@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - INCENTIVABR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e4d72 0%, #2874a6 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f39c12;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .user-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .protection-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(22, 160, 133, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .step-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #1e4d72;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            background: #1e4d72;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            color: #1e4d72;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-with-prefix {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            max-width: 300px;
+        }
+
+        .input-prefix {
+            background: #f39c12;
+            color: white;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+        }
+
+        .input-with-prefix input {
+            border: none;
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            outline: none;
+            width: 200px;
+        }
+
+        .calculation-result {
+            background: linear-gradient(135deg, #16a085 0%, #27ae60 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-info {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .fund-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .fund-card {
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .fund-card:hover {
+            border-color: #1e4d72;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .fund-card.selected {
+            border-color: #1e4d72;
+            background: rgba(30, 77, 114, 0.05);
+        }
+
+        .fund-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .fund-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1e4d72;
+            margin-bottom: 0.5rem;
+        }
+
+        .fund-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .fund-data {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .project-list {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .project-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            background: #f8f9fa;
+            border-color: #1e4d72;
+        }
+
+        .project-item.selected {
+            background: rgba(30, 77, 114, 0.05);
+            border-color: #1e4d72;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-name {
+            font-weight: 600;
+            color: #1e4d72;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-link {
+            color: #1e4d72;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #1e4d72;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background: #1e4d72;
+            color: white;
+        }
+
+        .value-input {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .value-input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-available {
+            color: #16a085;
+            font-weight: 600;
+        }
+
+        .deposit-info {
+            display: none;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .bank-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .bank-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .bank-label {
+            font-weight: 600;
+            color: #1e4d72;
+        }
+
+        .bank-value {
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .pix-section {
+            background: #e8f5e8;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .pix-key {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 0.5rem 0;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #1e4d72;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #164057;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1e4d72;
+            border: 2px solid #1e4d72;
+        }
+
+        .btn-outline:hover {
+            background: #1e4d72;
+            color: white;
+        }
+
+        .upload-section {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area:hover {
+            border-color: #1e4d72;
+            background: rgba(30, 77, 114, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.05);
+        }
+
+        .confirmation-screen {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+
+        .success-title {
+            color: #1e4d72;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .success-info {
+            background: #e8f5e8;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .document-list {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .document-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .document-item:last-child {
+            border-bottom: none;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #f39c12;
+            color: #856404;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .fund-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .bank-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-area">
+                <div class="logo">INCENTIVABR</div>
+                <div class="user-info">
+                    <span class="welcome">Bem-vindo,</span>
+                    <span class="user-name" id="userName">João Silva Santos</span>
+                    <span class="user-role" id="userRole">Servidor Federal - Ministério da Educação</span>
+                </div>
+            </div>
+            
+            <div class="protection-status">
+                <i class="fas fa-shield-alt"></i>
+                <span>Proteção Ativa</span>
+            </div>
+            
+            <button onclick="logout()" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">
+                <i class="fas fa-sign-out-alt"></i>
+                Sair
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Passo 1: Calcular Potencial -->
+        <div class="step-container" id="step1">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">Calcule Seu Potencial de Destinação</div>
+            </div>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <strong>Importante:</strong> Você pode destinar até 6% do seu Imposto de Renda devido para causas sociais, sem pagar nada a mais.
+            </div>
+            
+            <div class="input-group">
+                <label for="irDevido" style="min-width: 200px; font-weight: 600;">Valor do seu IR devido:</label>
+                <div class="input-with-prefix">
+                    <span class="input-prefix">R$</span>
+                    <input type="number" id="irDevido" placeholder="0,00" min="0" step="0.01">
+                </div>
+                <button class="btn btn-primary" onclick="calcularPotencial()">
+                    <i class="fas fa-calculator"></i>
+                    Calcular
+                </button>
+            </div>
+            
+            <div id="calculationResult" class="calculation-result hidden">
+                <div class="result-value" id="resultValue">R$ 0,00</div>
+                <div class="result-info">Você pode destinar até este valor (6% do IR devido)</div>
+            </div>
+        </div>
+
+        <!-- Passo 2: Escolher Fundo -->
+        <div class="step-container hidden" id="step2">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">Escolha o Fundo</div>
+            </div>
+            
+            <div class="fund-options">
+                <div class="fund-card" onclick="selecionarFundo('FDI')">
+                    <div class="fund-icon">👴</div>
+                    <div class="fund-name">Fundo do Idoso (FDI/DF)</div>
+                    <div class="fund-description">Projetos para dignidade e qualidade de vida das pessoas idosas</div>
+                    <div class="fund-data">
+                        Banco: 070 - BRB | Agência: 0100 | Conta: 062024-4<br>
+                        CNPJ: 35.186.643/0001-56
+                    </div>
+                </div>
+                
+                <div class="fund-card" onclick="selecionarFundo('FDCA')">
+                    <div class="fund-icon">👶</div>
+                    <div class="fund-name">Fundo Criança/Adolescente (FDCA/DF)</div>
+                    <div class="fund-description">Projetos para proteção e desenvolvimento de crianças e adolescentes</div>
+                    <div class="fund-data">
+                        Banco: 070 - BRB | Agência: 100 | Conta: 044149-8<br>
+                        CNPJ: 15.558.339/0001-85
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Passo 3: Escolher Projeto -->
+        <div class="step-container hidden" id="step3">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">Escolha um Projeto</div>
+            </div>
+            
+            <div id="projectList" class="project-list">
+                <!-- Projetos serão carregados dinamicamente -->
+            </div>
+        </div>
+
+        <!-- Passo 4: Definir Valor -->
+        <div class="step-container hidden" id="step4">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title">Defina o Valor da Destinação</div>
+            </div>
+            
+            <div class="value-input-group">
+                <label for="valorDestinacao" style="min-width: 200px; font-weight: 600;">Quanto deseja destinar:</label>
+                <div class="input-with-prefix">
+                    <span class="input-prefix">R$</span>
+                    <input type="number" id="valorDestinacao" placeholder="0,00" min="1" step="0.01">
+                </div>
+            </div>
+            
+            <div class="value-available">
+                Disponível: R$ <span id="valorDisponivel">0,00</span>
+            </div>
+            
+            <button class="btn btn-primary" onclick="confirmarValor()" style="margin-top: 1rem;">
+                <i class="fas fa-check"></i>
+                Confirmar Valor
+            </button>
+        </div>
+
+        <!-- Passo 5: Dados para Depósito -->
+        <div class="step-container hidden" id="step5">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <div class="step-title">Dados para Depósito</div>
+            </div>
+            
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>IMPORTANTE:</strong> Faça o depósito primeiro, depois volte aqui para enviar o comprovante.
+            </div>
+            
+            <div class="deposit-info" id="depositInfo">
+                <div class="bank-details" id="bankDetails">
+                    <!-- Dados bancários serão preenchidos dinamicamente -->
+                </div>
+                
+                <div class="pix-section">
+                    <h4><i class="fas fa-mobile-alt"></i> PIX (Recomendado)</h4>
+                    <div>Chave PIX (CNPJ):</div>
+                    <div class="pix-key" id="pixKey">00.000.000/0001-00</div>
+                    <button class="btn btn-outline" onclick="copiarPix()">
+                        <i class="fas fa-copy"></i>
+                        Copiar Chave PIX
+                    </button>
+                </div>
+                
+                <div style="text-align: center; font-size: 1.2rem; font-weight: 600; color: #1e4d72; margin: 1rem 0;">
+                    Valor a depositar: R$ <span id="valorFinal">0,00</span>
+                </div>
+                
+                <button class="btn btn-success" onclick="mostrarUpload()" style="width: 100%;">
+                    <i class="fas fa-check"></i>
+                    Já fiz o depósito - Enviar Comprovante
+                </button>
+            </div>
+        </div>
+
+        <!-- Passo 6: Upload Comprovante -->
+        <div class="step-container" id="step6">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <div class="step-title">Enviar Comprovante</div>
+            </div>
+            
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <strong>Prazo Legal:</strong> Você tem 60 dias para enviar o comprovante conforme Art. 5º da legislação.
+            </div>
+            
+            <div class="upload-section" style="display: block;">
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
+                    <p>Clique aqui para selecionar o comprovante<br>ou arraste o arquivo até aqui</p>
+                    <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Formatos aceitos: PDF, JPG, PNG (até 5MB)</p>
+                </div>
+                <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                
+                <div class="input-group" style="margin-top: 1rem;">
+                    <label for="dataDeposito" style="min-width: 150px; font-weight: 600;">Data do depósito:</label>
+                    <input type="date" id="dataDeposito" style="padding: 0.5rem; border: 2px solid #ddd; border-radius: 8px;">
+                </div>
+                
+                <div class="input-group">
+                    <label for="valorDepositado" style="min-width: 150px; font-weight: 600;">Valor depositado:</label>
+                    <div class="input-with-prefix">
+                        <span class="input-prefix">R$</span>
+                        <input type="number" id="valorDepositado" placeholder="0,00" step="0.01">
+                    </div>
+                </div>
+                
+                <button class="btn btn-success" onclick="enviarComprovante()" style="width: 100%; margin-top: 1rem;" disabled id="btnEnviarComprovante">
+                    <i class="fas fa-paper-plane"></i>
+                    Confirmar e Solicitar Recibo
+                </button>
+            </div>
+        </div>
+
+        <!-- Confirmação Final -->
+        <div class="step-container hidden" id="confirmationStep">
+            <div class="confirmation-screen">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="success-title">Comprovante Enviado com Sucesso!</h2>
+                
+                <div class="success-info">
+                    <h4><i class="fas fa-envelope"></i> Email Automático Enviado</h4>
+                    <p><strong>Para:</strong> <span id="emailFundo">contato@incentivabr.com.br</span></p>
+                    <p><strong>Assunto:</strong> Solicitação de Recibo - Art. 5º</p>
+                    <p style="font-size: 0.9rem; color: #666; font-style: italic;">
+                        ℹ️ <strong>Demonstração:</strong> Em produção, seria enviado para a secretaria oficial do fundo.
+                    </p>
+                    
+                    <h4 style="margin-top: 1rem;"><i class="fas fa-file-alt"></i> Dados Enviados para Recibo (Art. 6º):</h4>
+                    <ul style="text-align: left; margin-left: 1rem;">
+                        <li><strong>Nome:</strong> <span id="confirmNome">João Silva Santos</span></li>
+                        <li><strong>CPF:</strong> <span id="confirmCPF">000.000.000-00</span></li>
+                        <li><strong>Valor:</strong> R$ <span id="confirmValor">0,00</span></li>
+                        <li><strong>Data:</strong> <span id="confirmData">00/00/0000</span></li>
+                        <li><strong>Projeto:</strong> <span id="confirmProjeto">Nome do Projeto</span></li>
+                        <li><strong>Ano-calendário:</strong> 2025</li>
+                    </ul>
+                </div>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-clock"></i>
+                    <strong>Prazo Legal:</strong> O recibo será emitido em até 60 dias conforme legislação.<br>
+                    <strong>Status:</strong> Solicitação enviada (Dia 1/60)
+                </div>
+                
+                <div class="document-list">
+                    <h4>📁 Seus Documentos:</h4>
+                    <div class="document-item">
+                        <i class="fas fa-file-image" style="color: #27ae60;"></i>
+                        <span>Comprovante de depósito</span>
+                        <a href="#" class="btn-link">Baixar</a>
+                    </div>
+                    <div class="document-item">
+                        <i class="fas fa-envelope" style="color: #3498db;"></i>
+                        <span>Cópia do email enviado</span>
+                        <a href="#" class="btn-link">Ver</a>
+                    </div>
+                    <div class="document-item">
+                        <i class="fas fa-hourglass-half" style="color: #f39c12;"></i>
+                        <span>Recibo oficial</span>
+                        <span style="color: #f39c12;">Aguardando</span>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <p><i class="fas fa-bell"></i> <strong>Você será notificado quando o recibo estiver disponível!</strong></p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 1rem;">
+                        <i class="fas fa-envelope"></i> 
+                        Dúvidas? Entre em contato: <strong>contato@incentivabr.com.br</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados globais
+        let userData = {
+            nome: "João Silva Santos",
+            cpf: "000.000.000-00",
+            orgao: "Ministério da Educação",
+            cargo: "Analista Técnico de Políticas Sociais"
+        };
+
+        let destinationData = {
+            irDevido: 0,
+            limiteDestinacao: 0,
+            fundoSelecionado: null,
+            projetoSelecionado: null,
+            valorDestinacao: 0
+        };
+
+        // Projetos por fundo
+        const projetos = {
+            FDI: [
+                {
+                    id: 1,
+                    nome: "Centro de Convivência para Idosos - Ceilândia",
+                    descricao: "Espaço de socialização e atividades para terceira idade",
+                    link: "https://exemplo.com/projeto1"
+                },
+                {
+                    id: 2,
+                    nome: "Lar dos Idosos São Vicente - Taguatinga",
+                    descricao: "Cuidados especializados para idosos em vulnerabilidade",
+                    link: "https://exemplo.com/projeto2"
+                },
+                {
+                    id: 3,
+                    nome: "Programa Alimentação Saudável - Terceira Idade",
+                    descricao: "Distribuição de refeições nutritivas para idosos",
+                    link: "https://exemplo.com/projeto3"
+                },
+                {
+                    id: 0,
+                    nome: "Destinação Geral do Fundo",
+                    descricao: "Recursos aplicados conforme necessidade do fundo",
+                    link: null
+                }
+            ],
+            FDCA: [
+                {
+                    id: 4,
+                    nome: "Programa de Reforço Escolar - Brasília",
+                    descricao: "Apoio educacional para crianças em vulnerabilidade",
+                    link: "https://exemplo.com/projeto4"
+                },
+                {
+                    id: 5,
+                    nome: "Casa de Acolhimento Lar Feliz",
+                    descricao: "Abrigo temporário para crianças e adolescentes",
+                    link: "https://exemplo.com/projeto5"
+                },
+                {
+                    id: 6,
+                    nome: "Esporte e Cidadania - Samambaia",
+                    descricao: "Atividades esportivas para desenvolvimento social",
+                    link: "https://exemplo.com/projeto6"
+                },
+                {
+                    id: 0,
+                    nome: "Destinação Geral do Fundo",
+                    descricao: "Recursos aplicados conforme necessidade do fundo",
+                    link: null
+                }
+            ]
+        };
+
+        // Dados dos fundos
+        const fundosData = {
+            FDI: {
+                nome: "Fundo dos Direitos do Idoso do Distrito Federal",
+                banco: "070 - BRB",
+                agencia: "0100",
+                conta: "062024-4",
+                cnpj: "35.186.643/0001-56",
+                email: "contato@incentivabr.com.br"
+            },
+            FDCA: {
+                nome: "Fundo dos Direitos da Criança e do Adolescente do Distrito Federal",
+                banco: "070 - BRB",
+                agencia: "100",
+                conta: "044149-8",
+                cnpj: "15.558.339/0001-85",
+                email: "contato@incentivabr.com.br"
+            }
+        };
+
+        function calcularPotencial() {
+            const irDevido = parseFloat(document.getElementById('irDevido').value);
+            
+            if (!irDevido || irDevido <= 0) {
+                alert('Por favor, informe o valor do seu IR devido.');
+                return;
+            }
+
+            const limiteDestinacao = irDevido * 0.06; // 6%
+            
+            destinationData.irDevido = irDevido;
+            destinationData.limiteDestinacao = limiteDestinacao;
+
+            // Mostrar resultado
+            document.getElementById('resultValue').textContent = 
+                'R$ ' + limiteDestinacao.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('calculationResult').classList.remove('hidden');
+
+            // Mostrar próximo passo
+            setTimeout(() => {
+                document.getElementById('step2').classList.remove('hidden');
+                document.getElementById('step2').scrollIntoView({behavior: 'smooth'});
+            }, 1000);
+        }
+
+        function selecionarFundo(fundo) {
+            // Remover seleção anterior
+            document.querySelectorAll('.fund-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Selecionar novo fundo
+            event.target.closest('.fund-card').classList.add('selected');
+            destinationData.fundoSelecionado = fundo;
+
+            // Carregar projetos
+            carregarProjetos(fundo);
+
+            // Mostrar próximo passo
+            setTimeout(() => {
+                document.getElementById('step3').classList.remove('hidden');
+                document.getElementById('step3').scrollIntoView({behavior: 'smooth'});
+            }, 500);
+        }
+
+        function carregarProjetos(fundo) {
+            const projectList = document.getElementById('projectList');
+            projectList.innerHTML = '';
+            projectList.style.display = 'block';
+
+            projetos[fundo].forEach(projeto => {
+                const projectItem = document.createElement('div');
+                projectItem.className = 'project-item';
+                projectItem.onclick = () => selecionarProjeto(projeto.id, projeto.nome);
+
+                projectItem.innerHTML = `
+                    <div class="project-info">
+                        <div class="project-name">${projeto.nome}</div>
+                        <div class="project-description">${projeto.descricao}</div>
+                    </div>
+                    <div class="project-actions">
+                        ${projeto.link ? `<a href="${projeto.link}" target="_blank" class="btn-link" onclick="event.stopPropagation()">Ver detalhes</a>` : ''}
+                    </div>
+                `;
+
+                projectList.appendChild(projectItem);
+            });
+        }
+
+        function selecionarProjeto(id, nome) {
+            // Remover seleção anterior
+            document.querySelectorAll('.project-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+
+            // Selecionar novo projeto
+            event.target.closest('.project-item').classList.add('selected');
+            destinationData.projetoSelecionado = {id: id, nome: nome};
+
+            // Mostrar próximo passo
+            setTimeout(() => {
+                document.getElementById('valorDisponivel').textContent = 
+                    destinationData.limiteDestinacao.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+                document.getElementById('step4').classList.remove('hidden');
+                document.getElementById('step4').scrollIntoView({behavior: 'smooth'});
+            }, 500);
+        }
+
+        function confirmarValor() {
+            const valor = parseFloat(document.getElementById('valorDestinacao').value);
+            
+            if (!valor || valor <= 0) {
+                alert('Por favor, informe o valor da destinação.');
+                return;
+            }
+
+            if (valor > destinationData.limiteDestinacao) {
+                alert(`O valor não pode ser superior a R$ ${destinationData.limiteDestinacao.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`);
+                return;
+            }
+
+            destinationData.valorDestinacao = valor;
+
+            // Mostrar dados para depósito
+            mostrarDadosDeposito();
+
+            // Mostrar próximo passo
+            setTimeout(() => {
+                document.getElementById('step5').classList.remove('hidden');
+                document.getElementById('step5').scrollIntoView({behavior: 'smooth'});
+            }, 500);
+        }
+
+        function mostrarDadosDeposito() {
+            const fundo = fundosData[destinationData.fundoSelecionado];
+            const bankDetails = document.getElementById('bankDetails');
+            
+            bankDetails.innerHTML = `
+                <div class="bank-item">
+                    <span class="bank-label">Banco:</span>
+                    <span class="bank-value">${fundo.banco}</span>
+                </div>
+                <div class="bank-item">
+                    <span class="bank-label">Agência:</span>
+                    <span class="bank-value">${fundo.agencia}</span>
+                </div>
+                <div class="bank-item">
+                    <span class="bank-label">Conta:</span>
+                    <span class="bank-value">${fundo.conta}</span>
+                </div>
+                <div class="bank-item">
+                    <span class="bank-label">CNPJ:</span>
+                    <span class="bank-value">${fundo.cnpj}</span>
+                </div>
+                <div class="bank-item">
+                    <span class="bank-label">Favorecido:</span>
+                    <span class="bank-value">${fundo.nome}</span>
+                </div>
+            `;
+
+            document.getElementById('pixKey').textContent = fundo.cnpj;
+            document.getElementById('valorFinal').textContent = 
+                destinationData.valorDestinacao.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            
+            document.getElementById('depositInfo').style.display = 'block';
+        }
+
+        function copiarPix() {
+            const pixKey = document.getElementById('pixKey').textContent;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                const btn = event.target;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                btn.style.background = '#27ae60';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function mostrarUpload() {
+            // Remover classe hidden se existir
+            document.getElementById('step6').classList.remove('hidden');
+            // Garantir que está visível
+            document.getElementById('step6').style.display = 'block';
+            
+            document.getElementById('valorDepositado').value = destinationData.valorDestinacao.toFixed(2);
+            document.getElementById('dataDeposito').value = new Date().toISOString().split('T')[0];
+            document.getElementById('step6').scrollIntoView({behavior: 'smooth'});
+        }
+
+        // Upload de arquivo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup do upload quando a página carregar
+            setupUpload();
+        });
+        
+        function setupUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        processarArquivo(file);
+                    }
+                });
+            }
+            
+            if (uploadArea) {
+                // Drag and drop
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        processarArquivo(files[0]);
+                    }
+                });
+            }
+        }
+
+        function processarArquivo(file) {
+            // Validar tipo
+            const allowedTypes = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Tipo de arquivo não permitido. Use PDF, JPG ou PNG.');
+                return;
+            }
+
+            // Validar tamanho (5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Arquivo muito grande. Tamanho máximo: 5MB.');
+                return;
+            }
+
+            // Atualizar interface
+            const uploadArea = document.getElementById('uploadArea');
+            uploadArea.innerHTML = `
+                <i class="fas fa-file-check" style="font-size: 3rem; color: #27ae60; margin-bottom: 1rem;"></i>
+                <p><strong>${file.name}</strong></p>
+                <p style="font-size: 0.8rem; color: #666;">Arquivo selecionado com sucesso</p>
+            `;
+            uploadArea.style.border = '2px solid #27ae60';
+            uploadArea.style.background = 'rgba(39, 174, 96, 0.05)';
+
+            // Habilitar botão
+            document.getElementById('btnEnviarComprovante').disabled = false;
+        }
+
+        function enviarComprovante() {
+            const dataDeposito = document.getElementById('dataDeposito').value;
+            const valorDepositado = parseFloat(document.getElementById('valorDepositado').value);
+
+            if (!dataDeposito || !valorDepositado) {
+                alert('Preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            // Simular envio
+            const btn = document.getElementById('btnEnviarComprovante');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                mostrarConfirmacao();
+            }, 2000);
+        }
+
+        function mostrarConfirmacao() {
+            const fundo = fundosData[destinationData.fundoSelecionado];
+            
+            // Preencher dados de confirmação
+            document.getElementById('emailFundo').textContent = fundo.email;
+            document.getElementById('confirmNome').textContent = userData.nome;
+            document.getElementById('confirmCPF').textContent = userData.cpf;
+            document.getElementById('confirmValor').textContent = 
+                destinationData.valorDestinacao.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            document.getElementById('confirmData').textContent = 
+                new Date(document.getElementById('dataDeposito').value).toLocaleDateString('pt-BR');
+            document.getElementById('confirmProjeto').textContent = destinationData.projetoSelecionado.nome;
+
+            // Mostrar tela final
+            document.getElementById('confirmationStep').classList.remove('hidden');
+            document.getElementById('confirmationStep').scrollIntoView({behavior: 'smooth'});
+
+            // Ocultar steps anteriores
+            ['step1', 'step2', 'step3', 'step4', 'step5', 'step6'].forEach(stepId => {
+                document.getElementById(stepId).style.display = 'none';
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar se há dados do Gov.br
+            const storedUser = sessionStorage.getItem('incentivabr_user');
+            
+            if (storedUser) {
+                // Usuário logado via Gov.br
+                const govbrData = JSON.parse(storedUser);
+                userData.nome = govbrData.nome;
+                userData.cpf = govbrData.cpf;
+                userData.orgao = govbrData.orgao;
+                userData.cargo = govbrData.cargo;
+                
+                // Atualizar interface
+                document.getElementById('userName').textContent = govbrData.nome;
+                document.getElementById('userRole').textContent = `Servidor Federal - ${govbrData.orgao}`;
+                
+                // Mostrar animação de boas-vindas
+                mostrarBoasVindas(govbrData.nome);
+            } else {
+                // Usuário não autenticado - redirecionar para login
+                if (confirm('Você precisa fazer login via Gov.br para acessar o INCENTIVABR. Deseja fazer login agora?')) {
+                    window.location.href = 'login-govbr.html';
+                } else {
+                    // Manter dados de demonstração
+                    document.getElementById('userName').textContent = userData.nome;
+                    document.getElementById('userRole').textContent = `Servidor Federal - ${userData.orgao}`;
+                }
+            }
+        });
+        
+        function mostrarBoasVindas(nome) {
+            // Criar modal de boas-vindas
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+                    <div style="background: white; padding: 2rem; border-radius: 15px; text-align: center; max-width: 400px; animation: slideIn 0.5s ease;">
+                        <div style="font-size: 3rem; color: #27ae60; margin-bottom: 1rem;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2 style="color: #1e4d72; margin-bottom: 1rem;">Login Realizado!</h2>
+                        <p style="margin-bottom: 1.5rem;">Bem-vindo ao <strong>INCENTIVABR</strong>, ${nome.split(' ')[0]}!</p>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 1.5rem;">
+                            <i class="fas fa-shield-alt" style="color: #16a085;"></i>
+                            Sua sessão está protegida pelo sistema Gov.br
+                        </p>
+                        <button onclick="this.parentElement.parentElement.remove()" 
+                                style="background: #1e4d72; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                            Começar
+                        </button>
+                    </div>
+                </div>
+                <style>
+                    @keyframes slideIn {
+                        from { transform: translateY(-50px); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                </style>
+            `;
+            document.body.appendChild(modal);
+            
+            // Remover automaticamente após 5 segundos
+            setTimeout(() => {
+                if (modal.parentElement) {
+                    modal.remove();
+                }
+            }, 5000);
+        }
+        
+        function logout() {
+            if (confirm('Deseja sair do INCENTIVABR?')) {
+                sessionStorage.removeItem('incentivabr_user');
+                window.location.href = 'login-govbr.html';
+            }
+        }
+        
+        function setupUpload() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            
+            if (fileInput) {
+                fileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        processarArquivo(file);
+                    }
+                });
+            }
+            
+            if (uploadArea) {
+                // Drag and drop
+                uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        processarArquivo(files[0]);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>
