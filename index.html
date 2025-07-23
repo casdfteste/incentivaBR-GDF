@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INCENTIVABR - Plataforma Exclusiva para Servidores Públicos</title>
+    <meta name="description" content="A única plataforma desenvolvida especialmente para servidores públicos destinarem até 6% do IR com total segurança jurídica. Sistema protegido por INPI BR512025000647-0.">
+    <meta name="keywords" content="incentivo fiscal, imposto de renda, servidor público, destinação IR, fundo do idoso, fundo da criança">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="INCENTIVABR - Exclusivo para Servidores Públicos">
+    <meta property="og:description" content="Destine até 6% do seu IR para projetos sociais com total segurança jurídica">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seu-usuario.github.io/incentivabr">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏛️%3C/text%3E%3C/svg%3E" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e4d72;
+            --secondary: #2874a6;
+            --accent: #f39c12;
+            --success: #27ae60;
+            --text: #2c3e50;
+            --light: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 77, 114, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, #16a085 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .demo-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-content p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .demo-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .demo-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .demo-features li i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+
+        .demo-visual {
+            background: linear-gradient(135deg, var(--light), #e8f4f8);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .browser-mockup {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .browser-header {
+            background: #f1f3f4;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .browser-dots {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff5f57;
+        }
+
+        .browser-dots:nth-child(2) {
+            background: #ffbd2e;
+        }
+
+        .browser-dots:nth-child(3) {
+            background: #28ca42;
+        }
+
+        .browser-content {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .browser-content h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .browser-content p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .protection-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 2rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #bbb;
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 1rem;
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsivity */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .demo-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <i class="fas fa-university"></i>
+                    INCENTIVABR
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#como-funciona">Como Funciona</a></li>
+                    <li><a href="#funcionalidades">Funcionalidades</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+                
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    EXCLUSIVIDADE PARA SERVIDORES PÚBLICOS
+                </div>
+                
+                <h1>
+                    A <span class="highlight">única plataforma</span> desenvolvida especialmente para 
+                    servidores públicos destinarem até <span class="highlight">6%</span> do IR
+                </h1>
+                
+                <p>
+                    Transforme sua destinação de Imposto de Renda em impacto social real, 
+                    com total segurança jurídica e processo 100% automatizado.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="login-govbr.html" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Começar Demo
+                    </a>
+                    <a href="#demo" class="btn btn-outline">
+                        <i class="fas fa-play"></i>
+                        Ver Como Funciona
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">12M+</span>
+                        <span class="stat-label">Servidores Públicos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">6%</span>
+                        <span class="stat-label">do IR Disponível</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Proteção Jurídica</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Custo Adicional</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="funcionalidades" class="features">
+        <div class="container">
+            <h2 class="section-title">Por que escolher o INCENTIVABR?</h2>
+            <p class="section-subtitle">
+                A primeira e única plataforma pensada exclusivamente para as necessidades 
+                e particularidades dos servidores públicos.
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
+                    <h3>Proteção Jurídica Total</h3>
+                    <p>Sistema registrado no INPI com blindagem automática de responsabilidade. Certificação de conformidade em tempo real e trilha de auditoria inviolável.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Exclusivo para Servidores</h3>
+                    <p>Desenvolvido especificamente para servidores federais, estaduais, municipais, militares e aposentados. Interface e processos adaptados à realidade pública.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>100% Automatizado</h3>
+                    <p>Da calculadora de IR até a emissão do recibo, tudo é automatizado. Emails, documentos, prazos e validações acontecem sem intervenção manual.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-gov"></i>
+                    </div>
+                    <h3>Integração Gov.br</h3>
+                    <p>Login seguro através do portal oficial do governo, garantindo autenticidade e validação automática do vínculo público.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Calculadora Inteligente</h3>
+                    <p>Cálculo preciso baseado na tabela oficial do IR 2025. Simulações, otimizações e validações em tempo real.</p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Transparência Total</h3>
+                    <p>Acompanhe o impacto dos projetos apoiados com relatórios visuais, métricas quantificadas e prestação de contas em tempo real.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section id="como-funciona" class="demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h2>Como Funciona em 7 Passos</h2>
+                    <p>
+                        Processo pensado para ser simples, seguro e completamente automatizado. 
+                        O que antes levava horas, agora você faz em minutos.
+                    </p>
+                    
+                    <ul class="demo-features">
+                        <li><i class="fas fa-check-circle"></i> Login seguro via Gov.br</li>
+                        <li><i class="fas fa-check-circle"></i> Calcule seu potencial de destinação</li>
+                        <li><i class="fas fa-check-circle"></i> Escolha fundo e projeto</li>
+                        <li><i class="fas fa-check-circle"></i> Defina valor da destinação</li>
+                        <li><i class="fas fa-check-circle"></i> Receba dados bancários automaticamente</li>
+                        <li><i class="fas fa-check-circle"></i> Envie comprovante via upload</li>
+                        <li><i class="fas fa-check-circle"></i> Receba confirmação e documentos</li>
+                    </ul>
+                    
+                    <a href="login-govbr.html" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        Testar Agora
+                    </a>
+                </div>
+                
+                <div class="demo-visual">
+                    <div class="browser-mockup">
+                        <div class="browser-header">
+                            <div class="browser-dots"></div>
+                            <div class="browser-dots"></div>
+                            <div class="browser-dots"></div>
+                        </div>
+                        <div class="browser-content">
+                            <h3>🏛️ INCENTIVABR Dashboard</h3>
+                            <p>Interface exclusiva para servidores públicos</p>
+                            <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                                <div style="font-size: 0.9rem; opacity: 0.8;">Simulação funcionando:</div>
+                                <div style="font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem;">
+                                    Login Gov.br → Cálculo → Destinação
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo CTA -->
+    <section id="demo" class="cta">
+        <div class="container">
+            <h2>Experimente a Diferença</h2>
+            <p>
+                Veja como é fácil destinar seu Imposto de Renda com total segurança 
+                e transparência. Demo completa funcionando em menos de 5 minutos.
+            </p>
+            
+            <div class="hero-cta">
+                <a href="login-govbr.html" class="btn btn-primary" style="background: white; color: var(--primary);">
+                    <i class="fas fa-rocket"></i>
+                    Iniciar Demo Completa
+                </a>
+                <a href="dashboard.html" class="btn btn-outline" style="border-color: white; color: white;">
+                    <i class="fas fa-tachometer-alt"></i>
+                    Ver Dashboard Direto
+                </a>
+            </div>
+            
+            <div class="protection-badge">
+                <i class="fas fa-certificate"></i>
+                Sistema Protegido - INPI BR512025000647-0
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>INCENTIVABR</h3>
+                    <p>A primeira plataforma exclusiva para servidores públicos destinarem Imposto de Renda com total segurança jurídica.</p>
+                    <p style="margin-top: 1rem;">
+                        <i class="fas fa-certificate"></i>
+                        Sistema protegido por registro no INPI
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Funcionalidades</h3>
+                    <a href="#como-funciona">Como Funciona</a><br>
+                    <a href="login-govbr.html">Demo Completa</a><br>
+                    <a href="dashboard.html">Dashboard</a><br>
+                    <a href="docs/DEMO.md">Guia de Demonstração</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Para Servidores</h3>
+                    <p>✓ Federais, Estaduais, Municipais</p>
+                    <p>✓ Militares e Aposentados</p>
+                    <p>✓ Empresas Públicas</p>
+                    <p>✓ Sociedades de Economia Mista</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-envelope"></i> contato@incentivabr.com.br</p>
+                    <p><i class="fas fa-phone"></i> 0800-SERVIDOR</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Brasília-DF, Brasil</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="https://github.com/seu-usuario/incentivabr" style="color: #bbb; margin-right: 1rem;">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="https://linkedin.com/company/incentivabr" style="color: #bbb;">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 INCENTIVABR. Sistema protegido por INPI BR512025000647-0. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animate-on-scroll elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stats counter animation
+        function animateCounters() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = stat.textContent;
+                const isPercentage = target.includes('%');
+                const isNumber = target.includes('M+') || !isNaN(target);
+                
+                if (isNumber && !isPercentage) {
+                    let current = 0;
+                    const increment = target.includes('M+') ? 0.1 : 1;
+                    const finalValue = parseFloat(target);
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= finalValue) {
+                            current = finalValue;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = target.includes('M+') ? 
+                            current.toFixed(1) + 'M+' : 
+                            Math.floor(current);
+                    }, 50);
+                }
+            });
+        }
+
+        // Start counter animation when hero stats are visible
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statsObserver.observe(heroStats);
+        }
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+                if (navLinks.style.display === 'flex') {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.width = '100%';
+                    navLinks.style.background = 'white';
+                    navLinks.style.padding = '1rem';
+                    navLinks.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+                }
+            });
+        }
+
+        // Loading simulation for demo buttons
+        document.querySelectorAll('a[href="login-govbr.html"], a[href="dashboard.html"]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span class="loading"></span> Carregando...';
+                this.style.pointerEvents = 'none';
+                
+                // Reset after a short delay to show loading effect
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.pointerEvents = 'auto';
+                }, 1000);
+            });
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < hero.offsetHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add typing effect to hero title
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    if (text.charAt(i) === '<') {
+                        // Handle HTML tags
+                        let tag = '';
+                        while (i < text.length && text.charAt(i) !== '>') {
+                            tag += text.charAt(i);
+                            i++;
+                        }
+                        tag += text.charAt(i); // Add closing '>'
+                        element.innerHTML += tag;
+                        i++;
+                    } else {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                    }
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on page load
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero h1');
+            if (heroTitle) {
+                const originalText = heroTitle.innerHTML;
+                setTimeout(() => {
+                    typeWriter(heroTitle, originalText, 30);
+                }, 500);
+            }
+        });
+
+        // Add scroll progress indicator
+        function createScrollProgress() {
+            const progressBar = document.createElement('div');
+            progressBar.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 0%;
+                height: 3px;
+                background: linear-gradient(90deg, var(--primary), var(--accent));
+                z-index: 9999;
+                transition: width 0.1s ease;
+            `;
+            document.body.appendChild(progressBar);
+
+            window.addEventListener('scroll', () => {
+                const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (window.pageYOffset / windowHeight) * 100;
+                progressBar.style.width = scrolled + '%';
+            });
+        }
+
+        createScrollProgress();
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const correctCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > correctCode.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.length === correctCode.length && 
+                konamiCode.every((code, index) => code === correctCode[index])) {
+                
+                // Easter egg activated
+                document.body.style.animation = 'rainbow 2s infinite';
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes rainbow {
+                        0% { filter: hue-rotate(0deg); }
+                        100% { filter: hue-rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                    style.remove();
+                }, 4000);
+                
+                konamiCode = [];
+            }
+        });
+
+        // Add some console messages for developers
+        console.log(`
+        🏛️ INCENTIVABR - Sistema para Servidores Públicos
+        
+        Olá desenvolvedor! 👋
+        
+        Este é um sistema MVP para demonstração.
+        Funcionalidades implementadas:
+        ✅ Simulação de login Gov.br
+        ✅ Dashboard completo
+        ✅ Calculadora de IR
+        ✅ Processo de destinação
+        ✅ Upload de comprovantes
+        ✅ Automação de emails
+        
+        Tecnologias: HTML5, CSS3, JavaScript Vanilla
+        Registro INPI: BR512025000647-0
+        
+        Quer contribuir? github.com/seu-usuario/incentivabr
+        `);
+
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+                    
+                    if (loadTime > 3000) {
+                        console.warn('⚠️ Página demorou para carregar:', loadTime + 'ms');
+                    } else {
+                        console.log('✅ Página carregada em:', loadTime + 'ms');
+                    }
+                }, 0);
+            });
+        }
+    </script>
+</body>
+</html>
