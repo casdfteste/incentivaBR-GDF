@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso com Gov.br - INCENTIVABR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e4d72 0%, #2874a6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .incentivabr-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e4d72;
+            margin-bottom: 0.5rem;
+        }
+
+        .tagline {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .login-title {
+            color: #1e4d72;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .govbr-button {
+            background: #1351b4;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .govbr-button:hover {
+            background: #0c3a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(19, 81, 180, 0.3);
+        }
+
+        .govbr-logo {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1351b4;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .security-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #16a085;
+        }
+
+        .security-info h4 {
+            color: #16a085;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .security-info p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .features-list {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .features-list li {
+            color: #555;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #16a085;
+            font-weight: bold;
+        }
+
+        .demo-note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            color: #856404;
+        }
+
+        .demo-note strong {
+            color: #533c02;
+        }
+
+        /* Simulação do Gov.br */
+        .govbr-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .govbr-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 450px;
+            width: 90%;
+            position: relative;
+        }
+
+        .govbr-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .govbr-official-logo {
+            background: #1351b4;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1351b4;
+        }
+
+        .govbr-login-btn {
+            background: #1351b4;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .govbr-login-btn:hover {
+            background: #0c3a8a;
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1351b4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+
+        .user-data {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .redirect-info {
+            background: #e3f2fd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            color: #1565c0;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <!-- Logo INCENTIVABR -->
+        <div class="incentivabr-logo">
+            <div class="logo-text">INCENTIVABR</div>
+            <div class="tagline">Exclusivo para Servidores Públicos</div>
+        </div>
+
+        <!-- Título -->
+        <h1 class="login-title">Acesso Seguro</h1>
+        <p class="login-subtitle">
+            Entre com sua conta Gov.br para acessar a plataforma exclusiva de destinação de Imposto de Renda
+        </p>
+
+        <!-- Botão Gov.br -->
+        <button class="govbr-button" onclick="abrirGovBr()">
+            <div class="govbr-logo">BR</div>
+            Entrar com Gov.br
+        </button>
+
+        <!-- Informações de Segurança -->
+        <div class="security-info">
+            <h4>
+                <i class="fas fa-shield-alt"></i>
+                Proteção e Credibilidade
+            </h4>
+            <p>
+                Ao usar o Gov.br, garantimos máxima segurança e validação automática do seu vínculo como servidor público.
+            </p>
+            <ul class="features-list">
+                <li>Autenticação oficial do governo</li>
+                <li>Dados pessoais protegidos</li>
+                <li>Validação automática de vínculo público</li>
+                <li>Acesso exclusivo para servidores</li>
+            </ul>
+        </div>
+
+        <!-- Nota de Demonstração -->
+        <div class="demo-note">
+            <strong>📋 Demonstração:</strong> Esta é uma simulação da integração futura com Gov.br. 
+            No sistema real, você será redirecionado para o portal oficial do governo.
+        </div>
+    </div>
+
+    <!-- Modal Gov.br (Simulação) -->
+    <div class="govbr-modal" id="govbrModal">
+        <div class="govbr-content">
+            <button class="close-modal" onclick="fecharGovBr()">×</button>
+            
+            <div id="loginForm">
+                <div class="govbr-header">
+                    <div class="govbr-official-logo">gov.br</div>
+                    <h2>Entrar no Gov.br</h2>
+                    <p>Portal oficial do governo brasileiro</p>
+                </div>
+
+                <form onsubmit="return processarLogin(event)">
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Sua senha do Gov.br" required>
+                    </div>
+
+                    <button type="submit" class="govbr-login-btn">Entrar</button>
+                </form>
+
+                <p style="font-size: 0.8rem; color: #666; margin-top: 1rem; text-align: center;">
+                    <i class="fas fa-info-circle"></i>
+                    Simulação - Digite qualquer CPF e senha
+                </p>
+            </div>
+
+            <div class="loading" id="loadingScreen">
+                <div class="spinner"></div>
+                <h3>Validando credenciais...</h3>
+                <p>Verificando vínculo com serviço público</p>
+            </div>
+
+            <div class="success-screen" id="successScreen">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Login realizado com sucesso!</h3>
+                
+                <div class="user-data">
+                    <h4>Dados validados pelo Gov.br:</h4>
+                    <p><strong>Nome:</strong> <span id="nomeUsuario">João Silva Santos</span></p>
+                    <p><strong>CPF:</strong> <span id="cpfUsuario">000.000.000-00</span></p>
+                    <p><strong>Órgão:</strong> <span id="orgaoUsuario">Ministério da Educação</span></p>
+                    <p><strong>Cargo:</strong> <span id="cargoUsuario">Analista Técnico de Políticas Sociais</span></p>
+                    <p><strong>Situação:</strong> <span style="color: #27ae60;">✓ Servidor Ativo</span></p>
+                </div>
+
+                <div class="redirect-info">
+                    <i class="fas fa-arrow-right"></i>
+                    Redirecionando para o INCENTIVABR...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Máscara para CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            e.target.value = value;
+        });
+
+        function abrirGovBr() {
+            document.getElementById('govbrModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharGovBr() {
+            document.getElementById('govbrModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset do modal
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('successScreen').style.display = 'none';
+        }
+
+        function processarLogin(event) {
+            event.preventDefault();
+            
+            const cpf = document.getElementById('cpf').value;
+            const senha = document.getElementById('senha').value;
+            
+            if (!cpf || !senha) {
+                alert('Preencha todos os campos');
+                return false;
+            }
+
+            // Mostrar loading
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('loadingScreen').style.display = 'block';
+
+            // Simular processo de autenticação
+            setTimeout(() => {
+                // Mostrar sucesso
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('successScreen').style.display = 'block';
+                
+                // Preencher dados simulados
+                document.getElementById('cpfUsuario').textContent = cpf;
+                randomizarUsuario();
+                
+                // Redirecionar após 3 segundos
+                setTimeout(() => {
+                    // Passar dados do usuário para o dashboard
+                    const userData = {
+                        nome: document.getElementById('nomeUsuario').textContent,
+                        cpf: document.getElementById('cpfUsuario').textContent,
+                        orgao: document.getElementById('orgaoUsuario').textContent,
+                        cargo: document.getElementById('cargoUsuario').textContent
+                    };
+                    
+                    // Salvar no sessionStorage
+                    sessionStorage.setItem('incentivabr_user', JSON.stringify(userData));
+                    
+                    // Redirecionar para dashboard
+                    window.location.href = 'dashboard.html';
+                }, 3000);
+            }, 2000);
+
+            return false;
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('govbrModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharGovBr();
+            }
+        });
+
+        // Simular diferentes tipos de servidores
+        const tiposServidor = [
+            {
+                nome: "João Silva Santos",
+                orgao: "Ministério da Educação",
+                cargo: "Analista Técnico de Políticas Sociais"
+            },
+            {
+                nome: "Maria Oliveira Costa",
+                orgao: "Tribunal de Justiça do DF",
+                cargo: "Técnica Judiciária"
+            },
+            {
+                nome: "Carlos Pereira Lima",
+                orgao: "Secretaria de Saúde - DF",
+                cargo: "Auditor Fiscal"
+            },
+            {
+                nome: "Ana Paula Ferreira",
+                orgao: "Ministério da Fazenda",
+                cargo: "Auditora Fiscal da Receita Federal"
+            },
+            {
+                nome: "Roberto Santos Almeida",
+                orgao: "Secretaria de Educação - DF",
+                cargo: "Professor Efetivo"
+            },
+            {
+                nome: "Patricia Lima Souza",
+                orgao: "Ministério da Justiça",
+                cargo: "Analista de Infraestrutura"
+            }
+        ];
+
+        // Randomizar dados do usuário na simulação
+        function randomizarUsuario() {
+            const usuario = tiposServidor[Math.floor(Math.random() * tiposServidor.length)];
+            document.getElementById('nomeUsuario').textContent = usuario.nome;
+            document.getElementById('orgaoUsuario').textContent = usuario.orgao;
+            document.getElementById('cargoUsuario').textContent = usuario.cargo;
+        }
+    </script>
+</body>
+</html>
