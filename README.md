@@ -51,6 +51,25 @@
 
 O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servidores e empregados públicos** exercerem seu direito de destinar até **6% do imposto devido** para causas sociais, com total segurança jurídica.
 
+### **🎯 Fundos de Destinação Suportados:**
+
+**✅ VERSÃO DEMONSTRATIVA (DF):**
+- 👴 **Fundo dos Direitos do Idoso (FDI/DF)**
+- 👶 **Fundo da Criança e Adolescente (FDCA/DF)**
+
+**🚀 VERSÃO COMPLETA (Nacional):**
+- 🎭 **Lei Rouanet** (Cultura) - até 6%
+- 👴 **Fundos do Idoso** (todos os estados) - até 6%
+- 👶 **Fundos da Criança** (todos os estados) - até 6%
+- ⚽ **Lei do Esporte** - até 7%
+- ♻️ **Lei da Reciclagem** - até 6% (em vigor)
+- 📚 **PRONAS/PCD** (Pessoa com Deficiência) - até 1%
+- 🏥 **PRONON** (Oncologia) - até 1%
+- 🌱 **Outros incentivos fiscais** em desenvolvimento
+
+**💰 MERCADO REAL:** R$ 14,90 bilhões disponíveis (dados IR 2024)
+**💡 FUNDOS DIVERSOS:** Múltiplas opções de destinação por contribuinte
+
 ### **💡 Diferenciais Únicos:**
 - ✅ **Exclusivo para servidores públicos** (todas as esferas)
 - ✅ **Sistema de Compliance Fiscal Ativo** com garantia de conformidade
@@ -212,12 +231,22 @@ FDCA/DF: BRB (070) | Ag: 100  | CC: 044149-8 | CNPJ: 15.558.339/0001-85
 - [ ] Integração com APIs bancárias
 - [ ] Sistema de auditoria completo
 
-### **🚀 Expansão Nacional**
-- [ ] Todos os estados brasileiros
-- [ ] Múltiplos fundos por região
-- [ ] Integração com Receita Federal
-- [ ] Sistema multi-tenant
-- [ ] API para terceiros (white label)
+### **🚀 Expansão Nacional Programada**
+- [ ] **Lei Rouanet** - Incentivos culturais (até 6%)
+- [ ] **Fundos do Idoso** - Todos os 27 estados (até 6%)
+- [ ] **Fundos da Criança** - Todos os 27 estados (até 6%)
+- [ ] **Lei do Esporte** - Incentivo ao Esporte (até 7%)
+- [ ] **Lei da Reciclagem** - Incentivo à Reciclagem (até 6% - em vigor)
+- [ ] **PRONAS/PCD** - Pessoa com Deficiência (até 1%)
+- [ ] **PRONON** - Oncologia (até 1%)
+- [ ] **Funcines** - Cinema e audiovisual
+- [ ] **Incentivos estaduais** específicos por região
+- [ ] **Sistema multi-tenant** para múltiplas destinações simultâneas
+- [ ] **Marketplace** de projetos sociais nacional
+- [ ] **API para terceiros** (white label)
+
+**📊 Base Real:** R$ 14,90 bilhões disponíveis anualmente (IR 2024)
+**🎯 Expansão:** Múltiplos fundos e modalidades de incentivo
 
 ---
 
@@ -333,12 +362,13 @@ A marca **"INCENTIVA BR"** está registrada nas seguintes classes:
 - **Satisfação do usuário:** 4.8/5.0 em pesquisas
 - **Compliance legal:** 100% de conformidade automática
 
-### **🏛️ Público-Alvo Validado**
+### **🏛️ Público-Alvo e Mercado Real (Dados Oficiais 2024)**
 - **12+ milhões** de servidores públicos no Brasil
-- **R$ 50+ bilhões** em potencial anual de destinação
-- **3.000+ municípios** como mercado potencial
-- **27 estados** para expansão nacional
-- **99%** dos servidores não fazem destinação (oportunidade)
+- **R$ 14,90 bilhões** disponíveis para destinação de 6% (Declarações IR 2024 até 08/04/2025)
+- **27 estados + DF** como mercado de expansão
+- **5.570 municípios** como mercado potencial
+- **8 tipos diferentes** de incentivos fiscais mapeados
+- **99%** dos servidores não fazem destinação (oportunidade massiva comprovada)
 
 ---
 
