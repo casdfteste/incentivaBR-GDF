@@ -1,6 +1,7 @@
 LICENÇA PROPRIETÁRIA - INCENTIVABR
 REGISTRO INPI SOFWARE Nº BR512025000647-0
 REGISTRO INPI MARCA Nº 939403005 E 939403110
+REGISTRO CARTORIAL - 2º OFÍCIO RTD BRASÍLIA-DF
 
 ═══════════════════════════════════════════════════════════════════════════════
                               PREÂMBULO LEGAL
@@ -8,11 +9,13 @@ REGISTRO INPI MARCA Nº 939403005 E 939403110
 
 Este documento constitui registro formal complementar aos Registros INPI nº
 BR512025000647-0 (Software), 939403005 (Marca Classe 35) e 939403110 (Marca Classe 42), 
-elaborado nos termos do Art. 221 do Código Civil Brasileiro e Art. 127 da Lei 6.015/73, 
-para fins de comprovação de data certa e autoria, sem prejuízo das proteções já asseguradas 
-pela Lei 9.609/98 (Lei de Software), Lei 9.610/98 (Lei de Direitos Autorais) e Lei 9.279/96 
-(Lei de Propriedade Industrial). O presente instrumento visa assegurar proteção adicional 
-à propriedade intelectual aqui descrita.
+com REGISTRO CARTORIAL no 2º Ofício de Registro Civil, Títulos e Documentos e de 
+Pessoas Jurídicas de Brasília-DF, elaborado nos termos do Art. 221 do Código Civil 
+Brasileiro e Art. 127 da Lei 6.015/73, para fins de comprovação de data certa e autoria, 
+sem prejuízo das proteções já asseguradas pela Lei 9.609/98 (Lei de Software), 
+Lei 9.610/98 (Lei de Direitos Autorais) e Lei 9.279/96 (Lei de Propriedade Industrial). 
+O presente instrumento visa assegurar proteção adicional à propriedade intelectual 
+aqui descrita.
 
 ═══════════════════════════════════════════════════════════════════════════════
                         1. IDENTIFICAÇÃO E PROPRIEDADE
@@ -50,7 +53,13 @@ B) REGISTROS DE MARCA
 - Data de Depósito: 02 de junho de 2025 às 16:22
 - Protocolo: 850250284312
 
-C) DOMÍNIOS REGISTRADOS
+C) REGISTRO CARTORIAL DE DATA CERTA
+- Cartório: 2º Ofício de Registro Civil, Títulos e Documentos e de Pessoas Jurídicas de Brasília-DF
+- Finalidade: Comprovação de data certa e autoria conforme Art. 221 do Código Civil
+- Documento: Versão sanitizada com hash A97BE922C9325D69FED266DE2973E431E8CC137F348C9C780A15DADF6282A2C7
+- Status: REGISTRADO
+
+D) DOMÍNIOS REGISTRADOS
 - incentivabr.com.br
 - incentivabr.app.br
 - impostopositivo.com.br
@@ -106,6 +115,7 @@ Data de geração: 26 de fevereiro de 2025
 5. HASH do Documento Sanitizado Registro Cartório
 A97BE922C9325D69FED266DE2973E431E8CC137F348C9C780A15DADF6282A2C7
 Data de geração: 26 de fevereiro de 2025
+Status: REGISTRADO no 2º Ofício RTD Brasília-DF
 
 Os hashes acima constituem impressões digitais criptográficas que comprovam a
 existência e integridade dos respectivos documentos nas datas indicadas.
@@ -128,7 +138,50 @@ Este repositório público tem finalidade EXCLUSIVA de:
 ❌ NÃO permite criação de obras derivadas
 
 ═══════════════════════════════════════════════════════════════════════════════
-                           4. VERSÃO DEMONSTRATIVA
+                        4. SISTEMA PROPRIETÁRIO COMPLETO
+═══════════════════════════════════════════════════════════════════════════════
+
+4.1 VISÃO GERAL DO SISTEMA COMPLETO
+O INCENTIVABR é um sistema proprietário inovador para gestão integrada e otimização 
+de incentivos fiscais, com foco inicial em deduções de 6% do Imposto de Renda (Lei 
+Rouanet, Fundos da Infância e Adolescência, Fundos do Idoso e Incentivos ao Esporte), 
+mas arquitetonicamente projetado para expandir-se a qualquer modalidade de incentivo 
+fiscal presente ou futura.
+
+4.2 INOVAÇÕES PROPRIETÁRIAS PRINCIPAIS
+
+A) SISTEMA DE COMPLIANCE FISCAL ATIVO COM GARANTIA DE CONFORMIDADE
+- Inovação disruptiva especificamente projetada para servidores públicos
+- Tokenização de responsabilidade fiscal
+- Garantia automática de conformidade legal
+- Metodologia proprietária de validação em tempo real
+
+B) MÓDULO DE IMPACTO VERIFICÁVEL E TRANSPARENTE  
+- Sistema proprietário de mensuração de resultados sociais
+- Grupos de impacto específicos para servidores públicos
+- Rastreabilidade completa de destinações
+- Relatórios de transparência automatizados
+
+C) ARQUITETURA DE EXTENSIBILIDADE PARA FUNDOS ADICIONAIS
+- Design escalável para qualquer modalidade de incentivo fiscal
+- Adaptação automática a diferentes percentuais e bases de cálculo
+- Compatibilidade com regimes tributários diversos
+- Expansão nacional e internacional programada
+
+4.3 FLUXOS DE PROCESSO PROPRIETÁRIOS
+- Metodologias exclusivas de cálculo e validação
+- Processos automatizados de compliance
+- Workflows proprietários de destinação
+- Integração sistêmica com órgãos governamentais
+
+4.4 MODELO DE NEGÓCIO PROTEGIDO
+- Segmentação estratégica por categorias de usuários
+- Modelo de monetização proprietário
+- Estratégia de expansão documentada
+- Parcerias e licenciamentos estruturados
+
+═══════════════════════════════════════════════════════════════════════════════
+                           5. VERSÃO DEMONSTRATIVA
 ═══════════════════════════════════════════════════════════════════════════════
 
 IMPORTANTE: O código aqui apresentado representa uma VERSÃO DEMONSTRATIVA do 
@@ -147,12 +200,17 @@ Funcionalidades desta versão demo:
 - Integração Gov.br (simulada)
 
 Funcionalidades exclusivas da versão completa:
+- Sistema de Compliance Fiscal Ativo com Garantia de Conformidade
+- Módulo de Impacto Verificável e Transparente
 - Integração real com APIs governamentais
-- Banco de dados de produção
-- Sistema de compliance avançado
-- Módulos de relatórios gerenciais
-- Funcionalidades de auditoria
-- Suporte técnico especializado
+- Banco de dados de produção com histórico completo
+- Arquitetura de extensibilidade para fundos adicionais
+- Tokenização de responsabilidade fiscal
+- Módulos de relatórios gerenciais avançados
+- Funcionalidades de auditoria completa
+- Metodologias proprietárias de cálculo
+- Suporte técnico especializado 24/7
+- Fluxos de processo proprietários
 
 ═══════════════════════════════════════════════════════════════════════════════
                         5. PROTEÇÃO MARCÁRIA E USO DO NOME
@@ -189,11 +247,23 @@ Conforme Lei 9.279/96 (Lei de Propriedade Industrial):
                         6. TERMOS DE USO E RESTRIÇÕES
 ═══════════════════════════════════════════════════════════════════════════════
 
-6.1 PROPRIEDADE INTELECTUAL
+6.1 PROPRIEDADE INTELECTUAL COMPLETA
 Todo o código, metodologias, algoritmos, interfaces, design patterns, documentação,
-marca, logotipos e inovações técnicas contidos neste repositório são de propriedade 
-EXCLUSIVA de ADACTO ARTUR DORNAS DE OLIVEIRA, protegidos pelas leis brasileiras 
-de direitos autorais, software e propriedade industrial.
+marca, logotipos, inovações técnicas, fluxos de processo proprietários, sistema de
+compliance fiscal ativo, módulo de impacto verificável, arquitetura de extensibilidade,
+tokenização de responsabilidade, metodologias de cálculo, e todas as demais inovações
+contidas neste repositório são de propriedade EXCLUSIVA de ADACTO ARTUR DORNAS 
+DE OLIVEIRA, protegidos pelas leis brasileiras de direitos autorais, software e 
+propriedade industrial.
+
+INOVAÇÕES ESPECIFICAMENTE PROTEGIDAS:
+- Sistema de Compliance Fiscal Ativo com Garantia de Conformidade
+- Tokenização de Responsabilidade Fiscal
+- Módulo de Impacto Verificável e Transparente
+- Arquitetura de Extensibilidade para Fundos Adicionais
+- Metodologias proprietárias de cálculo e validação
+- Fluxos de processo proprietários
+- Modelo de negócio protegido e segmentação estratégica
 
 6.2 USO PERMITIDO (mediante aceitação tácita destes termos)
 ✅ Visualização do código para fins de AVALIAÇÃO TÉCNICA
