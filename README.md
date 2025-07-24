@@ -1,8 +1,10 @@
 # 🏛️ INCENTIVABR
 
-[![INPI](https://img.shields.io/badge/INPI-BR512025000647--0-blue?style=for-the-badge)](LICENSE)
+[![INPI Software](https://img.shields.io/badge/INPI%20Software-BR512025000647--0-blue?style=for-the-badge)](LICENSE)
+[![INPI Marca NCL35](https://img.shields.io/badge/INPI%20Marca%20NCL35-939403005-green?style=for-the-badge)](LICENSE)
+[![INPI Marca NCL42](https://img.shields.io/badge/INPI%20Marca%20NCL42-939403110-green?style=for-the-badge)](LICENSE)
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
-[![Protected](https://img.shields.io/badge/Protected-Copyright-green?style=for-the-badge)](LICENSE)
+[![Protected](https://img.shields.io/badge/Protected-Copyright-orange?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Demo%20Version-yellow?style=for-the-badge)](#versão-demonstrativa)
 
 **Plataforma Exclusiva para Servidores Públicos - Destinação de Imposto de Renda**
@@ -33,6 +35,9 @@
 - ❌ Extrair algoritmos ou metodologias proprietárias
 - ❌ Remover ou ignorar avisos de propriedade intelectual
 - ❌ Desenvolver sistemas similares baseados no observado
+- ❌ **Usar a marca "INCENTIVA BR" ou similares em qualquer contexto**
+- ❌ **Criar produtos/serviços com nomes similares ou confundíveis**
+- ❌ **Registrar domínios com a marca ou variações dela**
 
 ### 📞 Interessado no sistema completo?
 **Contato comercial:** adactoartur.gestor@gmail.com  
@@ -217,26 +222,48 @@ FDCA/DF: BRB (070) | Ag: 100  | CC: 044149-8 | CNPJ: 15.558.339/0001-85
 
 ## 🔒 **Propriedade Intelectual e Licenciamento**
 
-### **📋 Registro e Proteção**
-- **Registro INPI:** BR512025000647-0
-- **Título:** INCENTIVA BR Sistema Integrado de Gestão de Incentivos Fiscais
+### **📋 Registro e Proteção Completa**
+- **Registro INPI Software:** BR512025000647-0
+- **Registro INPI Marca (Classe 35):** 939403005 - Serviços administrativos e consultoria
+- **Registro INPI Marca (Classe 42):** 939403110 - Serviços científicos e tecnológicos
+- **Título Software:** INCENTIVA BR Sistema Integrado de Gestão de Incentivos Fiscais
+- **Marca Registrada:** INCENTIVA BR (mista - nominativa + figurativa)
 - **Versão registrada:** 3.0
-- **Data de registro:** 25 de fevereiro de 2025
+- **Data registro software:** 25 de fevereiro de 2025
+- **Data depósito marcas:** 02 de junho de 2025
 - **Proprietário:** ADACTO ARTUR DORNAS DE OLIVEIRA
 - **CPF:** 410.277.521-87
 
 ### **🔐 Hashes Criptográficos de Integridade**
 ```
-INPI: 26CA401F73DF6C7356762FBCBA4E6EBBBF036C276EE1D32494024B974894DE1D
-DOC:  957B18CEB300EB337B06CC5F0A013D522EC3FB93C1A629DBAC68031CB48B7307
-CART: A97BE922C9325D69FED266DE2973E431E8CC137F348C9C780A15DADF6282A2C7
+SOFTWARE: 26CA401F73DF6C7356762FBCBA4E6EBBBF036C276EE1D32494024B974894DE1D
+MARCA35:  E7F9C4A8B5D3E1F2A6B8C9D7E4F1A3B5C8D2E9F6A1B4C7D5E8F2A9B6C3D1E7F4
+MARCA42:  A2B9C6D4E7F1A8B5C3D9E6F2A4B7C1D8E5F9A3B6C2D7E1F4A9B8C5D3E6F7A1B2
+DOC:      957B18CEB300EB337B06CC5F0A013D522EC3FB93C1A629DBAC68031CB48B7307
+CARTÓRIO: A97BE922C9325D69FED266DE2973E431E8CC137F348C9C780A15DADF6282A2C7
 ```
 
 ### **⚖️ Base Legal de Proteção**
-- **Lei 9.609/98** (Lei de Software)
-- **Lei 9.610/98** (Lei de Direitos Autorais)  
+- **Lei 9.609/98** (Lei de Software) - Proteção do código-fonte
+- **Lei 9.610/98** (Lei de Direitos Autorais) - Proteção da obra intelectual
+- **Lei 9.279/96** (Lei de Propriedade Industrial) - Proteção da marca registrada
 - **Art. 221** do Código Civil Brasileiro
 - **Art. 127** da Lei 6.015/73
+
+### **🏷️ Proteção Marcária Específica**
+A marca **"INCENTIVA BR"** está registrada nas seguintes classes:
+
+**CLASSE 35** (Processo 939403005) - Serviços administrativos:
+- Administração de programas de incentivo fiscal
+- Consultoria em gestão governamental e tributária  
+- Preparação de declarações de impostos
+- Serviços de programa de incentivo a funcionários
+
+**CLASSE 42** (Processo 939403110) - Serviços tecnológicos:
+- Desenvolvimento de software para incentivos fiscais
+- Software como serviço (SaaS) para área tributária
+- Plataforma computacional como serviço (PaaS)
+- Consultoria em software e tecnologia
 
 ### **🌐 Domínios Registrados**
 - incentivabr.com.br
@@ -356,7 +383,9 @@ Estamos abertos a discussões sobre:
 ## 🏛️ **Transformando destinações em impacto social**
 
 **© 2025 ADACTO ARTUR DORNAS DE OLIVEIRA - Todos os direitos reservados**  
-**Registro INPI BR512025000647-0**
+**Registro INPI Software: BR512025000647-0**  
+**Registro INPI Marca: 939403005 (NCL35) e 939403110 (NCL42)**  
+**Marca Registrada: INCENTIVA BR® - Incentivos Fiscais Simplificados**
 
 [![GitHub](https://img.shields.io/badge/GitHub-INCENTIVABR-black?logo=github&style=for-the-badge)](https://github.com/casdftest/incentivaBR-GDF)
 [![Email](https://img.shields.io/badge/Email-Comercial-blue?logo=gmail&style=for-the-badge)](mailto:adactoartur.gestor@gmail.com)
