@@ -561,6 +561,15 @@
                 left: 1rem;
             }
         }
+        /* ANIMAÇÕES DA TINA - ADICIONAR ANTES DE </style> */
+@keyframes tinaPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.tina-pulse {
+    animation: tinaPulse 2s infinite;
+}
     </style>
 </head>
 <body>
@@ -1146,14 +1155,17 @@
             return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
         }
 
-        // Mostrar notificação TINA após 3 segundos
+        // Auto-abertura TINA
+setTimeout(() => {
+    if (window.innerWidth >= 768) {
+        const bubble = document.querySelector('.tina-bubble');
+        bubble.classList.add('tina-pulse');
+        
         setTimeout(() => {
-            if (!tinaAberta) {
-                const bubble = document.querySelector('.tina-bubble');
-                bubble.style.animation = 'pulse 2s infinite';
-                bubble.title = 'Clique para falar com a TINA!';
-            }
-        }, 3000);
+            abrirTina();
+        }, 2000);
+    }
+}, 3000);
     </script>
 </body>
 </html>
