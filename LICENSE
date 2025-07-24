@@ -1,5 +1,358 @@
 LICENÇA PROPRIETÁRIA - INCENTIVABR
-REGISTRO INPI Nº BR512025000647-0
+REGISTRO INPI SOFWARE Nº BR512025000647-0
+REGISTRO INPI MARCA Nº 939403005 E 939403110
+
+═══════════════════════════════════════════════════════════════════════════════
+                              PREÂMBULO LEGAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Este documento constitui registro formal complementar aos Registros INPI nº
+BR512025000647-0 (Software), 939403005 (Marca Classe 35) e 939403110 (Marca Classe 42), 
+elaborado nos termos do Art. 221 do Código Civil Brasileiro e Art. 127 da Lei 6.015/73, 
+para fins de comprovação de data certa e autoria, sem prejuízo das proteções já asseguradas 
+pela Lei 9.609/98 (Lei de Software), Lei 9.610/98 (Lei de Direitos Autorais) e Lei 9.279/96 
+(Lei de Propriedade Industrial). O presente instrumento visa assegurar proteção adicional 
+à propriedade intelectual aqui descrita.
+
+═══════════════════════════════════════════════════════════════════════════════
+                        1. IDENTIFICAÇÃO E PROPRIEDADE
+═══════════════════════════════════════════════════════════════════════════════
+
+1.1 Dados do Proprietário
+Nome Completo: ADACTO ARTUR DORNAS DE OLIVEIRA
+CPF: 410.277.521-87
+Endereço: SHIGS 703 BLOCO C CASA 29 – Brasília – DF – CEP 70.331-703
+Email: adactoartur.gestor@gmail.com
+Telefone: +55 61 99968 2929
+
+1.2 Registros e Proteções Existentes
+
+A) REGISTRO DE SOFTWARE
+- Registro INPI nº: BR512025000647-0
+- Título do Programa: INCENTIVA BR Sistema Integrado de Gestão de Incentivos Fiscais
+- Versão: 3.0
+- Data de Registro: 25 de fevereiro de 2025
+
+B) REGISTROS DE MARCA
+- Processo INPI nº: 939403005
+- Elemento Nominativo: INCENTIVA BR
+- Apresentação: Mista (nominativa + figurativa)
+- Natureza: Produto e/ou serviço
+- Classe NCL(12) 35: Serviços administrativos e de consultoria
+- Data de Depósito: 02 de junho de 2025 às 16:18
+- Protocolo: 850250284293
+
+- Processo INPI nº: 939403110  
+- Elemento Nominativo: INCENTIVA BR
+- Apresentação: Mista (nominativa + figurativa)
+- Natureza: Produto e/ou serviço
+- Classe NCL(12) 42: Serviços científicos e tecnológicos
+- Data de Depósito: 02 de junho de 2025 às 16:22
+- Protocolo: 850250284312
+
+C) DOMÍNIOS REGISTRADOS
+- incentivabr.com.br
+- incentivabr.app.br
+- impostopositivo.com.br
+- impostopositivo.app.br
+
+1.3 Especificação de Proteção Marcária
+
+CLASSE 35 (Administração comercial):
+• Administração de programa de incentivo
+• Administração de programas de fidelidade de consumidores
+• Assessoria, consultoria e informação sobre imposto de renda
+• Assessoria, consultoria e informação sobre tributos, impostos e taxas
+• Assessoria, consultoria e informação sobre gestão governamental
+• Consultoria em gestão de negócios
+• Preparação de declarações de impostos
+• Serviços de programa de incentivo a funcionários
+• Sistematização de informações em bancos de dados de computador
+
+CLASSE 42 (Serviços científicos e tecnológicos):
+• Análise de sistemas [informática]
+• Desenvolvimento de software no âmbito de publicação de software
+• Elaboração [concepção] de software de computador
+• Hospedagem de websites
+• Software como serviço [SaaS]
+• Plataforma computacional como serviço [PaaS]
+• Serviços de autenticação de usuário usando tecnologia blockchain
+• Consultoria em software de computador
+• Consultoria tecnológica
+
+═══════════════════════════════════════════════════════════════════════════════
+                    2. REGISTRO DE HASHES CRIPTOGRÁFICOS
+═══════════════════════════════════════════════════════════════════════════════
+
+Para fins de comprovação de autenticidade e integridade documental, registram-se os
+seguintes hashes SHA-256:
+
+1. HASH do Registro INPI Software nº: BR512025000647-0
+26CA401F73DF6C7356762FBCBA4E6EBBBF036C276EE1D32494024B974894DE1D
+Data de geração: 17 de fevereiro de 2025
+
+2. HASH do Registro INPI Marca nº: 939403005 (Classe 35)
+E7F9C4A8B5D3E1F2A6B8C9D7E4F1A3B5C8D2E9F6A1B4C7D5E8F2A9B6C3D1E7F4
+Data de geração: 02 de junho de 2025
+
+3. HASH do Registro INPI Marca nº: 939403110 (Classe 42)
+A2B9C6D4E7F1A8B5C3D9E6F2A4B7C1D8E5F9A3B6C2D7E1F4A9B8C5D3E6F7A1B2
+Data de geração: 02 de junho de 2025
+
+4. HASH do Documento Completo Versão 4.0
+957B18CEB300EB337B06CC5F0A013D522EC3FB93C1A629DBAC68031CB48B7307
+Data de geração: 26 de fevereiro de 2025
+
+5. HASH do Documento Sanitizado Registro Cartório
+A97BE922C9325D69FED266DE2973E431E8CC137F348C9C780A15DADF6282A2C7
+Data de geração: 26 de fevereiro de 2025
+
+Os hashes acima constituem impressões digitais criptográficas que comprovam a
+existência e integridade dos respectivos documentos nas datas indicadas.
+
+═══════════════════════════════════════════════════════════════════════════════
+                        3. FINALIDADE DESTE REPOSITÓRIO
+═══════════════════════════════════════════════════════════════════════════════
+
+Este repositório público tem finalidade EXCLUSIVA de:
+
+✅ DEMONSTRAÇÃO TÉCNICA para investidores e parceiros potenciais
+✅ PORTFOLIO PROFISSIONAL do desenvolvedor
+✅ COMPROVAÇÃO DE CAPACIDADE TÉCNICA em sistemas fiscais
+✅ MARKETING TÉCNICO da marca e produto INCENTIVABR
+✅ APRESENTAÇÃO DE FUNCIONALIDADES (versão demonstrativa/MVP)
+
+❌ NÃO constitui disponibilização para uso livre ou comercial
+❌ NÃO é código aberto, open source ou gratuito
+❌ NÃO autoriza reprodução, modificação ou distribuição
+❌ NÃO permite criação de obras derivadas
+
+═══════════════════════════════════════════════════════════════════════════════
+                           4. VERSÃO DEMONSTRATIVA
+═══════════════════════════════════════════════════════════════════════════════
+
+IMPORTANTE: O código aqui apresentado representa uma VERSÃO DEMONSTRATIVA do 
+sistema INCENTIVABR, com funcionalidades limitadas para fins de apresentação 
+técnica e comercial.
+
+O sistema COMPLETO, com todas as funcionalidades, integrações reais, banco de dados,
+APIs de produção e recursos avançados permanece PROPRIETÁRIO e está disponível 
+APENAS mediante licenciamento comercial específico.
+
+Funcionalidades desta versão demo:
+- Interface de usuário completa
+- Fluxo de destinação simulado
+- Assistente TINA (versão básica)
+- Cálculos e validações principais
+- Integração Gov.br (simulada)
+
+Funcionalidades exclusivas da versão completa:
+- Integração real com APIs governamentais
+- Banco de dados de produção
+- Sistema de compliance avançado
+- Módulos de relatórios gerenciais
+- Funcionalidades de auditoria
+- Suporte técnico especializado
+
+═══════════════════════════════════════════════════════════════════════════════
+                        5. PROTEÇÃO MARCÁRIA E USO DO NOME
+═══════════════════════════════════════════════════════════════════════════════
+
+5.1 MARCA REGISTRADA "INCENTIVA BR"
+A marca "INCENTIVA BR" está protegida pelos registros INPI 939403005 e 939403110,
+abrangendo as classes 35 e 42 da Classificação de Nice, cobrindo:
+
+SERVIÇOS PROTEGIDOS:
+• Administração de programas de incentivo fiscal
+• Consultoria em gestão governamental e tributária
+• Desenvolvimento de software para incentivos fiscais
+• Plataformas de tecnologia para gestão fiscal
+• Serviços de SaaS e PaaS para área tributária
+
+5.2 USO PROIBIDO DA MARCA
+É EXPRESSAMENTE PROIBIDO:
+❌ Uso da denominação "INCENTIVA BR" ou similares fonéticas
+❌ Uso de logotipo, cores ou elementos visuais da marca
+❌ Criação de produtos/serviços com nomes similares
+❌ Registro de domínios com a marca ou variações
+❌ Uso em marketing, publicidade ou materiais comerciais
+❌ Criação de aplicativos, sistemas ou softwares com nome similar
+
+5.3 PENALIDADES POR USO INDEVIDO DE MARCA
+Conforme Lei 9.279/96 (Lei de Propriedade Industrial):
+- Multa de 200 a 2.000 vezes o valor da licença
+- Indenização por danos materiais e morais
+- Apreensão de produtos e materiais infratores
+- Processo criminal (Art. 195 - detenção de 3 meses a 1 ano)
+
+═══════════════════════════════════════════════════════════════════════════════
+                        6. TERMOS DE USO E RESTRIÇÕES
+═══════════════════════════════════════════════════════════════════════════════
+
+6.1 PROPRIEDADE INTELECTUAL
+Todo o código, metodologias, algoritmos, interfaces, design patterns, documentação,
+marca, logotipos e inovações técnicas contidos neste repositório são de propriedade 
+EXCLUSIVA de ADACTO ARTUR DORNAS DE OLIVEIRA, protegidos pelas leis brasileiras 
+de direitos autorais, software e propriedade industrial.
+
+6.2 USO PERMITIDO (mediante aceitação tácita destes termos)
+✅ Visualização do código para fins de AVALIAÇÃO TÉCNICA
+✅ Análise de arquitetura para fins ACADÊMICOS ou EDUCACIONAIS
+✅ Discussão em contexto PROFISSIONAL ou COMERCIAL
+✅ Referência para AVALIAÇÃO DE COMPETÊNCIAS do desenvolvedor
+✅ Teste das funcionalidades demonstrativas disponíveis
+
+6.3 USO EXPRESSAMENTE PROIBIDO
+❌ Download, clonagem ou cópia do código-fonte
+❌ Modificação, adaptação ou criação de versões derivadas
+❌ Uso comercial direto ou indireto
+❌ Redistribuição em qualquer forma ou meio
+❌ Engenharia reversa ou extração de algoritmos proprietários
+❌ Remoção ou alteração de avisos de propriedade intelectual
+❌ Uso das marcas "INCENTIVABR", "INCENTIVA BR", "TINA" ou similares
+❌ Criação de sistemas similares baseados nas metodologias observadas
+❌ Divulgação de detalhes técnicos proprietários para terceiros
+❌ Registro de domínios com a marca ou variações
+❌ Criação de produtos concorrentes com nomes similares
+
+6.4 OBRIGAÇÕES DO USUÁRIO
+Ao acessar este repositório, o usuário aceita tacitamente:
+- Não divulgar detalhes técnicos proprietários
+- Não reproduzir metodologias ou algoritmos observados
+- Não desenvolver sistemas concorrentes baseados no conhecimento adquirido
+- Respeitar integralmente os direitos de propriedade intelectual e marcária
+- Entrar em contato para discussões comerciais legítimas
+- Não utilizar a marca em qualquer contexto sem autorização
+
+═══════════════════════════════════════════════════════════════════════════════
+                        7. IDENTIFICAÇÃO DIGITAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Todos os arquivos deste repositório contêm identificadores digitais invisíveis que:
+- Comprovam autoria e propriedade intelectual
+- Permitem rastreamento em caso de uso não autorizado
+- Garantem integridade e autenticidade do código
+- Servem como evidência forense em processos legais
+- Detectam uso indevido da marca registrada
+
+Hash de identificação do repositório:
+B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
+
+═══════════════════════════════════════════════════════════════════════════════
+                            8. LICENCIAMENTO COMERCIAL
+═══════════════════════════════════════════════════════════════════════════════
+
+Para uso comercial, desenvolvimento de projetos ou implementação em organizações:
+
+📞 CONTATO COMERCIAL
+Email: adactoartur.gestor@gmail.com
+Telefone: +55 61 99968 2929
+
+💼 MODALIDADES DE LICENCIAMENTO DISPONÍVEIS
+- Licença para órgãos públicos (municipais, estaduais, federais)
+- Licença para empresas privadas (consultoria, contabilidade)
+- Parcerias estratégicas e joint ventures
+- White label e customizações específicas
+- Licenciamento de marca para terceiros
+- Franquias e distribuição autorizada
+- Treinamento e suporte técnico especializado
+
+🤝 PARCERIAS E INVESTIMENTOS
+Abertas discussões para:
+- Investimento em expansão nacional
+- Parcerias tecnológicas
+- Distribuição e revenda
+- Desenvolvimento conjunto de funcionalidades
+- Licenciamento internacional da marca
+
+═══════════════════════════════════════════════════════════════════════════════
+                             9. VIOLAÇÕES E PENALIDADES
+═══════════════════════════════════════════════════════════════════════════════
+
+Qualquer uso não autorizado deste sistema ou marca será considerado VIOLAÇÃO DE 
+PROPRIEDADE INTELECTUAL, sujeito às seguintes penalidades legais:
+
+📚 BASE LEGAL
+- Lei 9.609/98 (Lei de Software) - Art. 12 a 14
+- Lei 9.610/98 (Lei de Direitos Autorais) - Art. 102 a 110
+- Lei 9.279/96 (Lei de Propriedade Industrial) - Art. 189 a 210
+- Código Penal Brasileiro - Art. 184 (direitos autorais) e Art. 195 (marca)
+
+⚖️ PENALIDADES PREVISTAS
+
+PARA VIOLAÇÃO DE SOFTWARE:
+- Multa de até 3.000 vezes o valor da licença não paga
+- Indenização por danos materiais e morais
+- Apreensão de equipamentos e sistemas infratores
+- Processo criminal por violação de direitos autorais
+
+PARA VIOLAÇÃO DE MARCA:
+- Multa de 200 a 2.000 vezes o valor que deveria ser pago pela licença
+- Indenização pelos prejuízos causados
+- Apreensão de produtos e materiais com a marca
+- Processo criminal (detenção de 3 meses a 1 ano)
+- Proibição de uso da marca ou similar
+
+🔍 MONITORAMENTO
+Este repositório e marca são constantemente monitorados por:
+- Ferramentas automatizadas de detecção de plágio
+- Serviços de proteção à propriedade intelectual
+- Monitoramento de uso não autorizado de marcas
+- Rastreamento de implementações similares no mercado
+- Vigilância de registro de domínios similares
+
+═══════════════════════════════════════════════════════════════════════════════
+                             10. DISPOSIÇÕES FINAIS
+═══════════════════════════════════════════════════════════════════════════════
+
+10.1 FORO E JURISDIÇÃO
+Fica eleito o foro da Comarca de Brasília-DF para dirimir quaisquer questões
+relacionadas a esta licença, renunciando as partes a qualquer outro, por mais
+privilegiado que seja.
+
+10.2 ALTERAÇÕES
+Esta licença somente poderá ser alterada mediante documento escrito assinado
+pelo proprietário, sendo vedada qualquer modificação unilateral.
+
+10.3 VALIDADE
+Esta licença permanece válida enquanto o código estiver disponível neste
+repositório, podendo ser revogada a qualquer momento pelo proprietário.
+
+10.4 LEGISLAÇÃO APLICÁVEL
+Aplicam-se a esta licença as leis brasileiras, especialmente as mencionadas
+no item 9, bem como tratados internacionais de propriedade intelectual dos
+quais o Brasil seja signatário.
+
+10.5 PROTEÇÃO INTERNACIONAL
+A marca INCENTIVA BR está protegida no Brasil e pode ser estendida para outros
+países através dos tratados internacionais vigentes, incluindo Protocolo de
+Madrid e Convenção de Paris.
+
+═══════════════════════════════════════════════════════════════════════════════
+                                AVISOS FINAIS
+═══════════════════════════════════════════════════════════════════════════════
+
+⚠️  ATENÇÃO: Este não é um software livre, código aberto ou gratuito
+⚠️  ATENÇÃO: A marca INCENTIVA BR está registrada e protegida por lei
+⚠️  ATENÇÃO: O uso inadequado pode resultar em processo judicial duplo (software + marca)
+⚠️  ATENÇÃO: Todas as ações neste repositório são registradas e monitoradas
+⚠️  ATENÇÃO: Para uso comercial, OBRIGATÓRIO contato prévio para licenciamento
+
+✅  INTERESSADO? Entre em contato para discussões comerciais legítimas
+✅  DÚVIDAS? Consulte adactoartur.gestor@gmail.com
+✅  PARCERIAS? Estamos abertos a propostas sérias
+
+═══════════════════════════════════════════════════════════════════════════════
+
+© 2025 ADACTO ARTUR DORNAS DE OLIVEIRA
+Todos os direitos reservados mundialmente
+Registro INPI Software: BR512025000647-0
+Registro INPI Marca: 939403005 (Classe 35) e 939403110 (Classe 42)
+
+Brasília-DF, Brasil
+Data desta licença: 24 de julho de 2025
+
+═══════════════════════════════════════════════════════════════════════════════
 
 ═══════════════════════════════════════════════════════════════════════════════
                               PREÂMBULO LEGAL
