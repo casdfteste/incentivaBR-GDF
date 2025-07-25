@@ -594,7 +594,7 @@
     z-index: 9999 !important;
 }
         }
-        /* ANIMAÇÕES DA TINA - ADICIONAR ANTES DE </style> */
+       * ANIMAÇÕES DA TINA - ADICIONAR ANTES DE </style> */
 @keyframes tinaPulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
@@ -602,6 +602,11 @@
 
 .tina-pulse {
     animation: tinaPulse 2s infinite;
+}
+
+@keyframes tinaSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
 }
     </style>
 </head>
