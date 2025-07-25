@@ -1202,90 +1202,102 @@
             }
         });
 
-        // TINA
-        let tinaAberta = false;
-        
-        function abrirTina() {
+        // TINA Functions - ADICIONAR NO SCRIPT
+let tinaAberta = false;
+
+function abrirTina() {
     const chat = document.getElementById('tinaChat');
+    if (!chat) {
+        console.error('TINA chat não encontrado!');
+        return;
+    }
+    
     chat.style.display = 'flex';
     
     // Força reflow antes da animação
     chat.offsetHeight;
     
-    chat.classList.add('active');
-    tinaAberta = true;
-    
-    // Previne scroll do body em mobile
     if (window.innerWidth <= 768) {
+        chat.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+    
+    tinaAberta = true;
+    console.log('TINA aberta!');
 }
 
 function fecharTina() {
     const chat = document.getElementById('tinaChat');
-    chat.classList.remove('active');
+    if (!chat) return;
     
-    setTimeout(() => {
+    if (window.innerWidth <= 768) {
+        chat.classList.remove('active');
+        setTimeout(() => {
+            chat.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300);
+    } else {
         chat.style.display = 'none';
-        document.body.style.overflow = '';
-    }, 300);
+    }
     
     tinaAberta = false;
+    console.log('TINA fechada!');
 }
-        
-        function enviarPergunta(event) {
-            if (event.key === 'Enter') {
-                responder();
-            }
-        }
-        
-        function responder() {
-            const pergunta = document.getElementById('pergunta').value.trim();
-            if (!pergunta) return;
-            
-            const mensagens = document.getElementById('mensagens');
-            
-            // Adicionar pergunta do usuário
-            mensagens.innerHTML += `
-                <div class="tina-message">
-                    <div class="message-avatar" style="background: #1e4d72;">👤</div>
-                    <div class="message-content">${pergunta}</div>
-                </div>
-            `;
-            
-            document.getElementById('pergunta').value = '';
-            
-            // Simular resposta da TINA
-            setTimeout(() => {
-                let resposta = getResposta(pergunta.toLowerCase());
-                mensagens.innerHTML += `
-                    <div class="tina-message">
-                        <div class="message-avatar">🤖</div>
-                        <div class="message-content">${resposta}</div>
-                    </div>
-                `;
-                mensagens.scrollTop = mensagens.scrollHeight;
-            }, 1000);
-        }
-        
-        function getResposta(pergunta) {
-            if (pergunta.includes('ir') || pergunta.includes('imposto')) {
-                return '💰 O IR devido você encontra na sua declaração de 2024, campo "Imposto Devido". Se não souber, posso estimar baseado no seu salário!';
-            }
-            if (pergunta.includes('fundo') || pergunta.includes('diferença')) {
-                return '🏛️ FDI é para idosos (60+) e FDCA para crianças/adolescentes. Escolha pela causa que mais te identifica!';
-            }
-            if (pergunta.includes('projeto')) {
-                return '🎯 Todos os projetos são pré-aprovados. Considere o impacto direto e transparência. Pode escolher "Destinação Geral" se preferir!';
-            }
-            if (pergunta.includes('upload') || pergunta.includes('comprovante')) {
-                return '📎 Use PDF, JPG ou PNG até 5MB. Deve mostrar data, valor e destinatário. Print do banco funciona perfeitamente!';
-            }
-            if (pergunta.includes('legal') || pergunta.includes('prazo')) {
-                return '⚖️ O Conselho tem 60 dias para emitir o recibo conforme Art. 5º. O sistema garante total conformidade legal!';
-            }
-            return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
-        }
+
+function enviarPergunta(event) {
+    if (event.key === 'Enter') {
+        responder();
+    }
+}
+
+function responder() {
+    const pergunta = document.getElementById('pergunta').value.trim();
+    if (!pergunta) return;
+    
+    const mensagens = document.getElementById('mensagens');
+    if (!mensagens) return;
+    
+    // Adicionar pergunta do usuário
+    mensagens.innerHTML += `
+        <div class="tina-message">
+            <div class="message-avatar" style="background: #1e4d72;">👤</div>
+            <div class="message-content">${pergunta}</div>
+        </div>
+    `;
+    
+    document.getElementById('pergunta').value = '';
+    
+    // Simular resposta da TINA
+    setTimeout(() => {
+        let resposta = getResposta(pergunta.toLowerCase());
+        mensagens.innerHTML += `
+            <div class="tina-message">
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">${resposta}</div>
+            </div>
+        `;
+        mensagens.scrollTop = mensagens.scrollHeight;
+    }, 1000);
+}
+
+function getResposta(pergunta) {
+    if (pergunta.includes('ir') || pergunta.includes('imposto')) {
+        return '💰 O IR devido você encontra na sua declaração de 2024, campo "Imposto Devido". Se não souber, posso estimar baseado no seu salário!';
+    }
+    if (pergunta.includes('fundo') || pergunta.includes('diferença')) {
+        return '🏛️ FDI é para idosos (60+) e FDCA para crianças/adolescentes. Escolha pela causa que mais te identifica!';
+    }
+    if (pergunta.includes('projeto')) {
+        return '🎯 Todos os projetos são pré-aprovados. Considere o impacto direto e transparência. Pode escolher "Destinação Geral" se preferir!';
+    }
+    if (pergunta.includes('upload') || pergunta.includes('comprovante')) {
+        return '📎 Use PDF, JPG ou PNG até 5MB. Deve mostrar data, valor e destinatário. Print do banco funciona perfeitamente!';
+    }
+    if (pergunta.includes('legal') || pergunta.includes('prazo')) {
+        return '⚖️ O Conselho tem 60 dias para emitir o recibo conforme Art. 5º. O sistema garante total conformidade legal!';
+    }
+    return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
+}
 
         // Auto-abertura TINA
 setTimeout(() => {
@@ -1297,6 +1309,7 @@ setTimeout(() => {
             abrirTina();
         }, 2000);
     }
+}  
 }, 3000);
     </script>
 </body>
