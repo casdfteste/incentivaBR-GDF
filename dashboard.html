@@ -1299,18 +1299,19 @@ function getResposta(pergunta) {
     return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
 }
 
-        // Auto-abertura TINA
-setTimeout(() => {
-    if (window.innerWidth >= 768) {
-        const bubble = document.querySelector('.tina-bubble');
-        bubble.classList.add('tina-pulse');
-        
+       // Auto-abertura TINA
         setTimeout(() => {
-            abrirTina();
-        }, 2000);
-    }
-}  
-}, 3000);
+            if (window.innerWidth >= 768) {
+                const bubble = document.querySelector('.tina-bubble');
+                if (bubble) {
+                    bubble.classList.add('tina-pulse');
+                    
+                    setTimeout(() => {
+                        abrirTina();
+                    }, 2000);
+                }
+            }
+        }, 3000);
     </script>
 </body>
 </html>
