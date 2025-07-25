@@ -64,6 +64,57 @@
             box-sizing: border-box;
         }
 
+        /* CORREÇÃO EMERGENCIAL - DESKTOP PRIMEIRO */
+@media (min-width: 769px) {
+    .tina-chat {
+        position: absolute !important;
+        bottom: 80px !important;
+        right: 0 !important;
+        width: 350px !important;
+        height: 500px !important;
+        background: white !important;
+        border-radius: 20px !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
+        display: none !important;
+        flex-direction: column !important;
+        z-index: 1000 !important;
+        transform: none !important;
+        top: auto !important;
+        left: auto !important;
+    }
+
+    .tina-widget {
+        position: fixed !important;
+        bottom: 2rem !important;
+        right: 2rem !important;
+        z-index: 1000 !important;
+    }
+
+    .tina-bubble {
+        width: 60px !important;
+        height: 60px !important;
+        bottom: auto !important;
+        right: auto !important;
+        position: relative !important;
+    }
+
+    .nav-links {
+        position: static !important;
+        display: flex !important;
+        background: transparent !important;
+        height: auto !important;
+        width: auto !important;
+        flex-direction: row !important;
+        transform: none !important;
+        left: auto !important;
+        top: auto !important;
+    }
+
+    .mobile-menu {
+        display: none !important;
+    }
+}
+
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
