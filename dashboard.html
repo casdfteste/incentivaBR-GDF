@@ -1125,14 +1125,32 @@
         let tinaAberta = false;
         
         function abrirTina() {
-            document.getElementById('tinaChat').style.display = 'flex';
-            tinaAberta = true;
-        }
-        
-        function fecharTina() {
-            document.getElementById('tinaChat').style.display = 'none';
-            tinaAberta = false;
-        }
+    const chat = document.getElementById('tinaChat');
+    chat.style.display = 'flex';
+    
+    // Força reflow antes da animação
+    chat.offsetHeight;
+    
+    chat.classList.add('active');
+    tinaAberta = true;
+    
+    // Previne scroll do body em mobile
+    if (window.innerWidth <= 768) {
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function fecharTina() {
+    const chat = document.getElementById('tinaChat');
+    chat.classList.remove('active');
+    
+    setTimeout(() => {
+        chat.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 300);
+    
+    tinaAberta = false;
+}
         
         function enviarPergunta(event) {
             if (event.key === 'Enter') {
