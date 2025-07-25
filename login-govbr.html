@@ -263,18 +263,23 @@
             font-weight: 500;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
+       .form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color 0.3s ease;
+}
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #1351b4;
-        }
+.form-group input:focus {
+    outline: none;
+    border-color: #1351b4;
+    box-shadow: 0 0 0 3px rgba(19, 81, 180, 0.1);
+}
 
         .govbr-login-btn {
             background: #1351b4;
