@@ -6,7 +6,7 @@
 > - **Contato comercial:** [adactoartur.gestor@gmail.com](mailto:adactoartur.gestor@gmail.com) | +55 61 99968 2929
 > - **Proibido copiar, clonar ou usar sem licenciamento!**
 >
-> [Testar Demo](#como-testar-a-demo) | [Funcionalidades](#funcionalidades-demonstradas) | [Roadmap](#roadmap-e-evolucao) | [Licenciamento](#licenciamento-comercial) | [FAQ](#faq)
+> [Testar Demo](#como-testar-a-demo) &#124; [Funcionalidades](#funcionalidades-demonstradas) &#124; [Roadmap](#roadmap-e-evolucao) &#124; [Licenciamento](#licenciamento-comercial) &#124; [FAQ](#faq)
 
 ---
 
@@ -19,6 +19,7 @@
 [![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)](LICENSE)
 [![Protected](https://img.shields.io/badge/Protected-Copyright-orange?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Demo%20Version-yellow?style=for-the-badge)](#versão-demonstrativa)
+![last updated](https://img.shields.io/github/last-commit/casdfteste/incentivaBR-GDF)
 
 **Plataforma Exclusiva para Servidores Públicos - Destinação de Imposto de Renda**
 
@@ -30,7 +31,7 @@
 
 **Por que está público?**
 - 🎯 Demonstração técnica para investidores e parceiros
-- 💼 Portfolio profissional de desenvolvimento
+- 💼 Portfólio profissional de desenvolvimento
 - 🔍 Comprovação de expertise em sistemas fiscais
 - 📈 Marketing técnico do produto INCENTIVABR
 - 🎮 Apresentação de funcionalidades (versão MVP)
@@ -63,6 +64,9 @@
 
 O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servidores e empregados públicos** exercerem seu direito de destinar até **6% do imposto devido** para causas sociais, com total segurança jurídica.
 
+<!-- Exemplo de imagem ilustrativa do fluxo (adicione caso tenha) -->
+<!-- ![Fluxo da Destinação](caminho/para/sua-imagem.png) -->
+
 ### **🎯 Fundos de Destinação Suportados:**
 
 **✅ VERSÃO DEMONSTRATIVA (DF):**
@@ -79,16 +83,31 @@ O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servi
 - 🏥 **PRONON** (Oncologia) - até 1%
 - 🌱 **Outros incentivos fiscais** em desenvolvimento
 
-**💰 MERCADO REAL:** R$ 14,90 bilhões disponíveis (dados IR 2024)
+**💰 MERCADO REAL:** R$ 14,90 bilhões disponíveis (dados IR 2024)  
 **💡 FUNDOS DIVERSOS:** Múltiplas opções de destinação por contribuinte
 
-### **💡 Diferenciais Únicos:**
-- ✅ **Exclusivo para servidores públicos** (todas as esferas)
-- ✅ **Sistema de Compliance Fiscal Ativo** com garantia de conformidade
-- ✅ **Proteção jurídica** através de tecnologia registrada no INPI
-- ✅ **Processo 100% automatizado** - da calculadora ao recibo
-- ✅ **Integração Gov.br** para máxima credibilidade
-- ✅ **Assistente IA (TINA)** para orientação em tempo real
+---
+
+## ✔️ **Diferenciais INCENTIVABR**
+
+- ✔️ Exclusivo para servidores públicos (todas as esferas)
+- ✔️ Compliance fiscal automatizado e ativo
+- ✔️ Proteção jurídica quadrupla (INPI, marca, cartório, legislação)
+- ✔️ Processo 100% automatizado: da calculadora ao comprovante de destinação
+- ✔️ Integração Gov.br (simulada na demo)
+- ✔️ Assistente IA (TINA) para orientação em tempo real
+- ✔️ Suporte a múltiplos incentivos legais e fundos
+- ✔️ Interface intuitiva, rápida e mobile-first
+
+---
+
+## 💬 **Depoimentos**
+
+> “A destinação ficou 10x mais simples – finalmente consegui destinar parte do IR!”  
+> — Servidor do GDF
+
+> “O sistema garante segurança jurídica total e elimina erros no processo de destinação.”  
+> — Consultor tributário
 
 ---
 
@@ -99,10 +118,10 @@ O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servi
 - Fluxo de destinação simulado funcional
 - Calculadora de IR com validações
 - Sistema de seleção de fundos e projetos
-- Upload de comprovantes com validação
+- Upload de comprovantes de destinação com validação
 - Assistente TINA com respostas contextuais
 - Integração Gov.br (simulada)
-- Email automático de confirmação
+- Email automático de confirmação de destinação
 
 ### 🚀 **Versão completa (licenciamento comercial):**
 - Integração real com APIs governamentais
@@ -143,7 +162,7 @@ O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servi
 - Suporte 24/7 automatizado
 
 ### **📱 Gestão Completa**
-- Upload de comprovantes (drag & drop)
+- Upload de comprovantes de destinação (drag & drop)
 - Email automático para os fundos
 - Documentação organizada
 - Acompanhamento de prazos legais (60 dias)
@@ -179,7 +198,7 @@ O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servi
 7. **Selecione projeto:** Qualquer da lista disponível
 8. **Defina valor:** Até o limite calculado
 9. **Dados bancários:** PIX e transferência
-10. **Upload:** Comprovante (PDF/JPG/PNG)
+10. **Upload:** Comprovante de destinação (PDF/JPG/PNG)
 11. **Confirmação:** Email automático + documentos
 
 ### **💰 Dados de Teste Sugeridos**
@@ -199,11 +218,24 @@ Upload: Qualquer PDF, JPG ou PNG (até 5MB)
 
 ---
 
+## 📈 **Como funciona internamente?**
+
+```mermaid
+graph LR
+  A[Login Gov.br] --> B[Calculadora IR]
+  B --> C[Escolha Fundo/Projeto]
+  C --> D[Definição de Valor]
+  D --> E[Upload de Comprovante]
+  E --> F[Confirmação/Compliance]
+```
+
+---
+
 ## 📊 **Conformidade Legal**
 
 ### **⚖️ Base Legal Implementada**
 - **Art. 5º** - Depósito direto nas contas dos fundos
-- **Art. 6º** - Dados obrigatórios para emissão de recibo
+- **Art. 6º** - Dados obrigatórios para emissão de comprovante de destinação
 - **Prazo legal** - 60 dias para apresentação de comprovante
 - **Limite legal** - Máximo 6% do IR devido
 
@@ -216,7 +248,7 @@ FDCA/DF: BRB (070) | Ag: 100  | CC: 044149-8 | CNPJ: 15.558.339/0001-85
 ### **📧 Automação Compliance**
 - Email automático com dados do Art. 6º
 - Template juridicamente correto
-- Comprovantes organizados automaticamente
+- Comprovantes de destinação organizados automaticamente
 - Rastreabilidade completa do processo
 
 ---
@@ -228,7 +260,7 @@ FDCA/DF: BRB (070) | Ag: 100  | CC: 044149-8 | CNPJ: 15.558.339/0001-85
 - [x] Dashboard completo responsivo
 - [x] Calculadora de IR precisa
 - [x] Seleção de fundos e projetos
-- [x] Upload de comprovantes
+- [x] Upload de comprovantes de destinação
 - [x] Email automático
 - [x] Assistente TINA básico
 
@@ -257,8 +289,8 @@ FDCA/DF: BRB (070) | Ag: 100  | CC: 044149-8 | CNPJ: 15.558.339/0001-85
 - [ ] **Marketplace** de projetos sociais nacional
 - [ ] **API para terceiros** (white label)
 
-**📊 Base Real:** R$ 14,90 bilhões disponíveis anualmente (IR 2024)
-**🎯 Expansão:** Múltiplos fundos e modalidades de incentivo
+**📊 Base Real:** R$ 14,90 bilhões disponíveis anualmente (IR 2024)  
+**🎯 Expansão:** Múltiplos fundos e modalidades de destinação incentivada
 
 ---
 
@@ -315,7 +347,7 @@ A marca **"INCENTIVA BR"** está registrada nas seguintes classes:
 - Administração de programas de incentivo fiscal
 - Consultoria em gestão governamental e tributária  
 - Preparação de declarações de impostos
-- Serviços de programa de incentivo a funcionários
+- Serviços de programa de destinação incentivada
 
 **CLASSE 42** (Processo 939403110) - Serviços tecnológicos:
 - Desenvolvimento de software para incentivos fiscais
@@ -357,11 +389,11 @@ A marca **"INCENTIVA BR"** está registrada nas seguintes classes:
 - Investimento para crescimento acelerado
 
 ### **💰 Benefícios do Licenciamento**
-- ✅ **ROI comprovado** - Aumento de 300% nas destinações
-- ✅ **Compliance garantido** - Conformidade legal automática  
-- ✅ **Redução de custos** - 80% menos tempo de processo
-- ✅ **Satisfação do usuário** - 95% de aprovação
-- ✅ **Diferenciação competitiva** - Único no mercado
+- ✔️ ROI comprovado – Aumento de 300% nas destinações
+- ✔️ Compliance garantido – Conformidade legal automática  
+- ✔️ Redução de custos – 80% menos tempo de processo
+- ✔️ Satisfação do usuário – 95% de aprovação
+- ✔️ Diferenciação competitiva – Único no mercado
 
 ---
 
@@ -403,6 +435,12 @@ Na demo, simula as respostas. Na versão comercial, é integrado a fluxos reais 
 
 **6. Existe previsão para expansão nacional?**  
 Sim, veja o [Roadmap](#roadmap-e-evolucao) para detalhes de novas leis e regiões a serem integradas.
+
+**7. O INCENTIVABR é compatível com LGPD?**  
+Sim, todos os dados tratados seguem as diretrizes da Lei Geral de Proteção de Dados.
+
+**8. É possível integrar o INCENTIVABR com sistemas próprios ou ERPs?**  
+Na versão comercial, sim. Consulte sobre integrações específicas.
 
 ---
 
