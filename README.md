@@ -1,14 +1,3 @@
-> **TL;DR (Resumo Executivo)**
->
-> - Plataforma exclusiva para servidores públicos destinarem até 6% do IR para causas sociais – com segurança jurídica máxima.
-> - **DEMO**: Simule todo o fluxo, com login Gov.br, calculadora de IR, seleção de fundos e upload de comprovante.
-> - **Proteção jurídica:** INPI (software e marca), registro em cartório, compliance legal e tecnologia proprietária.
-> - **Contato comercial:** [adactoartur.gestor@gmail.com](mailto:adactoartur.gestor@gmail.com) | +55 61 99968 2929
-> - **Proibido copiar, clonar ou usar sem licenciamento!**
->
-> [Testar Demo](#como-testar-a-demo) &#124; [Funcionalidades](#-funcionalidades-demonstradas) &#124; [Roadmap](#-roadmap-e-evolucao) &#124; [Licenciamento](#-licenciamento-comercial) &#124; [FAQ](#faq)
-
----
 
 # 🏛️ INCENTIVABR
 
