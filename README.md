@@ -6,7 +6,7 @@
 > - **Contato comercial:** [adactoartur.gestor@gmail.com](mailto:adactoartur.gestor@gmail.com) | +55 61 99968 2929
 > - **Proibido copiar, clonar ou usar sem licenciamento!**
 >
-> [Testar Demo](#como-testar-a-demo) &#124; [Funcionalidades](#funcionalidades-demonstradas) &#124; [Roadmap](#roadmap-e-evolucao) &#124; [Licenciamento](#licenciamento-comercial) &#124; [FAQ](#faq)
+> [Testar Demo](#como-testar-a-demo) &#124; [Funcionalidades](#-funcionalidades-demonstradas) &#124; [Roadmap](#-roadmap-e-evolucao) &#124; [Licenciamento](#-licenciamento-comercial) &#124; [FAQ](#faq)
 
 ---
 
