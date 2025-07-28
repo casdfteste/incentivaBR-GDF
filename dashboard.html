@@ -1,4 +1,7 @@
-<!-- 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- 
     ═══════════════════════════════════════════════════════════════════════════════
                             SISTEMA PROPRIETÁRIO - INCENTIVABR
     ═══════════════════════════════════════════════════════════════════════════════
@@ -16,104 +19,23 @@
     CPF: 410.277.521-87
     Email: contato@incentivabr.com.br
     
-    ⚠️  ATENÇÃO: Este código é PROPRIETÁRIO e protegido por lei
-    ⚠️  A marca INCENTIVA BR está REGISTRADA e protegida
-    ⚠️  Documento registrado em cartório com data certa
-    ⚠️  Uso não autorizado constitui violação de propriedade intelectual
-    ⚠️  Todas as ações são monitoradas e registradas
-    ⚠️  Para uso comercial, contate: adactoartur.gestor@gmail.com
-    
     Hash de Identificação: B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
     Data: 24 de julho de 2025
-    
     ═══════════════════════════════════════════════════════════════════════════════
     -->
-    <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INCENTIVABR - Dashboard</title>
-    
-    <!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-                            SISTEMA PROPRIETÁRIO - INCENTIVABR
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Registro INPI: BR512025000647-0
-    Proprietário: ADACTO ARTUR DORNAS DE OLIVEIRA
-    CPF: 410.277.521-87
-    Email: contato@incentivabr.com.br
-    
-    ⚠️  ATENÇÃO: Este código é PROPRIETÁRIO e protegido por lei
-    ⚠️  Uso não autorizado constitui violação de propriedade intelectual
-    ⚠️  Todas as ações são monitoradas e registradas
-    ⚠️  Para uso comercial, contate: adactoartur.gestor@gmail.com
-    
-    Hash de Identificação: B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
-    Data: 24 de julho de 2025
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    -->
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* RESET E BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        /* CORREÇÃO EMERGENCIAL - DESKTOP PRIMEIRO */
-@media (min-width: 769px) {
-    .tina-chat {
-        position: absolute !important;
-        bottom: 80px !important;
-        right: 0 !important;
-        width: 350px !important;
-        height: 500px !important;
-        background: white !important;
-        border-radius: 20px !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
-        display: none !important;
-        flex-direction: column !important;
-        z-index: 1000 !important;
-        transform: none !important;
-        top: auto !important;
-        left: auto !important;
-    }
-
-    .tina-widget {
-        position: fixed !important;
-        bottom: 2rem !important;
-        right: 2rem !important;
-        z-index: 1000 !important;
-    }
-
-    .tina-bubble {
-        width: 60px !important;
-        height: 60px !important;
-        bottom: auto !important;
-        right: auto !important;
-        position: relative !important;
-    }
-
-    .nav-links {
-        position: static !important;
-        display: flex !important;
-        background: transparent !important;
-        height: auto !important;
-        width: auto !important;
-        flex-direction: row !important;
-        transform: none !important;
-        left: auto !important;
-        top: auto !important;
-    }
-
-    .mobile-menu {
-        display: none !important;
-    }
-}
 
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -121,6 +43,7 @@
             min-height: 100vh;
         }
 
+        /* HEADER */
         .header {
             background: linear-gradient(135deg, #1e4d72 0%, #2874a6 100%);
             color: white;
@@ -148,12 +71,14 @@
             text-align: right;
         }
 
+        /* CONTAINER */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
 
+        /* WELCOME */
         .welcome {
             text-align: center;
             margin-bottom: 3rem;
@@ -165,6 +90,7 @@
             margin-bottom: 1rem;
         }
 
+        /* STATS */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -186,6 +112,7 @@
             color: #1e4d72;
         }
 
+        /* STEPS */
         .step {
             background: white;
             border-radius: 15px;
@@ -223,6 +150,7 @@
             font-weight: 600;
         }
 
+        /* FORMS */
         .input-group {
             display: flex;
             align-items: center;
@@ -248,6 +176,7 @@
             border-color: #1e4d72;
         }
 
+        /* BUTTONS */
         .btn {
             background: #1e4d72;
             color: white;
@@ -260,6 +189,8 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            min-height: 44px;
+            min-width: 44px;
         }
 
         .btn:hover {
@@ -274,6 +205,7 @@
             background: #2ecc71;
         }
 
+        /* RESULTS */
         .result {
             background: linear-gradient(135deg, #f39c12, #e67e22);
             color: white;
@@ -293,6 +225,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* FUND CARDS */
         .fund-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -332,6 +265,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* PROJECT LIST */
         .project-list {
             display: none;
         }
@@ -361,6 +295,7 @@
             margin-bottom: 0.5rem;
         }
 
+        /* BANK INFO */
         .bank-info {
             background: #f8f9fa;
             border-radius: 10px;
@@ -384,6 +319,7 @@
             font-weight: 600;
         }
 
+        /* PIX */
         .pix-section {
             background: #e8f5e8;
             border-radius: 8px;
@@ -403,6 +339,7 @@
             margin: 0.5rem 0;
         }
 
+        /* UPLOAD */
         .upload-area {
             border: 3px dashed #ddd;
             border-radius: 10px;
@@ -417,6 +354,7 @@
             background: #f8fbff;
         }
 
+        /* ALERTS */
         .alert {
             padding: 1rem;
             border-radius: 8px;
@@ -436,6 +374,7 @@
             color: #2e7d32;
         }
 
+        /* SUCCESS SCREEN */
         .success-screen {
             text-align: center;
         }
@@ -476,7 +415,7 @@
             font-weight: 600;
         }
 
-        /* TINA Widget */
+        /* ===== TINA WIDGET - VERSÃO LIMPA ===== */
         .tina-widget {
             position: fixed;
             bottom: 2rem;
@@ -531,6 +470,7 @@
             flex: 1;
             padding: 1rem;
             overflow-y: auto;
+            max-height: 300px;
         }
 
         .tina-message {
@@ -548,6 +488,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
+            flex-shrink: 0;
         }
 
         .message-content {
@@ -556,6 +497,7 @@
             border-radius: 10px;
             flex: 1;
             font-size: 0.9rem;
+            word-wrap: break-word;
         }
 
         .tina-input-area {
@@ -571,6 +513,7 @@
             border-radius: 20px;
             padding: 0.5rem 1rem;
             outline: none;
+            font-size: 0.9rem;
         }
 
         .tina-send {
@@ -581,96 +524,12 @@
             width: 40px;
             height: 40px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .fund-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .input-group {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .input-group label {
-                min-width: auto;
-                margin-bottom: 0.5rem;
-            }
-            
-           /* SÓ APLICAR EM MOBILE */
-@media (max-width: 768px) {
-    .tina-chat {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        border-radius: 0 !important;
-        z-index: 10000 !important;
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-    }
-
-    .tina-chat.active {
-        transform: translateY(0);
-    }
-
-    .tina-header {
-        border-radius: 0 !important;
-        padding: 1rem !important;
-        padding-top: max(1rem, env(safe-area-inset-top)) !important;
-    }
-
-    .tina-messages {
-        max-height: none !important;
-        padding-bottom: env(safe-area-inset-bottom) !important;
-    }
-
-    .tina-bubble {
-        width: 55px !important;
-        height: 55px !important;
-        bottom: 1.5rem !important;
-        right: 1.5rem !important;
-    }
-}
-
-.tina-chat.active {
-    transform: translateY(0);
-}
-
-.tina-header {
-    border-radius: 0 !important;
-    padding: 1rem !important;
-    padding-top: max(1rem, env(safe-area-inset-top)) !important;
-}
-
-.tina-messages {
-    max-height: none !important;
-    padding-bottom: env(safe-area-inset-bottom) !important;
-}
-
-.tina-bubble {
-    width: 55px !important;
-    height: 55px !important;
-    bottom: 1.5rem !important;
-    right: 1.5rem !important;
-    position: fixed !important;
-    z-index: 9999 !important;
-}
-        }
-
-        /* Animações TINA */
+        /* TINA ANIMATIONS */
         @keyframes tinaPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
@@ -680,12 +539,211 @@
             animation: tinaPulse 2s infinite;
         }
 
-        @keyframes tinaSlideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .stat-card {
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .fund-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .fund-card {
+                padding: 1rem;
+            }
+            
+            .fund-icon {
+                font-size: 2rem;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            
+            .input-group label {
+                min-width: auto;
+                margin-bottom: 0.5rem;
+            }
+
+            .step {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .step-title {
+                font-size: 1.2rem;
+            }
+
+            .welcome h1 {
+                font-size: 1.8rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .user-info {
+                text-align: center;
+            }
+
+            .user-info h3 {
+                font-size: 1rem;
+            }
+
+            .user-info p {
+                font-size: 0.9rem;
+            }
+
+            /* TINA MOBILE */
+            .tina-widget {
+                bottom: 1.5rem;
+                right: 1.5rem;
+            }
+
+            .tina-bubble {
+                width: 55px;
+                height: 55px;
+                font-size: 1.3rem;
+            }
+
+            .tina-chat {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                z-index: 10000;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+            }
+
+            .tina-chat.active {
+                transform: translateY(0);
+            }
+
+            .tina-header {
+                border-radius: 0;
+                padding: 1rem;
+                padding-top: max(1rem, env(safe-area-inset-top));
+            }
+
+            .tina-messages {
+                max-height: none;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+
+        /* SMARTPHONES PEQUENOS */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .step {
+                padding: 0.75rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .welcome h1 {
+                font-size: 1.5rem;
+            }
+
+            .result-amount {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* TOUCH DEVICES */
+        @media (hover: none) and (pointer: coarse) {
+            .fund-card:hover {
+                transform: none;
+            }
+            
+            .btn:hover {
+                background: #1e4d72;
+            }
+            
+            .btn:active {
+                transform: scale(0.98);
+            }
+            
+            .fund-card:active {
+                transform: scale(0.98);
+            }
+
+            .tina-bubble:hover {
+                transform: scale(1);
+            }
+
+            .tina-bubble:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* SCROLLBAR CUSTOMIZATION */
+        .tina-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .tina-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .tina-messages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 2px;
+        }
+
+        /* SAFE AREAS */
+        @supports (padding-top: env(safe-area-inset-top)) {
+            @media (max-width: 768px) {
+                .tina-header {
+                    padding-top: max(1rem, env(safe-area-inset-top));
+                }
+                
+                .tina-messages {
+                    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+                }
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <div class="header">
@@ -930,7 +988,7 @@
         <div class="tina-chat" id="tinaChat">
             <div class="tina-header">
                 <div>🤖 TINA - Assistente IA</div>
-                <button onclick="fecharTina()" style="background: none; border: none; color: white; cursor: pointer;">
+                <button onclick="fecharTina()" style="background: none; border: none; color: white; cursor: pointer; padding: 0.5rem;">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -954,7 +1012,7 @@
     </div>
 
     <script>
-        // Dados globais
+        // ===== DADOS GLOBAIS =====
         let dadosDestinacao = {};
         
         const fundos = {
@@ -989,7 +1047,7 @@
             ]
         };
 
-        // Funções principais
+        // ===== FUNÇÕES PRINCIPAIS =====
         function calcular() {
             const ir = parseFloat(document.getElementById('irDevido').value);
             if (!ir || ir <= 0) {
@@ -1139,7 +1197,6 @@
                 return;
             }
             
-            // Simular envio
             const btn = document.getElementById('btnEnviar');
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             btn.disabled = true;
@@ -1157,41 +1214,135 @@
             document.getElementById('confirmacao').classList.remove('hidden');
             document.getElementById('confirmacao').scrollIntoView({behavior: 'smooth'});
             
-            // Ocultar steps anteriores
             ['step1', 'step2', 'step3', 'step4', 'step5', 'step6'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
         }
 
-        // Upload
-        document.addEventListener('DOMContentLoaded', function() {
-            const arquivo = document.getElementById('arquivo');
-            const uploadArea = document.querySelector('.upload-area');
-            const btnEnviar = document.getElementById('btnEnviar');
+        // ===== TINA FUNCTIONS - VERSÃO LIMPA =====
+        let tinaAberta = false;
+        
+        function abrirTina() {
+            console.log('=== ABRINDO TINA ===');
+            const chat = document.getElementById('tinaChat');
+            if (!chat) {
+                console.error('TINA chat não encontrado!');
+                return;
+            }
             
-            arquivo.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const tipos = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
-                    if (!tipos.includes(file.type)) {
-                        alert('Tipo não permitido. Use PDF, JPG ou PNG.');
-                        return;
+            chat.style.display = 'flex';
+            
+            if (window.innerWidth <= 768) {
+                chat.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            tinaAberta = true;
+            console.log('=== TINA ABERTA COM SUCESSO ===');
+        }
+        
+        function fecharTina() {
+            console.log('=== FECHANDO TINA ===');
+            const chat = document.getElementById('tinaChat');
+            if (!chat) return;
+            
+            if (window.innerWidth <= 768) {
+                chat.classList.remove('active');
+                setTimeout(() => {
+                    chat.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            } else {
+                chat.style.display = 'none';
+            }
+            
+            tinaAberta = false;
+            console.log('=== TINA FECHADA ===');
+        }
+        
+        function enviarPergunta(event) {
+            if (event.key === 'Enter') {
+                responder();
+            }
+        }
+        
+        function responder() {
+            const pergunta = document.getElementById('pergunta').value.trim();
+            if (!pergunta) return;
+            
+            const mensagens = document.getElementById('mensagens');
+            if (!mensagens) return;
+            
+            mensagens.innerHTML += `
+                <div class="tina-message">
+                    <div class="message-avatar" style="background: #1e4d72;">👤</div>
+                    <div class="message-content">${pergunta}</div>
+                </div>
+            `;
+            
+            document.getElementById('pergunta').value = '';
+            
+            setTimeout(() => {
+                let resposta = getResposta(pergunta.toLowerCase());
+                mensagens.innerHTML += `
+                    <div class="tina-message">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content">${resposta}</div>
+                    </div>
+                `;
+                mensagens.scrollTop = mensagens.scrollHeight;
+            }, 1000);
+        }
+        
+        function getResposta(pergunta) {
+            if (pergunta.includes('ir') || pergunta.includes('imposto')) {
+                return '💰 O IR devido você encontra na sua declaração de 2024, campo "Imposto Devido". Se não souber, posso estimar baseado no seu salário!';
+            }
+            if (pergunta.includes('fundo') || pergunta.includes('diferença')) {
+                return '🏛️ FDI é para idosos (60+) e FDCA para crianças/adolescentes. Escolha pela causa que mais te identifica!';
+            }
+            if (pergunta.includes('projeto')) {
+                return '🎯 Todos os projetos são pré-aprovados. Considere o impacto direto e transparência. Pode escolher "Destinação Geral" se preferir!';
+            }
+            if (pergunta.includes('upload') || pergunta.includes('comprovante')) {
+                return '📎 Use PDF, JPG ou PNG até 5MB. Deve mostrar data, valor e destinatário. Print do banco funciona perfeitamente!';
+            }
+            if (pergunta.includes('legal') || pergunta.includes('prazo')) {
+                return '⚖️ O Conselho tem 60 dias para emitir o recibo conforme Art. 5º. O sistema garante total conformidade legal!';
+            }
+            return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
+        }
+
+        // ===== INICIALIZAÇÃO =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Upload handler
+            const arquivo = document.getElementById('arquivo');
+            if (arquivo) {
+                arquivo.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const tipos = ['application/pdf', 'image/jpeg', 'image/jpg', 'image/png'];
+                        if (!tipos.includes(file.type)) {
+                            alert('Tipo não permitido. Use PDF, JPG ou PNG.');
+                            return;
+                        }
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('Arquivo muito grande. Máximo: 5MB.');
+                            return;
+                        }
+                        
+                        const uploadArea = document.querySelector('.upload-area');
+                        uploadArea.innerHTML = `
+                            <i class="fas fa-file-check" style="font-size: 3rem; color: #27ae60;"></i>
+                            <p><strong>${file.name}</strong></p>
+                            <small>Arquivo selecionado</small>
+                        `;
+                        uploadArea.style.border = '2px solid #27ae60';
+                        uploadArea.style.background = '#f0f8ff';
+                        document.getElementById('btnEnviar').disabled = false;
                     }
-                    if (file.size > 5 * 1024 * 1024) {
-                        alert('Arquivo muito grande. Máximo: 5MB.');
-                        return;
-                    }
-                    
-                    uploadArea.innerHTML = `
-                        <i class="fas fa-file-check" style="font-size: 3rem; color: #27ae60;"></i>
-                        <p><strong>${file.name}</strong></p>
-                        <small>Arquivo selecionado</small>
-                    `;
-                    uploadArea.style.border = '2px solid #27ae60';
-                    uploadArea.style.background = '#f0f8ff';
-                    btnEnviar.disabled = false;
-                }
-            });
+                });
+            }
             
             // Verificar dados do Gov.br
             const dadosGovbr = sessionStorage.getItem('incentivabr_user');
@@ -1202,116 +1353,28 @@
             }
         });
 
-        // TINA Functions - ADICIONAR NO SCRIPT
-let tinaAberta = false;
-
-function abrirTina() {
-    const chat = document.getElementById('tinaChat');
-    if (!chat) {
-        console.error('TINA chat não encontrado!');
-        return;
-    }
-    
-    chat.style.display = 'flex';
-    
-    // Força reflow antes da animação
-    chat.offsetHeight;
-    
-    if (window.innerWidth <= 768) {
-        chat.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    
-    tinaAberta = true;
-    console.log('TINA aberta!');
-}
-
-function fecharTina() {
-    const chat = document.getElementById('tinaChat');
-    if (!chat) return;
-    
-    if (window.innerWidth <= 768) {
-        chat.classList.remove('active');
+        // ===== AUTO-ABERTURA TINA =====
         setTimeout(() => {
-            chat.style.display = 'none';
-            document.body.style.overflow = '';
-        }, 300);
-    } else {
-        chat.style.display = 'none';
-    }
-    
-    tinaAberta = false;
-    console.log('TINA fechada!');
-}
-
-function enviarPergunta(event) {
-    if (event.key === 'Enter') {
-        responder();
-    }
-}
-
-function responder() {
-    const pergunta = document.getElementById('pergunta').value.trim();
-    if (!pergunta) return;
-    
-    const mensagens = document.getElementById('mensagens');
-    if (!mensagens) return;
-    
-    // Adicionar pergunta do usuário
-    mensagens.innerHTML += `
-        <div class="tina-message">
-            <div class="message-avatar" style="background: #1e4d72;">👤</div>
-            <div class="message-content">${pergunta}</div>
-        </div>
-    `;
-    
-    document.getElementById('pergunta').value = '';
-    
-    // Simular resposta da TINA
-    setTimeout(() => {
-        let resposta = getResposta(pergunta.toLowerCase());
-        mensagens.innerHTML += `
-            <div class="tina-message">
-                <div class="message-avatar">🤖</div>
-                <div class="message-content">${resposta}</div>
-            </div>
-        `;
-        mensagens.scrollTop = mensagens.scrollHeight;
-    }, 1000);
-}
-
-function getResposta(pergunta) {
-    if (pergunta.includes('ir') || pergunta.includes('imposto')) {
-        return '💰 O IR devido você encontra na sua declaração de 2024, campo "Imposto Devido". Se não souber, posso estimar baseado no seu salário!';
-    }
-    if (pergunta.includes('fundo') || pergunta.includes('diferença')) {
-        return '🏛️ FDI é para idosos (60+) e FDCA para crianças/adolescentes. Escolha pela causa que mais te identifica!';
-    }
-    if (pergunta.includes('projeto')) {
-        return '🎯 Todos os projetos são pré-aprovados. Considere o impacto direto e transparência. Pode escolher "Destinação Geral" se preferir!';
-    }
-    if (pergunta.includes('upload') || pergunta.includes('comprovante')) {
-        return '📎 Use PDF, JPG ou PNG até 5MB. Deve mostrar data, valor e destinatário. Print do banco funciona perfeitamente!';
-    }
-    if (pergunta.includes('legal') || pergunta.includes('prazo')) {
-        return '⚖️ O Conselho tem 60 dias para emitir o recibo conforme Art. 5º. O sistema garante total conformidade legal!';
-    }
-    return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
-}
-
-       // Auto-abertura TINA
-        setTimeout(() => {
+            console.log('=== INICIANDO AUTO-ABERTURA TINA ===');
             if (window.innerWidth >= 768) {
                 const bubble = document.querySelector('.tina-bubble');
                 if (bubble) {
                     bubble.classList.add('tina-pulse');
+                    console.log('=== TINA PULSE ATIVADO ===');
                     
                     setTimeout(() => {
+                        console.log('=== ABRINDO TINA AUTOMATICAMENTE ===');
                         abrirTina();
                     }, 2000);
                 }
             }
         }, 3000);
+
+        // ===== LOG DE SISTEMA =====
+        console.log('🎉 Dashboard IncentivaBR carregado com sucesso!');
+        console.log('✅ TINA Widget: Pronto');
+        console.log('✅ Sistema responsivo: Ativo');
+        console.log('✅ Todas as funções: Carregadas');
     </script>
 </body>
 </html>
