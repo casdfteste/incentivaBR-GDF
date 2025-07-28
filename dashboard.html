@@ -22,13 +22,13 @@
     Hash de Identificação: B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
     Data: 24 de julho de 2025
     
-    🚀 VERSÃO 2.0 - COM GUIA IR INTEGRADO
+    🚀 VERSÃO 3.0 - COM SEÇÃO "COMO FUNCIONA"
     ═══════════════════════════════════════════════════════════════════════════════
     -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INCENTIVABR - Dashboard v2</title>
+    <title>INCENTIVABR - Dashboard v3</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -75,7 +75,7 @@
 
         /* CONTAINER */
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
         }
@@ -90,6 +90,123 @@
             font-size: 2.5rem;
             color: #1e4d72;
             margin-bottom: 1rem;
+        }
+
+        /* ===== SEÇÃO COMO FUNCIONA ===== */
+        .como-funciona {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .como-funciona h2 {
+            font-size: 2.2rem;
+            color: #1e4d72;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .como-funciona-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .processo-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .processo-step {
+            position: relative;
+            padding: 2rem 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .processo-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(238, 90, 36, 0.3);
+            position: relative;
+        }
+
+        .step-icon.step-2 {
+            background: linear-gradient(135deg, #4834d4, #686de0);
+            box-shadow: 0 8px 25px rgba(72, 52, 212, 0.3);
+        }
+
+        .step-icon.step-3 {
+            background: linear-gradient(135deg, #00d2d3, #54a0ff);
+            box-shadow: 0 8px 25px rgba(0, 210, 211, 0.3);
+        }
+
+        .step-icon.step-4 {
+            background: linear-gradient(135deg, #5f27cd, #a55eea);
+            box-shadow: 0 8px 25px rgba(95, 39, 205, 0.3);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 30px;
+            height: 30px;
+            background: #1e4d72;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 3px solid white;
+        }
+
+        .step-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e4d72;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: #666;
+            line-height: 1.5;
+            font-size: 1rem;
+        }
+
+        /* Conectores entre steps */
+        .processo-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -1rem;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(90deg, #ddd, transparent);
+            z-index: 1;
         }
 
         /* STATS */
@@ -134,7 +251,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .step-number {
+        .step-number-circle {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -146,7 +263,7 @@
             font-weight: 700;
         }
 
-        .step-title {
+        .step-title-main {
             font-size: 1.5rem;
             color: #1e4d72;
             font-weight: 600;
@@ -750,7 +867,7 @@
                 margin-bottom: 1rem;
             }
 
-            .step-title {
+            .step-title-main {
                 font-size: 1.2rem;
             }
 
@@ -778,6 +895,35 @@
 
             .user-info p {
                 font-size: 0.9rem;
+            }
+
+            /* COMO FUNCIONA MOBILE */
+            .como-funciona {
+                padding: 2rem 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .como-funciona h2 {
+                font-size: 1.8rem;
+            }
+            
+            .processo-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .processo-step:not(:last-child)::after {
+                display: none;
+            }
+            
+            .step-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 2rem;
+            }
+            
+            .step-title {
+                font-size: 1.2rem;
             }
 
             /* GUIA MOBILE */
@@ -879,11 +1025,21 @@
             .result-amount {
                 font-size: 1.5rem;
             }
+
+            .como-funciona h2 {
+                font-size: 1.5rem;
+            }
+
+            .step-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
         }
 
         /* TOUCH DEVICES */
         @media (hover: none) and (pointer: coarse) {
-            .fund-card:hover {
+            .fund-card:hover, .processo-step:hover {
                 transform: none;
             }
             
@@ -896,7 +1052,7 @@
                 transform: scale(0.98);
             }
             
-            .fund-card:active {
+            .fund-card:active, .processo-step:active {
                 transform: scale(0.98);
             }
 
@@ -961,6 +1117,60 @@
             <p>Destine até 6% do seu Imposto de Renda para projetos sociais</p>
         </div>
 
+        <!-- NOVA SEÇÃO: Como Funciona -->
+        <div class="como-funciona">
+            <h2>Como Funciona</h2>
+            <p class="como-funciona-subtitle">
+                Em 4 passos simples, você destina parte do seu IR para projetos sociais e recebe 100% de volta na restituição
+            </p>
+            
+            <div class="processo-steps">
+                <div class="processo-step">
+                    <div class="step-icon">
+                        <i class="fas fa-calculator"></i>
+                        <div class="step-number">1</div>
+                    </div>
+                    <div class="step-title">Calcule</div>
+                    <div class="step-description">
+                        Descubra quanto você pode destinar baseado no seu IR devido
+                    </div>
+                </div>
+                
+                <div class="processo-step">
+                    <div class="step-icon step-2">
+                        <i class="fas fa-hand-pointer"></i>
+                        <div class="step-number">2</div>
+                    </div>
+                    <div class="step-title">Escolha</div>
+                    <div class="step-description">
+                        Escolha o fundo e projeto de sua preferência
+                    </div>
+                </div>
+                
+                <div class="processo-step">
+                    <div class="step-icon step-3">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <div class="step-number">3</div>
+                    </div>
+                    <div class="step-title">Incentive</div>
+                    <div class="step-description">
+                        Realize o depósito direto na conta oficial do projeto
+                    </div>
+                </div>
+                
+                <div class="processo-step">
+                    <div class="step-icon step-4">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <div class="step-number">4</div>
+                    </div>
+                    <div class="step-title">Declare</div>
+                    <div class="step-description">
+                        Receba o comprovante e tenha 100% do valor de volta na restituição
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Stats -->
         <div class="stats">
             <div class="stat-card">
@@ -984,8 +1194,8 @@
         <!-- Passo 1: Cálculo do IR -->
         <div class="step" id="step1">
             <div class="step-header">
-                <div class="step-number">1</div>
-                <div class="step-title">Calcule seu Potencial de Destinação</div>
+                <div class="step-number-circle">1</div>
+                <div class="step-title-main">Calcule seu Potencial de Destinação</div>
             </div>
             
             <div class="input-group">
@@ -1010,8 +1220,8 @@
         <!-- Passo 2: Escolha do Fundo -->
         <div class="step hidden" id="step2">
             <div class="step-header">
-                <div class="step-number">2</div>
-                <div class="step-title">Escolha o Fundo de Destinação</div>
+                <div class="step-number-circle">2</div>
+                <div class="step-title-main">Escolha o Fundo de Destinação</div>
             </div>
             
             <div class="fund-grid">
@@ -1038,8 +1248,8 @@
         <!-- Passo 3: Projetos -->
         <div class="step hidden" id="step3">
             <div class="step-header">
-                <div class="step-number">3</div>
-                <div class="step-title">Selecione um Projeto</div>
+                <div class="step-number-circle">3</div>
+                <div class="step-title-main">Selecione um Projeto</div>
             </div>
             
             <div class="project-list" id="projetos">
@@ -1050,8 +1260,8 @@
         <!-- Passo 4: Valor -->
         <div class="step hidden" id="step4">
             <div class="step-header">
-                <div class="step-number">4</div>
-                <div class="step-title">Defina o Valor da Destinação</div>
+                <div class="step-number-circle">4</div>
+                <div class="step-title-main">Defina o Valor da Destinação</div>
             </div>
             
             <div class="alert alert-info">
@@ -1072,8 +1282,8 @@
         <!-- Passo 5: Dados Bancários -->
         <div class="step hidden" id="step5">
             <div class="step-header">
-                <div class="step-number">5</div>
-                <div class="step-title">Dados para Depósito</div>
+                <div class="step-number-circle">5</div>
+                <div class="step-title-main">Dados para Depósito</div>
             </div>
             
             <div class="bank-info" id="dadosBanco" style="display: none;">
@@ -1099,8 +1309,8 @@
         <!-- Passo 6: Upload -->
         <div class="step hidden" id="step6">
             <div class="step-header">
-                <div class="step-number">6</div>
-                <div class="step-title">Enviar Comprovante</div>
+                <div class="step-number-circle">6</div>
+                <div class="step-title-main">Enviar Comprovante</div>
             </div>
             
             <div class="alert alert-info">
@@ -1590,6 +1800,9 @@
             if (pergunta.includes('declaração') || pergunta.includes('receita') || pergunta.includes('encontrar')) {
                 return '📋 Você pode encontrar o IR devido no programa IRPF (Resumo da Declaração) ou no recibo PDF (Campo 25). Use o botão "Onde encontro?" para ver o tutorial completo!';
             }
+            if (pergunta.includes('como funciona') || pergunta.includes('processo') || pergunta.includes('passos')) {
+                return '📋 O processo tem 4 passos simples: 1) Calcule quanto pode destinar, 2) Escolha o projeto, 3) Faça o depósito, 4) Receba o comprovante. Veja a seção "Como Funciona" no topo da página!';
+            }
             if (pergunta.includes('fundo') || pergunta.includes('diferença')) {
                 return '🏛️ FDI é para idosos (60+) e FDCA para crianças/adolescentes. Escolha pela causa que mais te identifica!';
             }
@@ -1602,7 +1815,7 @@
             if (pergunta.includes('legal') || pergunta.includes('prazo')) {
                 return '⚖️ O Conselho tem 60 dias para emitir o recibo conforme Art. 5º. O sistema garante total conformidade legal!';
             }
-            return '🤖 Sou especialista em destinação de IR! Posso ajudar com: encontrar IR devido, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
+            return '🤖 Sou especialista em destinação de IR! Posso ajudar com: encontrar IR devido, entender o processo, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
         }
 
         // ===== EVENT LISTENERS GLOBAIS =====
@@ -1686,7 +1899,8 @@
         }, 3000);
 
         // ===== LOG DE SISTEMA =====
-        console.log('🎉 Dashboard IncentivaBR v2 carregado com sucesso!');
+        console.log('🎉 Dashboard IncentivaBR v3 carregado com sucesso!');
+        console.log('✅ SEÇÃO COMO FUNCIONA: Implementada');
         console.log('✅ GUIA IR: Implementado');
         console.log('✅ TINA Widget: Atualizada');
         console.log('✅ Sistema responsivo: Ativo');
