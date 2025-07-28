@@ -21,12 +21,14 @@
     
     Hash de Identificação: B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
     Data: 24 de julho de 2025
+    
+    🚀 VERSÃO 2.0 - COM GUIA IR INTEGRADO
     ═══════════════════════════════════════════════════════════════════════════════
     -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INCENTIVABR - Dashboard</title>
+    <title>INCENTIVABR - Dashboard v2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -156,6 +158,7 @@
             align-items: center;
             gap: 1rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .input-group label {
@@ -169,6 +172,7 @@
             border: 2px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
+            min-width: 150px;
         }
 
         input:focus {
@@ -191,10 +195,12 @@
             gap: 0.5rem;
             min-height: 44px;
             min-width: 44px;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
             background: #2874a6;
+            transform: translateY(-1px);
         }
 
         .btn-success {
@@ -203,6 +209,163 @@
 
         .btn-success:hover {
             background: #2ecc71;
+        }
+
+        /* ===== GUIA IR STYLES ===== */
+        .btn-help {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 44px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-help:hover {
+            background: #2ecc71;
+            transform: translateY(-1px);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.hidden {
+            display: none;
+        }
+
+        .guia-modal {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .guia-header {
+            background: linear-gradient(135deg, #1e4d72, #2874a6);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .guia-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .guia-content {
+            padding: 2rem;
+        }
+
+        .guia-opcao {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #1e4d72;
+        }
+
+        .guia-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .guia-texto h4 {
+            margin: 0 0 1rem 0;
+            color: #1e4d72;
+            font-size: 1.1rem;
+        }
+
+        .guia-texto ol {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .guia-texto li {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .guia-alerta {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            margin-top: 1.5rem;
+        }
+
+        .guia-alerta i {
+            color: #f39c12;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .guia-footer {
+            padding: 1rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .guia-footer .btn {
+            min-width: 120px;
         }
 
         /* RESULTS */
@@ -545,6 +708,17 @@
                 padding: 1rem;
             }
             
+            .input-group {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+            }
+            
+            .input-group label {
+                min-width: auto;
+                margin-bottom: 0.5rem;
+            }
+            
             .stats {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.5rem;
@@ -569,17 +743,6 @@
             
             .fund-icon {
                 font-size: 2rem;
-            }
-            
-            .input-group {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.5rem;
-            }
-            
-            .input-group label {
-                min-width: auto;
-                margin-bottom: 0.5rem;
             }
 
             .step {
@@ -615,6 +778,35 @@
 
             .user-info p {
                 font-size: 0.9rem;
+            }
+
+            /* GUIA MOBILE */
+            .guia-modal {
+                margin: 1rem;
+                max-height: calc(100vh - 2rem);
+            }
+            
+            .guia-opcao {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .guia-icon {
+                align-self: center;
+            }
+            
+            .guia-content {
+                padding: 1rem;
+            }
+            
+            .guia-header {
+                padding: 1rem;
+            }
+            
+            .btn-help {
+                font-size: 0.8rem;
+                padding: 10px 12px;
+                min-width: auto;
             }
 
             /* TINA MOBILE */
@@ -674,9 +866,10 @@
                 padding: 0.75rem;
             }
 
-            .btn {
+            .btn, .btn-help {
                 width: 100%;
                 justify-content: center;
+                margin-bottom: 0.5rem;
             }
 
             .welcome h1 {
@@ -694,11 +887,12 @@
                 transform: none;
             }
             
-            .btn:hover {
+            .btn:hover, .btn-help:hover {
                 background: #1e4d72;
+                transform: none;
             }
             
-            .btn:active {
+            .btn:active, .btn-help:active {
                 transform: scale(0.98);
             }
             
@@ -716,15 +910,15 @@
         }
 
         /* SCROLLBAR CUSTOMIZATION */
-        .tina-messages::-webkit-scrollbar {
+        .tina-messages::-webkit-scrollbar, .guia-modal::-webkit-scrollbar {
             width: 4px;
         }
 
-        .tina-messages::-webkit-scrollbar-track {
+        .tina-messages::-webkit-scrollbar-track, .guia-modal::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
 
-        .tina-messages::-webkit-scrollbar-thumb {
+        .tina-messages::-webkit-scrollbar-thumb, .guia-modal::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 2px;
         }
@@ -797,6 +991,10 @@
             <div class="input-group">
                 <label>Valor do IR devido em 2024:</label>
                 <input type="number" id="irDevido" placeholder="0,00" step="0.01">
+                <button class="btn-help" onclick="mostrarGuiaIR()">
+                    <i class="fas fa-question-circle"></i>
+                    Onde encontro?
+                </button>
                 <button class="btn" onclick="calcular()">
                     <i class="fas fa-calculator"></i>
                     Calcular
@@ -979,6 +1177,63 @@
         </div>
     </div>
 
+    <!-- Modal Guia IR -->
+    <div class="modal-overlay hidden" id="guiaIRModal">
+        <div class="guia-modal">
+            <div class="guia-header">
+                <h3><i class="fas fa-search"></i> Onde encontrar o IR Devido</h3>
+                <button class="close-btn" onclick="fecharGuiaIR()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="guia-content">
+                <div class="guia-opcao">
+                    <div class="guia-icon">🖥️</div>
+                    <div class="guia-texto">
+                        <h4>No Programa IRPF 2024</h4>
+                        <ol>
+                            <li>Abra o programa da Receita Federal</li>
+                            <li>Clique em <strong>"Resumo da Declaração"</strong></li>
+                            <li>Procure o campo <strong>"Imposto Devido"</strong></li>
+                            <li>Esse é o valor que você deve digitar aqui</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="guia-opcao">
+                    <div class="guia-icon">📄</div>
+                    <div class="guia-texto">
+                        <h4>No Recibo de Entrega (PDF)</h4>
+                        <ol>
+                            <li>Abra o PDF do recibo que você baixou</li>
+                            <li>Procure o <strong>"Campo 25"</strong></li>
+                            <li>O valor está em <strong>"Imposto a Pagar"</strong></li>
+                            <li>Use exatamente esse valor</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="guia-alerta">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <strong>Importante:</strong><br>
+                        • Se o valor for R$ 0,00 ou negativo, você recebe restituição e não pode destinar<br>
+                        • Use sempre o valor exato da sua declaração oficial<br>
+                        • Em caso de dúvida, consulte um contador
+                    </div>
+                </div>
+            </div>
+            
+            <div class="guia-footer">
+                <button class="btn" onclick="fecharGuiaIR()">
+                    <i class="fas fa-check"></i>
+                    Entendi
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- TINA Widget -->
     <div class="tina-widget">
         <button class="tina-bubble" onclick="abrirTina()">
@@ -1046,6 +1301,40 @@
                 {nome: "Destinação Geral do Fundo", descricao: "Ações prioritárias do conselho"}
             ]
         };
+
+        // ===== GUIA IR FUNCTIONS =====
+        function mostrarGuiaIR() {
+            console.log('=== ABRINDO GUIA IR ===');
+            const modal = document.getElementById('guiaIRModal');
+            if (!modal) {
+                console.error('Modal do guia IR não encontrado!');
+                return;
+            }
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Analytics (opcional)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'guia_ir_aberto', {
+                    'event_category': 'ajuda',
+                    'event_label': 'onde_encontrar_ir'
+                });
+            }
+            
+            console.log('=== GUIA IR ABERTO ===');
+        }
+
+        function fecharGuiaIR() {
+            console.log('=== FECHANDO GUIA IR ===');
+            const modal = document.getElementById('guiaIRModal');
+            if (!modal) return;
+            
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+            
+            console.log('=== GUIA IR FECHADO ===');
+        }
 
         // ===== FUNÇÕES PRINCIPAIS =====
         function calcular() {
@@ -1295,8 +1584,11 @@
         }
         
         function getResposta(pergunta) {
-            if (pergunta.includes('ir') || pergunta.includes('imposto')) {
-                return '💰 O IR devido você encontra na sua declaração de 2024, campo "Imposto Devido". Se não souber, posso estimar baseado no seu salário!';
+            if (pergunta.includes('ir') || pergunta.includes('imposto') || pergunta.includes('devido')) {
+                return '💰 Para encontrar seu IR devido, clique no botão verde "Onde encontro?" ao lado do campo! Lá tem um guia passo a passo com capturas de tela.';
+            }
+            if (pergunta.includes('declaração') || pergunta.includes('receita') || pergunta.includes('encontrar')) {
+                return '📋 Você pode encontrar o IR devido no programa IRPF (Resumo da Declaração) ou no recibo PDF (Campo 25). Use o botão "Onde encontro?" para ver o tutorial completo!';
             }
             if (pergunta.includes('fundo') || pergunta.includes('diferença')) {
                 return '🏛️ FDI é para idosos (60+) e FDCA para crianças/adolescentes. Escolha pela causa que mais te identifica!';
@@ -1310,8 +1602,31 @@
             if (pergunta.includes('legal') || pergunta.includes('prazo')) {
                 return '⚖️ O Conselho tem 60 dias para emitir o recibo conforme Art. 5º. O sistema garante total conformidade legal!';
             }
-            return '🤖 Sou especialista em destinação de IR! Posso ajudar com: cálculos, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
+            return '🤖 Sou especialista em destinação de IR! Posso ajudar com: encontrar IR devido, fundos, projetos, upload de documentos e questões legais. O que você gostaria de saber?';
         }
+
+        // ===== EVENT LISTENERS GLOBAIS =====
+        
+        // Fechar modals clicando fora
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('guiaIRModal');
+            if (e.target === modal) {
+                fecharGuiaIR();
+            }
+        });
+
+        // Fechar modals com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('guiaIRModal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    fecharGuiaIR();
+                }
+                if (tinaAberta) {
+                    fecharTina();
+                }
+            }
+        });
 
         // ===== INICIALIZAÇÃO =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -1371,8 +1686,9 @@
         }, 3000);
 
         // ===== LOG DE SISTEMA =====
-        console.log('🎉 Dashboard IncentivaBR carregado com sucesso!');
-        console.log('✅ TINA Widget: Pronto');
+        console.log('🎉 Dashboard IncentivaBR v2 carregado com sucesso!');
+        console.log('✅ GUIA IR: Implementado');
+        console.log('✅ TINA Widget: Atualizada');
         console.log('✅ Sistema responsivo: Ativo');
         console.log('✅ Todas as funções: Carregadas');
     </script>
