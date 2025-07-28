@@ -1,3 +1,15 @@
+> **TL;DR (Resumo Executivo)**
+>
+> - Plataforma exclusiva para servidores públicos destinarem até 6% do IR para causas sociais – com segurança jurídica máxima.
+> - **DEMO**: Simule todo o fluxo, com login Gov.br, calculadora de IR, seleção de fundos e upload de comprovante.
+> - **Proteção jurídica:** INPI (software e marca), registro em cartório, compliance legal e tecnologia proprietária.
+> - **Contato comercial:** [adactoartur.gestor@gmail.com](mailto:adactoartur.gestor@gmail.com) | +55 61 99968 2929
+> - **Proibido copiar, clonar ou usar sem licenciamento!**
+>
+> [Testar Demo](#como-testar-a-demo) | [Funcionalidades](#funcionalidades-demonstradas) | [Roadmap](#roadmap-e-evolucao) | [Licenciamento](#licenciamento-comercial) | [FAQ](#faq)
+
+---
+
 # 🏛️ INCENTIVABR
 
 [![INPI Software](https://img.shields.io/badge/INPI%20Software-BR512025000647--0-blue?style=for-the-badge)](LICENSE)
@@ -369,6 +381,28 @@ A marca **"INCENTIVA BR"** está registrada nas seguintes classes:
 - **5.570 municípios** como mercado potencial
 - **8 tipos diferentes** de incentivos fiscais mapeados
 - **99%** dos servidores não fazem destinação (oportunidade massiva comprovada)
+
+---
+
+## ❓ FAQ
+
+**1. Posso clonar ou usar este código no meu projeto?**  
+Não. O código é proprietário e protegido por diversas formas legais. É proibido copiar, clonar ou reutilizar para qualquer fim não autorizado.
+
+**2. Para que serve a versão demonstrativa?**  
+Permite que investidores, parceiros e órgãos públicos avaliem funcionalidades, design e arquitetura, sem acesso à versão completa.
+
+**3. Como faço para obter uma licença comercial?**  
+Entre em contato pelo email [adactoartur.gestor@gmail.com](mailto:adactoartur.gestor@gmail.com) para discutir modalidades de licenciamento.
+
+**4. O sistema é seguro/legalmente protegido?**  
+Sim. Possui proteção quadrupla: INPI (software e marca), cartório, legislação específica e compliance jurídico.
+
+**5. O assistente IA (TINA) é operacional?**  
+Na demo, simula as respostas. Na versão comercial, é integrado a fluxos reais e pode ser customizado.
+
+**6. Existe previsão para expansão nacional?**  
+Sim, veja o [Roadmap](#roadmap-e-evolucao) para detalhes de novas leis e regiões a serem integradas.
 
 ---
 
