@@ -22,13 +22,13 @@
     Hash de Identificação: B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
     Data: 24 de julho de 2025
     
-    🚀 VERSÃO 3.3 - ESTRATÉGIA HÍBRIDA PARA DECISORES DE ALTO ESCALÃO
+    🚀 VERSÃO 3.4 - TRANSPARÊNCIA TOTAL NO PROCESSO DE VALIDAÇÃO
     ═══════════════════════════════════════════════════════════════════════════════
     -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INCENTIVABR - Dashboard v3.3</title>
+    <title>INCENTIVABR - Dashboard v3.4</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- EmailJS -->
@@ -1797,9 +1797,12 @@
             <div class="alert alert-info">
                 <i class="fas fa-info-circle"></i>
                 <div>
-                    <strong>⏱️ Prazo Legal:</strong> O Conselho tem até 60 dias para enviar o comprovante conforme Art. 5º da legislação.<br>
-                    <strong>📧 Tranquilidade:</strong> Na prática, a maioria dos comprovantes sai em 15-30 dias e você receberá confirmação por email.<br>
-                    <strong>📱 Acompanhamento:</strong> Após o envio, você receberá um protocolo para acompanhar o andamento.
+                    <strong>⏱️ Processo de Validação:</strong><br>
+                    1. <strong>Upload do comprovante:</strong> Você envia e recebe recibo provisório<br>
+                    2. <strong>Análise do depósito:</strong> Fundo confirma recebimento (até 5 dias úteis)<br>
+                    3. <strong>Recibo definitivo:</strong> Documento oficial válido para IR (até 60 dias)<br><br>
+                    <strong>📧 Transparência Total:</strong> Você acompanha cada etapa por email, WhatsApp e portal.<br>
+                    <strong>📱 Acompanhamento:</strong> Após o envio, você receberá um protocolo para consultar o andamento.
                 </div>
             </div>
             
@@ -2113,8 +2116,11 @@
             return `
                 <div class="recibo-preview" id="reciboParaPDF">
                     <div class="recibo-header">
-                        <div class="recibo-title">RECIBO DE DOAÇÃO</div>
+                        <div class="recibo-title">RECIBO DE DOAÇÃO - PROVISÓRIO</div>
                         <div>Conforme Art. 6º da Legislação Vigente</div>
+                        <div style="background: #fff3cd; color: #856404; padding: 0.5rem; border-radius: 5px; margin-top: 0.5rem; font-size: 0.9rem;">
+                            ⚠️ <strong>IMPORTANTE:</strong> Este recibo tem caráter provisório. A validade jurídica será confirmada após verificação do depósito pelo fundo destinatário.
+                        </div>
                     </div>
                     
                     <div class="recibo-info">
@@ -2139,7 +2145,7 @@
                         <div class="recibo-label">IV - Data da Doação:</div>
                         <div class="recibo-value">${dados.doacao.data}</div>
                         
-                        <div class="recibo-label">IV - Valor Efetivamente Recebido:</div>
+                        <div class="recibo-label">IV - Valor Informado:</div>
                         <div class="recibo-value">R$ ${dados.doacao.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
                         
                         <div class="recibo-label">V - Ano-Calendário:</div>
@@ -2150,24 +2156,37 @@
                         
                         <div class="recibo-label">VI - Nome do Projeto:</div>
                         <div class="recibo-value">${dados.doacao.projeto}</div>
+                        
+                        <div class="recibo-label">Status do Recibo:</div>
+                        <div class="recibo-value" style="color: #f39c12; font-weight: bold;">⏳ PROVISÓRIO - Aguardando confirmação do depósito</div>
                     </div>
                     
                     <div class="recibo-footer">
                         <div><strong>Este recibo foi gerado automaticamente pelo Sistema INCENTIVABR</strong></div>
                         <div>Para validação oficial, utilize o protocolo: <strong>${dados.protocolo}</strong></div>
                         <div style="margin-top: 2rem;">
-                            <p><em>Obs: Recibo válido após confirmação do depósito e emissão das assinaturas oficiais conforme Art. 6º</em></p>
+                            <div style="background: #e3f2fd; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196f3;">
+                                <h4 style="margin: 0 0 0.5rem 0; color: #1565c0;">📋 Processo de Validação</h4>
+                                <ol style="margin: 0; padding-left: 1.2rem; font-size: 0.9rem; color: #1565c0;">
+                                    <li><strong>Recibo Provisório:</strong> Gerado automaticamente (agora)</li>
+                                    <li><strong>Verificação:</strong> Fundo confirma recebimento (até 5 dias úteis)</li>
+                                    <li><strong>Recibo Definitivo:</strong> Documento oficial válido para IR (até 60 dias)</li>
+                                </ol>
+                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: #1565c0;">
+                                    <strong>✅ Validade Jurídica:</strong> Confirmada apenas após verificação do depósito pelo fundo destinatário.
+                                </p>
+                            </div>
                         </div>
                         <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
                             <div style="text-align: center;">
                                 <div>_____________________________</div>
                                 <div><strong>Secretário Executivo</strong></div>
-                                <div><small>Conforme Art. 6º da Legislação</small></div>
+                                <div><small>Assinatura pendente de confirmação</small></div>
                             </div>
                             <div style="text-align: center;">
                                 <div>_____________________________</div>
                                 <div><strong>Presidente do CDI/DF</strong></div>
-                                <div><small>Conforme Art. 6º da Legislação</small></div>
+                                <div><small>Assinatura pendente de confirmação</small></div>
                             </div>
                         </div>
                     </div>
@@ -2185,20 +2204,25 @@
             // Título principal
             doc.setFontSize(18);
             doc.setTextColor(30, 77, 114);
-            doc.text("RECIBO DE DOAÇÃO", 105, 25, { align: 'center' });
+            doc.text("RECIBO DE DOAÇÃO - PROVISÓRIO", 105, 25, { align: 'center' });
             
             doc.setFontSize(12);
             doc.text("Conforme Art. 6º da Legislação Vigente", 105, 35, { align: 'center' });
             
+            // Aviso de status provisório
+            doc.setFontSize(10);
+            doc.setTextColor(200, 120, 0);
+            doc.text("⚠️ IMPORTANTE: Este recibo tem caráter provisório até confirmação do depósito", 105, 45, { align: 'center' });
+            
             // Linha separadora
             doc.setLineWidth(0.5);
-            doc.line(20, 40, 190, 40);
+            doc.setTextColor(0, 0, 0);
+            doc.line(20, 50, 190, 50);
             
             // Dados do recibo conforme Art. 6º
             doc.setFontSize(11);
-            doc.setTextColor(0, 0, 0);
             
-            let y = 55;
+            let y = 65;
             const lineHeight = 7;
             const labelWidth = 80;
             
@@ -2228,7 +2252,7 @@
             
             // IV - Data e valor
             addLine("IV - Data da Doação:", dados.doacao.data);
-            addLine("IV - Valor Efetivamente Recebido:", `R$ ${dados.doacao.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`, true);
+            addLine("IV - Valor Informado:", `R$ ${dados.doacao.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`, true);
             y += 3;
             
             // V - Ano-calendário
@@ -2238,29 +2262,58 @@
             // VI - OSC e projeto
             addLine("VI - Nome da OSC:", dados.doacao.osc);
             addLine("VI - Nome do Projeto:", dados.doacao.projeto);
+            y += 3;
+            
+            // Status
+            doc.setTextColor(200, 120, 0);
+            addLine("Status do Recibo:", "⏳ PROVISÓRIO - Aguardando confirmação", true);
+            doc.setTextColor(0, 0, 0);
             
             // Linha separadora
             y += 10;
             doc.line(20, y, 190, y);
             
+            // Processo de validação
+            y += 15;
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(30, 77, 114);
+            doc.text("PROCESSO DE VALIDAÇÃO", 20, y);
+            
+            y += 10;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(0, 0, 0);
+            doc.text("1. Recibo Provisório: Gerado automaticamente (agora)", 20, y);
+            y += 6;
+            doc.text("2. Verificação: Fundo confirma recebimento (até 5 dias úteis)", 20, y);
+            y += 6;
+            doc.text("3. Recibo Definitivo: Documento oficial válido para IR (até 60 dias)", 20, y);
+            
+            y += 10;
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(200, 0, 0);
+            doc.text("VALIDADE JURÍDICA: Confirmada apenas após verificação do depósito pelo fundo.", 20, y);
+            
             // Informações adicionais
             y += 15;
             doc.setFontSize(10);
             doc.setFont("helvetica", "bold");
+            doc.setTextColor(0, 0, 0);
             doc.text("INFORMAÇÕES IMPORTANTES:", 20, y);
             
             y += 8;
             doc.setFont("helvetica", "normal");
             doc.text("• Este recibo foi gerado automaticamente pelo Sistema INCENTIVABR", 20, y);
             y += 6;
-            doc.text(`• Para validação oficial, utilize o protocolo: ${dados.protocolo}`, 20, y);
+            doc.text(`• Para acompanhamento, utilize o protocolo: ${dados.protocolo}`, 20, y);
             y += 6;
-            doc.text("• Recibo válido após confirmação do depósito e emissão das assinaturas oficiais", 20, y);
+            doc.text("• Você será notificado quando o recibo definitivo estiver disponível", 20, y);
             
             // Assinaturas
             y += 25;
             doc.setFont("helvetica", "bold");
-            doc.text("ASSINATURAS CONFORME ART. 6º:", 20, y);
+            doc.text("ASSINATURAS (Pendentes de confirmação):", 20, y);
             
             y += 15;
             // Secretário Executivo
@@ -2279,7 +2332,7 @@
             y += 20;
             doc.setFontSize(8);
             doc.setTextColor(100, 100, 100);
-            doc.text("Gerado automaticamente em " + new Date().toLocaleString('pt-BR'), 105, y, { align: 'center' });
+            doc.text("Recibo provisório gerado em " + new Date().toLocaleString('pt-BR'), 105, y, { align: 'center' });
             doc.text("Sistema INCENTIVABR - Destinação de IR Simplificada", 105, y + 5, { align: 'center' });
             
             return doc;
@@ -2762,9 +2815,10 @@ Gerado automaticamente pelo Sistema INCENTIVABR
             return `
                 <div class="multi-canal-container">
                     <div class="multi-canal-title">
-                        🚀 Recibo Enviado por Múltiplos Canais
+                        📄 Recibo Provisório Gerado com Sucesso
                     </div>
-                    <p>Seu recibo oficial foi processado e está sendo entregue através de nossos canais integrados:</p>
+                    <p><strong>⚠️ Importante:</strong> Este recibo tem caráter provisório até a confirmação do depósito pelo fundo destinatário.</p>
+                    <p>Você está sendo notificado através de nossos canais integrados e poderá acompanhar todo o processo:</p>
                     
                     <div class="canais-grid">
                         <!-- EMAIL INSTITUCIONAL -->
@@ -2785,12 +2839,22 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                                     </div>
                                 </div>
                                 <div class="email-body">
-                                    <h3>Destinação Confirmada com Sucesso!</h3>
+                                    <h3>Recibo Provisório Gerado!</h3>
                                     <p>Prezado(a) <strong>${nomeUsuario}</strong>,</p>
-                                    <p>Confirmamos o recebimento da sua destinação de Imposto de Renda no valor de <strong>R$ ${valorFormatado}</strong> para o projeto <strong>${projetoNome}</strong>.</p>
-                                    <p><strong>📄 Recibo Oficial:</strong> Em anexo (PDF)</p>
+                                    <p>Recebemos sua solicitação de destinação de Imposto de Renda no valor de <strong>R$ ${valorFormatado}</strong> para o projeto <strong>${projetoNome}</strong>.</p>
+                                    
+                                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                                        <h4 style="margin: 0 0 0.5rem 0; color: #856404;">⚠️ Status: RECIBO PROVISÓRIO</h4>
+                                        <p style="margin: 0; color: #856404; font-size: 0.9rem;">
+                                            Este recibo será validado após confirmação do depósito pelo fundo destinatário (até 5 dias úteis).
+                                        </p>
+                                    </div>
+                                    
+                                    <p><strong>📄 Recibo Provisório:</strong> Em anexo (PDF)</p>
                                     <p><strong>🔍 Protocolo:</strong> ${protocoloAtual}</p>
                                     <p><strong>📱 Acompanhe:</strong> incentivabr.gov.br/acompanhar/${protocoloAtual}</p>
+                                    
+                                    <p><small><strong>Próximo passo:</strong> Aguarde a confirmação do depósito pelo fundo. Você será notificado quando o recibo definitivo estiver disponível.</small></p>
                                 </div>
                                 <div class="email-signature">
                                     <strong>Sistema INCENTIVABR</strong><br>
@@ -2818,12 +2882,13 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                                     </div>
                                 </div>
                                 <div class="whatsapp-message">
-                                    ✅ <strong>Destinação Confirmada!</strong><br><br>
-                                    📄 <strong>Recibo Oficial:</strong> Disponível<br>
+                                    📄 <strong>Recibo Provisório Gerado!</strong><br><br>
+                                    ⚠️ <strong>Status:</strong> Aguardando confirmação do depósito<br>
                                     💰 <strong>Valor:</strong> R$ ${valorFormatado}<br>
                                     🎯 <strong>Projeto:</strong> ${projetoNome}<br>
                                     🔍 <strong>Protocolo:</strong> ${protocoloAtual}<br><br>
-                                    <a href="#" class="whatsapp-link">📱 Acessar Portal</a>
+                                    <em>O recibo definitivo será enviado após validação do fundo (até 5 dias úteis).</em><br><br>
+                                    <a href="#" class="whatsapp-link">📱 Acompanhar Status</a>
                                     <div class="whatsapp-time">agora ✓✓</div>
                                 </div>
                             </div>
@@ -2847,25 +2912,33 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                                     <div class="timeline-item">
                                         <div class="timeline-icon"><i class="fas fa-check"></i></div>
                                         <div class="timeline-content">
-                                            <h4>Destinação Processada</h4>
-                                            <p>Recibo oficial gerado e enviado</p>
+                                            <h4>Recibo Provisório Gerado</h4>
+                                            <p>Documento provisório criado conforme Art. 6º</p>
                                             <div class="timeline-date">${new Date().toLocaleString('pt-BR')}</div>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
                                         <div class="timeline-icon"><i class="fas fa-check"></i></div>
                                         <div class="timeline-content">
-                                            <h4>Comprovante Recebido</h4>
-                                            <p>Depósito confirmado pelo sistema</p>
+                                            <h4>Comprovante Enviado</h4>
+                                            <p>Comprovante de depósito recebido pelo sistema</p>
                                             <div class="timeline-date">${new Date().toLocaleString('pt-BR')}</div>
                                         </div>
                                     </div>
                                     <div class="timeline-item">
                                         <div class="timeline-icon pending"><i class="fas fa-clock"></i></div>
                                         <div class="timeline-content">
-                                            <h4>Assinatura Digital</h4>
-                                            <p>Aguardando assinatura do conselho</p>
-                                            <div class="timeline-date">Em até 15 dias úteis</div>
+                                            <h4>Confirmação do Depósito</h4>
+                                            <p>Fundo analisando comprovante de depósito</p>
+                                            <div class="timeline-date">Até 5 dias úteis</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-icon pending"><i class="fas fa-clock"></i></div>
+                                        <div class="timeline-content">
+                                            <h4>Recibo Definitivo</h4>
+                                            <p>Emissão do recibo oficial válido para IR</p>
+                                            <div class="timeline-date">Até 60 dias úteis</div>
                                         </div>
                                     </div>
                                 </div>
@@ -3036,7 +3109,16 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                 return '⚖️ Tudo é 100% legal! Base: Lei 8.069/90 (ECA) e Lei 10.741/03 (Estatuto do Idoso). O sistema garante total conformidade com a Receita Federal.';
             }
             if (pergunta.includes('recibo') || pergunta.includes('comprovante oficial') || pergunta.includes('art 6')) {
-                return '📄 **RECIBO OFICIAL:** Geramos automaticamente conforme Art. 6º da legislação com todos os campos obrigatórios. Você recebe por EMAIL, WHATSAPP e pode acessar no PORTAL sempre!';
+                return '📄 **RECIBO OFICIAL:** Geramos recibo PROVISÓRIO imediato conforme Art. 6º. Após confirmação do depósito pelo fundo (5 dias), você recebe o DEFINITIVO válido para IR!';
+            }
+            if (pergunta.includes('provisório') || pergunta.includes('validade') || pergunta.includes('válido')) {
+                return '⚠️ **RECIBO PROVISÓRIO:** O primeiro recibo é provisório até o fundo confirmar seu depósito (até 5 dias). Depois disso, o recibo DEFINITIVO tem total validade jurídica para IR!';
+            }
+            if (pergunta.includes('quando válido') || pergunta.includes('quando serve') || pergunta.includes('declaração')) {
+                return '✅ **VALIDADE JURÍDICA:** O recibo só é válido para declaração de IR APÓS a confirmação do depósito pelo fundo. Você acompanha tudo na timeline e recebe notificação!';
+            }
+            if (pergunta.includes('confirmação') || pergunta.includes('depósito') || pergunta.includes('5 dias')) {
+                return '🔍 **CONFIRMAÇÃO DO DEPÓSITO:** O fundo tem até 5 dias úteis para verificar se seu depósito chegou corretamente. Depois disso, seu recibo vira DEFINITIVO e válido para IR!';
             }
             if (pergunta.includes('whatsapp') || pergunta.includes('celular') || pergunta.includes('notificação')) {
                 return '📱 **WHATSAPP OFICIAL:** Sim! Você recebe uma notificação no WhatsApp Business do Governo com link direto para seu recibo. É instantâneo e seguro!';
@@ -3137,7 +3219,7 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         }, 3000);
 
         // ===== LOG DE SISTEMA =====
-        console.log('🎉 Dashboard IncentivaBR v3.3 ESTRATÉGIA HÍBRIDA carregado com sucesso!');
+        console.log('🎉 Dashboard IncentivaBR v3.4 TRANSPARÊNCIA TOTAL carregado com sucesso!');
         console.log('✅ SEÇÃO COMO FUNCIONA: Implementada');
         console.log('✅ GUIA IR: Implementado');
         console.log('✅ PROJETOS DETALHADOS: Implementado');
@@ -3156,20 +3238,26 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         console.log('💎 WHATSAPP BUSINESS: Simulação realística');
         console.log('💎 PORTAL DE ACOMPANHAMENTO: Timeline visual');
         console.log('💎 ANIMAÇÕES EXECUTIVAS: WOW factor');
+        console.log('🔍 TRANSPARÊNCIA TOTAL: Status claro dos recibos');
+        console.log('🔍 RECIBO PROVISÓRIO: Claramente identificado');
+        console.log('🔍 PROCESSO DE VALIDAÇÃO: Explicado completamente');
+        console.log('🔍 TIMELINE ATUALIZADA: 4 etapas do processo');
+        console.log('🔍 TINA ATUALIZADA: Respostas sobre validade');
         console.log('✅ PROTEÇÃO CONTRA ERROS: Ativa');
         console.log('✅ Sistema responsivo: Ativo');
         console.log('✅ Todas as funções: Carregadas');
         console.log('');
-        console.log('🎯 ESTRATÉGIA HÍBRIDA IMPLEMENTADA:');
-        console.log('   📧 Nível 1: Email robusto profissional');
-        console.log('   📱 WOW Factor: WhatsApp Business simulado');
-        console.log('   🌐 Profissionalismo: Portal com timeline');
-        console.log('   🔄 Experiência integrada: Múltiplos canais');
+        console.log('🎯 ESTRATÉGIA HÍBRIDA + TRANSPARÊNCIA:');
+        console.log('   📧 Email: Recibo provisório explicado');
+        console.log('   📱 WhatsApp: Status de validação claro');
+        console.log('   🌐 Portal: Timeline de 4 etapas');
+        console.log('   📄 PDF: Avisos legais sobre validade');
+        console.log('   🤖 TINA: Respostas sobre processo');
         console.log('');
-        console.log('🎭 PRONTO PARA DEMO EXECUTIVA!');
-        console.log('🏛️ Ideal para secretários/ministros');
-        console.log('💼 Perfeito para investidores/parceiros');
-        console.log('🚀 Máximo impacto visual garantido!');
+        console.log('🎭 DEMO EXECUTIVA COM TRANSPARÊNCIA TOTAL!');
+        console.log('🏛️ Conformidade legal máxima');
+        console.log('💼 Processo claro para todos');
+        console.log('🚀 Confiança e credibilidade garantidas!');
     </script>
 </body>
 </html>
