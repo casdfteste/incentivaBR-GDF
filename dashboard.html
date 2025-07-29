@@ -22,13 +22,13 @@
     Hash de Identificação: B4F7E8A9D6C2F1E3A8B9C7D4E6F2A5B8C1D7E9F4A2B6C8D5E7F1A3B9C4D8E2F6
     Data: 24 de julho de 2025
     
-    🚀 VERSÃO 3.2.1 - COM CORREÇÃO DO ERRO EMAILJS
+    🚀 VERSÃO 3.3 - ESTRATÉGIA HÍBRIDA PARA DECISORES DE ALTO ESCALÃO
     ═══════════════════════════════════════════════════════════════════════════════
     -->
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INCENTIVABR - Dashboard v3.2.1</title>
+    <title>INCENTIVABR - Dashboard v3.3</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- EmailJS -->
@@ -1211,6 +1211,357 @@
             background: #ffebee;
             border-color: #e74c3c;
         }
+
+        /* ===== MULTI-CANAL DELIVERY STYLES ===== */
+        .multi-canal-container {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .multi-canal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .canais-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .canal-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .canal-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .canal-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .canal-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .canal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .canal-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .canal-status {
+            background: #27ae60;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* WHATSAPP SIMULADO */
+        .whatsapp-simulation {
+            background: #25d366;
+            border-radius: 15px;
+            padding: 1rem;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .whatsapp-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-contact {
+            flex: 1;
+        }
+
+        .whatsapp-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .whatsapp-message {
+            background: white;
+            color: #333;
+            padding: 1rem;
+            border-radius: 0 15px 15px 15px;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.4;
+        }
+
+        .whatsapp-time {
+            font-size: 0.7rem;
+            color: #999;
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        .whatsapp-link {
+            background: #007bff;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* EMAIL INSTITUCIONAL */
+        .email-preview {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .email-header {
+            background: linear-gradient(135deg, #1e4d72, #2874a6);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .email-gov-logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e4d72;
+            font-weight: 700;
+        }
+
+        .email-subject {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .email-from {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .email-body {
+            padding: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .email-signature {
+            border-top: 1px solid #eee;
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* PORTAL DE ACOMPANHAMENTO */
+        .portal-preview {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .portal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .portal-url {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: monospace;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .portal-timeline {
+            padding: 1.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 35px;
+            width: 2px;
+            height: calc(100% + 0.5rem);
+            background: #ddd;
+        }
+
+        .timeline-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #27ae60;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .timeline-icon.pending {
+            background: #ddd;
+            color: #999;
+        }
+
+        .timeline-content h4 {
+            margin: 0 0 0.5rem 0;
+            color: #1e4d72;
+            font-size: 1rem;
+        }
+
+        .timeline-content p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.25rem;
+        }
+
+        /* QR CODE */
+        .qr-code-container {
+            text-align: center;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .qr-code {
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border-radius: 8px;
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGreen {
+            0%, 100% { 
+                background: #27ae60; 
+                transform: scale(1);
+            }
+            50% { 
+                background: #2ecc71; 
+                transform: scale(1.05);
+            }
+        }
+
+        .canal-status.enviado {
+            animation: pulseGreen 2s infinite;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .canais-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .multi-canal-container {
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            
+            .multi-canal-title {
+                font-size: 1.4rem;
+            }
+            
+            .whatsapp-message {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 
@@ -2382,11 +2733,184 @@ Gerado automaticamente pelo Sistema INCENTIVABR
             document.getElementById('resumoValor').textContent = 'R$ ' + dadosDestinacao.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2});
             document.getElementById('resumoProjeto').textContent = dadosDestinacao.projeto;
             
-            document.getElementById('confirmacao').classList.remove('hidden');
-            document.getElementById('confirmacao').scrollIntoView({behavior: 'smooth'});
+            // Adicionar experiência multi-canal
+            const confirmacao = document.getElementById('confirmacao');
+            const successScreen = confirmacao.querySelector('.success-screen');
+            
+            // Inserir multi-canal container após o summary
+            const summary = confirmacao.querySelector('.summary');
+            const multiCanalHTML = gerarExperienciaMultiCanal();
+            summary.insertAdjacentHTML('afterend', multiCanalHTML);
+            
+            confirmacao.classList.remove('hidden');
+            confirmacao.scrollIntoView({behavior: 'smooth'});
             
             ['step1', 'step2', 'step3', 'step4', 'step5', 'step6'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
+            });
+            
+            // Animar canais em sequência
+            setTimeout(() => animarCanais(), 1000);
+        }
+        
+        function gerarExperienciaMultiCanal() {
+            const protocoloAtual = protocolo || 'INC2025000000001';
+            const nomeUsuario = document.getElementById('userName').textContent;
+            const valorFormatado = dadosDestinacao.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2});
+            const projetoNome = dadosDestinacao.projeto;
+            
+            return `
+                <div class="multi-canal-container">
+                    <div class="multi-canal-title">
+                        🚀 Recibo Enviado por Múltiplos Canais
+                    </div>
+                    <p>Seu recibo oficial foi processado e está sendo entregue através de nossos canais integrados:</p>
+                    
+                    <div class="canais-grid">
+                        <!-- EMAIL INSTITUCIONAL -->
+                        <div class="canal-card" id="canal-email">
+                            <div class="canal-icon">📧</div>
+                            <div class="canal-title">Email Institucional</div>
+                            <div class="canal-description">Recibo oficial enviado para seu email com PDF anexo</div>
+                            <div class="canal-status" id="status-email">
+                                <i class="fas fa-clock"></i> Processando...
+                            </div>
+                            
+                            <div class="email-preview" style="margin-top: 1rem; display: none;" id="preview-email">
+                                <div class="email-header">
+                                    <div class="email-gov-logo">🏛️</div>
+                                    <div>
+                                        <div class="email-subject">Recibo Oficial de Destinação IR - ${protocoloAtual}</div>
+                                        <div class="email-from">noreply@incentivabr.gov.br</div>
+                                    </div>
+                                </div>
+                                <div class="email-body">
+                                    <h3>Destinação Confirmada com Sucesso!</h3>
+                                    <p>Prezado(a) <strong>${nomeUsuario}</strong>,</p>
+                                    <p>Confirmamos o recebimento da sua destinação de Imposto de Renda no valor de <strong>R$ ${valorFormatado}</strong> para o projeto <strong>${projetoNome}</strong>.</p>
+                                    <p><strong>📄 Recibo Oficial:</strong> Em anexo (PDF)</p>
+                                    <p><strong>🔍 Protocolo:</strong> ${protocoloAtual}</p>
+                                    <p><strong>📱 Acompanhe:</strong> incentivabr.gov.br/acompanhar/${protocoloAtual}</p>
+                                </div>
+                                <div class="email-signature">
+                                    <strong>Sistema INCENTIVABR</strong><br>
+                                    Governo do Distrito Federal<br>
+                                    Este é um email automático, não responda.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- WHATSAPP BUSINESS -->
+                        <div class="canal-card" id="canal-whatsapp">
+                            <div class="canal-icon">📱</div>
+                            <div class="canal-title">WhatsApp Business</div>
+                            <div class="canal-description">Notificação instantânea via WhatsApp oficial</div>
+                            <div class="canal-status" id="status-whatsapp">
+                                <i class="fas fa-clock"></i> Processando...
+                            </div>
+                            
+                            <div class="whatsapp-simulation" style="display: none;" id="preview-whatsapp">
+                                <div class="whatsapp-header">
+                                    <div class="whatsapp-avatar">🏛️</div>
+                                    <div class="whatsapp-contact">
+                                        <div class="whatsapp-name">Governo do DF</div>
+                                        <div class="whatsapp-status">online</div>
+                                    </div>
+                                </div>
+                                <div class="whatsapp-message">
+                                    ✅ <strong>Destinação Confirmada!</strong><br><br>
+                                    📄 <strong>Recibo Oficial:</strong> Disponível<br>
+                                    💰 <strong>Valor:</strong> R$ ${valorFormatado}<br>
+                                    🎯 <strong>Projeto:</strong> ${projetoNome}<br>
+                                    🔍 <strong>Protocolo:</strong> ${protocoloAtual}<br><br>
+                                    <a href="#" class="whatsapp-link">📱 Acessar Portal</a>
+                                    <div class="whatsapp-time">agora ✓✓</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- PORTAL DE ACOMPANHAMENTO -->
+                        <div class="canal-card" id="canal-portal">
+                            <div class="canal-icon">🌐</div>
+                            <div class="canal-title">Portal de Acompanhamento</div>
+                            <div class="canal-description">Timeline completa e download sempre disponível</div>
+                            <div class="canal-status" id="status-portal">
+                                <i class="fas fa-clock"></i> Processando...
+                            </div>
+                            
+                            <div class="portal-preview" style="display: none;" id="preview-portal">
+                                <div class="portal-header">
+                                    <h4>Portal INCENTIVABR</h4>
+                                    <div class="portal-url">incentivabr.gov.br/acompanhar/${protocoloAtual}</div>
+                                </div>
+                                <div class="portal-timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-icon"><i class="fas fa-check"></i></div>
+                                        <div class="timeline-content">
+                                            <h4>Destinação Processada</h4>
+                                            <p>Recibo oficial gerado e enviado</p>
+                                            <div class="timeline-date">${new Date().toLocaleString('pt-BR')}</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-icon"><i class="fas fa-check"></i></div>
+                                        <div class="timeline-content">
+                                            <h4>Comprovante Recebido</h4>
+                                            <p>Depósito confirmado pelo sistema</p>
+                                            <div class="timeline-date">${new Date().toLocaleString('pt-BR')}</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-icon pending"><i class="fas fa-clock"></i></div>
+                                        <div class="timeline-content">
+                                            <h4>Assinatura Digital</h4>
+                                            <p>Aguardando assinatura do conselho</p>
+                                            <div class="timeline-date">Em até 15 dias úteis</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="qr-code-container">
+                                    <div class="qr-code">QR<br>CODE</div>
+                                    <small>Acesso rápido pelo celular</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function animarCanais() {
+            const canais = ['email', 'whatsapp', 'portal'];
+            
+            canais.forEach((canal, index) => {
+                setTimeout(() => {
+                    // Animar aparição do card
+                    const card = document.getElementById(`canal-${canal}`);
+                    card.classList.add('animate');
+                    
+                    // Simular processamento
+                    setTimeout(() => {
+                        const status = document.getElementById(`status-${canal}`);
+                        const preview = document.getElementById(`preview-${canal}`);
+                        
+                        // Atualizar status
+                        status.innerHTML = '<i class="fas fa-check"></i> Enviado!';
+                        status.classList.add('enviado');
+                        
+                        // Mostrar preview
+                        if (preview) {
+                            preview.style.display = 'block';
+                            preview.style.animation = 'slideInUp 0.5s ease';
+                        }
+                        
+                        // Efeito sonoro simulado no console
+                        if (canal === 'whatsapp') {
+                            console.log('🔔 Notificação WhatsApp enviada!');
+                        }
+                    }, 1500);
+                    
+                }, index * 800); // Escalonar animações
             });
         }
 
@@ -2512,7 +3036,19 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                 return '⚖️ Tudo é 100% legal! Base: Lei 8.069/90 (ECA) e Lei 10.741/03 (Estatuto do Idoso). O sistema garante total conformidade com a Receita Federal.';
             }
             if (pergunta.includes('recibo') || pergunta.includes('comprovante oficial') || pergunta.includes('art 6')) {
-                return '📄 **RECIBO OFICIAL:** Geramos automaticamente conforme Art. 6º da legislação com todos os campos obrigatórios. Você baixa o PDF e recebe por email. É válido para declaração!';
+                return '📄 **RECIBO OFICIAL:** Geramos automaticamente conforme Art. 6º da legislação com todos os campos obrigatórios. Você recebe por EMAIL, WHATSAPP e pode acessar no PORTAL sempre!';
+            }
+            if (pergunta.includes('whatsapp') || pergunta.includes('celular') || pergunta.includes('notificação')) {
+                return '📱 **WHATSAPP OFICIAL:** Sim! Você recebe uma notificação no WhatsApp Business do Governo com link direto para seu recibo. É instantâneo e seguro!';
+            }
+            if (pergunta.includes('portal') || pergunta.includes('acompanhar') || pergunta.includes('timeline')) {
+                return '🌐 **PORTAL DE ACOMPANHAMENTO:** Acesse incentivabr.gov.br/acompanhar/[protocolo] para ver timeline completa, baixar recibo e acompanhar status em tempo real!';
+            }
+            if (pergunta.includes('email') || pergunta.includes('gmail') || pergunta.includes('spam')) {
+                return '📧 **EMAIL INSTITUCIONAL:** Enviamos de @incentivabr.gov.br com template oficial. Se não chegou, verifique spam. Você também recebe por WhatsApp e Portal!';
+            }
+            if (pergunta.includes('canais') || pergunta.includes('como recebo') || pergunta.includes('onde chega')) {
+                return '🚀 **MÚLTIPLOS CANAIS:** Seu recibo chega por EMAIL (PDF anexo), WHATSAPP (notificação), e fica sempre disponível no PORTAL. Garantia máxima de entrega!';
             }
             return '🤖 Sou especialista em destinação de IR! Posso ajudar com: encontrar IR devido, entender o processo, fundos, projetos, prazos, questões legais e muito mais. O que você gostaria de saber?';
         }
@@ -2601,7 +3137,7 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         }, 3000);
 
         // ===== LOG DE SISTEMA =====
-        console.log('🎉 Dashboard IncentivaBR v3.2.1 carregado com sucesso!');
+        console.log('🎉 Dashboard IncentivaBR v3.3 ESTRATÉGIA HÍBRIDA carregado com sucesso!');
         console.log('✅ SEÇÃO COMO FUNCIONA: Implementada');
         console.log('✅ GUIA IR: Implementado');
         console.log('✅ PROJETOS DETALHADOS: Implementado');
@@ -2614,15 +3150,26 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         console.log('✅ SISTEMA DE EMAIL: Configurado com fallback');
         console.log('✅ PROTOCOLO ÚNICO: Implementado');
         console.log('✅ SIMULAÇÃO COMPLETA: Ativa');
-        console.log('✅ EXPERIÊNCIA HÍBRIDA: Funcional');
+        console.log('💎 EXPERIÊNCIA HÍBRIDA: Funcional');
+        console.log('💎 ENTREGA MULTI-CANAL: Implementada');
+        console.log('💎 EMAIL INSTITUCIONAL: Template gov.br');
+        console.log('💎 WHATSAPP BUSINESS: Simulação realística');
+        console.log('💎 PORTAL DE ACOMPANHAMENTO: Timeline visual');
+        console.log('💎 ANIMAÇÕES EXECUTIVAS: WOW factor');
         console.log('✅ PROTEÇÃO CONTRA ERROS: Ativa');
         console.log('✅ Sistema responsivo: Ativo');
         console.log('✅ Todas as funções: Carregadas');
         console.log('');
-        console.log('📧 EMAILJS: Carregamento seguro implementado');
-        console.log('💡 MODO ATUAL: Simulação + Email com fallback');
-        console.log('🎯 PRONTO PARA: Validação e demonstração');
-        console.log('🛡️ SEM ERROS: Sistema funciona mesmo sem EmailJS');
+        console.log('🎯 ESTRATÉGIA HÍBRIDA IMPLEMENTADA:');
+        console.log('   📧 Nível 1: Email robusto profissional');
+        console.log('   📱 WOW Factor: WhatsApp Business simulado');
+        console.log('   🌐 Profissionalismo: Portal com timeline');
+        console.log('   🔄 Experiência integrada: Múltiplos canais');
+        console.log('');
+        console.log('🎭 PRONTO PARA DEMO EXECUTIVA!');
+        console.log('🏛️ Ideal para secretários/ministros');
+        console.log('💼 Perfeito para investidores/parceiros');
+        console.log('🚀 Máximo impacto visual garantido!');
     </script>
 </body>
 </html>
