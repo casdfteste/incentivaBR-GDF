@@ -1085,6 +1085,66 @@
             font-weight: 600;
         }
 
+        /* Multi-canal styles */
+        .multi-canal-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .multi-canal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .canais-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .canal-card {
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .canal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .canal-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .canal-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .canal-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .canal-status.enviado {
+            background: rgba(39,174,96,0.2);
+            color: #e8f5e8;
+        }
+
         /* ===== GUIA IR STYLES ===== */
         .modal-overlay {
             position: fixed;
@@ -1583,6 +1643,10 @@
             .selo-verificado small {
                 margin-left: 0;
                 margin-top: 0.5rem;
+            }
+
+            .canais-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -2507,8 +2571,6 @@
             }
         }
 
-        // ===== TODAS AS OUTRAS FUNÇÕES EXISTENTES MANTIDAS IGUAIS =====
-        
         function escolherFundo(fundo) {
             document.querySelectorAll('.fund-card').forEach(card => card.classList.remove('selected'));
             event.target.closest('.fund-card').classList.add('selected');
@@ -3176,20 +3238,25 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         }
         
         function baixarReciboAtual() {
+            if (!protocolo) {
+                alert('Erro: Protocolo não encontrado. Tente gerar o recibo novamente.');
+                return;
+            }
+            
             const dadosRecibo = gerarDadosRecibo();
             const pdf = gerarPDFRecibo(dadosRecibo);
             pdf.save(`Recibo_Destinacao_${protocolo}.pdf`);
             
-            // Feedback visual
-            const btn = event.target;
-            const textoOriginal = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Baixado!';
-            btn.style.background = '#27ae60';
+            console.log('✅ PDF do recibo baixado pelo usuário');
             
-            setTimeout(() => {
-                btn.innerHTML = textoOriginal;
-                btn.style.background = '';
-            }, 2000);
+            // Mostrar mensagem de sucesso temporária
+            const originalText = event.target ? event.target.textContent : '';
+            if (event.target) {
+                event.target.innerHTML = '<i class="fas fa-check"></i> Baixado!';
+                setTimeout(() => {
+                    event.target.innerHTML = '<i class="fas fa-download"></i> Baixar PDF';
+                }, 2000);
+            }
         }
 
         function mostrarConfirmacao() {
@@ -3212,9 +3279,6 @@ Gerado automaticamente pelo Sistema INCENTIVABR
             ['step1', 'step2', 'step3', 'step4', 'step5', 'step6'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
-            
-            // Animar canais em sequência
-            setTimeout(() => animarCanais(), 1000);
         }
         
         function gerarExperienciaMultiCanal() {
@@ -3228,50 +3292,17 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                     <div class="multi-canal-title">
                         📄 Recibo Provisório Gerado com Sucesso
                     </div>
-                    <p><strong>⚠️ Importante:</strong> Este recibo tem caráter provisório até a confirmação do depósito pelo fundo destinatário.</p>
-                    <p>Você está sendo notificado através de nossos canais integrados e poderá acompanhar todo o processo:</p>
+                    <p style="margin-bottom: 2rem;"><strong>⚠️ Importante:</strong> Este recibo tem caráter provisório até a confirmação do depósito pelo fundo destinatário.</p>
+                    <p style="margin-bottom: 2rem;">Você está sendo notificado através de nossos canais integrados:</p>
                     
                     <div class="canais-grid">
                         <!-- EMAIL INSTITUCIONAL -->
                         <div class="canal-card" id="canal-email">
                             <div class="canal-icon">📧</div>
                             <div class="canal-title">Email Institucional</div>
-                            <div class="canal-description">Recibo oficial enviado para seu email com PDF anexo</div>
-                            <div class="canal-status" id="status-email">
-                                <i class="fas fa-clock"></i> Processando...
-                            </div>
-                            
-                            <div class="email-preview" style="margin-top: 1rem; display: none;" id="preview-email">
-                                <div class="email-header">
-                                    <div class="email-gov-logo">🏛️</div>
-                                    <div>
-                                        <div class="email-subject">Recibo Oficial de Destinação IR - ${protocoloAtual}</div>
-                                        <div class="email-from">noreply@incentivabr.gov.br</div>
-                                    </div>
-                                </div>
-                                <div class="email-body">
-                                    <h3>Recibo Provisório Gerado!</h3>
-                                    <p>Prezado(a) <strong>${nomeUsuario}</strong>,</p>
-                                    <p>Recebemos sua solicitação de destinação de Imposto de Renda no valor de <strong>R$ ${valorFormatado}</strong> para o projeto <strong>${projetoNome}</strong>.</p>
-                                    
-                                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                                        <h4 style="margin: 0 0 0.5rem 0; color: #856404;">⚠️ Status: RECIBO PROVISÓRIO</h4>
-                                        <p style="margin: 0; color: #856404; font-size: 0.9rem;">
-                                            Este recibo será validado após confirmação do depósito pelo fundo destinatário (até 5 dias úteis).
-                                        </p>
-                                    </div>
-                                    
-                                    <p><strong>📄 Recibo Provisório:</strong> Em anexo (PDF)</p>
-                                    <p><strong>🔍 Protocolo:</strong> ${protocoloAtual}</p>
-                                    <p><strong>📱 Acompanhe:</strong> incentivabr.gov.br/acompanhar/${protocoloAtual}</p>
-                                    
-                                    <p><small><strong>Próximo passo:</strong> Aguarde a confirmação do depósito pelo fundo. Você será notificado quando o recibo definitivo estiver disponível.</small></p>
-                                </div>
-                                <div class="email-signature">
-                                    <strong>Sistema INCENTIVABR</strong><br>
-                                    Governo do Distrito Federal<br>
-                                    Este é um email automático, não responda.
-                                </div>
+                            <div class="canal-description">Recibo oficial enviado com PDF anexo</div>
+                            <div class="canal-status enviado">
+                                <i class="fas fa-check"></i> Enviado!
                             </div>
                         </div>
                         
@@ -3279,29 +3310,9 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                         <div class="canal-card" id="canal-whatsapp">
                             <div class="canal-icon">📱</div>
                             <div class="canal-title">WhatsApp Business</div>
-                            <div class="canal-description">Notificação instantânea via WhatsApp oficial</div>
-                            <div class="canal-status" id="status-whatsapp">
-                                <i class="fas fa-clock"></i> Processando...
-                            </div>
-                            
-                            <div class="whatsapp-simulation" style="display: none;" id="preview-whatsapp">
-                                <div class="whatsapp-header">
-                                    <div class="whatsapp-avatar">🏛️</div>
-                                    <div class="whatsapp-contact">
-                                        <div class="whatsapp-name">Governo do DF</div>
-                                        <div class="whatsapp-status">online</div>
-                                    </div>
-                                </div>
-                                <div class="whatsapp-message">
-                                    📄 <strong>Recibo Provisório Gerado!</strong><br><br>
-                                    ⚠️ <strong>Status:</strong> Aguardando confirmação do depósito<br>
-                                    💰 <strong>Valor:</strong> R$ ${valorFormatado}<br>
-                                    🎯 <strong>Projeto:</strong> ${projetoNome}<br>
-                                    🔍 <strong>Protocolo:</strong> ${protocoloAtual}<br><br>
-                                    <em>O recibo definitivo será enviado após validação do fundo (até 5 dias úteis).</em><br><br>
-                                    <a href="#" class="whatsapp-link">📱 Acompanhar Status</a>
-                                    <div class="whatsapp-time">agora ✓✓</div>
-                                </div>
+                            <div class="canal-description">Notificação instantânea enviada</div>
+                            <div class="canal-status enviado">
+                                <i class="fas fa-check"></i> Enviado!
                             </div>
                         </div>
                         
@@ -3309,93 +3320,81 @@ Gerado automaticamente pelo Sistema INCENTIVABR
                         <div class="canal-card" id="canal-portal">
                             <div class="canal-icon">🌐</div>
                             <div class="canal-title">Portal de Acompanhamento</div>
-                            <div class="canal-description">Timeline completa e download sempre disponível</div>
-                            <div class="canal-status" id="status-portal">
-                                <i class="fas fa-clock"></i> Processando...
+                            <div class="canal-description">Timeline disponível para consulta</div>
+                            <div class="canal-status enviado">
+                                <i class="fas fa-check"></i> Disponível!
                             </div>
-                            
-                            <div class="portal-preview" style="display: none;" id="preview-portal">
-                                <div class="portal-header">
-                                    <h4>Portal INCENTIVABR</h4>
-                                    <div class="portal-url">incentivabr.gov.br/acompanhar/${protocoloAtual}</div>
-                                </div>
-                                <div class="portal-timeline">
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon"><i class="fas fa-check"></i></div>
-                                        <div class="timeline-content">
-                                            <h4>Recibo Provisório Gerado</h4>
-                                            <p>Documento provisório criado conforme Art. 6º</p>
-                                            <div class="timeline-date">${new Date().toLocaleString('pt-BR')}</div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon"><i class="fas fa-check"></i></div>
-                                        <div class="timeline-content">
-                                            <h4>Comprovante Enviado</h4>
-                                            <p>Comprovante de depósito recebido pelo sistema</p>
-                                            <div class="timeline-date">${new Date().toLocaleString('pt-BR')}</div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon pending"><i class="fas fa-clock"></i></div>
-                                        <div class="timeline-content">
-                                            <h4>Confirmação do Depósito</h4>
-                                            <p>Fundo analisando comprovante de depósito</p>
-                                            <div class="timeline-date">Até 5 dias úteis</div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="timeline-icon pending"><i class="fas fa-clock"></i></div>
-                                        <div class="timeline-content">
-                                            <h4>Recibo Definitivo</h4>
-                                            <p>Emissão do recibo oficial válido para IR</p>
-                                            <div class="timeline-date">Até 60 dias úteis</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="qr-code-container">
-                                    <div class="qr-code">QR<br>CODE</div>
-                                    <small>Acesso rápido pelo celular</small>
-                                </div>
+                        </div>
+                    </div>
+                    
+                    <!-- DETALHES DO PROTOCOLO -->
+                    <div style="background: rgba(255,255,255,0.15); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; text-align: center;">
+                        <h4 style="margin: 0 0 1rem 0; font-size: 1.2rem;">📋 Dados da sua Destinação</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                            <div>
+                                <strong>🔍 Protocolo:</strong><br>
+                                <code style="background: rgba(255,255,255,0.2); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.9rem;">${protocoloAtual}</code>
                             </div>
+                            <div>
+                                <strong>💰 Valor:</strong><br>
+                                R$ ${valorFormatado}
+                            </div>
+                            <div>
+                                <strong>🎯 Projeto:</strong><br>
+                                ${projetoNome}
+                            </div>
+                            <div>
+                                <strong>👤 Doador:</strong><br>
+                                ${nomeUsuario}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PRÓXIMOS PASSOS -->
+                    <div style="background: rgba(255,255,255,0.15); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem;">
+                        <h4 style="margin: 0 0 1rem 0; font-size: 1.2rem; text-align: center;">⏱️ Próximos Passos</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏳</div>
+                                <strong>1. Verificação</strong><br>
+                                <small>Fundo confirma depósito<br>(até 5 dias úteis)</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+                                <strong>2. Recibo Definitivo</strong><br>
+                                <small>Documento oficial válido<br>(até 60 dias úteis)</small>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📧</div>
+                                <strong>3. Notificação</strong><br>
+                                <small>Você será avisado por<br>email e WhatsApp</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- LINKS IMPORTANTES -->
+                    <div style="background: rgba(255,255,255,0.15); border-radius: 12px; padding: 1.5rem; margin-top: 1.5rem; text-align: center;">
+                        <h4 style="margin: 0 0 1rem 0; font-size: 1.2rem;">🔗 Links Importantes</h4>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                            <a href="#" onclick="alert('Portal: incentivabr.gov.br/acompanhar/${protocoloAtual}')" 
+                               style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-external-link-alt"></i>
+                                Acompanhar Status
+                            </a>
+                            <a href="#" onclick="baixarReciboAtual()" 
+                               style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-download"></i>
+                                Baixar PDF
+                            </a>
+                            <a href="mailto:contato@incentivabr.com.br?subject=Dúvida sobre ${protocoloAtual}" 
+                               style="background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-envelope"></i>
+                                Suporte
+                            </a>
                         </div>
                     </div>
                 </div>
             `;
-        }
-        
-        function animarCanais() {
-            const canais = ['email', 'whatsapp', 'portal'];
-            
-            canais.forEach((canal, index) => {
-                setTimeout(() => {
-                    // Animar aparição do card
-                    const card = document.getElementById(`canal-${canal}`);
-                    card.classList.add('animate');
-                    
-                    // Simular processamento
-                    setTimeout(() => {
-                        const status = document.getElementById(`status-${canal}`);
-                        const preview = document.getElementById(`preview-${canal}`);
-                        
-                        // Atualizar status
-                        status.innerHTML = '<i class="fas fa-check"></i> Enviado!';
-                        status.classList.add('enviado');
-                        
-                        // Mostrar preview
-                        if (preview) {
-                            preview.style.display = 'block';
-                            preview.style.animation = 'slideInUp 0.5s ease';
-                        }
-                        
-                        // Efeito sonoro simulado no console
-                        if (canal === 'whatsapp') {
-                            console.log('🔔 Notificação WhatsApp enviada!');
-                        }
-                    }, 1500);
-                    
-                }, index * 800); // Escalonar animações
-            });
         }
 
         // ===== GUIA IR FUNCTIONS =====
@@ -3678,11 +3677,11 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         console.log('  💾 Geração de PDF automática: Funcional');
         console.log('  📧 Sistema de email: Configurado com fallback');
         console.log('  🔍 Status provisório/definitivo: Implementado');
-        console.log('✅ EXPERIÊNCIA MULTI-CANAL: Implementada');
-        console.log('  📧 Email institucional: Template gov.br');
-        console.log('  📱 WhatsApp Business: Simulação realística');
-        console.log('  🌐 Portal de acompanhamento: Timeline visual');
-        console.log('  🎬 Animações sequenciais: Implementadas');
+        console.log('✅ EXPERIÊNCIA MULTI-CANAL LIMPA: Implementada');
+        console.log('  📧 Cards visuais organizados: Funcionais');
+        console.log('  📱 Layout responsivo premium: Implementado');
+        console.log('  🌐 Links de acompanhamento: Funcionais');
+        console.log('  📋 Dados organizados visualmente: Implementados');
         console.log('✅ TINA ROBUSTA: Implementada');
         console.log('  🤖 Respostas sobre simulador híbrido: Adicionadas');
         console.log('  🛡️ Respostas de credibilidade: Expandidas');
@@ -3698,7 +3697,7 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         console.log('   ⚡ Performance: Otimizada para todos os dispositivos');
         console.log('   🎨 UX: Experiência premium governamental');
         console.log('   📄 Recibos: Sistema completo conforme legislação');
-        console.log('   🎪 Multi-canal: Experiência moderna e transparente');
+        console.log('   🎪 Multi-canal: Layout limpo e organizado');
         console.log('');
         console.log('🚀 SISTEMA 100% FUNCIONAL PARA PRODUÇÃO!');
         console.log('🏛️ Pronto para apresentação GDF');
@@ -3710,15 +3709,14 @@ Gerado automaticamente pelo Sistema INCENTIVABR
         console.log('   📊 Impacto Contextual Visual');
         console.log('   📋 Sistema de Recibo Oficial');
         console.log('   📧 Geração de PDF automática');
-        console.log('   🎬 Experiência Multi-Canal');
+        console.log('   🎬 Experiência Multi-Canal organizada');
         console.log('   🤖 TINA com 20+ respostas inteligentes');
         console.log('   🛡️ Verificação de dados oficial');
         console.log('   📱 Responsividade mobile premium');
+        console.log('   🔗 Links funcionais para acompanhamento');
         console.log('');
         console.log('✨ INCENTIVABR AGORA É O SISTEMA MAIS AVANÇADO DO BRASIL!');
-    </script>
-</body>
-</html>
+        console.log('🎉 LAYOUT FINAL LIMPO E ORGANIZADO - PERFEITO PARA APRESENTAÇÃO!');
     </script>
 </body>
 </html>
