@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar - IncentivaBR</title>
+  <meta name="description" content="Entre na sua conta IncentivaBR.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      width: 100%;
+      max-width: 440px;
+      overflow: hidden;
+    }
+
+    .login-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      padding: 32px;
+      text-align: center;
+      color: white;
+    }
+
+    .login-header img {
+      height: 60px;
+      margin-bottom: 16px;
+    }
+
+    .login-header h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .login-header p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tab {
+      flex: 1;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .tab:hover {
+      color: var(--primary-color);
+    }
+
+    .tab.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .form-container {
+      padding: 32px;
+    }
+
+    .form {
+      display: none;
+    }
+
+    .form.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    .form-group input.error {
+      border-color: var(--danger-color);
+    }
+
+    .error-message {
+      color: var(--danger-color);
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .password-toggle {
+      position: relative;
+    }
+
+    .password-toggle i {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 24px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .divider span {
+      padding: 0 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert-error {
+      background: rgba(231, 76, 60, 0.1);
+      color: var(--danger-color);
+      border: 1px solid var(--danger-color);
+    }
+
+    .alert-success {
+      background: rgba(0, 168, 89, 0.1);
+      color: #006837;
+      border: 1px solid var(--success-color);
+    }
+
+    .alert.show {
+      display: block;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: var(--primary-color);
+    }
+
+    .btn-loading {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-loading .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .login-header {
+        padding: 24px;
+      }
+
+      .form-container {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <img src="assets/logo-icon.svg" alt="IncentivaBR">
+      <h1>IncentivaBR</h1>
+      <p>Transforme seu imposto em impacto social</p>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="login">Entrar</div>
+      <div class="tab" data-tab="register">Cadastrar</div>
+    </div>
+
+    <div class="form-container">
+      <div id="alert" class="alert"></div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="form active">
+        <div class="form-group">
+          <label for="loginCpfEmail">CPF ou Email</label>
+          <input type="text" id="loginCpfEmail" placeholder="Digite seu CPF ou email" required>
+          <span class="error-message">Campo obrigatorio</span>
+        </div>
+
+        <div class="form-group">
+          <label for="loginSenha">Senha</label>
+          <div class="password-toggle">
+            <input type="password" id="loginSenha" placeholder="Digite sua senha" required>
+            <i class="fas fa-eye" onclick="togglePassword('loginSenha', this)"></i>
+          </div>
+          <span class="error-message">Campo obrigatorio</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%" id="loginBtn">
+          <span>Entrar</span>
+        </button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="form">
+        <div class="form-group">
+          <label for="regNome">Nome completo *</label>
+          <input type="text" id="regNome" placeholder="Seu nome completo" required>
+          <span class="error-message">Minimo 3 caracteres</span>
+        </div>
+
+        <div class="form-group">
+          <label for="regCpf">CPF *</label>
+          <input type="text" id="regCpf" placeholder="000.000.000-00" maxlength="14" required>
+          <span class="error-message">CPF invalido</span>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">Email *</label>
+          <input type="email" id="regEmail" placeholder="seu@email.com" required>
+          <span class="error-message">Email invalido</span>
+        </div>
+
+        <div class="form-group">
+          <label for="regPhone">Telefone</label>
+          <input type="text" id="regPhone" placeholder="(00) 00000-0000" maxlength="15">
+        </div>
+
+        <div class="form-group">
+          <label for="regSenha">Senha *</label>
+          <div class="password-toggle">
+            <input type="password" id="regSenha" placeholder="Minimo 6 caracteres" required>
+            <i class="fas fa-eye" onclick="togglePassword('regSenha', this)"></i>
+          </div>
+          <span class="error-message">Minimo 6 caracteres</span>
+        </div>
+
+        <div class="form-group">
+          <label for="regSenhaConfirm">Confirmar senha *</label>
+          <div class="password-toggle">
+            <input type="password" id="regSenhaConfirm" placeholder="Repita a senha" required>
+            <i class="fas fa-eye" onclick="togglePassword('regSenhaConfirm', this)"></i>
+          </div>
+          <span class="error-message">Senhas nao conferem</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%" id="registerBtn">
+          <span>Criar conta</span>
+        </button>
+      </form>
+
+      <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Voltar para o inicio
+      </a>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    // Se ja logado, redirecionar
+    if (auth.isLoggedIn()) {
+      const redirect = utils.getQueryParam('redirect') || 'dashboard.html';
+      window.location.href = redirect;
+    }
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.form').forEach(f => f.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab + 'Form').classList.add('active');
+        hideAlert();
+      });
+    });
+
+    // Toggle password visibility
+    function togglePassword(inputId, icon) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    }
+
+    // Show/hide alert
+    function showAlert(message, type = 'error') {
+      const alert = document.getElementById('alert');
+      alert.textContent = message;
+      alert.className = `alert alert-${type} show`;
+    }
+
+    function hideAlert() {
+      document.getElementById('alert').classList.remove('show');
+    }
+
+    // Set button loading
+    function setLoading(btn, loading) {
+      if (loading) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-loading"><div class="spinner"></div> Aguarde...</span>';
+      } else {
+        btn.disabled = false;
+        btn.innerHTML = '<span>' + (btn.id === 'loginBtn' ? 'Entrar' : 'Criar conta') + '</span>';
+      }
+    }
+
+    // Masks
+    document.getElementById('regCpf').addEventListener('input', function() {
+      utils.maskCPF(this);
+    });
+
+    document.getElementById('regPhone').addEventListener('input', function() {
+      utils.maskPhone(this);
+    });
+
+    // Login form
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const cpfEmail = document.getElementById('loginCpfEmail').value.trim();
+      const senha = document.getElementById('loginSenha').value;
+      const btn = document.getElementById('loginBtn');
+
+      if (!cpfEmail || !senha) {
+        showAlert('Preencha todos os campos');
+        return;
+      }
+
+      setLoading(btn, true);
+
+      try {
+        // Detectar se e CPF ou email
+        const isEmail = cpfEmail.includes('@');
+        const credentials = isEmail
+          ? { email: cpfEmail, senha }
+          : { cpf: utils.cleanCPF(cpfEmail), senha };
+
+        const response = await api.login(credentials);
+
+        auth.setToken(response.token);
+        auth.setUser(response.user);
+
+        utils.showToast('Login realizado com sucesso!', 'success');
+
+        const redirect = utils.getQueryParam('redirect') || 'dashboard.html';
+        setTimeout(() => window.location.href = redirect, 500);
+
+      } catch (error) {
+        showAlert(error.message || 'Erro ao fazer login');
+      } finally {
+        setLoading(btn, false);
+      }
+    });
+
+    // Register form
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const nome = document.getElementById('regNome').value.trim();
+      const cpf = utils.cleanCPF(document.getElementById('regCpf').value);
+      const email = document.getElementById('regEmail').value.trim();
+      const phone = document.getElementById('regPhone').value.replace(/\D/g, '');
+      const senha = document.getElementById('regSenha').value;
+      const senhaConfirm = document.getElementById('regSenhaConfirm').value;
+      const btn = document.getElementById('registerBtn');
+
+      // Validacoes
+      if (nome.length < 3) {
+        showAlert('Nome deve ter pelo menos 3 caracteres');
+        return;
+      }
+
+      if (!utils.isValidCPF(cpf)) {
+        showAlert('CPF invalido');
+        return;
+      }
+
+      if (!utils.isValidEmail(email)) {
+        showAlert('Email invalido');
+        return;
+      }
+
+      if (senha.length < 6) {
+        showAlert('Senha deve ter pelo menos 6 caracteres');
+        return;
+      }
+
+      if (senha !== senhaConfirm) {
+        showAlert('Senhas nao conferem');
+        return;
+      }
+
+      setLoading(btn, true);
+
+      try {
+        await api.register({ nome, cpf, email, phone, senha });
+
+        showAlert('Conta criada com sucesso! Faca login.', 'success');
+
+        // Switch to login tab
+        document.querySelector('.tab[data-tab="login"]').click();
+        document.getElementById('loginCpfEmail').value = email;
+
+      } catch (error) {
+        showAlert(error.message || 'Erro ao criar conta');
+      } finally {
+        setLoading(btn, false);
+      }
+    });
+  </script>
+</body>
+</html>

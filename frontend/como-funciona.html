@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como Funciona - IncentivaBR</title>
+  <meta name="description" content="Entenda como destinar seu Imposto de Renda para projetos sociais. Guia completo sobre destinação de IR.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    body {
+      background: var(--background-light);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .requisito-box {
+      background: #F7941D;
+      color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .requisito-box h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .requisito-box p {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    .requisito-box p.small {
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    .card {
+      margin-bottom: 2rem;
+    }
+
+    .card h2 {
+      color: #1E3A5F;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .card ul, .card ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .highlight-box {
+      background: #F5F7FA;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .info-box {
+      background: #E8F4FD;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+
+    .card-forma1 {
+      border-left: 4px solid #2B5A9E;
+    }
+
+    .card-forma1 h3 {
+      color: #2B5A9E;
+    }
+
+    .card-forma2 {
+      border-left: 4px solid #F7941D;
+    }
+
+    .card-forma2 h3 {
+      color: #F7941D;
+    }
+
+    .section-title {
+      color: #1E3A5F;
+      text-align: center;
+      margin: 3rem 0 2rem;
+      font-size: 1.5rem;
+    }
+
+    .card-tabela {
+      background: #F5F7FA;
+      margin: 3rem 0;
+    }
+
+    .card-tabela h3 {
+      color: #1E3A5F;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .tabela-limites {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tabela-limites thead tr {
+      background: #1E3A5F;
+      color: white;
+    }
+
+    .tabela-limites th,
+    .tabela-limites td {
+      padding: 1rem;
+      border: 1px solid #ccc;
+    }
+
+    .tabela-limites th {
+      text-align: left;
+    }
+
+    .tabela-limites td.limite {
+      text-align: center;
+      font-weight: bold;
+      color: #F7941D;
+    }
+
+    .tabela-limites tbody tr:nth-child(even) {
+      background: #fff;
+    }
+
+    .tabela-limites .total-row {
+      background: #F7941D !important;
+      color: white;
+      font-weight: bold;
+    }
+
+    .tabela-limites .total-row td {
+      border-color: #F7941D;
+    }
+
+    .tabela-limites .total-row .limite {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .card-exemplo {
+      border: 3px solid #F7941D;
+    }
+
+    .card-exemplo h3 {
+      color: #F7941D;
+      text-align: center;
+    }
+
+    .exemplo-content {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .cta-final {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .cta-final h3 {
+      color: #1E3A5F;
+      margin-bottom: 1rem;
+    }
+
+    .cta-final .btn-secondary {
+      font-size: 1.2rem;
+      padding: 1rem 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .content-container {
+        padding: 0 1rem;
+      }
+
+      .tabela-limites th,
+      .tabela-limites td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .tabela-limites .total-row .limite {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="logo">
+      <img src="assets/logo-horizontal.svg" alt="IncentivaBR" height="36">
+    </a>
+    <nav>
+      <a href="projetos.html">Projetos</a>
+      <a href="calculadora-escolha.html">Calculadora IR</a>
+      <a href="como-funciona.html" style="color:var(--secondary-color)">Como Funciona</a>
+      <a href="#" id="navAuth" class="btn btn-primary btn-sm">Entrar</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <section class="hero">
+    <h1>Como Funciona a Destinação de IR?</h1>
+    <p>Entenda como transformar seu imposto em impacto social</p>
+  </section>
+
+  <div class="content-container">
+
+    <!-- Requisito Principal -->
+    <div class="requisito-box">
+      <h2><i class="fas fa-exclamation-triangle"></i> Quem pode destinar?</h2>
+      <p><strong>Apenas quem faz a declaração COMPLETA do Imposto de Renda</strong></p>
+      <p class="small">A declaração simplificada não permite destinação de IR.</p>
+    </div>
+
+    <!-- Introdução -->
+    <div class="card">
+      <h2><i class="fas fa-lightbulb" style="color:#F7941D"></i> O que é destinação de IR?</h2>
+      <p>
+        Se você faz a declaração completa do Imposto de Renda, pode <strong>destinar parte do imposto para projetos sociais</strong>
+        e ainda pode <strong>aumentar a sua restituição</strong> ou <strong>diminuir o imposto a pagar</strong>.
+      </p>
+      <div class="highlight-box">
+        <strong><i class="fas fa-check-circle" style="color:#00A859"></i> Importante:</strong> O dinheiro destinado volta para você na restituição ou reduz o que você tem a pagar.
+        É uma forma de direcionar impostos que você já vai pagar para causas que você acredita!
+      </div>
+    </div>
+
+    <!-- 2 Formas de Destinar -->
+    <h2 class="section-title">Existem 2 formas de destinar:</h2>
+
+    <!-- FORMA 1 -->
+    <div class="card card-forma1">
+      <h3><i class="fas fa-clipboard-list"></i> FORMA 1: Durante a entrega da declaração</h3>
+
+      <p><strong>Quando:</strong> Na hora de preencher a declaração anual (até abril/maio)</p>
+
+      <p><strong>Para onde destinar:</strong></p>
+      <ul>
+        <li>Fundos dos Direitos da Criança e do Adolescente</li>
+        <li>Fundos da Pessoa Idosa</li>
+      </ul>
+
+      <p><strong>Limite:</strong> Até <span style="color: #F7941D; font-weight: bold;">3% para cada fundo</span> (total: 6%)</p>
+
+      <p><strong>Como fazer:</strong></p>
+      <ol>
+        <li>No programa da Receita Federal, selecione os fundos</li>
+        <li>O sistema gera um DARF (documento de pagamento)</li>
+        <li>Pague o DARF até o prazo final da declaração</li>
+        <li>O valor <strong>reduz o imposto a pagar ou aumenta sua restituição</strong></li>
+      </ol>
+
+      <div class="info-box">
+        <strong><i class="fas fa-coins" style="color:#F7941D"></i> Exemplo prático:</strong><br>
+        IR devido: R$ 10.000<br>
+        Destinação (6%): R$ 600<br>
+        Você paga os R$ 600 para os fundos<br>
+        Seu IR cai para R$ 9.400<br>
+        <strong>Resultado: Você direcionou R$ 600 para causas sociais sem custo adicional!</strong>
+      </div>
+    </div>
+
+    <!-- FORMA 2 -->
+    <div class="card card-forma2">
+      <h3><i class="fas fa-calendar-alt"></i> FORMA 2: Durante o ano (janeiro a dezembro)</h3>
+
+      <p><strong>Quando:</strong> Qualquer momento do ano</p>
+
+      <p><strong>Para onde destinar:</strong></p>
+      <ul>
+        <li><i class="fas fa-check" style="color:#00A859"></i> Fundos da criança, adolescente e pessoa idosa</li>
+        <li><i class="fas fa-check" style="color:#00A859"></i> Projetos de incentivo à cultura</li>
+        <li><i class="fas fa-check" style="color:#00A859"></i> Projetos de incentivo à atividade audiovisual</li>
+        <li><i class="fas fa-check" style="color:#00A859"></i> Projetos de incentivo à reciclagem</li>
+        <li><i class="fas fa-check" style="color:#00A859"></i> Projetos esportivos</li>
+      </ul>
+
+      <p><strong>Limite base:</strong> <span style="color: #F7941D; font-weight: bold;">6% do imposto devido</span></p>
+      <p><strong>Com esporte:</strong> <span style="color: #F7941D; font-weight: bold;">7% do imposto devido</span></p>
+
+      <p style="margin-top: 1.5rem;"><strong>ALÉM DISSO, você também pode apoiar:</strong></p>
+      <ul>
+        <li><i class="fas fa-ribbon" style="color:#E74C3C"></i> <strong>PRONON</strong> – Programa Nacional de Apoio à Atenção Oncológica (limite: 1%)</li>
+        <li><i class="fas fa-wheelchair" style="color:#3498DB"></i> <strong>PRONAS/PCD</strong> – Programa de Apoio à Pessoa com Deficiência (limite: 1%)</li>
+      </ul>
+
+      <p><strong>Como fazer:</strong></p>
+      <ol>
+        <li>Escolha um projeto no IncentivaBR</li>
+        <li>Faça a destinação durante o ano</li>
+        <li>Guarde o recibo</li>
+        <li>Na declaração do ano seguinte, informe a destinação</li>
+        <li>O valor <strong>reduz o imposto a pagar ou aumenta sua restituição</strong></li>
+      </ol>
+    </div>
+
+    <!-- Tabela de Limites -->
+    <div class="card card-tabela">
+      <h3><i class="fas fa-chart-bar" style="color:#1E3A5F"></i> Resumo dos Limites de Destinação</h3>
+
+      <table class="tabela-limites">
+        <thead>
+          <tr>
+            <th>Grupo de Destinação</th>
+            <th style="text-align: center;">Limite do IR Devido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Grupo 1:</strong><br>
+              • Fundos da Criança e Adolescente<br>
+              • Fundo da Pessoa Idosa<br>
+              • Atividade Cultural e Artística<br>
+              • Atividade Audiovisual<br>
+              • Incentivo à Reciclagem<br>
+              • Atividade Desportiva
+            </td>
+            <td class="limite">
+              6%<br>
+              ou<br>
+              7% (se incluir esporte)
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>PRONON</strong><br>
+              Programa de Apoio à Atenção Oncológica
+            </td>
+            <td class="limite">1%</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>PRONAS/PCD</strong><br>
+              Programa de Apoio à Pessoa com Deficiência
+            </td>
+            <td class="limite">1%</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL MÁXIMO POSSÍVEL</td>
+            <td class="limite">
+              8% ou 9%<br>
+              <span style="font-size: 0.9rem;">(se incluir esporte)</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Exemplo Prático Completo -->
+    <div class="card card-exemplo">
+      <h3><i class="fas fa-coins"></i> Exemplo Prático Completo</h3>
+
+      <div class="exemplo-content">
+        <p><strong>Situação:</strong> João tem IR devido de R$ 15.000 em 2026</p>
+
+        <p style="margin-top: 1rem;"><strong>Destinações possíveis:</strong></p>
+        <ul>
+          <li>Grupo 1 (com esporte): R$ 1.050 (7%)</li>
+          <li>PRONON: R$ 150 (1%)</li>
+          <li>PRONAS/PCD: R$ 150 (1%)</li>
+        </ul>
+
+        <p style="margin-top: 1rem;"><strong>Total que João pode destinar: R$ 1.350 (9%)</strong></p>
+
+        <div class="info-box">
+          <p><strong>Resultado final:</strong></p>
+          <p><i class="fas fa-check" style="color:#00A859"></i> João destinou R$ 1.350 para causas sociais</p>
+          <p><i class="fas fa-check" style="color:#00A859"></i> Esse valor VOLTOU na restituição ou reduziu o imposto</p>
+          <p><i class="fas fa-check" style="color:#00A859"></i> <strong>Custo para João: R$ 0 (zero!)</strong></p>
+          <p><i class="fas fa-check" style="color:#00A859"></i> <strong>Impacto social: ENORME!</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Final -->
+    <div class="cta-final">
+      <h3>Pronto para transformar seu IR em impacto social?</h3>
+      <a href="calculadora-escolha.html" class="btn btn-secondary">
+        <i class="fas fa-calculator"></i> Calcular meu IR agora
+      </a>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="logo">
+      <img src="assets/logo-horizontal.svg" alt="IncentivaBR" height="80">
+    </div>
+    <p class="tagline">Incentivos Fiscais Simplificados</p>
+    <div class="footer-bottom">
+      <p>&copy; 2026 IncentivaBR - Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.querySelector('nav');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+      });
+    }
+
+    // Update nav auth
+    const navAuth = document.getElementById('navAuth');
+    if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
+      const user = auth.getUser();
+      navAuth.textContent = user.nome ? user.nome.split(' ')[0] : 'Minha Conta';
+      navAuth.href = 'dashboard.html';
+      navAuth.classList.remove('btn', 'btn-primary', 'btn-sm');
+    } else {
+      navAuth.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
