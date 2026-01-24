@@ -379,11 +379,8 @@
 <body>
   <!-- Header -->
   <header class="header">
-    <a href="index.html" class="logo">
-      <div class="logo-incentivabr">
-        <span class="logo-icon">💚</span>
-        <span class="logo-text">Incentiva<span class="highlight">BR</span></span>
-      </div>
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img">
     </a>
     <nav>
       <a href="projetos.html">Projetos</a>
@@ -404,6 +401,13 @@
     <div class="welcome-section">
       <h1 id="welcomeTitle">Ola!</h1>
       <p>Acompanhe suas destinacoes e impacto social</p>
+
+      <!-- Link Admin (visivel apenas para admins) -->
+      <div id="adminLinkContainer" style="margin: 1.5rem 0; display: none;">
+        <a href="admin.html" style="display: inline-block; padding: 0.75rem 1.5rem; background: rgba(255,255,255,0.2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+          <i class="fas fa-chart-bar"></i> Painel Administrativo (Fundo)
+        </a>
+      </div>
 
       <div class="stats-row">
         <div class="stat-card">
@@ -493,12 +497,9 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="logo">
-      <div class="logo-incentivabr logo-white logo-lg" style="justify-content: center;">
-        <span class="logo-icon">💚</span>
-        <span class="logo-text">Incentiva<span class="highlight">BR</span></span>
-      </div>
-    </div>
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white">
+    </a>
     <p class="tagline">Incentivos Fiscais Simplificados</p>
     <div class="footer-bottom">
       <p>
@@ -529,6 +530,11 @@
       document.getElementById('userAvatar').textContent = firstName.charAt(0).toUpperCase();
       document.getElementById('welcomeTitle').textContent = `Ola, ${firstName}!`;
       document.getElementById('statTotalDonated').textContent = utils.formatCurrency(user.total_donated || 0);
+
+      // Mostrar link admin se usuario for admin
+      if (user.is_admin) {
+        document.getElementById('adminLinkContainer').style.display = 'block';
+      }
     }
 
     // Load fresh user data

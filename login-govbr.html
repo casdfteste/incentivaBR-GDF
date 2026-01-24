@@ -68,13 +68,32 @@
 
         .incentivabr-logo {
             margin-bottom: 1.5rem;
+            text-align: center;
         }
 
-        .logo-text {
-            font-size: 2rem;
+        /* Logo IncentivaBR Padronizada */
+        .logo-incentivabr {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        .logo-incentivabr .logo-icon {
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        .logo-incentivabr .logo-text {
+            font-size: 28px;
             font-weight: 700;
-            color: #1e4d72;
-            margin-bottom: 0.5rem;
+            color: #1E3A5F;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-incentivabr .logo-text .highlight {
+            color: #F7941D;
         }
 
         .tagline {
@@ -511,7 +530,9 @@
     <div class="login-container">
         <!-- Logo INCENTIVABR -->
         <div class="incentivabr-logo">
-            <div class="logo-text">INCENTIVABR</div>
+            <a href="index.html" class="logo-link">
+                <img src="frontend/assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img" style="height: 50px;">
+            </a>
             <div class="tagline">Exclusivo para Servidores Públicos</div>
         </div>
 

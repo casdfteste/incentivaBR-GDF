@@ -104,11 +104,39 @@ Data: 24 de julho de 2025
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
             text-decoration: none;
+        }
+
+        /* Logo IncentivaBR Padronizada */
+        .logo-incentivabr {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-incentivabr .logo-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .logo-incentivabr .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1E3A5F;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-incentivabr .logo-text .highlight {
+            color: #F7941D;
+        }
+
+        .logo-incentivabr.logo-white .logo-text {
+            color: white;
+        }
+
+        .logo-incentivabr.logo-white .logo-text .highlight {
+            color: #F7941D;
         }
 
         .nav-links {
@@ -724,9 +752,8 @@ Data: 24 de julho de 2025
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <a href="#" class="logo">
-                    <i class="fas fa-university"></i>
-                    INCENTIVABR
+                <a href="#" class="logo-link">
+                    <img src="frontend/assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img" style="height: 45px;">
                 </a>
                 
                 <ul class="nav-links">
@@ -940,7 +967,7 @@ Data: 24 de julho de 2025
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>INCENTIVABR</h3>
+                    <img src="frontend/assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white" style="height: 45px; margin-bottom: 1rem;">
                     <p>A primeira plataforma exclusiva para servidores públicos destinarem Imposto de Renda com total segurança jurídica.</p>
                     <p style="margin-top: 1rem;">
                         <i class="fas fa-certificate"></i>

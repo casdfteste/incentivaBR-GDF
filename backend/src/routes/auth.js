@@ -151,13 +151,13 @@ router.post('/login', async (req, res) => {
     if (cpf) {
       const cleanedCPF = cleanCPF(cpf);
       const result = await pool.query(
-        'SELECT id, cpf, nome, email, phone, senha_hash, total_donated, created_at FROM users WHERE cpf = $1',
+        'SELECT id, cpf, nome, email, phone, senha_hash, total_donated, is_admin, created_at FROM users WHERE cpf = $1',
         [cleanedCPF]
       );
       user = result.rows[0];
     } else {
       const result = await pool.query(
-        'SELECT id, cpf, nome, email, phone, senha_hash, total_donated, created_at FROM users WHERE email = $1',
+        'SELECT id, cpf, nome, email, phone, senha_hash, total_donated, is_admin, created_at FROM users WHERE email = $1',
         [email.toLowerCase()]
       );
       user = result.rows[0];
@@ -196,7 +196,8 @@ router.post('/login', async (req, res) => {
         nome: user.nome,
         email: user.email,
         cpf: user.cpf,
-        total_donated: parseFloat(user.total_donated) || 0
+        total_donated: parseFloat(user.total_donated) || 0,
+        is_admin: user.is_admin || false
       }
     });
 
@@ -213,7 +214,7 @@ router.post('/login', async (req, res) => {
 router.get('/me', authenticateToken, async (req, res) => {
   try {
     const result = await pool.query(
-      `SELECT id, cpf, nome, email, phone, email_verified, total_donated, jurisdiction_id, created_at
+      `SELECT id, cpf, nome, email, phone, email_verified, total_donated, jurisdiction_id, is_admin, created_at
        FROM users WHERE id = $1`,
       [req.user.userId]
     );
@@ -238,6 +239,7 @@ router.get('/me', authenticateToken, async (req, res) => {
         email_verified: user.email_verified,
         total_donated: parseFloat(user.total_donated) || 0,
         jurisdiction_id: user.jurisdiction_id,
+        is_admin: user.is_admin || false,
         created_at: user.created_at
       }
     });

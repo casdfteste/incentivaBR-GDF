@@ -1242,3 +1242,33 @@ textarea:focus {
 .logo-incentivabr.logo-lg .logo-text {
   font-size: 28px;
 }
+
+/* ========================================
+   LOGO IMG - Imagem PNG/SVG
+   ======================================== */
+.logo-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Versão branca para fundos escuros */
+.logo-img.logo-white {
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
+/* Tamanhos da logo img */
+.logo-img.logo-sm {
+  height: 32px;
+}
+
+.logo-img.logo-lg {
+  height: 60px;
+}

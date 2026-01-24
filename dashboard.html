@@ -70,9 +70,30 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 1.5rem;
+        }
+
+        /* Logo IncentivaBR Padronizada */
+        .logo-incentivabr {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-incentivabr .logo-icon {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .logo-incentivabr .logo-text {
+            font-size: 22px;
             font-weight: 700;
+            color: white;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-incentivabr .logo-text .highlight {
+            color: #F7941D;
         }
 
         .user-info {
@@ -1719,10 +1740,9 @@
     <!-- Header -->
     <div class="header">
         <div class="header-content">
-            <div class="logo">
-                <i class="fas fa-university"></i>
-                INCENTIVABR
-            </div>
+            <a href="index.html" class="logo-link">
+                <img src="frontend/assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white" style="height: 40px;">
+            </a>
             <div class="user-info">
                 <h3 id="userName">João Silva Santos</h3>
                 <p id="userRole">Servidor Federal</p>
