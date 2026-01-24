@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Administrativo - IncentivaBR</title>
+  <meta name="description" content="Painel administrativo para gestao de destinacoes - IncentivaBR">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    body {
+      background: var(--background-light);
+    }
+
+    .admin-header {
+      background: var(--primary-color);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .admin-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .admin-header .logo img {
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+
+    .admin-header .logo span {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .admin-header .badge-admin {
+      background: var(--secondary-color);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .admin-header .user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-header .user-info span {
+      font-size: 14px;
+    }
+
+    .admin-header .btn-logout {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .admin-header .btn-logout:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .admin-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .page-title {
+      font-size: 28px;
+      color: var(--primary-color);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .page-title i {
+      color: var(--secondary-color);
+    }
+
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-card .icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+    }
+
+    .stat-card .icon.pending { background: var(--warning-color); }
+    .stat-card .icon.confirmed { background: var(--success-color); }
+    .stat-card .icon.rejected { background: var(--danger-color); }
+    .stat-card .icon.total { background: var(--primary-color); }
+
+    .stat-card .info h3 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-card .info p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .stat-card .info .amount {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.3s;
+    }
+
+    .tab:hover {
+      color: var(--primary-color);
+    }
+
+    .tab.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .tab .count {
+      background: var(--border-color);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+
+    .tab.active .count {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    /* Table */
+    .table-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .table-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-header h3 {
+      font-size: 18px;
+      color: var(--primary-color);
+    }
+
+    .table-header .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--background-light);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .table-header .search-box input {
+      border: none;
+      background: none;
+      outline: none;
+      font-size: 14px;
+      width: 200px;
+    }
+
+    .table-header .search-box i {
+      color: var(--text-muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th {
+      text-align: left;
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      background: var(--background-light);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    table tr:hover {
+      background: rgba(30, 58, 95, 0.02);
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .user-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .user-cell .name {
+      font-weight: 500;
+    }
+
+    .user-cell .cpf {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    .amount-cell {
+      font-weight: 600;
+      color: var(--success-color);
+    }
+
+    .date-cell {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-badge.pending {
+      background: rgba(255, 184, 0, 0.15);
+      color: #8a6d00;
+    }
+
+    .status-badge.confirmed {
+      background: rgba(0, 168, 89, 0.15);
+      color: #006837;
+    }
+
+    .status-badge.rejected {
+      background: rgba(231, 76, 60, 0.15);
+      color: #c0392b;
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-action {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+    }
+
+    .btn-confirm {
+      background: var(--success-color);
+      color: white;
+    }
+
+    .btn-confirm:hover {
+      background: #008a47;
+    }
+
+    .btn-reject {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    .btn-reject:hover {
+      background: #c0392b;
+    }
+
+    .btn-upload {
+      background: var(--info-color);
+      color: white;
+    }
+
+    .btn-upload:hover {
+      background: #2980b9;
+    }
+
+    .btn-view {
+      background: var(--background-light);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-view:hover {
+      background: var(--border-color);
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      color: var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .empty-state h4 {
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .loading-state .spinner {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 16px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-size: 18px;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    /* Detail Item */
+    .detail-item {
+      margin-bottom: 16px;
+    }
+
+    .detail-item label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .detail-item .value {
+      font-size: 15px;
+      color: var(--text-primary);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* File Upload */
+    .file-upload-area {
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .file-upload-area:hover {
+      border-color: var(--primary-color);
+      background: rgba(30, 58, 95, 0.02);
+    }
+
+    .file-upload-area.dragover {
+      border-color: var(--success-color);
+      background: rgba(0, 168, 89, 0.05);
+    }
+
+    .file-upload-area i {
+      font-size: 40px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .file-upload-area p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .file-upload-area .file-name {
+      margin-top: 12px;
+      color: var(--success-color);
+      font-weight: 500;
+    }
+
+    /* Reason Input */
+    .reason-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: var(--font-family);
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .reason-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    /* Proof Link */
+    .proof-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--info-color);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .proof-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+      }
+
+      .admin-header .user-info {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 800px;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-container {
+        padding: 16px;
+      }
+    }
+
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 3000;
+    }
+
+    .toast {
+      background: white;
+      padding: 16px 20px;
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      animation: slideIn 0.3s ease;
+    }
+
+    .toast.success {
+      border-left: 4px solid var(--success-color);
+    }
+
+    .toast.error {
+      border-left: 4px solid var(--danger-color);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="admin-header">
+    <a href="index.html" class="logo">
+      <div class="logo-incentivabr logo-white logo-sm">
+        <span class="logo-icon">💚</span>
+        <span class="logo-text">Incentiva<span class="highlight">BR</span></span>
+      </div>
+      <span class="badge-admin">ADMIN</span>
+    </a>
+    <div class="user-info">
+      <span id="adminName">Carregando...</span>
+      <button class="btn-logout" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> Sair
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <h1 class="page-title">
+      <i class="fas fa-chart-line"></i>
+      Gestao de Destinacoes
+    </h1>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="icon pending">
+          <i class="fas fa-clock"></i>
+        </div>
+        <div class="info">
+          <h3 id="statPendingCount">-</h3>
+          <p>Pendentes</p>
+          <span class="amount" id="statPendingAmount">R$ -</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="icon confirmed">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="info">
+          <h3 id="statConfirmedCount">-</h3>
+          <p>Confirmadas</p>
+          <span class="amount" id="statConfirmedAmount">R$ -</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="icon rejected">
+          <i class="fas fa-times-circle"></i>
+        </div>
+        <div class="info">
+          <h3 id="statRejectedCount">-</h3>
+          <p>Recusadas</p>
+          <span class="amount" id="statRejectedAmount">R$ -</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="icon total">
+          <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <div class="info">
+          <h3 id="statTotalCount">-</h3>
+          <p>Total Geral</p>
+          <span class="amount" id="statTotalAmount">R$ -</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="pending">
+        <i class="fas fa-clock"></i> Pendentes
+        <span class="count" id="tabPendingCount">0</span>
+      </button>
+      <button class="tab" data-tab="confirmed">
+        <i class="fas fa-check"></i> Confirmadas
+        <span class="count" id="tabConfirmedCount">0</span>
+      </button>
+      <button class="tab" data-tab="rejected">
+        <i class="fas fa-times"></i> Recusadas
+        <span class="count" id="tabRejectedCount">0</span>
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <div class="table-header">
+        <h3 id="tableTitle">Destinacoes Pendentes</h3>
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Buscar por nome ou CPF...">
+        </div>
+      </div>
+
+      <div id="tableContent">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Carregando destinacoes...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Detalhes/Confirmar -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle"><i class="fas fa-info-circle"></i> Detalhes da Destinacao</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Content loaded dynamically -->
+      </div>
+      <div class="modal-footer" id="modalFooter">
+        <button class="btn btn-outline" onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Links -->
+  <div style="text-align: center; padding: 20px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 40px;">
+    <a href="politica-privacidade.html" style="color: var(--text-secondary);">Politica de Privacidade</a> |
+    <a href="termos-uso.html" style="color: var(--text-secondary);">Termos de Uso</a>
+    <span style="margin-left: 16px;">&copy; 2026 IncentivaBR</span>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    // Verificar autenticacao e admin
+    let currentUser = null;
+    let currentTab = 'pending';
+    let donations = {
+      pending: [],
+      confirmed: [],
+      rejected: []
+    };
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', async () => {
+      if (!auth.isLoggedIn()) {
+        window.location.href = 'login.html?redirect=admin.html';
+        return;
+      }
+
+      try {
+        const response = await api.me();
+        currentUser = response.user;
+        document.getElementById('adminName').textContent = currentUser.nome;
+
+        // Carregar dados
+        await loadStats();
+        await loadDonations('pending');
+
+        // Setup tabs
+        setupTabs();
+        setupSearch();
+
+      } catch (error) {
+        showToast('Erro ao carregar dados. Verifique se voce tem permissao de admin.', 'error');
+        console.error(error);
+      }
+    });
+
+    // Logout
+    function logout() {
+      auth.logout();
+    }
+
+    // Carregar estatisticas
+    async function loadStats() {
+      try {
+        const token = auth.getToken();
+        const response = await fetch('http://localhost:3000/api/admin/stats', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) {
+          if (response.status === 403) {
+            showToast('Voce nao tem permissao de administrador.', 'error');
+            setTimeout(() => window.location.href = 'dashboard.html', 2000);
+            return;
+          }
+          throw new Error('Erro ao carregar estatisticas');
+        }
+
+        const data = await response.json();
+        const stats = data.stats;
+
+        // Atualizar cards
+        document.getElementById('statPendingCount').textContent = stats.pending.count;
+        document.getElementById('statPendingAmount').textContent = formatCurrency(stats.pending.total);
+
+        document.getElementById('statConfirmedCount').textContent = stats.confirmed.count;
+        document.getElementById('statConfirmedAmount').textContent = formatCurrency(stats.confirmed.total);
+
+        document.getElementById('statRejectedCount').textContent = stats.rejected.count;
+        document.getElementById('statRejectedAmount').textContent = formatCurrency(stats.rejected.total);
+
+        const totalCount = stats.pending.count + stats.confirmed.count + stats.rejected.count;
+        const totalAmount = stats.pending.total + stats.confirmed.total + stats.rejected.total;
+
+        document.getElementById('statTotalCount').textContent = totalCount;
+        document.getElementById('statTotalAmount').textContent = formatCurrency(totalAmount);
+
+        // Atualizar contadores das tabs
+        document.getElementById('tabPendingCount').textContent = stats.pending.count;
+        document.getElementById('tabConfirmedCount').textContent = stats.confirmed.count;
+        document.getElementById('tabRejectedCount').textContent = stats.rejected.count;
+
+      } catch (error) {
+        console.error('Erro ao carregar estatisticas:', error);
+      }
+    }
+
+    // Carregar doacoes por status
+    async function loadDonations(status) {
+      const tableContent = document.getElementById('tableContent');
+      tableContent.innerHTML = `
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Carregando...</p>
+        </div>
+      `;
+
+      try {
+        const token = auth.getToken();
+        const response = await fetch(`http://localhost:3000/api/admin/donations/${status}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) throw new Error('Erro ao carregar doacoes');
+
+        const data = await response.json();
+        donations[status] = data.donations;
+
+        renderTable(status);
+
+      } catch (error) {
+        console.error('Erro:', error);
+        tableContent.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-circle"></i>
+            <h4>Erro ao carregar dados</h4>
+            <p>Tente novamente mais tarde</p>
+          </div>
+        `;
+      }
+    }
+
+    // Renderizar tabela
+    function renderTable(status, searchTerm = '') {
+      const tableContent = document.getElementById('tableContent');
+      let list = donations[status] || [];
+
+      // Filtrar por busca
+      if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        list = list.filter(d =>
+          d.user.name.toLowerCase().includes(term) ||
+          d.user.cpf_masked.includes(term)
+        );
+      }
+
+      if (list.length === 0) {
+        tableContent.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <h4>Nenhuma destinacao encontrada</h4>
+            <p>${searchTerm ? 'Tente outro termo de busca' : 'Nao ha destinacoes nesta categoria'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>Contribuinte</th>
+              <th>Projeto</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th>Comprovante</th>
+              ${status === 'pending' ? '<th>Acoes</th>' : ''}
+              ${status === 'confirmed' ? '<th>Recibo</th>' : ''}
+              ${status === 'rejected' ? '<th>Motivo</th>' : ''}
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      list.forEach(d => {
+        html += `
+          <tr>
+            <td>
+              <div class="user-cell">
+                <span class="name">${d.user.name}</span>
+                <span class="cpf">${d.user.cpf_masked}</span>
+              </div>
+            </td>
+            <td>
+              <div class="user-cell">
+                <span class="name">${d.project.title || 'N/A'}</span>
+                <span class="cpf">${d.fund.name || ''}</span>
+              </div>
+            </td>
+            <td class="amount-cell">${formatCurrency(d.donation_amount)}</td>
+            <td class="date-cell">${formatDate(d.created_at)}</td>
+            <td>
+              ${d.proof_file_path
+                ? `<a href="${d.proof_file_path}" target="_blank" class="proof-link"><i class="fas fa-file-alt"></i> Ver</a>`
+                : '<span style="color: var(--text-muted)">-</span>'
+              }
+            </td>
+        `;
+
+        if (status === 'pending') {
+          html += `
+            <td class="actions-cell">
+              <button class="btn-action btn-confirm" onclick="confirmDonation('${d.id}')">
+                <i class="fas fa-check"></i> Confirmar
+              </button>
+              <button class="btn-action btn-reject" onclick="showRejectModal('${d.id}')">
+                <i class="fas fa-times"></i> Recusar
+              </button>
+              <button class="btn-action btn-view" onclick="showDetails('${d.id}')">
+                <i class="fas fa-eye"></i>
+              </button>
+            </td>
+          `;
+        }
+
+        if (status === 'confirmed') {
+          html += `
+            <td>
+              ${d.receipt_file_path
+                ? `<a href="${d.receipt_file_path}" target="_blank" class="proof-link"><i class="fas fa-receipt"></i> Ver</a>`
+                : `<button class="btn-action btn-upload" onclick="showUploadModal('${d.id}')"><i class="fas fa-upload"></i> Upload</button>`
+              }
+            </td>
+          `;
+        }
+
+        if (status === 'rejected') {
+          html += `
+            <td>
+              <span style="color: var(--text-secondary); font-size: 13px;">
+                ${d.rejection_reason || 'Nao informado'}
+              </span>
+            </td>
+          `;
+        }
+
+        html += '</tr>';
+      });
+
+      html += '</tbody></table>';
+      tableContent.innerHTML = html;
+    }
+
+    // Setup tabs
+    function setupTabs() {
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', async () => {
+          const status = tab.dataset.tab;
+          if (status === currentTab) return;
+
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          currentTab = status;
+
+          // Atualizar titulo
+          const titles = {
+            pending: 'Destinacoes Pendentes',
+            confirmed: 'Destinacoes Confirmadas',
+            rejected: 'Destinacoes Recusadas'
+          };
+          document.getElementById('tableTitle').textContent = titles[status];
+
+          // Carregar dados se ainda nao carregou
+          if (!donations[status] || donations[status].length === 0) {
+            await loadDonations(status);
+          } else {
+            renderTable(status);
+          }
+
+          // Limpar busca
+          document.getElementById('searchInput').value = '';
+        });
+      });
+    }
+
+    // Setup search
+    function setupSearch() {
+      const searchInput = document.getElementById('searchInput');
+      let debounceTimer;
+
+      searchInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          renderTable(currentTab, searchInput.value);
+        }, 300);
+      });
+    }
+
+    // Confirmar doacao
+    async function confirmDonation(id) {
+      if (!confirm('Confirmar esta destinacao?')) return;
+
+      try {
+        const token = auth.getToken();
+        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}/confirm`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) throw new Error('Erro ao confirmar');
+
+        showToast('Destinacao confirmada com sucesso!', 'success');
+
+        // Recarregar dados
+        await loadStats();
+        donations.pending = [];
+        donations.confirmed = [];
+        await loadDonations('pending');
+
+      } catch (error) {
+        showToast('Erro ao confirmar destinacao.', 'error');
+        console.error(error);
+      }
+    }
+
+    // Modal de rejeicao
+    function showRejectModal(id) {
+      const modal = document.getElementById('modal');
+      document.getElementById('modalTitle').innerHTML = '<i class="fas fa-times-circle" style="color: var(--danger-color)"></i> Recusar Destinacao';
+      document.getElementById('modalBody').innerHTML = `
+        <div class="detail-item">
+          <label>Motivo da recusa (opcional)</label>
+          <textarea class="reason-input" id="rejectReason" placeholder="Informe o motivo da recusa..."></textarea>
+        </div>
+      `;
+      document.getElementById('modalFooter').innerHTML = `
+        <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" style="background: var(--danger-color)" onclick="rejectDonation('${id}')">
+          <i class="fas fa-times"></i> Confirmar Recusa
+        </button>
+      `;
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    // Recusar doacao
+    async function rejectDonation(id) {
+      const reason = document.getElementById('rejectReason').value;
+
+      try {
+        const token = auth.getToken();
+        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}/reject`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ reason })
+        });
+
+        if (!response.ok) throw new Error('Erro ao recusar');
+
+        closeModal();
+        showToast('Destinacao recusada.', 'success');
+
+        // Recarregar dados
+        await loadStats();
+        donations.pending = [];
+        donations.rejected = [];
+        await loadDonations('pending');
+
+      } catch (error) {
+        showToast('Erro ao recusar destinacao.', 'error');
+        console.error(error);
+      }
+    }
+
+    // Modal de upload
+    function showUploadModal(id) {
+      document.getElementById('modalTitle').innerHTML = '<i class="fas fa-upload" style="color: var(--info-color)"></i> Upload de Recibo';
+      document.getElementById('modalBody').innerHTML = `
+        <div class="file-upload-area" id="uploadArea" onclick="document.getElementById('receiptFile').click()">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Clique ou arraste o arquivo do recibo</p>
+          <p style="font-size: 12px; color: var(--text-muted)">PDF, JPG ou PNG (max 5MB)</p>
+          <input type="file" id="receiptFile" accept=".pdf,.jpg,.jpeg,.png" style="display: none" onchange="handleFileSelect(this)">
+          <div class="file-name" id="fileName" style="display: none"></div>
+        </div>
+      `;
+      document.getElementById('modalFooter').innerHTML = `
+        <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" id="uploadBtn" onclick="uploadReceipt('${id}')" disabled>
+          <i class="fas fa-upload"></i> Enviar Recibo
+        </button>
+      `;
+      document.getElementById('modalOverlay').classList.add('active');
+
+      // Setup drag and drop
+      const uploadArea = document.getElementById('uploadArea');
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+      });
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+      });
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file) {
+          document.getElementById('receiptFile').files = e.dataTransfer.files;
+          handleFileSelect(document.getElementById('receiptFile'));
+        }
+      });
+    }
+
+    // Handle file select
+    function handleFileSelect(input) {
+      const file = input.files[0];
+      if (file) {
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('fileName').style.display = 'block';
+        document.getElementById('uploadBtn').disabled = false;
+      }
+    }
+
+    // Upload recibo
+    async function uploadReceipt(id) {
+      const fileInput = document.getElementById('receiptFile');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        showToast('Selecione um arquivo', 'error');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('receipt', file);
+
+      try {
+        const token = auth.getToken();
+        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}/upload-receipt`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Erro ao enviar');
+
+        closeModal();
+        showToast('Recibo enviado com sucesso!', 'success');
+
+        // Recarregar dados
+        donations.confirmed = [];
+        await loadDonations('confirmed');
+
+      } catch (error) {
+        showToast('Erro ao enviar recibo.', 'error');
+        console.error(error);
+      }
+    }
+
+    // Mostrar detalhes
+    async function showDetails(id) {
+      document.getElementById('modalTitle').innerHTML = '<i class="fas fa-info-circle"></i> Detalhes da Destinacao';
+      document.getElementById('modalBody').innerHTML = '<div class="loading-state"><div class="spinner"></div></div>';
+      document.getElementById('modalFooter').innerHTML = '<button class="btn btn-outline" onclick="closeModal()">Fechar</button>';
+      document.getElementById('modalOverlay').classList.add('active');
+
+      try {
+        const token = auth.getToken();
+        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!response.ok) throw new Error('Erro ao carregar');
+
+        const data = await response.json();
+        const d = data.donation;
+
+        document.getElementById('modalBody').innerHTML = `
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Contribuinte</label>
+              <div class="value">${d.user.name}</div>
+            </div>
+            <div class="detail-item">
+              <label>CPF</label>
+              <div class="value">${d.user.cpf_masked}</div>
+            </div>
+            <div class="detail-item">
+              <label>Email</label>
+              <div class="value">${d.user.email}</div>
+            </div>
+            <div class="detail-item">
+              <label>Telefone</label>
+              <div class="value">${d.user.phone || '-'}</div>
+            </div>
+          </div>
+          <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border-color)">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Projeto</label>
+              <div class="value">${d.project.title || '-'}</div>
+            </div>
+            <div class="detail-item">
+              <label>Fundo</label>
+              <div class="value">${d.fund.name || '-'}</div>
+            </div>
+            <div class="detail-item">
+              <label>Valor da Destinacao</label>
+              <div class="value" style="color: var(--success-color); font-weight: 600">${formatCurrency(d.donation_amount)}</div>
+            </div>
+            <div class="detail-item">
+              <label>% do IR</label>
+              <div class="value">${d.percentage}%</div>
+            </div>
+            <div class="detail-item">
+              <label>IR Total</label>
+              <div class="value">${formatCurrency(d.ir_total)}</div>
+            </div>
+            <div class="detail-item">
+              <label>Ano Fiscal</label>
+              <div class="value">${d.fiscal_year}</div>
+            </div>
+          </div>
+          <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border-color)">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <label>Data de Criacao</label>
+              <div class="value">${formatDateTime(d.created_at)}</div>
+            </div>
+            <div class="detail-item">
+              <label>Status</label>
+              <div class="value">
+                <span class="status-badge ${d.status}">
+                  ${d.status === 'pending' ? 'Pendente' : d.status === 'confirmed' ? 'Confirmada' : 'Recusada'}
+                </span>
+              </div>
+            </div>
+          </div>
+          ${d.fund.bank_code ? `
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border-color)">
+            <div class="detail-item">
+              <label>Dados Bancarios do Fundo</label>
+              <div class="value">
+                Banco: ${d.fund.bank_code} | Agencia: ${d.fund.agency} | Conta: ${d.fund.account}<br>
+                CNPJ: ${d.fund.cnpj || '-'}
+              </div>
+            </div>
+          ` : ''}
+        `;
+
+      } catch (error) {
+        document.getElementById('modalBody').innerHTML = '<div class="empty-state"><p>Erro ao carregar detalhes</p></div>';
+        console.error(error);
+      }
+    }
+
+    // Fechar modal
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    // Fechar modal ao clicar fora
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modalOverlay')) {
+        closeModal();
+      }
+    });
+
+    // Utilitarios
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(value || 0);
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('pt-BR');
+    }
+
+    function formatDateTime(dateStr) {
+      if (!dateStr) return '-';
+      const date = new Date(dateStr);
+      return date.toLocaleString('pt-BR');
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'slideIn 0.3s ease reverse';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

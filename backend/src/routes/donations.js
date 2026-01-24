@@ -1,6 +1,7 @@
 import express from 'express';
 import pool from '../../config/database.js';
 import { authenticateToken } from '../middleware/auth.js';
+import { gerarComprovante } from '../services/pdfGenerator.js';
 
 const router = express.Router();
 
@@ -211,6 +212,7 @@ router.get('/', authenticateToken, async (req, res) => {
         d.fiscal_year,
         d.status,
         d.created_at,
+        d.receipt_file_path,
         p.id AS project_id,
         p.code AS project_code,
         p.title AS project_title,
@@ -255,6 +257,7 @@ router.get('/', authenticateToken, async (req, res) => {
         fiscal_year: d.fiscal_year,
         status: d.status,
         created_at: d.created_at,
+        receipt_file_path: d.receipt_file_path,
         project: {
           id: d.project_id,
           code: d.project_code,
@@ -361,6 +364,109 @@ router.get('/:id', authenticateToken, async (req, res) => {
     res.status(500).json({
       status: 'error',
       message: 'Erro interno ao buscar doação.'
+    });
+  }
+});
+
+// GET /api/donations/:id/comprovante - Gerar PDF do comprovante
+router.get('/:id/comprovante', authenticateToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    if (!isValidUUID(id)) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'ID inválido.'
+      });
+    }
+
+    // Buscar doação com todos os dados necessários
+    const result = await pool.query(`
+      SELECT
+        d.*,
+        u.nome as user_nome,
+        u.cpf as user_cpf,
+        u.email as user_email,
+        p.title as project_title,
+        p.code as project_code,
+        f.name as fund_name,
+        f.code as fund_code,
+        f.cnpj as fund_cnpj,
+        f.bank_code,
+        f.agency,
+        f.account
+      FROM donations d
+      LEFT JOIN users u ON d.user_id = u.id
+      LEFT JOIN projects p ON d.project_id = p.id
+      LEFT JOIN official_funds f ON d.official_fund_id = f.id
+      WHERE d.id = $1 AND d.user_id = $2
+    `, [id, userId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Destinação não encontrada.'
+      });
+    }
+
+    const row = result.rows[0];
+
+    // Verificar se está confirmada
+    if (row.status !== 'confirmed') {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Comprovante disponível apenas para destinações confirmadas.'
+      });
+    }
+
+    // Preparar dados para o PDF
+    const donation = {
+      id: row.id,
+      donation_amount: parseFloat(row.donation_amount),
+      ir_total: parseFloat(row.ir_total),
+      fiscal_year: row.fiscal_year,
+      created_at: row.created_at,
+      confirmed_at: row.confirmed_at
+    };
+
+    const user = {
+      nome: row.user_nome,
+      cpf: row.user_cpf,
+      email: row.user_email
+    };
+
+    const project = {
+      title: row.project_title,
+      code: row.project_code
+    };
+
+    const fund = {
+      name: row.fund_name,
+      code: row.fund_code,
+      cnpj: row.fund_cnpj,
+      bank_code: row.bank_code,
+      agency: row.agency,
+      account: row.account
+    };
+
+    // Gerar PDF
+    const doc = gerarComprovante(donation, user, project, fund);
+
+    // Configurar headers para download
+    const fileName = `comprovante-${id.substring(0, 8)}.pdf`;
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+
+    // Enviar PDF
+    doc.pipe(res);
+    doc.end();
+
+  } catch (error) {
+    console.error('Erro ao gerar comprovante:', error.message);
+    res.status(500).json({
+      status: 'error',
+      message: 'Erro interno ao gerar comprovante.'
     });
   }
 });

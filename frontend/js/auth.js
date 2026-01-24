@@ -53,12 +53,12 @@ const auth = {
     this.clearToken();
     this.clearUser();
     this.clearIRData();
-    window.location.href = '/frontend/login.html';
+    window.location.href = 'login.html';
   },
 
   requireAuth() {
     if (!this.isLoggedIn()) {
-      window.location.href = '/frontend/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+      window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.pathname);
       return false;
     }
     return true;

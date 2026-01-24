@@ -25,13 +25,21 @@ function cleanCPF(cpf) {
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
-    const { cpf, nome, email, phone, senha, jurisdiction_id } = req.body;
+    const { cpf, nome, email, phone, senha, jurisdiction_id, accepted_terms } = req.body;
 
     // Validações
     if (!cpf || !nome || !email || !senha) {
       return res.status(400).json({
         status: 'error',
         message: 'Campos obrigatórios: cpf, nome, email, senha'
+      });
+    }
+
+    // Validar aceite dos termos
+    if (!accepted_terms) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Você deve aceitar a Política de Privacidade e os Termos de Uso para se cadastrar.'
       });
     }
 
@@ -94,10 +102,10 @@ router.post('/register', async (req, res) => {
     // Hash da senha
     const senhaHash = await bcrypt.hash(senha, 10);
 
-    // Inserir usuário
+    // Inserir usuário com aceite dos termos
     const result = await pool.query(
-      `INSERT INTO users (cpf, nome, email, phone, senha_hash, jurisdiction_id)
-       VALUES ($1, $2, $3, $4, $5, $6)
+      `INSERT INTO users (cpf, nome, email, phone, senha_hash, jurisdiction_id, accepted_terms_at, accepted_terms_version)
+       VALUES ($1, $2, $3, $4, $5, $6, NOW(), '1.0')
        RETURNING id, nome, email, cpf, created_at`,
       [cleanedCPF, nome, email.toLowerCase(), phone || null, senhaHash, jurisdiction_id || null]
     );

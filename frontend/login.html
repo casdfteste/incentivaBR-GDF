@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrar - IncentivaBR</title>
   <meta name="description" content="Entre na sua conta IncentivaBR.">
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -226,8 +226,10 @@
 <body>
   <div class="login-container">
     <div class="login-header">
-      <img src="assets/logo-icon.svg" alt="IncentivaBR">
-      <h1>IncentivaBR</h1>
+      <div class="logo-incentivabr logo-white logo-lg" style="justify-content: center; margin-bottom: 8px;">
+        <span class="logo-icon">💚</span>
+        <span class="logo-text">Incentiva<span class="highlight">BR</span></span>
+      </div>
       <p>Transforme seu imposto em impacto social</p>
     </div>
 
@@ -304,6 +306,19 @@
           <span class="error-message">Senhas nao conferem</span>
         </div>
 
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; font-weight: 400;">
+            <input type="checkbox" id="regTerms" style="margin-top: 4px; width: 18px; height: 18px; cursor: pointer;">
+            <span style="font-size: 13px; line-height: 1.5;">
+              Li e aceito a
+              <a href="politica-privacidade.html" target="_blank" style="color: var(--primary-color);">Politica de Privacidade</a>
+              e os
+              <a href="termos-uso.html" target="_blank" style="color: var(--primary-color);">Termos de Uso</a> *
+            </span>
+          </label>
+          <span class="error-message" id="termsError" style="display: none;">Voce deve aceitar os termos para continuar</span>
+        </div>
+
         <button type="submit" class="btn btn-primary" style="width:100%" id="registerBtn">
           <span>Criar conta</span>
         </button>
@@ -312,6 +327,11 @@
       <a href="index.html" class="back-link">
         <i class="fas fa-arrow-left"></i> Voltar para o inicio
       </a>
+
+      <div style="margin-top: 24px; text-align: center; font-size: 12px; color: var(--text-muted);">
+        <a href="politica-privacidade.html" style="color: var(--text-secondary);">Politica de Privacidade</a> |
+        <a href="termos-uso.html" style="color: var(--text-secondary);">Termos de Uso</a>
+      </div>
     </div>
   </div>
 
@@ -430,6 +450,7 @@
       const phone = document.getElementById('regPhone').value.replace(/\D/g, '');
       const senha = document.getElementById('regSenha').value;
       const senhaConfirm = document.getElementById('regSenhaConfirm').value;
+      const acceptedTerms = document.getElementById('regTerms').checked;
       const btn = document.getElementById('registerBtn');
 
       // Validacoes
@@ -458,10 +479,17 @@
         return;
       }
 
+      if (!acceptedTerms) {
+        showAlert('Voce deve aceitar a Politica de Privacidade e os Termos de Uso');
+        document.getElementById('termsError').style.display = 'block';
+        return;
+      }
+      document.getElementById('termsError').style.display = 'none';
+
       setLoading(btn, true);
 
       try {
-        await api.register({ nome, cpf, email, phone, senha });
+        await api.register({ nome, cpf, email, phone, senha, accepted_terms: true });
 
         showAlert('Conta criada com sucesso! Faca login.', 'success');
 

@@ -15,6 +15,7 @@ import organizationsRoutes from './src/routes/organizations.js';
 import calculatorRoutes from './src/routes/calculator.js';
 import donationsRoutes from './src/routes/donations.js';
 import uploadsRoutes from './src/routes/uploads.js';
+import adminRoutes from './src/routes/admin.js';
 
 dotenv.config();
 
@@ -66,6 +67,7 @@ app.use('/api/organizations', organizationsRoutes);
 app.use('/api/calculator', calculatorRoutes);
 app.use('/api/donations', donationsRoutes);
 app.use('/api/uploads', uploadsRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Servir arquivos de upload
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

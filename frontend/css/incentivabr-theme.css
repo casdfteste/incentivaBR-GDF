@@ -1188,3 +1188,57 @@ textarea:focus {
 .skip-link:focus {
   top: 0;
 }
+
+/* ========================================
+   LOGO INCENTIVABR - Componente Padrao
+   ======================================== */
+.logo-incentivabr {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: var(--font-family);
+}
+
+.logo-incentivabr .logo-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.logo-incentivabr .logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+}
+
+.logo-incentivabr .logo-text .highlight {
+  color: var(--secondary-color);
+}
+
+/* Variante branca (para fundos escuros) */
+.logo-incentivabr.logo-white .logo-text {
+  color: white;
+}
+
+.logo-incentivabr.logo-white .logo-text .highlight {
+  color: var(--secondary-color);
+}
+
+/* Variante pequena */
+.logo-incentivabr.logo-sm .logo-icon {
+  font-size: 22px;
+}
+
+.logo-incentivabr.logo-sm .logo-text {
+  font-size: 18px;
+}
+
+/* Variante grande */
+.logo-incentivabr.logo-lg .logo-icon {
+  font-size: 36px;
+}
+
+.logo-incentivabr.logo-lg .logo-text {
+  font-size: 28px;
+}
