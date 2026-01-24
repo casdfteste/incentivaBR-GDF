@@ -875,7 +875,7 @@
               <i class="fas fa-check-circle"></i> IR Calculado: <strong>${utils.formatCurrency(irDevido)}</strong>
             </p>
             <p style="color: #00A859; margin: 4px 0 0 0; font-size: 13px;">
-              Limite para destinar: <strong>${utils.formatCurrency(limiteMaximo)}</strong> (9%)
+              Limite para destinar: <strong>${utils.formatCurrency(limiteMaximo)}</strong> (${typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9}%)
             </p>
           </div>
 
@@ -960,7 +960,7 @@
         document.getElementById('modalBody').innerHTML = `
           <div class="info-box">
             <p><strong>Seu IR devido:</strong> ${utils.formatCurrency(irData.ir_devido)}</p>
-            <p><strong>Limite maximo (9%):</strong> ${utils.formatCurrency(maxDonation)}</p>
+            <p><strong>Limite maximo (${typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9}%):</strong> ${utils.formatCurrency(maxDonation)}</p>
           </div>
 
           <form id="donateForm">
@@ -1026,9 +1026,10 @@
           return;
         }
 
-        const limiteMaximo = irDevido * 0.09;
+        const maxPercent = typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9;
+        const limiteMaximo = irDevido * (maxPercent / 100);
         if (amount > limiteMaximo) {
-          utils.showToast(`Valor máximo: ${utils.formatCurrency(limiteMaximo)} (9% do IR)`, 'warning');
+          utils.showToast(`Valor máximo: ${utils.formatCurrency(limiteMaximo)} (${maxPercent}% do IR)`, 'warning');
           return;
         }
 
