@@ -16,12 +16,77 @@ const TABELA_IR_2026 = [
 const DEDUCAO_DEPENDENTE = 2275.08;
 const DEDUCAO_EDUCACAO_MAX = 3561.50;
 
-// Limites de destinação por grupo (% do IR devido)
+// Limites de destinação por grupo (% do IR devido) - valores padrão
 const LIMITE_GRUPO_1_SEM_ESPORTE = 0.06; // 6% - FDI + FDCA
 const LIMITE_GRUPO_1_COM_ESPORTE = 0.07; // 7% - com esporte
 const LIMITE_PRONON = 0.01; // 1%
 const LIMITE_PRONAS = 0.01; // 1%
 const LIMITE_TOTAL_MAXIMO = 0.09; // 9% total
+
+/**
+ * Obtém limite máximo baseado na organização/tenant
+ * Se organização específica, usa seu max_percentage
+ * Se www (geral), usa o total máximo padrão
+ */
+function getOrganizationLimits(org) {
+  if (!org || org.slug === 'www') {
+    return {
+      grupo_1_sem_esporte: LIMITE_GRUPO_1_SEM_ESPORTE,
+      grupo_1_com_esporte: LIMITE_GRUPO_1_COM_ESPORTE,
+      pronon: LIMITE_PRONON,
+      pronas_pcd: LIMITE_PRONAS,
+      total_maximo: LIMITE_TOTAL_MAXIMO
+    };
+  }
+
+  // Organização específica - usar max_percentage dela
+  const maxPercent = parseFloat(org.max_percentage) / 100 || 0.06;
+
+  // Ajustar limites baseado no tipo de fundo da organização
+  switch (org.fund_type) {
+    case 'fia':
+    case 'fdi':
+      return {
+        grupo_1_sem_esporte: maxPercent,
+        grupo_1_com_esporte: maxPercent,
+        pronon: 0,
+        pronas_pcd: 0,
+        total_maximo: maxPercent
+      };
+    case 'esporte':
+      return {
+        grupo_1_sem_esporte: 0.06,
+        grupo_1_com_esporte: maxPercent,
+        pronon: 0,
+        pronas_pcd: 0,
+        total_maximo: maxPercent
+      };
+    case 'pronon':
+      return {
+        grupo_1_sem_esporte: 0,
+        grupo_1_com_esporte: 0,
+        pronon: maxPercent,
+        pronas_pcd: 0,
+        total_maximo: maxPercent
+      };
+    case 'pronas':
+      return {
+        grupo_1_sem_esporte: 0,
+        grupo_1_com_esporte: 0,
+        pronon: 0,
+        pronas_pcd: maxPercent,
+        total_maximo: maxPercent
+      };
+    default:
+      return {
+        grupo_1_sem_esporte: Math.min(maxPercent, LIMITE_GRUPO_1_SEM_ESPORTE),
+        grupo_1_com_esporte: Math.min(maxPercent, LIMITE_GRUPO_1_COM_ESPORTE),
+        pronon: Math.min(maxPercent, LIMITE_PRONON),
+        pronas_pcd: Math.min(maxPercent, LIMITE_PRONAS),
+        total_maximo: maxPercent
+      };
+  }
+}
 
 function calcularIRDevido(baseCalculo) {
   for (const faixa of TABELA_IR_2026) {
@@ -102,13 +167,16 @@ router.post('/ir', async (req, res) => {
       ? Math.round((ir_devido / rendimentosTotal) * 10000) / 100
       : 0;
 
+    // Obter limites baseado na organização/tenant
+    const limites = getOrganizationLimits(req.organization);
+
     // Calcular limites de doação (sempre disponível - declaração completa)
     const limitesDoacao = {
-      grupo_1_sem_esporte: Math.round(ir_devido * LIMITE_GRUPO_1_SEM_ESPORTE * 100) / 100,
-      grupo_1_com_esporte: Math.round(ir_devido * LIMITE_GRUPO_1_COM_ESPORTE * 100) / 100,
-      pronon: Math.round(ir_devido * LIMITE_PRONON * 100) / 100,
-      pronas_pcd: Math.round(ir_devido * LIMITE_PRONAS * 100) / 100,
-      total_maximo: Math.round(ir_devido * LIMITE_TOTAL_MAXIMO * 100) / 100
+      grupo_1_sem_esporte: Math.round(ir_devido * limites.grupo_1_sem_esporte * 100) / 100,
+      grupo_1_com_esporte: Math.round(ir_devido * limites.grupo_1_com_esporte * 100) / 100,
+      pronon: Math.round(ir_devido * limites.pronon * 100) / 100,
+      pronas_pcd: Math.round(ir_devido * limites.pronas_pcd * 100) / 100,
+      total_maximo: Math.round(ir_devido * limites.total_maximo * 100) / 100
     };
 
     res.json({
@@ -123,7 +191,13 @@ router.post('/ir', async (req, res) => {
       ir_devido,
       aliquota_nominal: aliquota * 100,
       aliquota_efetiva: aliquotaEfetiva,
-      limites_doacao: limitesDoacao
+      limites_doacao: limitesDoacao,
+      organization: req.organization ? {
+        name: req.organization.name,
+        slug: req.organization.slug,
+        fund_type: req.organization.fund_type,
+        max_percentage: parseFloat(req.organization.max_percentage) || 6
+      } : null
     });
 
   } catch (error) {
@@ -155,13 +229,16 @@ router.post('/limites-rapido', async (req, res) => {
       });
     }
 
+    // Obter limites baseado na organização/tenant
+    const limites = getOrganizationLimits(req.organization);
+
     // Calcular limites baseado no IR informado
     const limitesDoacao = {
-      grupo_1_sem_esporte: Math.round(ir_devido * LIMITE_GRUPO_1_SEM_ESPORTE * 100) / 100,
-      grupo_1_com_esporte: Math.round(ir_devido * LIMITE_GRUPO_1_COM_ESPORTE * 100) / 100,
-      pronon: Math.round(ir_devido * LIMITE_PRONON * 100) / 100,
-      pronas_pcd: Math.round(ir_devido * LIMITE_PRONAS * 100) / 100,
-      total_maximo: Math.round(ir_devido * LIMITE_TOTAL_MAXIMO * 100) / 100
+      grupo_1_sem_esporte: Math.round(ir_devido * limites.grupo_1_sem_esporte * 100) / 100,
+      grupo_1_com_esporte: Math.round(ir_devido * limites.grupo_1_com_esporte * 100) / 100,
+      pronon: Math.round(ir_devido * limites.pronon * 100) / 100,
+      pronas_pcd: Math.round(ir_devido * limites.pronas_pcd * 100) / 100,
+      total_maximo: Math.round(ir_devido * limites.total_maximo * 100) / 100
     };
 
     res.json({
@@ -171,7 +248,13 @@ router.post('/limites-rapido', async (req, res) => {
       ir_devido: Math.round(ir_devido * 100) / 100,
       tipo_declaracao: 'completa',
       pode_destinar: true,
-      limites_doacao: limitesDoacao
+      limites_doacao: limitesDoacao,
+      organization: req.organization ? {
+        name: req.organization.name,
+        slug: req.organization.slug,
+        fund_type: req.organization.fund_type,
+        max_percentage: parseFloat(req.organization.max_percentage) || 6
+      } : null
     });
 
   } catch (error) {

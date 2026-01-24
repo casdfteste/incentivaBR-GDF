@@ -1168,16 +1168,20 @@
             const proj = data.project;
             dadosDoacaoAtual.projeto = proj;
 
+            // Usar dados bancarios do projeto, ou fallback para organizacao
+            const org = typeof tenant !== 'undefined' ? tenant.getBankData() : null;
+            const bankData = proj.pix_key ? proj : (org || proj);
+
             // Preencher modal
             document.getElementById('modal-valor-doacao').textContent =
               'R$ ' + dadosDoacaoAtual.valor.toLocaleString('pt-BR', {minimumFractionDigits: 2});
             document.getElementById('modal-projeto-nome').textContent = proj.title;
-            document.getElementById('modal-beneficiary-name').textContent = proj.beneficiary_name || 'Fundo de Incentivo Fiscal';
-            document.getElementById('modal-beneficiary-cnpj').textContent = proj.beneficiary_cnpj || '-';
-            document.getElementById('modal-bank-name').textContent = proj.bank_name || '-';
-            document.getElementById('modal-bank-agency').textContent = proj.bank_agency || '-';
-            document.getElementById('modal-bank-account').textContent = proj.bank_account || '-';
-            document.getElementById('modal-pix-key').textContent = proj.pix_key || '-';
+            document.getElementById('modal-beneficiary-name').textContent = bankData.beneficiary_name || proj.beneficiary_name || 'Fundo de Incentivo Fiscal';
+            document.getElementById('modal-beneficiary-cnpj').textContent = bankData.beneficiary_cnpj || proj.beneficiary_cnpj || '-';
+            document.getElementById('modal-bank-name').textContent = bankData.bank_name || proj.bank_name || '-';
+            document.getElementById('modal-bank-agency').textContent = bankData.bank_agency || proj.bank_agency || '-';
+            document.getElementById('modal-bank-account').textContent = bankData.bank_account || proj.bank_account || '-';
+            document.getElementById('modal-pix-key').textContent = bankData.pix_key || proj.pix_key || '-';
 
             // Mostrar modal
             document.getElementById('modal-doacao').style.display = 'flex';
@@ -1307,6 +1311,7 @@
     // Init
     loadProject();
   </script>
+  <script src="js/tenant.js"></script>
 </body>
 </html>
 
