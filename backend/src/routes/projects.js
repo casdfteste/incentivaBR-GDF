@@ -58,6 +58,12 @@ router.get('/', async (req, res) => {
       whereConditions.push(`p.is_featured = true`);
     }
 
+    // Filtrar por organização/tenant (se não for 'www', mostrar apenas projetos dessa org)
+    if (req.organization && req.organization.slug !== 'www') {
+      whereConditions.push(`p.organization_id = $${paramIndex++}`);
+      params.push(req.organization.id);
+    }
+
     const whereClause = whereConditions.length > 0
       ? 'WHERE ' + whereConditions.join(' AND ')
       : '';

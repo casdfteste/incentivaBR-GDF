@@ -16,6 +16,8 @@ import calculatorRoutes from './src/routes/calculator.js';
 import donationsRoutes from './src/routes/donations.js';
 import uploadsRoutes from './src/routes/uploads.js';
 import adminRoutes from './src/routes/admin.js';
+import configRoutes from './src/routes/config.js';
+import tenantMiddleware from './src/middleware/tenant.js';
 
 dotenv.config();
 
@@ -25,6 +27,9 @@ const PORT = process.env.PORT || 3000;
 // Middlewares
 app.use(cors());
 app.use(express.json());
+
+// Multi-tenant middleware (detecta organização pelo subdomínio/query param)
+app.use(tenantMiddleware);
 
 // Servir arquivos estáticos do frontend
 const frontendPath = path.join(__dirname, '../frontend');
@@ -68,6 +73,7 @@ app.use('/api/calculator', calculatorRoutes);
 app.use('/api/donations', donationsRoutes);
 app.use('/api/uploads', uploadsRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/config', configRoutes);
 
 // Servir arquivos de upload
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
