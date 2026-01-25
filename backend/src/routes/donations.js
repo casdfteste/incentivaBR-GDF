@@ -2,6 +2,7 @@ import express from 'express';
 import pool from '../../config/database.js';
 import { authenticateToken } from '../middleware/auth.js';
 import { gerarComprovante } from '../services/pdfGenerator.js';
+import { notifyDestinationRegistered, notifyAdminNewDonation } from '../services/notificationService.js';
 
 const router = express.Router();
 
@@ -144,6 +145,50 @@ router.post('/', authenticateToken, async (req, res) => {
 
     // Commit da transação
     await client.query('COMMIT');
+
+    // Buscar dados do usuário para notificações
+    const userResult = await pool.query(
+      'SELECT nome, email, phone FROM users WHERE id = $1',
+      [userId]
+    );
+    const user = userResult.rows[0];
+
+    // Enviar notificações para o usuário (email + WhatsApp) - não bloqueia a resposta
+    if (user) {
+      notifyDestinationRegistered(
+        { name: user.nome, email: user.email, phone: user.phone },
+        { amount: donation_amount },
+        { title: project.title },
+        req.organization
+      ).catch(err => console.error('Erro ao enviar notificações de destinação registrada:', err.message));
+
+      // Notificar admin da organização (se tiver contato configurado)
+      if (req.organization?.contact_email || req.organization?.contact_phone) {
+        notifyAdminNewDonation(
+          req.organization.contact_email,
+          req.organization.contact_phone,
+          { name: user.nome, email: user.email },
+          { amount: donation_amount },
+          { title: project.title },
+          req.organization
+        ).catch(err => console.error('Erro ao notificar admin da organização:', err.message));
+      }
+
+      // Buscar admins do sistema para notificar
+      const adminsResult = await pool.query(
+        'SELECT email, phone FROM users WHERE is_admin = true'
+      );
+      for (const admin of adminsResult.rows) {
+        notifyAdminNewDonation(
+          admin.email,
+          admin.phone,
+          { name: user.nome, email: user.email },
+          { amount: donation_amount },
+          { title: project.title },
+          req.organization
+        ).catch(err => console.error('Erro ao notificar admin:', err.message));
+      }
+    }
 
     res.status(201).json({
       status: 'success',

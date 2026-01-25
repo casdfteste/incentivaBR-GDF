@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import pool from '../../config/database.js';
 import { authenticateToken } from '../middleware/auth.js';
+import { notifyWelcome } from '../services/notificationService.js';
 
 const router = express.Router();
 
@@ -111,6 +112,14 @@ router.post('/register', async (req, res) => {
     );
 
     const user = result.rows[0];
+
+    // Buscar telefone do usuário para notificação
+    const phoneResult = await pool.query('SELECT phone FROM users WHERE id = $1', [user.id]);
+    const userPhone = phoneResult.rows[0]?.phone;
+
+    // Enviar notificações (email + WhatsApp) - não bloqueia o registro
+    notifyWelcome({ name: user.nome, email: user.email, phone: userPhone })
+      .catch(err => console.error('Erro ao enviar notificações de boas-vindas:', err.message));
 
     res.status(201).json({
       status: 'success',

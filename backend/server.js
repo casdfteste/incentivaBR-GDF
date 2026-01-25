@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pool, { testConnection } from './config/database.js';
+import { initEmailService } from './src/services/emailService.js';
 
 // ES modules: criar __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -107,4 +108,7 @@ app.listen(PORT, async () => {
 
   // Testar conexão com banco na inicialização
   await testConnection();
+
+  // Inicializar serviço de email
+  initEmailService().catch(err => console.error('Erro ao inicializar email:', err));
 });

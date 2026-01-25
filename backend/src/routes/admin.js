@@ -5,6 +5,7 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import { notifyDestinationConfirmed } from '../services/notificationService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -394,7 +395,7 @@ router.put('/donations/:id/confirm', authenticateToken, isAdmin, async (req, res
 
     // Verificar se a doação existe e está pendente
     const checkResult = await pool.query(
-      'SELECT id, status FROM donations WHERE id = $1',
+      'SELECT id, status, user_id, donation_amount, project_id FROM donations WHERE id = $1',
       [id]
     );
 
@@ -412,6 +413,8 @@ router.put('/donations/:id/confirm', authenticateToken, isAdmin, async (req, res
       });
     }
 
+    const donationData = checkResult.rows[0];
+
     // Confirmar a doação
     const result = await pool.query(`
       UPDATE donations
@@ -419,6 +422,29 @@ router.put('/donations/:id/confirm', authenticateToken, isAdmin, async (req, res
       WHERE id = $1
       RETURNING id, status, confirmed_at
     `, [id]);
+
+    // Buscar dados do usuário e projeto para notificações
+    const userResult = await pool.query(
+      'SELECT nome, email, phone FROM users WHERE id = $1',
+      [donationData.user_id]
+    );
+    const projectResult = await pool.query(
+      'SELECT title FROM projects WHERE id = $1',
+      [donationData.project_id]
+    );
+
+    const user = userResult.rows[0];
+    const project = projectResult.rows[0];
+
+    // Enviar notificações de confirmação (email + WhatsApp) - não bloqueia a resposta
+    if (user && project) {
+      notifyDestinationConfirmed(
+        { name: user.nome, email: user.email, phone: user.phone },
+        { amount: donationData.donation_amount },
+        { title: project.title },
+        req.organization
+      ).catch(err => console.error('Erro ao enviar notificações de confirmação:', err.message));
+    }
 
     res.json({
       status: 'success',
