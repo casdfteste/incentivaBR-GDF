@@ -1,27 +1,50 @@
 import nodemailer from 'nodemailer';
 
-// Configuração do transporter (usando Ethereal para testes)
-// Em produção, trocar para SendGrid, AWS SES, ou Gmail
+// Configuração do transporter
+// Produção: usa SMTP configurado no .env (Locaweb, SendGrid, AWS SES, etc.)
+// Desenvolvimento: usa Ethereal (emails fake para testes)
 let transporter;
 
 export async function initEmailService() {
-  // Para desenvolvimento/testes: usar Ethereal (emails fake)
-  const testAccount = await nodemailer.createTestAccount();
+  // Se tiver configuração SMTP no .env, usar produção
+  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+    transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT) || 465,
+      secure: process.env.SMTP_SECURE === 'true',
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
+      }
+    });
 
-  transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    secure: false,
-    auth: {
-      user: testAccount.user,
-      pass: testAccount.pass
-    }
-  });
+    console.log('📧 Serviço de email inicializado (PRODUÇÃO)');
+    console.log('📧 SMTP:', process.env.SMTP_HOST);
+    console.log('📧 Usuário:', process.env.SMTP_USER);
+  } else {
+    // Modo desenvolvimento/testes: usar Ethereal (emails fake)
+    const testAccount = await nodemailer.createTestAccount();
 
-  console.log('📧 Serviço de email inicializado (modo teste)');
-  console.log('📧 Usuário Ethereal:', testAccount.user);
+    transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      secure: false,
+      auth: {
+        user: testAccount.user,
+        pass: testAccount.pass
+      }
+    });
+
+    console.log('📧 Serviço de email inicializado (TESTE - Ethereal)');
+    console.log('📧 Usuário Ethereal:', testAccount.user);
+    console.log('📧 Para ver emails enviados, acesse: https://ethereal.email');
+  }
+
   return transporter;
 }
+
+// Remetente padrão
+const getFromAddress = () => process.env.SMTP_FROM || '"IncentivaBR" <noreply@incentivabr.com.br>';
 
 // Template base do email
 function getEmailTemplate(content, org = null) {
@@ -86,7 +109,7 @@ export async function sendWelcomeEmail(user, org = null) {
   `;
 
   const info = await transporter.sendMail({
-    from: '"IncentivaBR" <noreply@incentivabr.com.br>',
+    from: getFromAddress(),
     to: user.email,
     subject: 'Bem-vindo ao IncentivaBR! 🎉',
     html: getEmailTemplate(content, org)
@@ -121,7 +144,7 @@ export async function sendDestinationRegisteredEmail(user, donation, project, or
   `;
 
   const info = await transporter.sendMail({
-    from: '"IncentivaBR" <noreply@incentivabr.com.br>',
+    from: getFromAddress(),
     to: user.email,
     subject: `Destinação registrada - ${project.title}`,
     html: getEmailTemplate(content, org)
@@ -163,7 +186,7 @@ export async function sendDestinationConfirmedEmail(user, donation, project, org
   `;
 
   const info = await transporter.sendMail({
-    from: '"IncentivaBR" <noreply@incentivabr.com.br>',
+    from: getFromAddress(),
     to: user.email,
     subject: `✅ Destinação confirmada - ${project.title}`,
     html: getEmailTemplate(content, org)
@@ -198,7 +221,7 @@ export async function sendNewDonationToAdminEmail(adminEmail, user, donation, pr
   `;
 
   const info = await transporter.sendMail({
-    from: '"IncentivaBR" <noreply@incentivabr.com.br>',
+    from: getFromAddress(),
     to: adminEmail,
     subject: `🔔 Nova destinação pendente - ${valor}`,
     html: getEmailTemplate(content, org)
