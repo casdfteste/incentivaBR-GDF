@@ -158,15 +158,55 @@ O **INCENTIVABR** é a única plataforma desenvolvida especialmente para **servi
 
 ---
 
+## 🆕 **Novas Funcionalidades (Janeiro/2026)**
+
+### 🔔 Sistema de Notificações
+- **Email automático** - Boas-vindas, destinação registrada, confirmação (Nodemailer)
+- **WhatsApp** - Notificações via links wa.me com mensagens formatadas
+- **Notificação para Admin** - Alertas de novas destinações pendentes
+
+### 🌐 Multi-Tenant
+- Cada cliente (Fundo) pode ter seu próprio ambiente
+- Percentuais dinâmicos por organização:
+  - `?org=ajufer` → Lei de Incentivo ao Esporte (7%)
+  - `?org=fia` → Fundo da Criança e Adolescente (6%)
+  - `?org=crm` → PRONON - Oncologia (1%)
+- Logo e cores personalizáveis por tenant
+- Pronto para subdomínios em produção (ajufer.incentivabr.com.br)
+
+### 🏢 Painel Administrativo (para Fundos/Clientes)
+- Confirmar/recusar depósitos
+- Upload de recibo oficial
+- Estatísticas de arrecadação por fundo
+- Listagem de destinações pendentes/confirmadas/recusadas
+
+### 📄 Documentos Automáticos
+- **Comprovante de Destinação** (PDF gerado pelo sistema com PDFKit)
+- **Recibo Oficial** (upload pelo Fundo - valor fiscal para IR)
+
+### 🔐 LGPD Compliance
+- Checkbox obrigatório no cadastro
+- Página de Política de Privacidade
+- Página de Termos de Uso
+- Registro de aceite com data/hora e versão
+
+---
+
 ## 🛠️ **Tecnologias Utilizadas**
 
 - **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
+- **Backend:** Node.js, Express.js, PostgreSQL
+- **Autenticação:** JWT (JSON Web Tokens), bcryptjs
+- **Email:** Nodemailer (Ethereal para testes, pronto para SendGrid/AWS SES)
+- **WhatsApp:** Links wa.me (pronto para API real)
+- **PDF:** PDFKit para geração de comprovantes
+- **Upload:** Multer para arquivos
 - **Design:** Mobile-first, responsivo
 - **Ícones:** Font Awesome 6.4.0
 - **Integração:** Gov.br API (simulação)
 - **IA:** Sistema TINA proprietário
-- **Validações:** Client-side com feedback em tempo real
-- **Arquitetura:** Progressive Web App (PWA) ready
+- **Validações:** Client-side + Server-side com feedback em tempo real
+- **Arquitetura:** Multi-tenant, Progressive Web App (PWA) ready
 
 ---
 
@@ -244,14 +284,19 @@ FDCA/DF: BRB (070) | Ag: 100  | CC: 044149-8 | CNPJ: 15.558.339/0001-85
 
 ## 📈 **Roadmap e Evolução**
 
-### **✅ MVP Atual (Demo)**
+### **✅ MVP Atual (Janeiro/2026)**
 - [x] Simulação Gov.br funcional
 - [x] Dashboard completo responsivo
 - [x] Calculadora de IR precisa
 - [x] Seleção de fundos e projetos
 - [x] Upload de comprovantes de destinação
-- [x] Email automático
+- [x] Email automático (Nodemailer)
+- [x] WhatsApp (links wa.me)
 - [x] Assistente TINA básico
+- [x] **Multi-Tenant** - Ambientes por cliente/fundo
+- [x] **Painel Admin** - Confirmar/recusar destinações
+- [x] **PDF automático** - Comprovante de destinação
+- [x] **LGPD** - Termos, privacidade, checkbox
 
 ### **🔄 Versão Comercial Completa**
 - [ ] Integração real com Gov.br
