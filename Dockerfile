@@ -11,8 +11,8 @@ RUN npm install --production
 # Copiar o resto do código do backend
 COPY backend/ ./
 
-# Copiar frontend para a pasta que o server.js espera
-COPY frontend/ ./frontend/
+# Copiar frontend para /frontend (onde o server.js espera: ../frontend)
+COPY frontend/ /frontend/
 
 # Expor porta
 EXPOSE 3000
