@@ -100,6 +100,9 @@ CREATE TABLE users (
   senha_hash TEXT NOT NULL,
   email_verified BOOLEAN DEFAULT false,
   total_donated DECIMAL(12,2) DEFAULT 0,
+  is_admin BOOLEAN DEFAULT false,
+  accepted_terms_at TIMESTAMP,
+  accepted_terms_version VARCHAR(20),
   created_at TIMESTAMP DEFAULT NOW()
 );
 
