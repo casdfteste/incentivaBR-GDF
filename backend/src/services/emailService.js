@@ -4,43 +4,87 @@ import nodemailer from 'nodemailer';
 // Produção: usa SMTP configurado no .env (Locaweb, SendGrid, AWS SES, etc.)
 // Desenvolvimento: usa Ethereal (emails fake para testes)
 let transporter;
+let emailServiceStatus = {
+  initialized: false,
+  mode: null,
+  host: null,
+  user: null,
+  error: null
+};
 
 export async function initEmailService() {
-  // Se tiver configuração SMTP no .env, usar produção
-  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-    transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT) || 465,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
+  try {
+    // Se tiver configuração SMTP no .env, usar produção
+    if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
+      transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: parseInt(process.env.SMTP_PORT) || 465,
+        secure: process.env.SMTP_SECURE === 'true',
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        }
+      });
+
+      emailServiceStatus = {
+        initialized: true,
+        mode: 'production',
+        host: process.env.SMTP_HOST,
         user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
-    });
+        port: parseInt(process.env.SMTP_PORT) || 465,
+        secure: process.env.SMTP_SECURE === 'true',
+        error: null
+      };
 
-    console.log('📧 Serviço de email inicializado (PRODUÇÃO)');
-    console.log('📧 SMTP:', process.env.SMTP_HOST);
-    console.log('📧 Usuário:', process.env.SMTP_USER);
-  } else {
-    // Modo desenvolvimento/testes: usar Ethereal (emails fake)
-    const testAccount = await nodemailer.createTestAccount();
+      console.log('📧 Serviço de email inicializado (PRODUÇÃO)');
+      console.log('📧 SMTP:', process.env.SMTP_HOST);
+      console.log('📧 Usuário:', process.env.SMTP_USER);
+    } else {
+      // Modo desenvolvimento/testes: usar Ethereal (emails fake)
+      const testAccount = await nodemailer.createTestAccount();
 
-    transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      secure: false,
-      auth: {
+      transporter = nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false,
+        auth: {
+          user: testAccount.user,
+          pass: testAccount.pass
+        }
+      });
+
+      emailServiceStatus = {
+        initialized: true,
+        mode: 'test',
+        host: 'smtp.ethereal.email',
         user: testAccount.user,
-        pass: testAccount.pass
-      }
-    });
+        port: 587,
+        secure: false,
+        etherealUrl: 'https://ethereal.email',
+        error: null
+      };
 
-    console.log('📧 Serviço de email inicializado (TESTE - Ethereal)');
-    console.log('📧 Usuário Ethereal:', testAccount.user);
-    console.log('📧 Para ver emails enviados, acesse: https://ethereal.email');
+      console.log('📧 Serviço de email inicializado (TESTE - Ethereal)');
+      console.log('📧 Usuário Ethereal:', testAccount.user);
+      console.log('📧 Para ver emails enviados, acesse: https://ethereal.email');
+    }
+
+    return transporter;
+  } catch (error) {
+    emailServiceStatus = {
+      initialized: false,
+      mode: null,
+      host: null,
+      user: null,
+      error: error.message
+    };
+    throw error;
   }
+}
 
-  return transporter;
+// Retorna status do serviço de email (para diagnóstico)
+export function getEmailStatus() {
+  return emailServiceStatus;
 }
 
 // Remetente padrão

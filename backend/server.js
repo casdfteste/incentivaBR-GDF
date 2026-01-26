@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pool, { testConnection } from './config/database.js';
-import { initEmailService } from './src/services/emailService.js';
+import { initEmailService, getEmailStatus } from './src/services/emailService.js';
 
 // ES modules: criar __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -68,6 +68,57 @@ app.get('/db-test', async (req, res) => {
       error: error.message
     });
   }
+});
+
+// Rota de diagnóstico completo do sistema
+app.get('/diagnostico', async (req, res) => {
+  const diagnostico = {
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    node_env: process.env.NODE_ENV || 'not set',
+    services: {}
+  };
+
+  // Status do banco de dados
+  try {
+    const dbResult = await pool.query('SELECT NOW() as time, current_database() as db');
+    diagnostico.services.database = {
+      status: 'ok',
+      database: dbResult.rows[0].db,
+      serverTime: dbResult.rows[0].time
+    };
+  } catch (error) {
+    diagnostico.services.database = {
+      status: 'error',
+      error: error.message
+    };
+  }
+
+  // Status do serviço de email
+  const emailStatus = getEmailStatus();
+  diagnostico.services.email = {
+    status: emailStatus.initialized ? 'ok' : 'error',
+    mode: emailStatus.mode === 'production' ? 'PRODUCAO (SMTP)' : 'TESTE (Ethereal)',
+    host: emailStatus.host,
+    user: emailStatus.user,
+    port: emailStatus.port,
+    secure: emailStatus.secure,
+    error: emailStatus.error
+  };
+  if (emailStatus.etherealUrl) {
+    diagnostico.services.email.etherealUrl = emailStatus.etherealUrl;
+  }
+
+  // Verificar variáveis de ambiente importantes (sem expor valores sensíveis)
+  diagnostico.environment = {
+    SMTP_HOST: process.env.SMTP_HOST ? '✅ configurado' : '❌ não configurado',
+    SMTP_USER: process.env.SMTP_USER ? '✅ configurado' : '❌ não configurado',
+    SMTP_PASS: process.env.SMTP_PASS ? '✅ configurado' : '❌ não configurado',
+    JWT_SECRET: process.env.JWT_SECRET ? '✅ configurado' : '❌ não configurado',
+    DATABASE_URL: process.env.DATABASE_URL ? '✅ configurado' : '❌ não configurado'
+  };
+
+  res.json(diagnostico);
 });
 
 // Rotas da API
