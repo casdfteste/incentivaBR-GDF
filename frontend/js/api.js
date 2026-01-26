@@ -1,5 +1,5 @@
 // API Module - IncentivaBR
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = window.location.origin + '/api';
 
 const api = {
   // Helper para fazer requisições
