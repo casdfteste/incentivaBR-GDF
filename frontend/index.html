@@ -315,6 +315,7 @@
   </footer>
 
   <script src="js/auth.js"></script>
+  <script src="js/mobile-menu.js"></script>
   <script>
     // Update nav based on auth status
     const navAuth = document.getElementById('navAuth');
@@ -325,15 +326,6 @@
       navAuth.classList.remove('btn', 'btn-primary', 'btn-sm');
     } else {
       navAuth.href = 'login.html';
-    }
-
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const headerNav = document.querySelector('.header nav');
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        headerNav.classList.toggle('show');
-      });
     }
   </script>
   <script src="js/tenant.js"></script>

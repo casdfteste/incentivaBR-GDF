@@ -184,6 +184,89 @@ header img {
   font-size: 24px;
   color: var(--primary-color);
   cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+
+/* Mobile Navigation Overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.mobile-nav-overlay.show {
+  display: block;
+  opacity: 1;
+}
+
+/* Mobile Navigation Panel */
+@media (max-width: 768px) {
+  .header nav,
+  .navbar > nav {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    background: var(--background);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 80px 24px 24px;
+    gap: 0;
+    box-shadow: var(--shadow-xl);
+    z-index: 999;
+    transition: right var(--transition-base);
+    display: flex;
+  }
+
+  .header nav.show,
+  .navbar > nav.show {
+    right: 0;
+  }
+
+  .header nav a,
+  .navbar nav a {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+  }
+
+  .header nav a:last-child,
+  .navbar nav a:last-child {
+    border-bottom: none;
+    margin-top: 16px;
+  }
+
+  .header nav a.btn,
+  .navbar nav a.btn {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-toggle.active {
+    color: var(--danger-color);
+  }
+
+  .menu-toggle.active i::before {
+    content: "\f00d"; /* Font Awesome X icon */
+  }
+
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
 }
 
 /* ========================================
@@ -1004,14 +1087,7 @@ header img {
     padding: var(--spacing-md);
   }
 
-  .header nav,
-  .navbar > nav {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
+  /* Menu toggle visibility handled above */
 
   .hero {
     padding: var(--spacing-2xl) var(--spacing-md);

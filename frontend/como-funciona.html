@@ -457,17 +457,8 @@
   </footer>
 
   <script src="js/auth.js"></script>
+  <script src="js/mobile-menu.js"></script>
   <script>
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const nav = document.querySelector('nav');
-
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        nav.classList.toggle('active');
-      });
-    }
-
     // Update nav auth
     const navAuth = document.getElementById('navAuth');
     if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
