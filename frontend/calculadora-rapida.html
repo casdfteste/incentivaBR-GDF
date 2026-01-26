@@ -598,7 +598,7 @@
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CALCULANDO...';
 
       try {
-        const response = await fetch('http://localhost:3000/api/calculator/limites-rapido', {
+        const response = await fetch('/api/calculator/limites-rapido', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

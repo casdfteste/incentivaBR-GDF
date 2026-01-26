@@ -1057,7 +1057,7 @@
         console.log('Enviando para API:', donationData);
 
         // 7. ENVIAR PARA API (fetch direto para debug)
-        const response = await fetch('http://localhost:3000/api/donations', {
+        const response = await fetch('/api/donations', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1162,7 +1162,7 @@
       dadosDoacaoAtual.valor = valor || 0;
 
       // Buscar dados do projeto com dados bancários
-      fetch(`http://localhost:3000/api/projects/${projectId}`)
+      fetch(`/api/projects/${projectId}`)
         .then(r => r.json())
         .then(data => {
           if (data.status === 'success' && data.project) {
@@ -1243,7 +1243,7 @@
         let irTotal = irData?.ir_devido || 15000;
 
         // 1. Registrar doação
-        const response = await fetch('http://localhost:3000/api/donations', {
+        const response = await fetch('/api/donations', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1272,7 +1272,7 @@
           formData.append('receipt', fileInput.files[0]);
 
           try {
-            await fetch(`http://localhost:3000/api/uploads/receipt/${donationId}`, {
+            await fetch(`/api/uploads/receipt/${donationId}`, {
               method: 'POST',
               headers: {
                 'Authorization': 'Bearer ' + token

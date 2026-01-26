@@ -824,7 +824,7 @@
     async function loadStats() {
       try {
         const token = auth.getToken();
-        const response = await fetch('http://localhost:3000/api/admin/stats', {
+        const response = await fetch('/api/admin/stats', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -878,7 +878,7 @@
 
       try {
         const token = auth.getToken();
-        const response = await fetch(`http://localhost:3000/api/admin/donations/${status}`, {
+        const response = await fetch(`/api/admin/donations/${status}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -1064,7 +1064,7 @@
 
       try {
         const token = auth.getToken();
-        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}/confirm`, {
+        const response = await fetch(`/api/admin/donations/${id}/confirm`, {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1113,7 +1113,7 @@
 
       try {
         const token = auth.getToken();
-        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}/reject`, {
+        const response = await fetch(`/api/admin/donations/${id}/reject`, {
           method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -1204,7 +1204,7 @@
 
       try {
         const token = auth.getToken();
-        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}/upload-receipt`, {
+        const response = await fetch(`/api/admin/donations/${id}/upload-receipt`, {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`
@@ -1236,7 +1236,7 @@
 
       try {
         const token = auth.getToken();
-        const response = await fetch(`http://localhost:3000/api/admin/donations/${id}`, {
+        const response = await fetch(`/api/admin/donations/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 

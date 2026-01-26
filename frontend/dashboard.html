@@ -587,7 +587,7 @@
       }
 
       try {
-        const response = await fetch(`http://localhost:3000/api/donations/${donationId}/comprovante`, {
+        const response = await fetch(`/api/donations/${donationId}/comprovante`, {
           headers: {
             'Authorization': 'Bearer ' + token
           }
@@ -655,7 +655,7 @@
                     <i class="fas fa-file-pdf"></i> Comprovante
                   </button>
                   ${donation.receipt_file_path ? `
-                    <a href="http://localhost:3000${donation.receipt_file_path}"
+                    <a href="${donation.receipt_file_path}"
                        class="btn-download recibo" target="_blank">
                       <i class="fas fa-receipt"></i> Recibo Oficial
                     </a>
