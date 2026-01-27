@@ -13,10 +13,23 @@
   <style>
     /* Page-specific styles */
     .hero {
-      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 100%);
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 50%, #1E3A5F 100%);
       color: white;
       padding: 140px 24px 100px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
     }
 
     .hero h1 {
@@ -24,10 +37,12 @@
       font-weight: 800;
       margin-bottom: 16px;
       line-height: 1.2;
+      position: relative;
     }
 
     .hero h1 .highlight {
       color: #F7941D;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
 
     .hero p {
@@ -35,6 +50,11 @@
       opacity: 0.95;
       max-width: 600px;
       margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .hero-buttons {
+      position: relative;
     }
 
     .hero-stats {
@@ -43,6 +63,15 @@
       gap: 60px;
       margin-top: 60px;
       flex-wrap: wrap;
+      position: relative;
+    }
+
+    .hero-stat {
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     .hero-stat .value {
@@ -51,7 +80,171 @@
     }
 
     .hero-stat .label {
-      opacity: 0.8;
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    /* Animated counter */
+    .counter-value {
+      display: inline-block;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid #eee;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 80px;
+      color: #F7941D;
+      opacity: 0.15;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .testimonial-content {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1E3A5F, #2B5A9E);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .testimonial-info h4 {
+      margin: 0;
+      color: #1E3A5F;
+      font-size: 15px;
+    }
+
+    .testimonial-info p {
+      margin: 4px 0 0;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .testimonial-rating {
+      color: #F7941D;
+      margin-bottom: 1rem;
+    }
+
+    /* Trust badges */
+    .trust-section {
+      padding: 60px 24px;
+      background: #1E3A5F;
+      color: white;
+    }
+
+    .trust-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .trust-badge {
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    .trust-badge i {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      color: #F7941D;
+    }
+
+    .trust-badge span {
+      font-size: 13px;
+      display: block;
+    }
+
+    /* For Organizations CTA */
+    .org-cta-section {
+      padding: 80px 24px;
+      background: linear-gradient(135deg, #F7941D 0%, #ff6b35 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .org-cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .org-cta-section p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .org-features {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .org-feature {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 15px;
+    }
+
+    .org-feature i {
+      font-size: 1.2rem;
     }
 
     /* Fund colors */
@@ -75,10 +268,23 @@
         font-size: 16px;
       }
       .hero-stats {
-        gap: 30px;
+        gap: 20px;
+      }
+      .hero-stat {
+        padding: 15px 20px;
       }
       .hero-stat .value {
         font-size: 28px;
+      }
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      .trust-grid {
+        gap: 2rem;
+      }
+      .org-features {
+        flex-direction: column;
+        gap: 1rem;
       }
     }
   </style>
@@ -116,15 +322,15 @@
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="value">R$ 2.5M+</div>
+        <div class="value">R$ <span class="counter-value" data-target="2500000" data-prefix="" data-suffix="">0</span></div>
         <div class="label">Destinados em 2024</div>
       </div>
       <div class="hero-stat">
-        <div class="value">1.200+</div>
+        <div class="value"><span class="counter-value" data-target="1200" data-prefix="" data-suffix="+">0</span></div>
         <div class="label">Apoiadores</div>
       </div>
       <div class="hero-stat">
-        <div class="value">45+</div>
+        <div class="value"><span class="counter-value" data-target="45" data-prefix="" data-suffix="+">0</span></div>
         <div class="label">Projetos Apoiados</div>
       </div>
     </div>
@@ -254,6 +460,142 @@
     </div>
   </section>
 
+  <!-- Depoimentos -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Quem J&aacute; Destinou Recomenda</h2>
+        <p>Veja o que dizem os contribuintes que transformaram seu imposto em impacto</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-content">
+            "Sempre quis ajudar, mas n&atilde;o sabia como. Descobri que podia destinar parte do meu IR sem pagar nada a mais.
+            J&aacute; s&atilde;o 3 anos consecutivos apoiando projetos para crian&ccedil;as."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MF</div>
+            <div class="testimonial-info">
+              <h4>Marcos F.</h4>
+              <p>Servidor P&uacute;blico Federal</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-content">
+            "Minha contadora indicou o IncentivaBR. O processo foi simples e recebi o recibo certinho para incluir
+            na declara&ccedil;&atilde;o. Recomendo a todos os meus colegas."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AS</div>
+            <div class="testimonial-info">
+              <h4>Ana S.</h4>
+              <p>Analista Judici&aacute;rio - TRF</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <p class="testimonial-content">
+            "Como contador, indico para todos os meus clientes que fazem declara&ccedil;&atilde;o completa.
+            &Eacute; uma forma inteligente de direcionar recursos que j&aacute; seriam pagos ao governo."
+          </p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RC</div>
+            <div class="testimonial-info">
+              <h4>Roberto C.</h4>
+              <p>Contador - CRC/DF</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selos de Confian&ccedil;a -->
+  <section class="trust-section">
+    <div class="trust-grid">
+      <div class="trust-badge">
+        <i class="fas fa-shield-alt"></i>
+        <span>Dados Protegidos</span>
+        <span style="font-size: 11px; opacity: 0.7;">LGPD Compliant</span>
+      </div>
+      <div class="trust-badge">
+        <i class="fas fa-lock"></i>
+        <span>Conex&atilde;o Segura</span>
+        <span style="font-size: 11px; opacity: 0.7;">SSL/TLS</span>
+      </div>
+      <div class="trust-badge">
+        <i class="fas fa-certificate"></i>
+        <span>Registro INPI</span>
+        <span style="font-size: 11px; opacity: 0.7;">BR512025000647-0</span>
+      </div>
+      <div class="trust-badge">
+        <i class="fas fa-landmark"></i>
+        <span>Fundos Oficiais</span>
+        <span style="font-size: 11px; opacity: 0.7;">Gov. Federal e Distrital</span>
+      </div>
+      <div class="trust-badge">
+        <i class="fas fa-calculator"></i>
+        <span>Validado por</span>
+        <span style="font-size: 11px; opacity: 0.7;">Contadores</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Para Organiza&ccedil;&otilde;es -->
+  <section class="org-cta-section">
+    <h2><i class="fas fa-building"></i> Sua Organiza&ccedil;&atilde;o Quer Oferecer Isso aos Associados?</h2>
+    <p>
+      Sindicatos, associa&ccedil;&otilde;es de classe e empresas podem ter sua pr&oacute;pria plataforma
+      personalizada para facilitar a destina&ccedil;&atilde;o de IR dos seus membros.
+    </p>
+    <div class="org-features">
+      <div class="org-feature">
+        <i class="fas fa-palette"></i>
+        <span>Sua marca e identidade visual</span>
+      </div>
+      <div class="org-feature">
+        <i class="fas fa-filter"></i>
+        <span>Projetos direcionados ao seu nicho</span>
+      </div>
+      <div class="org-feature">
+        <i class="fas fa-chart-line"></i>
+        <span>Dashboard de impacto</span>
+      </div>
+      <div class="org-feature">
+        <i class="fas fa-headset"></i>
+        <span>Suporte dedicado</span>
+      </div>
+    </div>
+    <a href="para-organizacoes.html" class="btn btn-white" style="color: #F7941D;">
+      <i class="fas fa-arrow-right"></i> Quero saber mais
+    </a>
+  </section>
+
   <!-- Precisa de Ajuda -->
   <section class="section section-alt">
     <div class="container">
@@ -327,7 +669,8 @@
         <a href="como-funciona.html">Como Funciona</a>
         <a href="passo-a-passo.html">Passo a Passo</a>
         <a href="faq.html">Perguntas Frequentes</a>
-        <a href="#">Para Organiza&ccedil;&otilde;es</a>
+        <a href="para-organizacoes.html">Para Organiza&ccedil;&otilde;es</a>
+        <a href="para-contadores.html">Para Contadores</a>
       </div>
       <div class="footer-col">
         <h4>Contato</h4>
@@ -363,5 +706,55 @@
     }
   </script>
   <script src="js/tenant.js"></script>
+  <script>
+    // Animated counters
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter-value');
+
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const duration = 2000;
+        const start = 0;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(start + (target - start) * easeOut);
+
+          if (target >= 1000000) {
+            counter.textContent = (current / 1000000).toFixed(1) + 'M' + suffix;
+          } else if (target >= 1000) {
+            counter.textContent = current.toLocaleString('pt-BR') + suffix;
+          } else {
+            counter.textContent = current + suffix;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
+    // Intersection Observer for counters
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(heroStats);
+    }
+  </script>
 </body>
 </html>
