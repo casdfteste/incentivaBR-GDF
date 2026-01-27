@@ -337,6 +337,7 @@
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
   <script src="js/utils.js"></script>
+  <script src="js/toast.js"></script>
   <script>
     // Se ja logado, redirecionar
     if (auth.isLoggedIn()) {
@@ -452,13 +453,13 @@
         auth.setToken(response.token);
         auth.setUser(response.user);
 
-        showAlert('Login realizado com sucesso!', 'success');
+        Toast.success('Redirecionando...', 'Login realizado!');
 
         const redirect = utils.getQueryParam('redirect') || 'dashboard.html';
-        setTimeout(() => window.location.href = redirect, 800);
+        setTimeout(() => window.location.href = redirect, 1000);
 
       } catch (error) {
-        showAlert(error.message || 'Erro ao fazer login');
+        Toast.error(error.message || 'Verifique suas credenciais e tente novamente.', 'Erro no login');
       } finally {
         setLoading(btn, false);
       }
@@ -480,32 +481,32 @@
 
       // Validacoes
       if (nome.length < 3) {
-        showAlert('Nome deve ter pelo menos 3 caracteres');
+        Toast.warning('Nome deve ter pelo menos 3 caracteres', 'Campo obrigatorio');
         return;
       }
 
       if (!utils.isValidCPF(cpf)) {
-        showAlert('CPF invalido');
+        Toast.warning('Digite um CPF valido', 'CPF invalido');
         return;
       }
 
       if (!utils.isValidEmail(email)) {
-        showAlert('Email invalido');
+        Toast.warning('Digite um email valido', 'Email invalido');
         return;
       }
 
       if (senha.length < 6) {
-        showAlert('Senha deve ter pelo menos 6 caracteres');
+        Toast.warning('Senha deve ter pelo menos 6 caracteres', 'Senha fraca');
         return;
       }
 
       if (senha !== senhaConfirm) {
-        showAlert('Senhas nao conferem');
+        Toast.warning('As senhas digitadas nao conferem', 'Senhas diferentes');
         return;
       }
 
       if (!acceptedTerms) {
-        showAlert('Voce deve aceitar a Politica de Privacidade e os Termos de Uso');
+        Toast.warning('Voce deve aceitar a Politica de Privacidade e os Termos de Uso', 'Termos obrigatorios');
         document.getElementById('termsError').style.display = 'block';
         return;
       }
@@ -516,14 +517,16 @@
       try {
         await api.register({ nome, cpf, email, phone, senha, accepted_terms: true });
 
-        showAlert('Conta criada com sucesso! Faca login.', 'success');
+        Toast.success('Sua conta foi criada com sucesso! Faca login para continuar.', 'Bem-vindo ao IncentivaBR!');
 
         // Switch to login tab
-        document.querySelector('.tab[data-tab="login"]').click();
-        document.getElementById('loginCpfEmail').value = email;
+        setTimeout(() => {
+          document.querySelector('.tab[data-tab="login"]').click();
+          document.getElementById('loginCpfEmail').value = email;
+        }, 500);
 
       } catch (error) {
-        showAlert(error.message || 'Erro ao criar conta');
+        Toast.error(error.message || 'Nao foi possivel criar sua conta. Tente novamente.', 'Erro no cadastro');
       } finally {
         setLoading(btn, false);
       }

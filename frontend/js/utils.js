@@ -99,8 +99,20 @@ const utils = {
     return diff > 0 ? diff : 0;
   },
 
-  // Toast notification
-  showToast(message, type = 'info') {
+  // Toast notification (usa Toast global se disponível)
+  showToast(message, type = 'info', title = '') {
+    // Se Toast global existir, usar ele (mais bonito)
+    if (typeof Toast !== 'undefined') {
+      switch (type) {
+        case 'success': Toast.success(message, title || 'Sucesso!'); break;
+        case 'error': Toast.error(message, title || 'Erro!'); break;
+        case 'warning': Toast.warning(message, title || 'Atenção!'); break;
+        default: Toast.info(message, title); break;
+      }
+      return;
+    }
+
+    // Fallback para toast simples
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
