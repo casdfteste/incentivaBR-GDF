@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passo a Passo - IncentivaBR</title>
+  <meta name="description" content="Guia completo passo a passo para destinar seu Imposto de Renda para projetos sociais.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    body {
+      background: var(--background-light);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 100%);
+      padding: 3rem 2rem;
+      text-align: center;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .content-container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #F7941D 0%, #00A859 100%);
+      border-radius: 2px;
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-number {
+      position: absolute;
+      left: -50px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #F7941D 0%, #FF6B00 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 15px rgba(247, 148, 29, 0.4);
+      z-index: 1;
+    }
+
+    .step-number.step-2 {
+      background: linear-gradient(135deg, #2B5A9E 0%, #1E3A5F 100%);
+      box-shadow: 0 4px 15px rgba(43, 90, 158, 0.4);
+    }
+
+    .step-number.step-3 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .step-number.step-4 {
+      background: linear-gradient(135deg, #00C9A7 0%, #00A859 100%);
+      box-shadow: 0 4px 15px rgba(0, 168, 89, 0.4);
+    }
+
+    .step-number.step-5 {
+      background: linear-gradient(135deg, #00A859 0%, #006837 100%);
+      box-shadow: 0 4px 15px rgba(0, 168, 89, 0.4);
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(247, 148, 29, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #F7941D;
+    }
+
+    .step-2 .step-icon {
+      background: rgba(43, 90, 158, 0.1);
+      color: #2B5A9E;
+    }
+
+    .step-3 .step-icon {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+    }
+
+    .step-4 .step-icon {
+      background: rgba(0, 168, 89, 0.1);
+      color: #00A859;
+    }
+
+    .step-5 .step-icon {
+      background: rgba(0, 168, 89, 0.1);
+      color: #006837;
+    }
+
+    .step-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 4px;
+    }
+
+    .step-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .step-content {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .step-content p {
+      margin-bottom: 1rem;
+    }
+
+    .step-content ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .step-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content strong {
+      color: var(--text-primary);
+    }
+
+    .step-action {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .highlight-box {
+      background: rgba(0, 168, 89, 0.08);
+      border-left: 4px solid var(--success-color);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .warning-box {
+      background: rgba(247, 148, 29, 0.08);
+      border-left: 4px solid var(--secondary-color);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    .info-box {
+      background: rgba(43, 90, 158, 0.08);
+      border-left: 4px solid var(--primary-color);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1rem 0;
+    }
+
+    /* Bank data */
+    .bank-data {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .bank-data-title {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bank-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .bank-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .bank-item strong {
+      color: var(--secondary-color);
+    }
+
+    .bank-value {
+      font-family: monospace;
+      background: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+    }
+
+    /* Checklist */
+    .checklist {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .checklist-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .checklist-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--success-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Final CTA */
+    .final-cta {
+      background: linear-gradient(135deg, #00A859 0%, #006837 100%);
+      color: white;
+      padding: 3rem;
+      border-radius: 20px;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .final-cta h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .final-cta p {
+      opacity: 0.95;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+
+    .btn-white-outline:hover {
+      background: white;
+      color: #00A859;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .content-container {
+        padding: 0 1rem;
+        margin: 2rem auto;
+      }
+
+      .timeline {
+        padding-left: 40px;
+      }
+
+      .timeline::before {
+        left: 18px;
+      }
+
+      .step-number {
+        left: -40px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+
+      .step-card {
+        padding: 1.5rem;
+      }
+
+      .step-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .step-title {
+        font-size: 1.3rem;
+      }
+
+      .step-action {
+        flex-direction: column;
+      }
+
+      .step-action .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .bank-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .final-cta {
+        padding: 2rem 1.5rem;
+      }
+
+      .final-cta h2 {
+        font-size: 1.5rem;
+      }
+
+      .final-cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img">
+    </a>
+    <nav>
+      <a href="projetos.html">Projetos</a>
+      <a href="calculadora-escolha.html">Calculadora IR</a>
+      <a href="como-funciona.html">Como Funciona</a>
+      <a href="#" id="navAuth" class="btn btn-primary btn-sm">Entrar</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <section class="hero">
+    <h1><i class="fas fa-route"></i> Passo a Passo Completo</h1>
+    <p>Guia detalhado para fazer sua primeira destinacao de IR</p>
+  </section>
+
+  <div class="content-container">
+
+    <!-- Intro -->
+    <div class="info-box" style="margin-bottom: 2rem;">
+      <strong><i class="fas fa-info-circle"></i> Antes de comecar:</strong>
+      <p style="margin: 0.5rem 0 0 0;">Voce precisa fazer a <strong>declaracao COMPLETA</strong> do Imposto de Renda. Se usa a simplificada, pode mudar para completa - em muitos casos vale a pena!</p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline">
+
+      <!-- PASSO 1 -->
+      <div class="timeline-step">
+        <div class="step-number">1</div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-icon"><i class="fas fa-calculator"></i></div>
+            <div>
+              <h2 class="step-title">Calcule seu IR</h2>
+              <p class="step-subtitle">Descubra quanto pode destinar</p>
+            </div>
+          </div>
+          <div class="step-content">
+            <p>Primeiro, voce precisa saber quanto de IR voce deve. Com esse valor, calculamos ate quanto pode destinar (limite de 6-9%).</p>
+
+            <p><strong>Como descobrir seu IR devido:</strong></p>
+            <ul>
+              <li>No programa IRPF da Receita Federal</li>
+              <li>Campo "Resumo da Declaracao" → "Imposto Devido"</li>
+              <li>Ou use nossa calculadora que estima baseado no seu salario</li>
+            </ul>
+
+            <div class="highlight-box">
+              <strong>Exemplo:</strong> Se seu IR devido e R$ 10.000, voce pode destinar ate R$ 600 (6%) ou R$ 900 (9% com todos os incentivos).
+            </div>
+
+            <div class="step-action">
+              <a href="calculadora-rapida.html" class="btn btn-primary">
+                <i class="fas fa-bolt"></i> Calculadora Rapida
+              </a>
+              <a href="calculadora.html" class="btn btn-outline">
+                <i class="fas fa-calculator"></i> Calculadora Completa
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 2 -->
+      <div class="timeline-step step-2">
+        <div class="step-number step-2">2</div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-icon"><i class="fas fa-hand-pointer"></i></div>
+            <div>
+              <h2 class="step-title">Escolha o Fundo e Projeto</h2>
+              <p class="step-subtitle">Decida para onde vai seu imposto</p>
+            </div>
+          </div>
+          <div class="step-content">
+            <p>Agora escolha qual causa quer apoiar. No DF, temos dois fundos principais:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+              <div style="background: rgba(43, 90, 158, 0.08); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fas fa-user-friends" style="color: #2B5A9E;"></i></div>
+                <strong>FDI - Fundo do Idoso</strong>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0;">Apoia pessoas com 60 anos ou mais</p>
+              </div>
+              <div style="background: rgba(0, 168, 89, 0.08); padding: 1.5rem; border-radius: 12px; text-align: center;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fas fa-child" style="color: #00A859;"></i></div>
+                <strong>FDCA - Fundo da Crianca</strong>
+                <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0;">Apoia criancas e adolescentes</p>
+              </div>
+            </div>
+
+            <p>Depois de escolher o fundo, selecione um projeto especifico ou opte por "Destinacao Geral" (o conselho decide a melhor alocacao).</p>
+
+            <div class="step-action">
+              <a href="projetos.html" class="btn btn-primary">
+                <i class="fas fa-search"></i> Ver Projetos Disponiveis
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 3 -->
+      <div class="timeline-step step-3">
+        <div class="step-number step-3">3</div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-icon"><i class="fas fa-university"></i></div>
+            <div>
+              <h2 class="step-title">Faca o Deposito</h2>
+              <p class="step-subtitle">Transfira para a conta oficial do fundo</p>
+            </div>
+          </div>
+          <div class="step-content">
+            <p>Faca uma transferencia (PIX, TED ou deposito) para a conta oficial do fundo escolhido:</p>
+
+            <div class="bank-data">
+              <div class="bank-data-title">
+                <i class="fas fa-landmark"></i> Dados Bancarios Oficiais
+              </div>
+
+              <div class="bank-item">
+                <div>
+                  <strong>FDI - Fundo do Idoso</strong>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--text-secondary);">CNPJ: 35.186.643/0001-56</p>
+                </div>
+                <div>
+                  <span class="bank-value">Banco BRB (070)</span><br>
+                  <span class="bank-value">Ag: 0100</span><br>
+                  <span class="bank-value">CC: 062024-4</span>
+                </div>
+              </div>
+
+              <div class="bank-item">
+                <div>
+                  <strong>FDCA - Fundo da Crianca</strong>
+                  <p style="font-size: 0.85rem; margin: 0; color: var(--text-secondary);">CNPJ: 15.558.339/0001-85</p>
+                </div>
+                <div>
+                  <span class="bank-value">Banco BRB (070)</span><br>
+                  <span class="bank-value">Ag: 100</span><br>
+                  <span class="bank-value">CC: 044149-8</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="warning-box">
+              <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong>
+              <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
+                <li>Confira os dados antes de transferir</li>
+                <li>Guarde o comprovante (print do app funciona!)</li>
+                <li>Voce pode verificar esses dados nos sites oficiais dos conselhos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 4 -->
+      <div class="timeline-step step-4">
+        <div class="step-number step-4">4</div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-icon"><i class="fas fa-upload"></i></div>
+            <div>
+              <h2 class="step-title">Envie o Comprovante</h2>
+              <p class="step-subtitle">Registre sua destinacao no sistema</p>
+            </div>
+          </div>
+          <div class="step-content">
+            <p>Apos fazer o deposito, envie o comprovante pelo nosso sistema:</p>
+
+            <div class="checklist">
+              <div class="checklist-item">
+                <div class="checklist-icon"><i class="fas fa-check"></i></div>
+                <div>Faca login na sua conta IncentivaBR</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon"><i class="fas fa-check"></i></div>
+                <div>Va para a pagina do projeto que escolheu</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon"><i class="fas fa-check"></i></div>
+                <div>Clique em "Registrar Destinacao"</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon"><i class="fas fa-check"></i></div>
+                <div>Preencha o valor e envie o comprovante (PDF, JPG ou PNG ate 5MB)</div>
+              </div>
+              <div class="checklist-item">
+                <div class="checklist-icon"><i class="fas fa-check"></i></div>
+                <div>Receba seu numero de protocolo</div>
+              </div>
+            </div>
+
+            <div class="highlight-box">
+              <strong>Dica:</strong> Print da tela do aplicativo do banco e aceito como comprovante. Basta mostrar data, valor e destinatario.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PASSO 5 -->
+      <div class="timeline-step step-5">
+        <div class="step-number step-5">5</div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+            <div>
+              <h2 class="step-title">Aguarde o Recibo Oficial</h2>
+              <p class="step-subtitle">O fundo confirma e emite seu recibo</p>
+            </div>
+          </div>
+          <div class="step-content">
+            <p>Apos enviar o comprovante, o fluxo e:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+              <div style="text-align: center; padding: 1rem;">
+                <div style="width: 50px; height: 50px; background: #f0f2f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; font-size: 1.5rem;">⏳</div>
+                <strong>5-10 dias</strong>
+                <p style="font-size: 0.85rem; margin: 0.25rem 0 0 0;">Fundo verifica o deposito</p>
+              </div>
+              <div style="text-align: center; padding: 1rem;">
+                <div style="width: 50px; height: 50px; background: #f0f2f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; font-size: 1.5rem;">📧</div>
+                <strong>Notificacao</strong>
+                <p style="font-size: 0.85rem; margin: 0.25rem 0 0 0;">Voce recebe email/WhatsApp</p>
+              </div>
+              <div style="text-align: center; padding: 1rem;">
+                <div style="width: 50px; height: 50px; background: #f0f2f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; font-size: 1.5rem;">📄</div>
+                <strong>Recibo Oficial</strong>
+                <p style="font-size: 0.85rem; margin: 0.25rem 0 0 0;">Documento para sua declaracao</p>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <strong>O recibo oficial serve para:</strong>
+              <ul style="margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
+                <li>Comprovar a destinacao na declaracao do IR</li>
+                <li>Garantir a deducao do valor do seu imposto</li>
+                <li>Ter respaldo legal conforme Art. 6</li>
+              </ul>
+            </div>
+
+            <p style="margin-top: 1.5rem;"><strong>Na proxima declaracao de IR:</strong></p>
+            <p>Informe a destinacao e anexe o recibo. O valor sera deduzido automaticamente - sua restituicao aumenta ou seu imposto a pagar diminui!</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Final CTA -->
+    <div class="final-cta">
+      <h2><i class="fas fa-rocket"></i> Pronto para comecar?</h2>
+      <p>Agora voce sabe exatamente como funciona. O processo e simples, seguro e transforma seu imposto em impacto social!</p>
+      <div class="final-cta-buttons">
+        <a href="calculadora-escolha.html" class="btn btn-white">
+          <i class="fas fa-calculator"></i> Calcular meu IR
+        </a>
+        <a href="projetos.html" class="btn btn-white-outline">
+          <i class="fas fa-search"></i> Ver Projetos
+        </a>
+        <a href="faq.html" class="btn btn-white-outline">
+          <i class="fas fa-question-circle"></i> Duvidas Frequentes
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white">
+    </a>
+    <p class="tagline">Incentivos Fiscais Simplificados</p>
+    <div class="footer-bottom">
+      <p>
+        <a href="politica-privacidade.html" style="color: rgba(255,255,255,0.8);">Politica de Privacidade</a> |
+        <a href="termos-uso.html" style="color: rgba(255,255,255,0.8);">Termos de Uso</a>
+      </p>
+      <p style="margin-top: 12px;">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
+      <p style="margin-top: 8px; font-size: 12px;">INPI: BR512025000647-0</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/mobile-menu.js"></script>
+  <script src="js/tina.js"></script>
+  <script>
+    // Update nav auth
+    const navAuth = document.getElementById('navAuth');
+    if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
+      const user = auth.getUser();
+      navAuth.textContent = user.nome ? user.nome.split(' ')[0] : 'Minha Conta';
+      navAuth.href = 'dashboard.html';
+      navAuth.classList.remove('btn', 'btn-primary', 'btn-sm');
+    } else {
+      navAuth.href = 'login.html';
+    }
+  </script>
+  <script src="js/tenant.js"></script>
+</body>
+</html>
