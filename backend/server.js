@@ -34,6 +34,15 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Redirect domínio sem www para www
+app.use((req, res, next) => {
+  const host = req.get('host');
+  if (host === 'incentivabr.com.br') {
+    return res.redirect(301, `https://www.incentivabr.com.br${req.originalUrl}`);
+  }
+  next();
+});
+
 // Multi-tenant middleware (detecta organização pelo subdomínio/query param)
 app.use(tenantMiddleware);
 
