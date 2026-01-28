@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para Organizacoes - IncentivaBR White Label</title>
-  <meta name="description" content="Ofereça destinação de IR aos seus associados com uma plataforma personalizada. Solução white label para sindicatos, associações e empresas.">
+  <title>Servidor Cidadao - IncentivaBR para Organizacoes</title>
+  <meta name="description" content="Movimento Servidor Cidadao: plataforma white label para sindicatos e associacoes de servidores publicos destinarem IR a projetos sociais curados.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/incentivabr-theme.css">
   <style>
     .hero-org {
-      background: linear-gradient(135deg, #F7941D 0%, #ff6b35 100%);
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 100%);
       color: white;
       padding: 140px 24px 80px;
       text-align: center;
@@ -24,107 +24,235 @@
       margin-bottom: 16px;
     }
 
+    .hero-org h1 span {
+      color: #F7941D;
+    }
+
     .hero-org p {
       font-size: 20px;
       opacity: 0.95;
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto 32px;
     }
 
     .hero-org .badge {
       display: inline-block;
-      background: rgba(255,255,255,0.2);
+      background: #F7941D;
       padding: 8px 20px;
       border-radius: 50px;
       font-size: 14px;
       margin-bottom: 24px;
+      font-weight: 600;
     }
 
-    .benefits-section {
+    .ecosystem-section {
       padding: 80px 24px;
       background: white;
     }
 
-    .benefits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .benefit-card {
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .benefit-card .icon {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #1E3A5F, #2B5A9E);
-      border-radius: 50%;
+    .ecosystem-flow {
       display: flex;
-      align-items: center;
       justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 2rem;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+    }
+
+    .ecosystem-item {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      flex: 1;
+      min-width: 250px;
+      max-width: 300px;
+    }
+
+    .ecosystem-item.highlight {
+      background: linear-gradient(135deg, #F7941D, #ff6b35);
       color: white;
     }
 
-    .benefit-card h3 {
-      color: #1E3A5F;
-      margin-bottom: 0.75rem;
+    .ecosystem-item h3 {
+      margin: 1rem 0 0.5rem;
+      font-size: 1.2rem;
     }
 
-    .benefit-card p {
-      color: #666;
-      line-height: 1.6;
+    .ecosystem-item p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin: 0;
     }
 
-    .how-it-works {
+    .ecosystem-item .icon {
+      font-size: 2.5rem;
+    }
+
+    .ecosystem-arrow {
+      font-size: 2rem;
+      color: #F7941D;
+    }
+
+    .problems-section {
       padding: 80px 24px;
       background: #f8f9fa;
     }
 
-    .steps-container {
-      max-width: 900px;
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
-    .step-item {
+    .problem-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
       display: flex;
-      gap: 2rem;
-      margin-bottom: 3rem;
+      gap: 1rem;
       align-items: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    .step-number {
-      width: 60px;
-      height: 60px;
-      background: #F7941D;
-      color: white;
-      border-radius: 50%;
+    .problem-card .icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #00A859, #00c46a);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      font-weight: 700;
+      color: white;
+      font-size: 1.3rem;
       flex-shrink: 0;
     }
 
-    .step-content h3 {
+    .problem-card h4 {
       color: #1E3A5F;
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .problem-card .dor {
+      color: #999;
+      font-size: 13px;
+      text-decoration: line-through;
       margin-bottom: 0.5rem;
     }
 
-    .step-content p {
-      color: #666;
-      line-height: 1.6;
+    .problem-card .solucao {
+      color: #00A859;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .why-servants {
+      padding: 80px 24px;
+      background: #1E3A5F;
+      color: white;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .why-item {
+      text-align: center;
+    }
+
+    .why-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .why-item h4 {
+      color: #F7941D;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-item p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    .case-section {
+      padding: 80px 24px;
+      background: white;
+    }
+
+    .case-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #f8f9fa, #fff);
+      border: 2px solid #F7941D;
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .case-content h3 {
+      color: #1E3A5F;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .case-content .slogan {
+      color: #F7941D;
+      font-size: 1.1rem;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .case-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .case-content li {
+      padding: 0.5rem 0;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .case-content li i {
+      color: #00A859;
+    }
+
+    .case-visual {
+      text-align: center;
+    }
+
+    .case-visual .big-icon {
+      font-size: 8rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .case-visual .tag {
+      background: #1E3A5F;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      display: inline-block;
     }
 
     .use-cases {
       padding: 80px 24px;
-      background: white;
+      background: #f8f9fa;
     }
 
     .cases-grid {
@@ -136,7 +264,7 @@
     }
 
     .case-card {
-      background: linear-gradient(135deg, #f8f9fa, #fff);
+      background: white;
       border: 1px solid #eee;
       border-radius: 16px;
       padding: 2rem;
@@ -166,18 +294,8 @@
 
     .pricing-section {
       padding: 80px 24px;
-      background: #1E3A5F;
-      color: white;
+      background: white;
       text-align: center;
-    }
-
-    .pricing-section h2 {
-      margin-bottom: 1rem;
-    }
-
-    .pricing-section > p {
-      opacity: 0.9;
-      margin-bottom: 3rem;
     }
 
     .pricing-cards {
@@ -190,16 +308,22 @@
     }
 
     .pricing-card {
-      background: white;
+      background: #f8f9fa;
       color: #333;
       border-radius: 16px;
       padding: 2.5rem;
       width: 280px;
       text-align: left;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .pricing-card:hover {
+      border-color: #F7941D;
     }
 
     .pricing-card.featured {
-      background: #F7941D;
+      background: linear-gradient(135deg, #1E3A5F, #2B5A9E);
       color: white;
       transform: scale(1.05);
     }
@@ -209,16 +333,14 @@
       margin-bottom: 0.5rem;
     }
 
+    .pricing-card.featured h3 {
+      color: #F7941D;
+    }
+
     .pricing-card .price {
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 1rem;
-    }
-
-    .pricing-card .price span {
-      font-size: 1rem;
-      font-weight: 400;
-      opacity: 0.8;
     }
 
     .pricing-card ul {
@@ -243,7 +365,12 @@
     }
 
     .pricing-card.featured li i {
-      color: white;
+      color: #F7941D;
+    }
+
+    .faq-section {
+      padding: 80px 24px;
+      background: #f8f9fa;
     }
 
     .cta-final {
@@ -262,6 +389,9 @@
       font-size: 1.1rem;
       opacity: 0.95;
       margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .contact-options {
@@ -275,12 +405,15 @@
       .hero-org h1 {
         font-size: 28px;
       }
-      .step-item {
-        flex-direction: column;
+      .ecosystem-arrow {
+        transform: rotate(90deg);
+      }
+      .case-box {
+        grid-template-columns: 1fr;
         text-align: center;
       }
-      .step-number {
-        margin: 0 auto;
+      .case-visual {
+        order: -1;
       }
       .pricing-card.featured {
         transform: none;
@@ -307,110 +440,191 @@
 
   <!-- Hero -->
   <section class="hero-org">
-    <div class="badge"><i class="fas fa-building"></i> Solucao White Label</div>
-    <h1>Sua Plataforma de Destinacao de IR</h1>
+    <div class="badge"><i class="fas fa-users"></i> Movimento Servidor Cidadao</div>
+    <h1>Transforme o IR da sua categoria em <span>impacto social</span></h1>
     <p>
-      Ofereça aos seus associados, funcionarios ou membros uma forma simples de
-      destinar parte do Imposto de Renda para causas alinhadas com sua organizacao.
+      Plataforma white label para sindicatos e associacoes de servidores publicos.
+      Seus associados destinam IR para projetos curados pela propria categoria,
+      com total transparencia e simplicidade.
     </p>
     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="#contato" class="btn btn-white" style="color: #F7941D;">
-        <i class="fas fa-calendar"></i> Agendar Demonstracao
+      <a href="#contato" class="btn btn-white" style="color: #1E3A5F;">
+        <i class="fas fa-handshake"></i> Seja Parceiro
       </a>
-      <a href="#como-funciona" class="btn btn-outline-white">
-        <i class="fas fa-play-circle"></i> Como Funciona
+      <a href="#ecossistema" class="btn btn-outline-white">
+        <i class="fas fa-play-circle"></i> Entenda o Modelo
       </a>
     </div>
   </section>
 
-  <!-- Beneficios -->
-  <section class="benefits-section">
+  <!-- Ecossistema -->
+  <section class="ecosystem-section" id="ecossistema">
     <div class="container">
       <div class="section-header">
-        <h2>Por Que Oferecer Destinacao de IR?</h2>
-        <p>Beneficios para sua organizacao e seus membros</p>
+        <h2>O Ecossistema Completo</h2>
+        <p>Tecnologia + Movimento + Impacto Social</p>
       </div>
 
-      <div class="benefits-grid">
-        <div class="benefit-card">
+      <div class="ecosystem-flow">
+        <div class="ecosystem-item">
+          <div class="icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>IncentivaBR</h3>
+          <p>Plataforma tecnologica white label com calculadora, curadoria e compliance</p>
+        </div>
+        <div class="ecosystem-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="ecosystem-item highlight">
+          <div class="icon"><i class="fas fa-fist-raised"></i></div>
+          <h3>Servidor Cidadao</h3>
+          <p>Movimento e identidade que une servidores em torno do impacto social</p>
+        </div>
+        <div class="ecosystem-arrow"><i class="fas fa-arrow-right"></i></div>
+        <div class="ecosystem-item">
+          <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <h3>Projetos Curados</h3>
+          <p>Iniciativas selecionadas pela categoria, com transparencia total</p>
+        </div>
+      </div>
+
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <p style="color: #666; line-height: 1.8;">
+          <strong>O diferencial:</strong> Seus associados nao estao sozinhos. A categoria curou os projetos,
+          a plataforma simplifica o processo, e o movimento cria senso de pertencimento.
+          <em>"Meu sindicato usa e aprova"</em> e a confianca que faltava.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problemas que Resolvemos -->
+  <section class="problems-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>7 Problemas que Resolvemos</h2>
+        <p>De processo burocratico a experiencia de poucos cliques</p>
+      </div>
+
+      <div class="problems-grid">
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-file-invoice"></i></div>
+          <div>
+            <h4>DARF Complexo</h4>
+            <div class="dor">Calcular valores, descobrir codigos, preencher manualmente</div>
+            <div class="solucao"><i class="fas fa-check"></i> Geramos o DARF automaticamente</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-search"></i></div>
+          <div>
+            <h4>Escolha de Projetos</h4>
+            <div class="dor">Como saber se o projeto e idoneo? Onde encontrar?</div>
+            <div class="solucao"><i class="fas fa-check"></i> Curadoria pre-aprovada pela categoria</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-calculator"></i></div>
+          <div>
+            <h4>Calculo dos Limites</h4>
+            <div class="dor">Quanto posso destinar? 6%? 7%? De que base?</div>
+            <div class="solucao"><i class="fas fa-check"></i> Calculadora mostra limite em tempo real</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-clock"></i></div>
+          <div>
+            <h4>Prazo e Timing</h4>
+            <div class="dor">Esqueci o prazo 31/12, deixei para ultima hora</div>
+            <div class="solucao"><i class="fas fa-check"></i> Lembretes automaticos e agendamento</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-folder-open"></i></div>
+          <div>
+            <h4>Comprovantes</h4>
+            <div class="dor">Perdi recibos, nao sei como organizar</div>
+            <div class="solucao"><i class="fas fa-check"></i> Dashboard centralizado com tudo</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-file-alt"></i></div>
+          <div>
+            <h4>Declaracao IRPF</h4>
+            <div class="dor">Como informar? Quais campos usar?</div>
+            <div class="solucao"><i class="fas fa-check"></i> Relatorio pronto para o contador</div>
+          </div>
+        </div>
+        <div class="problem-card">
+          <div class="icon"><i class="fas fa-eye"></i></div>
+          <div>
+            <h4>Transparencia</h4>
+            <div class="dor">Sera que o dinheiro chegou? Foi bem usado?</div>
+            <div class="solucao"><i class="fas fa-check"></i> Relatorios de impacto e prestacao de contas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por que Servidores -->
+  <section class="why-servants">
+    <div class="container">
+      <div class="section-header" style="color: white;">
+        <h2>Por Que Servidores Publicos?</h2>
+        <p style="opacity: 0.9;">O publico ideal para destinacao de IR</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="icon"><i class="fas fa-wallet"></i></div>
+          <h4>Renda Estavel</h4>
+          <p>Capacidade financeira previsivel para planejar destinacoes</p>
+        </div>
+        <div class="why-item">
+          <div class="icon"><i class="fas fa-file-signature"></i></div>
+          <h4>Declaram Completo</h4>
+          <p>Maioria usa modelo completo, requisito para destinar IR</p>
+        </div>
+        <div class="why-item">
           <div class="icon"><i class="fas fa-heart"></i></div>
-          <h3>Impacto Social Real</h3>
-          <p>Seus membros direcionam impostos para causas que importam, gerando transformacao social mensuravel.</p>
+          <h4>Vocacao de Servir</h4>
+          <p>Ja escolheram servir a sociedade, predisposicao natural</p>
         </div>
-        <div class="benefit-card">
+        <div class="why-item">
           <div class="icon"><i class="fas fa-users"></i></div>
-          <h3>Engajamento</h3>
-          <p>Fortaleça o vinculo com seus associados oferecendo um beneficio exclusivo e diferenciado.</p>
+          <h4>Redes de Confianca</h4>
+          <p>Sindicatos e associacoes como multiplicadores</p>
         </div>
-        <div class="benefit-card">
-          <div class="icon"><i class="fas fa-chart-line"></i></div>
-          <h3>Visibilidade</h3>
-          <p>Demonstre o impacto coletivo da sua organizacao com dashboards e relatorios de destinacao.</p>
-        </div>
-        <div class="benefit-card">
-          <div class="icon"><i class="fas fa-palette"></i></div>
-          <h3>Sua Marca</h3>
-          <p>Plataforma totalmente personalizada com a identidade visual da sua organizacao.</p>
-        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <div style="font-size: 3rem; font-weight: 800; color: #F7941D;">11+ milhoes</div>
+        <div style="opacity: 0.9;">de servidores publicos no Brasil</div>
       </div>
     </div>
   </section>
 
-  <!-- Números e Prova Social -->
-  <section class="social-proof" style="background: #1E3A5F; color: white; padding: 60px 24px; text-align: center;">
-    <h2 style="margin-bottom: 2rem;">A Plataforma em Números</h2>
-    <div style="display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;">
-      <div>
-        <div style="font-size: 3rem; font-weight: 800;">500+</div>
-        <div style="opacity: 0.8;">Projetos cadastrados</div>
-      </div>
-      <div>
-        <div style="font-size: 3rem; font-weight: 800;">27</div>
-        <div style="opacity: 0.8;">Estados atendidos</div>
-      </div>
-      <div>
-        <div style="font-size: 3rem; font-weight: 800;">100%</div>
-        <div style="opacity: 0.8;">Digital e seguro</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Como Funciona -->
-  <section class="how-it-works" id="como-funciona">
+  <!-- Case Exemplo -->
+  <section class="case-section">
     <div class="container">
       <div class="section-header">
-        <h2>Como Funciona o White Label?</h2>
-        <p>Em 4 passos sua organizacao tem uma plataforma propria</p>
+        <h2>Exemplo Pratico</h2>
+        <p>Como funciona na vida real</p>
       </div>
 
-      <div class="steps-container">
-        <div class="step-item">
-          <div class="step-number">1</div>
-          <div class="step-content">
-            <h3>Definimos Juntos</h3>
-            <p>Entendemos as necessidades da sua organizacao, os fundos/projetos de interesse e a identidade visual desejada.</p>
-          </div>
+      <div class="case-box">
+        <div class="case-content">
+          <h3>Programa Asas da Maturidade</h3>
+          <p class="slogan">"Servidor Cidadao: Destine seu IR ao Fundo do Idoso e de asas a maturidade"</p>
+          <ul>
+            <li><i class="fas fa-check"></i> <strong>Quem destina:</strong> Servidores publicos do DF</li>
+            <li><i class="fas fa-check"></i> <strong>Para onde:</strong> Fundo do Idoso-DF (Lei 4.548/2011)</li>
+            <li><i class="fas fa-check"></i> <strong>Projeto:</strong> Empreendedorismo social para idosos</li>
+            <li><i class="fas fa-check"></i> <strong>Fiscalizacao:</strong> Conselho do Idoso do DF</li>
+            <li><i class="fas fa-check"></i> <strong>Multiplicadores:</strong> Sindicatos de servidores do GDF</li>
+          </ul>
         </div>
-        <div class="step-item">
-          <div class="step-number">2</div>
-          <div class="step-content">
-            <h3>Personalizamos a Plataforma</h3>
-            <p>Aplicamos sua marca, cores, logo e configuramos os projetos direcionados ao seu publico.</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-number">3</div>
-          <div class="step-content">
-            <h3>Lancamento e Comunicacao</h3>
-            <p>Fornecemos materiais de divulgacao e apoiamos a comunicacao para seus associados.</p>
-          </div>
-        </div>
-        <div class="step-item">
-          <div class="step-number">4</div>
-          <div class="step-content">
-            <h3>Acompanhamento e Relatorios</h3>
-            <p>Dashboard em tempo real mostrando destinacoes, impacto e engajamento dos seus membros.</p>
-          </div>
+        <div class="case-visual">
+          <span class="big-icon"><i class="fas fa-dove" style="color: #F7941D;"></i></span>
+          <span class="tag"><i class="fas fa-shield-alt"></i> Base legal existente e regulamentada</span>
         </div>
       </div>
     </div>
@@ -420,40 +634,40 @@
   <section class="use-cases">
     <div class="container">
       <div class="section-header">
-        <h2>Quem Pode Usar?</h2>
-        <p>Solucoes para diversos tipos de organizacao</p>
+        <h2>Organizacoes que Podem Aderir</h2>
+        <p>O modelo funciona para diversas categorias</p>
       </div>
 
       <div class="cases-grid">
         <div class="case-card">
-          <div class="icon">⚖️</div>
+          <div class="icon"><i class="fas fa-balance-scale" style="color: #1E3A5F;"></i></div>
           <h4>Associacoes de Magistrados</h4>
-          <p>Projetos culturais, esportivos e sociais</p>
+          <p>AMAGIS, AMB e regionais</p>
         </div>
         <div class="case-card">
-          <div class="icon">🏛️</div>
+          <div class="icon"><i class="fas fa-landmark" style="color: #1E3A5F;"></i></div>
           <h4>Sindicatos de Servidores</h4>
-          <p>FDCA e FDI locais e regionais</p>
+          <p>SINDSEP, SINDPOL, SINDJUS e outros</p>
         </div>
         <div class="case-card">
-          <div class="icon">🏢</div>
-          <h4>Empresas (RH)</h4>
-          <p>Beneficio para funcionarios + ESG</p>
+          <div class="icon"><i class="fas fa-gavel" style="color: #1E3A5F;"></i></div>
+          <h4>Ministerio Publico</h4>
+          <p>Associacoes de procuradores e promotores</p>
         </div>
         <div class="case-card">
-          <div class="icon">🎓</div>
-          <h4>Universidades</h4>
-          <p>Projetos de extensao e pesquisa</p>
+          <div class="icon"><i class="fas fa-search-dollar" style="color: #1E3A5F;"></i></div>
+          <h4>Auditores Fiscais</h4>
+          <p>SINDIFISCO, UNAFISCO e estaduais</p>
         </div>
         <div class="case-card">
-          <div class="icon">⚕️</div>
-          <h4>Conselhos Profissionais</h4>
-          <p>OAB, CRM, CREA e outros</p>
+          <div class="icon"><i class="fas fa-shield-alt" style="color: #1E3A5F;"></i></div>
+          <h4>Defensoria Publica</h4>
+          <p>ANADEP e associacoes estaduais</p>
         </div>
         <div class="case-card">
-          <div class="icon">⛪</div>
-          <h4>Organizacoes Religiosas</h4>
-          <p>Projetos sociais da comunidade</p>
+          <div class="icon"><i class="fas fa-building" style="color: #1E3A5F;"></i></div>
+          <h4>Empresas Publicas</h4>
+          <p>BB, Caixa, Correios, Petrobras</p>
         </div>
       </div>
     </div>
@@ -461,20 +675,23 @@
 
   <!-- Pricing -->
   <section class="pricing-section">
-    <h2>Modelos de Parceria</h2>
-    <p>Escolha o que melhor se adapta a sua organizacao</p>
+    <div class="section-header">
+      <h2>Modelos de Parceria</h2>
+      <p>Escolha o que melhor se adapta a sua organizacao</p>
+    </div>
 
     <div class="pricing-cards">
       <div class="pricing-card">
-        <h3>Starter</h3>
+        <h3>Piloto</h3>
         <div class="price">Gratuito</div>
         <ul>
           <li><i class="fas fa-check"></i> Ate 100 usuarios</li>
           <li><i class="fas fa-check"></i> Logo personalizado</li>
+          <li><i class="fas fa-check"></i> Projetos curados</li>
           <li><i class="fas fa-check"></i> Relatorios basicos</li>
           <li><i class="fas fa-check"></i> Suporte por email</li>
         </ul>
-        <a href="#contato" class="btn btn-primary btn-sm" style="width: 100%;">Comecar</a>
+        <a href="#contato" class="btn btn-primary btn-sm" style="width: 100%;">Comecar Piloto</a>
       </div>
 
       <div class="pricing-card featured">
@@ -484,10 +701,11 @@
           <li><i class="fas fa-check"></i> Usuarios ilimitados</li>
           <li><i class="fas fa-check"></i> Dominio proprio</li>
           <li><i class="fas fa-check"></i> Dashboard completo</li>
+          <li><i class="fas fa-check"></i> Materiais de campanha</li>
           <li><i class="fas fa-check"></i> Suporte prioritario</li>
-          <li><i class="fas fa-check"></i> API de integracao</li>
+          <li><i class="fas fa-check"></i> Relatorios de impacto</li>
         </ul>
-        <a href="#contato" class="btn btn-white btn-sm" style="width: 100%; color: #F7941D;">Falar com Consultor</a>
+        <a href="#contato" class="btn btn-white btn-sm" style="width: 100%; color: #1E3A5F;">Falar com Consultor</a>
       </div>
 
       <div class="pricing-card">
@@ -495,9 +713,10 @@
         <div class="price">Personalizado</div>
         <ul>
           <li><i class="fas fa-check"></i> Tudo do Profissional</li>
-          <li><i class="fas fa-check"></i> Funcoes exclusivas</li>
+          <li><i class="fas fa-check"></i> API de integracao</li>
           <li><i class="fas fa-check"></i> SLA garantido</li>
           <li><i class="fas fa-check"></i> Gerente dedicado</li>
+          <li><i class="fas fa-check"></i> Co-branding em eventos</li>
         </ul>
         <a href="#contato" class="btn btn-primary btn-sm" style="width: 100%;">Contato</a>
       </div>
@@ -505,32 +724,32 @@
   </section>
 
   <!-- FAQ -->
-  <section class="faq-section" style="padding: 80px 24px; background: #f8f9fa;">
+  <section class="faq-section">
     <div class="container">
       <div class="section-header">
         <h2>Perguntas Frequentes</h2>
-        <p>Tire suas dúvidas sobre a parceria</p>
+        <p>Tire suas duvidas sobre a parceria</p>
       </div>
       <div style="max-width: 700px; margin: 0 auto;">
         <details style="margin-bottom: 1rem; padding: 1.25rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
           <summary style="font-weight: 600; cursor: pointer; color: #1E3A5F;">Quanto tempo leva para implementar?</summary>
-          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">A personalizacao basica (logo, cores, dominio) e feita em ate 5 dias uteis. Integracoes mais complexas com sistemas internos podem levar ate 15 dias.</p>
+          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">A personalizacao basica (logo, cores, dominio) e feita em ate 5 dias uteis. Curadoria de projetos e materiais de campanha podem levar ate 15 dias.</p>
+        </details>
+        <details style="margin-bottom: 1rem; padding: 1.25rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+          <summary style="font-weight: 600; cursor: pointer; color: #1E3A5F;">Como funciona a curadoria de projetos?</summary>
+          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">Voce define os criterios (estado, tipo de fundo, area de atuacao) e nos apresentamos opcoes pre-validadas. A decisao final e da sua organizacao.</p>
         </details>
         <details style="margin-bottom: 1rem; padding: 1.25rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
           <summary style="font-weight: 600; cursor: pointer; color: #1E3A5F;">Os dados dos associados ficam seguros?</summary>
-          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">Sim. Utilizamos criptografia em transito e em repouso, servidores no Brasil e seguimos a LGPD integralmente. Voce recebe relatorios agregados, sem acesso a dados individuais sensiveis.</p>
-        </details>
-        <details style="margin-bottom: 1rem; padding: 1.25rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-          <summary style="font-weight: 600; cursor: pointer; color: #1E3A5F;">Posso escolher quais fundos e projetos aparecem?</summary>
-          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">Sim. Voce pode curar os projetos especificos ou categorias que fazem sentido para seu publico. Por exemplo, apenas projetos do seu estado ou de determinada area (cultura, esporte, idoso, etc).</p>
+          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">Sim. Utilizamos criptografia, servidores no Brasil e seguimos a LGPD. Voce recebe relatorios agregados, sem acesso a dados individuais sensiveis.</p>
         </details>
         <details style="margin-bottom: 1rem; padding: 1.25rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
           <summary style="font-weight: 600; cursor: pointer; color: #1E3A5F;">Qual o custo para a organizacao?</summary>
-          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">O plano Starter e gratuito para ate 100 usuarios. Para organizacoes maiores, o modelo e sob consulta, podendo ser mensalidade fixa ou percentual sobre destinacoes realizadas.</p>
+          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">O plano Piloto e gratuito para validar o modelo. Para organizacoes maiores, o modelo e sob consulta - pode ser mensalidade fixa ou percentual sobre destinacoes.</p>
         </details>
         <details style="margin-bottom: 1rem; padding: 1.25rem; background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
           <summary style="font-weight: 600; cursor: pointer; color: #1E3A5F;">Os associados precisam pagar algo?</summary>
-          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">Nao. A destinacao de IR e gratuita para o contribuinte - ele apenas direciona parte do imposto que ja pagaria. Nao ha custo adicional para os usuarios da plataforma.</p>
+          <p style="margin-top: 1rem; color: #666; line-height: 1.6;">Nao. A destinacao de IR e gratuita para o contribuinte - ele apenas direciona parte do imposto que ja pagaria. Nao ha custo adicional.</p>
         </details>
       </div>
     </div>
@@ -538,13 +757,13 @@
 
   <!-- CTA Final -->
   <section class="cta-final" id="contato">
-    <h2>Vamos Conversar?</h2>
-    <p>Agende uma demonstracao e descubra como sua organizacao pode oferecer esse beneficio.</p>
+    <h2>Leve o Movimento Servidor Cidadao para sua Categoria</h2>
+    <p>Agende uma conversa e descubra como transformar o IR dos seus associados em impacto social.</p>
     <div class="contact-options">
       <a href="mailto:parcerias@incentivabr.com.br" class="btn btn-white" style="color: #F7941D;">
         <i class="fas fa-envelope"></i> parcerias@incentivabr.com.br
       </a>
-      <a href="https://wa.me/5561999682929?text=Olá! Tenho interesse no white label IncentivaBR" target="_blank" class="btn btn-outline-white">
+      <a href="https://wa.me/5561999682929?text=Olá! Represento uma organização e tenho interesse no Movimento Servidor Cidadão" target="_blank" class="btn btn-outline-white">
         <i class="fab fa-whatsapp"></i> WhatsApp
       </a>
     </div>
