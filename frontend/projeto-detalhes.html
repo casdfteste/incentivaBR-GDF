@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes do Projeto - IncentivaBR</title>
-  <meta name="description" content="Detalhes do projeto social para destinacao via incentivo fiscal.">
+  <meta name="description" content="Detalhes do projeto social para destinação via incentivo fiscal.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,429 +15,7 @@
       background: var(--background-light);
     }
 
-    .hero {
-      height: 320px;
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 80px;
-      position: relative;
-    }
-
-    .hero img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 48px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.75));
-      color: white;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 8px 16px;
-      border-radius: 24px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .hero-title {
-      font-size: 36px;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    .hero-org {
-      opacity: 0.9;
-      margin-top: 12px;
-      font-size: 16px;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 32px;
-    }
-
-    .card {
-      background: white;
-      border-radius: var(--radius-xl);
-      padding: 28px;
-      box-shadow: var(--shadow-md);
-      margin-bottom: 24px;
-    }
-
-    .card-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: var(--primary-color);
-    }
-
-    .card-title i {
-      color: var(--secondary-color);
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 100px;
-    }
-
-    .donate-card {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-      color: white;
-      border-radius: var(--radius-xl);
-      padding: 28px;
-      text-align: center;
-    }
-
-    .donate-card h3 {
-      font-size: 22px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .progress-large {
-      margin: 24px 0;
-    }
-
-    .progress-bar-large {
-      height: 14px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 7px;
-      overflow: hidden;
-    }
-
-    .progress-fill-large {
-      height: 100%;
-      background: linear-gradient(90deg, var(--secondary-color), var(--warning-color));
-      border-radius: 7px;
-    }
-
-    .progress-stats {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 12px;
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    .amount-large {
-      font-size: 32px;
-      font-weight: 700;
-      margin: 20px 0 8px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 14px 8px;
-      background: rgba(255,255,255,0.12);
-      border-radius: var(--radius-md);
-    }
-
-    .stat-value {
-      font-size: 22px;
-      font-weight: 700;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      opacity: 0.8;
-      margin-top: 4px;
-    }
-
-    .btn-donate {
-      background: var(--success-color);
-      color: white;
-      width: 100%;
-      margin-top: 24px;
-      padding: 18px;
-      font-size: 18px;
-      border-radius: var(--radius-lg);
-    }
-
-    .btn-donate:hover {
-      background: #008a47;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 168, 89, 0.4);
-    }
-
-    .btn-calc-outline {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-      width: 100%;
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: var(--radius-md);
-    }
-
-    .btn-calc-outline:hover {
-      background: rgba(255,255,255,0.15);
-    }
-
-    .tabs {
-      display: flex;
-      border-bottom: 2px solid var(--border-color);
-      margin-bottom: 24px;
-    }
-
-    .tab {
-      padding: 14px 24px;
-      cursor: pointer;
-      font-weight: 500;
-      color: var(--text-secondary);
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      transition: all 0.3s;
-    }
-
-    .tab:hover {
-      color: var(--primary-color);
-    }
-
-    .tab.active {
-      color: var(--primary-color);
-      border-bottom-color: var(--secondary-color);
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .description {
-      line-height: 1.9;
-      color: var(--text-secondary);
-    }
-
-    .org-info {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    .org-logo {
-      width: 80px;
-      height: 80px;
-      background: var(--background-light);
-      border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      color: var(--text-muted);
-    }
-
-    .org-details h4 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: var(--primary-color);
-    }
-
-    .org-details p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .fund-info {
-      background: var(--background-light);
-      padding: 20px;
-      border-radius: var(--radius-lg);
-      border-left: 4px solid var(--secondary-color);
-    }
-
-    .fund-info h4 {
-      font-size: 16px;
-      color: var(--primary-color);
-      margin-bottom: 12px;
-    }
-
-    .fund-info p {
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: var(--text-secondary);
-    }
-
-    .bank-info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .bank-item {
-      background: white;
-      padding: 12px;
-      border-radius: var(--radius-md);
-    }
-
-    .bank-item strong {
-      display: block;
-      color: var(--text-muted);
-      font-size: 11px;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-    }
-
-    /* Modal */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .modal-overlay.show {
-      display: flex;
-    }
-
-    .modal {
-      background: white;
-      border-radius: var(--radius-xl);
-      max-width: 500px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      padding: 24px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-header h2 {
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--primary-color);
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 28px;
-      cursor: pointer;
-      color: var(--text-muted);
-      padding: 0;
-      line-height: 1;
-    }
-
-    .modal-body {
-      padding: 24px;
-    }
-
-    .modal-footer {
-      padding: 24px;
-      border-top: 1px solid var(--border-color);
-    }
-
-    .info-box {
-      background: rgba(0, 168, 89, 0.1);
-      padding: 16px;
-      border-radius: var(--radius-md);
-      margin-bottom: 20px;
-      border: 1px solid var(--success-color);
-    }
-
-    .info-box.warning {
-      background: rgba(255, 184, 0, 0.1);
-      border-color: var(--warning-color);
-    }
-
-    .success-message {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .success-message i {
-      font-size: 72px;
-      color: var(--success-color);
-      margin-bottom: 20px;
-    }
-
-    .success-message h3 {
-      font-size: 26px;
-      margin-bottom: 12px;
-      color: var(--text-primary);
-    }
-
-    .loading {
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .loading i {
-      font-size: 56px;
-      color: var(--primary-color);
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 900px) {
-      .content-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-      }
-
-      .hero {
-        height: 240px;
-      }
-
-      .hero-title {
-        font-size: 28px;
-      }
-
-      .hero-overlay {
-        padding: 32px 20px;
-      }
-    }
-
-    /* Modal de Doação com Dados Bancários */
+    /* Modal de Doação com Dados Bancários - Específico desta página */
     .modal-doacao-overlay {
       position: fixed;
       top: 0;
@@ -533,7 +111,7 @@
   <div id="pageContent">
     <div class="loading">
       <i class="fas fa-spinner"></i>
-      <p style="margin-top:24px;color:var(--text-secondary)">Carregando projeto...</p>
+      <p class="loading-text">Carregando projeto...</p>
     </div>
   </div>
 
@@ -541,16 +119,16 @@
   <div class="modal-overlay" id="donateModal">
     <div class="modal">
       <div class="modal-header">
-        <h2><i class="fas fa-hand-holding-heart"></i> Fazer Destinacao</h2>
+        <h2><i class="fas fa-hand-holding-heart"></i> Fazer Destinação</h2>
         <button class="modal-close" onclick="closeModal()">&times;</button>
       </div>
       <div class="modal-body" id="modalBody">
-        <!-- Conteudo dinamico -->
+        <!-- Conteúdo dinâmico -->
       </div>
     </div>
   </div>
 
-  <!-- Modal de Destinacao com Dados Bancários -->
+  <!-- Modal de Destinação com Dados Bancários -->
   <div id="modal-doacao" class="modal-doacao-overlay" style="display: none;">
     <div class="modal-doacao-content">
       <span class="close-modal-doacao" onclick="fecharModalDoacao()">&times;</span>
@@ -681,11 +259,11 @@
     <p class="tagline">Incentivos Fiscais Simplificados</p>
     <div class="footer-bottom">
       <p>
-        <a href="politica-privacidade.html" style="color: rgba(255,255,255,0.8);">Politica de Privacidade</a> |
-        <a href="termos-uso.html" style="color: rgba(255,255,255,0.8);">Termos de Uso</a>
+        <a href="politica-privacidade.html" class="footer-legal-link">Política de Privacidade</a> |
+        <a href="termos-uso.html" class="footer-legal-link">Termos de Uso</a>
       </p>
-      <p style="margin-top: 12px;">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
-      <p style="margin-top: 8px; font-size: 12px;">INPI: BR512025000647-0</p>
+      <p class="footer-copyright">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
+      <p class="footer-inpi">INPI: BR512025000647-0</p>
     </div>
   </footer>
 
@@ -730,8 +308,8 @@
         document.getElementById('pageContent').innerHTML = `
           <div class="container" style="text-align:center;padding:80px 20px">
             <i class="fas fa-exclamation-circle" style="font-size:72px;color:var(--danger-color)"></i>
-            <h2 style="margin:24px 0;color:var(--text-primary)">Projeto nao encontrado</h2>
-            <p style="color:var(--text-secondary);margin-bottom:24px">O projeto que voce procura nao existe ou foi removido.</p>
+            <h2 style="margin:24px 0;color:var(--text-primary)">Projeto não encontrado</h2>
+            <p style="color:var(--text-secondary);margin-bottom:24px">O projeto que você procura não existe ou foi removido.</p>
             <a href="projetos.html" class="btn btn-primary">Ver Projetos</a>
           </div>
         `;
@@ -760,7 +338,7 @@
               <div class="card">
                 <div class="tabs">
                   <div class="tab active" data-tab="about">Sobre o Projeto</div>
-                  <div class="tab" data-tab="org">Organizacao</div>
+                  <div class="tab" data-tab="org">Organização</div>
                   <div class="tab" data-tab="fund">Fundo</div>
                 </div>
 
@@ -788,14 +366,14 @@
                     <h4>${project.fund.name}</h4>
                     <p><strong>Codigo:</strong> ${project.fund.code}</p>
                     <p><strong>Lei Federal:</strong> ${project.fund.federal_law || '-'}</p>
-                    <p><strong>Limite deducao:</strong> ${project.fund.max_percentage}% do IR devido</p>
+                    <p><strong>Limite dedução:</strong> ${project.fund.max_percentage}% do IR devido</p>
                     <p><strong>Grupo:</strong> ${project.fund.group_name}</p>
 
                     ${project.fund.bank_code ? `
-                      <h4 style="margin-top:20px">Dados Bancarios</h4>
+                      <h4 style="margin-top:20px">Dados Bancários</h4>
                       <div class="bank-info">
                         <div class="bank-item"><strong>Banco</strong>${project.fund.bank_code}</div>
-                        <div class="bank-item"><strong>Agencia</strong>${project.fund.agency || '-'}</div>
+                        <div class="bank-item"><strong>Agência</strong>${project.fund.agency || '-'}</div>
                         <div class="bank-item"><strong>Conta</strong>${project.fund.account || '-'}</div>
                         <div class="bank-item"><strong>CNPJ</strong>${project.fund.cnpj || '-'}</div>
                       </div>
@@ -963,18 +541,18 @@
         document.getElementById('modalBody').innerHTML = `
           <div class="info-box">
             <p><strong>Seu IR devido:</strong> ${utils.formatCurrency(irData.ir_devido)}</p>
-            <p><strong>Limite maximo (${typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9}%):</strong> ${utils.formatCurrency(maxDonation)}</p>
+            <p><strong>Limite máximo (${typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9}%):</strong> ${utils.formatCurrency(maxDonation)}</p>
           </div>
 
           <form id="donateForm">
             <div class="form-group">
-              <label for="donationAmount">Valor da destinacao</label>
+              <label for="donationAmount">Valor da destinação</label>
               <input type="text" id="donationAmount" placeholder="R$ 0,00" required style="padding:14px 16px;border:2px solid var(--border-color);border-radius:var(--radius-md);width:100%;font-size:16px">
-              <p style="font-size:13px;color:var(--text-muted);margin-top:8px">Maximo: ${utils.formatCurrency(maxDonation)}</p>
+              <p style="font-size:13px;color:var(--text-muted);margin-top:8px">Máximo: ${utils.formatCurrency(maxDonation)}</p>
             </div>
 
             <button type="submit" class="btn btn-success" style="width:100%" id="confirmDonateBtn">
-              <i class="fas fa-check"></i> Confirmar Destinacao
+              <i class="fas fa-check"></i> Confirmar Destinação
             </button>
           </form>
         `;
@@ -1172,7 +750,7 @@
             const proj = data.project;
             dadosDoacaoAtual.projeto = proj;
 
-            // Usar dados bancarios do projeto, ou fallback para organizacao
+            // Usar dados bancários do projeto, ou fallback para organização
             const org = typeof tenant !== 'undefined' ? tenant.getBankData() : null;
             const bankData = proj.pix_key ? proj : (org || proj);
 

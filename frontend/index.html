@@ -10,284 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/incentivabr-theme.css">
-  <style>
-    /* Page-specific styles */
-    .hero {
-      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 50%, #1E3A5F 100%);
-      color: white;
-      padding: 140px 24px 100px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 16px;
-      line-height: 1.2;
-      position: relative;
-    }
-
-    .hero h1 .highlight {
-      color: #F7941D;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-    }
-
-    .hero p {
-      font-size: 20px;
-      opacity: 0.95;
-      max-width: 600px;
-      margin: 0 auto 32px;
-      position: relative;
-    }
-
-    .hero-buttons {
-      position: relative;
-    }
-
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 60px;
-      margin-top: 60px;
-      flex-wrap: wrap;
-      position: relative;
-    }
-
-    .hero-stat {
-      background: rgba(255,255,255,0.1);
-      padding: 20px 30px;
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .hero-stat .value {
-      font-size: 36px;
-      font-weight: 700;
-    }
-
-    .hero-stat .label {
-      opacity: 0.9;
-      font-size: 14px;
-    }
-
-    /* Animated counter */
-    .counter-value {
-      display: inline-block;
-    }
-
-    /* Testimonials */
-    .testimonials-section {
-      padding: 80px 24px;
-      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .testimonial-card {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      border: 1px solid #eee;
-      position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .testimonial-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    }
-
-    .testimonial-card::before {
-      content: '"';
-      position: absolute;
-      top: 20px;
-      right: 25px;
-      font-size: 80px;
-      color: #F7941D;
-      opacity: 0.15;
-      font-family: Georgia, serif;
-      line-height: 1;
-    }
-
-    .testimonial-content {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #444;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .testimonial-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1E3A5F, #2B5A9E);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 18px;
-    }
-
-    .testimonial-info h4 {
-      margin: 0;
-      color: #1E3A5F;
-      font-size: 15px;
-    }
-
-    .testimonial-info p {
-      margin: 4px 0 0;
-      color: #888;
-      font-size: 13px;
-    }
-
-    .testimonial-rating {
-      color: #F7941D;
-      margin-bottom: 1rem;
-    }
-
-    /* Trust badges */
-    .trust-section {
-      padding: 60px 24px;
-      background: #1E3A5F;
-      color: white;
-    }
-
-    .trust-grid {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 3rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .trust-badge {
-      text-align: center;
-      opacity: 0.9;
-    }
-
-    .trust-badge i {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-      display: block;
-      color: #F7941D;
-    }
-
-    .trust-badge span {
-      font-size: 13px;
-      display: block;
-    }
-
-    /* For Organizations CTA */
-    .org-cta-section {
-      padding: 80px 24px;
-      background: linear-gradient(135deg, #F7941D 0%, #ff6b35 100%);
-      color: white;
-      text-align: center;
-    }
-
-    .org-cta-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .org-cta-section p {
-      font-size: 1.1rem;
-      opacity: 0.95;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-
-    .org-features {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
-
-    .org-feature {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 15px;
-    }
-
-    .org-feature i {
-      font-size: 1.2rem;
-    }
-
-    /* Fund colors */
-    .fund-children { background: #00A859; }
-    .fund-elderly { background: #2B5A9E; }
-    .fund-sports { background: #F7941D; }
-    .fund-culture { background: #9C27B0; }
-    .fund-audiovisual { background: #E91E63; }
-    .fund-oncology { background: #E74C3C; }
-    .fund-pcd { background: #3F51B5; }
-    .fund-recycling { background: #00BCD4; }
-
-    @media (max-width: 768px) {
-      .hero {
-        padding: 120px 20px 60px;
-      }
-      .hero h1 {
-        font-size: 32px;
-      }
-      .hero p {
-        font-size: 16px;
-      }
-      .hero-stats {
-        gap: 20px;
-      }
-      .hero-stat {
-        padding: 15px 20px;
-      }
-      .hero-stat .value {
-        font-size: 28px;
-      }
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-      }
-      .trust-grid {
-        gap: 2rem;
-      }
-      .org-features {
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-  </style>
 </head>
 <body>
   <!-- Header -->
@@ -307,7 +29,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero-home">
     <h1>Transforme seu Imposto<br>em <span class="highlight">Impacto Social</span></h1>
     <p>Destine at&eacute; <span class="max-percentage">9%</span> do seu IR devido para projetos que transformam vidas. Sem custo adicional para voc&ecirc;.</p>
 
@@ -339,28 +61,28 @@
   <!-- Como Funciona - Resumo -->
   <section class="section" id="como-funciona">
     <div class="container">
-      <h2 style="text-align: center; color: #1E3A5F; margin-bottom: 2rem;">
-        Como Funciona?
-      </h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 3rem;">1️⃣</div>
-          <h3 style="color: #1E3A5F;">Calcule seu IR</h3>
+      <div class="section-header">
+        <h2>Como Funciona?</h2>
+      </div>
+      <div class="steps-grid">
+        <div class="card step-card">
+          <div class="step-emoji">1️⃣</div>
+          <h3 class="text-primary">Calcule seu IR</h3>
           <p>Descubra quanto você pode destinar (até <span class="max-percentage">9%</span>)</p>
         </div>
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 3rem;">2️⃣</div>
-          <h3 style="color: #F7941D;">Escolha projetos</h3>
+        <div class="card step-card">
+          <div class="step-emoji">2️⃣</div>
+          <h3 class="text-secondary-color">Escolha projetos</h3>
           <p>Apoie causas que transformam vidas</p>
         </div>
-        <div class="card" style="text-align: center;">
-          <div style="font-size: 3rem;">3️⃣</div>
-          <h3 style="color: #00A859;">Receba de volta</h3>
+        <div class="card step-card">
+          <div class="step-emoji">3️⃣</div>
+          <h3 class="text-success">Receba de volta</h3>
           <p>Valor volta na restituição ou reduz imposto</p>
         </div>
       </div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="como-funciona.html" style="color: #2B5A9E; font-weight: 600;">
+      <div class="section-link">
+        <a href="como-funciona.html" class="link-accent">
           Ver explicação completa →
         </a>
       </div>
@@ -381,9 +103,9 @@
           <h3>Declara&ccedil;&atilde;o Completa</h3>
           <p><strong>Pode destinar IR</strong></p>
           <ul>
-            <li><i class="fas fa-check" style="color:#00A859"></i> Deduz gastos reais (sa&uacute;de, educa&ccedil;&atilde;o, dependentes)</li>
-            <li><i class="fas fa-check" style="color:#00A859"></i> Pode destinar at&eacute; <span class="max-percentage">9%</span> do IR para projetos</li>
-            <li><i class="fas fa-check" style="color:#00A859"></i> Ideal para quem tem muitas despesas dedut&iacute;veis</li>
+            <li><i class="fas fa-check icon-success"></i> Deduz gastos reais (sa&uacute;de, educa&ccedil;&atilde;o, dependentes)</li>
+            <li><i class="fas fa-check icon-success"></i> Pode destinar at&eacute; <span class="max-percentage">9%</span> do IR para projetos</li>
+            <li><i class="fas fa-check icon-success"></i> Ideal para quem tem muitas despesas dedut&iacute;veis</li>
           </ul>
         </div>
 
@@ -392,14 +114,14 @@
           <h3>Declara&ccedil;&atilde;o Simplificada</h3>
           <p><strong>N&Atilde;O pode destinar IR</strong></p>
           <ul>
-            <li><i class="fas fa-times" style="color:#FFB800"></i> Desconto padr&atilde;o de 20% (m&aacute;x R$ 16.754)</li>
-            <li><i class="fas fa-times" style="color:#FFB800"></i> N&atilde;o permite destina&ccedil;&atilde;o de IR</li>
-            <li><i class="fas fa-info-circle" style="color:#FFB800"></i> Mude para completa se quiser destinar</li>
+            <li><i class="fas fa-times icon-warning"></i> Desconto padr&atilde;o de 20% (m&aacute;x R$ 16.754)</li>
+            <li><i class="fas fa-times icon-warning"></i> N&atilde;o permite destina&ccedil;&atilde;o de IR</li>
+            <li><i class="fas fa-info-circle icon-warning"></i> Mude para completa se quiser destinar</li>
           </ul>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:40px">
+      <div class="section-cta">
         <a href="calculadora-escolha.html" class="btn btn-primary">
           <i class="fas fa-calculator"></i> Simular Meu IR
         </a>
@@ -535,33 +257,33 @@
     </div>
   </section>
 
-  <!-- Selos de Confian&ccedil;a -->
+  <!-- Selos de Confiança -->
   <section class="trust-section">
     <div class="trust-grid">
       <div class="trust-badge">
         <i class="fas fa-shield-alt"></i>
         <span>Dados Protegidos</span>
-        <span style="font-size: 11px; opacity: 0.7;">LGPD Compliant</span>
+        <span class="trust-badge-detail">LGPD Compliant</span>
       </div>
       <div class="trust-badge">
         <i class="fas fa-lock"></i>
-        <span>Conex&atilde;o Segura</span>
-        <span style="font-size: 11px; opacity: 0.7;">SSL/TLS</span>
+        <span>Conexão Segura</span>
+        <span class="trust-badge-detail">SSL/TLS</span>
       </div>
       <div class="trust-badge">
         <i class="fas fa-certificate"></i>
         <span>Registro INPI</span>
-        <span style="font-size: 11px; opacity: 0.7;">BR512025000647-0</span>
+        <span class="trust-badge-detail">BR512025000647-0</span>
       </div>
       <div class="trust-badge">
         <i class="fas fa-landmark"></i>
         <span>Fundos Oficiais</span>
-        <span style="font-size: 11px; opacity: 0.7;">Gov. Federal e Distrital</span>
+        <span class="trust-badge-detail">Gov. Federal e Distrital</span>
       </div>
       <div class="trust-badge">
         <i class="fas fa-calculator"></i>
         <span>Validado por</span>
-        <span style="font-size: 11px; opacity: 0.7;">Contadores</span>
+        <span class="trust-badge-detail">Contadores</span>
       </div>
     </div>
   </section>
@@ -591,7 +313,7 @@
         <span>Suporte dedicado</span>
       </div>
     </div>
-    <a href="para-organizacoes.html" class="btn btn-white" style="color: #F7941D;">
+    <a href="para-organizacoes.html" class="btn btn-white-secondary">
       <i class="fas fa-arrow-right"></i> Quero saber mais
     </a>
   </section>
@@ -601,29 +323,29 @@
     <div class="container">
       <div class="section-header">
         <h2>Precisa de Ajuda?</h2>
-        <p>Estamos aqui para esclarecer suas d&uacute;vidas</p>
+        <p>Estamos aqui para esclarecer suas dúvidas</p>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
-        <a href="passo-a-passo.html" class="card" style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-          <div style="font-size: 2.5rem; color: #F7941D; margin-bottom: 1rem;">
+      <div class="help-grid">
+        <a href="passo-a-passo.html" class="card help-card">
+          <div class="help-card-icon icon-secondary">
             <i class="fas fa-route"></i>
           </div>
-          <h3 style="color: #1E3A5F; margin-bottom: 0.5rem;">Passo a Passo</h3>
-          <p style="color: #666;">Guia visual completo do processo de destina&ccedil;&atilde;o</p>
+          <h3>Passo a Passo</h3>
+          <p>Guia visual completo do processo de destinação</p>
         </a>
-        <a href="faq.html" class="card" style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-          <div style="font-size: 2.5rem; color: #2B5A9E; margin-bottom: 1rem;">
+        <a href="faq.html" class="card help-card">
+          <div class="help-card-icon icon-accent">
             <i class="fas fa-question-circle"></i>
           </div>
-          <h3 style="color: #1E3A5F; margin-bottom: 0.5rem;">Perguntas Frequentes</h3>
-          <p style="color: #666;">Respostas para as d&uacute;vidas mais comuns</p>
+          <h3>Perguntas Frequentes</h3>
+          <p>Respostas para as dúvidas mais comuns</p>
         </a>
-        <div class="card" style="text-align: center; cursor: pointer;" onclick="if(typeof TINA !== 'undefined') TINA.open();">
-          <div style="font-size: 2.5rem; color: #00A859; margin-bottom: 1rem;">
+        <div class="card help-card" onclick="if(typeof TINA !== 'undefined') TINA.open();">
+          <div class="help-card-icon icon-success">
             <i class="fas fa-robot"></i>
           </div>
-          <h3 style="color: #1E3A5F; margin-bottom: 0.5rem;">Fale com a TINA</h3>
-          <p style="color: #666;">Nossa assistente virtual responde na hora</p>
+          <h3>Fale com a TINA</h3>
+          <p>Nossa assistente virtual responde na hora</p>
         </div>
       </div>
     </div>
@@ -682,11 +404,11 @@
 
     <div class="footer-bottom">
       <p>
-        <a href="politica-privacidade.html" style="color: rgba(255,255,255,0.8);">Politica de Privacidade</a> |
-        <a href="termos-uso.html" style="color: rgba(255,255,255,0.8);">Termos de Uso</a>
+        <a href="politica-privacidade.html" class="footer-legal-link">Política de Privacidade</a> |
+        <a href="termos-uso.html" class="footer-legal-link">Termos de Uso</a>
       </p>
-      <p style="margin-top: 12px;">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
-      <p style="margin-top: 8px; font-size: 12px;">INPI: BR512025000647-0</p>
+      <p class="footer-copyright">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
+      <p class="footer-inpi">INPI: BR512025000647-0</p>
     </div>
   </footer>
 
