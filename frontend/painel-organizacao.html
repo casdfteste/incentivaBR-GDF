@@ -17,62 +17,70 @@
       background: var(--background-light);
     }
 
-    /* Header */
-    .panel-header {
+    /* Org Sub-header */
+    .org-subheader {
       background: var(--primary-color);
       color: white;
-      padding: 16px 24px;
+      padding: 12px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
     }
 
-    .panel-header .logo {
+    .org-subheader .org-identity {
       display: flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
-      color: white;
     }
 
-    .panel-header .logo img {
-      height: 40px;
+    .org-subheader .org-identity img {
+      height: 36px;
       border-radius: 8px;
+      background: white;
+      padding: 2px;
     }
 
-    .panel-header .logo span {
+    .org-subheader .org-identity .org-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .org-subheader .org-identity .org-info .org-title {
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
     }
 
-    .panel-header .badge-powered {
+    .org-subheader .org-identity .org-info .org-subtitle {
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    .org-subheader .subheader-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-powered {
       background: rgba(255,255,255,0.15);
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    .panel-header .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      gap: 5px;
+      color: white;
     }
 
     .btn-export {
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.3);
       color: white;
-      padding: 8px 16px;
+      padding: 7px 14px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       display: flex;
       align-items: center;
@@ -498,13 +506,13 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .panel-header {
+      .org-subheader {
         flex-direction: column;
-        gap: 12px;
-        padding: 12px 16px;
+        gap: 10px;
+        padding: 10px 16px;
       }
 
-      .panel-header .header-actions {
+      .org-subheader .subheader-actions {
         width: 100%;
         justify-content: space-between;
       }
@@ -567,13 +575,32 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="panel-header">
-    <a href="/" class="logo">
-      <img src="assets/favicon.svg" alt="Logo" class="org-logo">
-      <span class="org-name">Organizacao</span>
+  <!-- Header padrao IncentivaBR -->
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img">
     </a>
-    <div class="header-actions">
+    <nav>
+      <a href="projetos.html">Projetos</a>
+      <a href="calculadora-escolha.html">Calculadora IR</a>
+      <a href="como-funciona.html">Como Funciona</a>
+      <a href="#" id="navAuth" class="btn btn-primary btn-sm">Entrar</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Sub-header da organizacao -->
+  <div class="org-subheader" id="org-subheader">
+    <div class="org-identity">
+      <img src="assets/favicon.svg" alt="Logo" class="org-logo" id="org-header-logo">
+      <div class="org-info">
+        <span class="org-title org-name">Organizacao</span>
+        <span class="org-subtitle fund-name">Painel de Impacto</span>
+      </div>
+    </div>
+    <div class="subheader-actions">
       <span class="badge-powered">
         <i class="fas fa-bolt"></i> Powered by IncentivaBR
       </span>
@@ -581,7 +608,7 @@
         <i class="fas fa-file-pdf"></i> Exportar PDF
       </button>
     </div>
-  </header>
+  </div>
 
   <!-- Main Content -->
   <main class="panel-container" id="panel-content">
@@ -712,7 +739,7 @@
     <div class="footer-links">
       <a href="politica-privacidade.html">Politica de Privacidade</a>
       <a href="termos-uso.html">Termos de Uso</a>
-      <a href="/">Pagina Inicial</a>
+      <a href="index.html">Pagina Inicial</a>
     </div>
     <p>Plataforma IncentivaBR &mdash; Tecnologia para impacto social</p>
   </footer>
@@ -721,6 +748,8 @@
   <script src="js/api.js"></script>
   <script src="js/tenant.js"></script>
   <script src="js/toast.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/mobile-menu.js"></script>
   <script>
     // ========================================
     // Painel da Organizacao - IncentivaBR
@@ -1078,6 +1107,16 @@
       if (!orgSlug || orgSlug === 'www') {
         document.querySelector('.welcome-section p').innerHTML =
           'Selecione uma organizacao para visualizar o painel de impacto.';
+      }
+
+      // Append ?org= to nav links to keep tenant context
+      if (orgSlug && orgSlug !== 'www') {
+        document.querySelectorAll('header.header nav a, .footer-links a').forEach(link => {
+          const href = link.getAttribute('href');
+          if (href && href !== '#' && !href.includes('org=')) {
+            link.href = href + (href.includes('?') ? '&' : '?') + 'org=' + orgSlug;
+          }
+        });
       }
 
       // Load all sections in parallel
