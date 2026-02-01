@@ -18,6 +18,7 @@ import donationsRoutes from './src/routes/donations.js';
 import uploadsRoutes from './src/routes/uploads.js';
 import adminRoutes from './src/routes/admin.js';
 import configRoutes from './src/routes/config.js';
+import orgDashboardRoutes from './src/routes/orgDashboard.js';
 import tenantMiddleware from './src/middleware/tenant.js';
 
 dotenv.config();
@@ -140,6 +141,7 @@ app.use('/api/donations', donationsRoutes);
 app.use('/api/uploads', uploadsRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/config', configRoutes);
+app.use('/api/org-dashboard', orgDashboardRoutes);
 
 // Servir arquivos de upload
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));

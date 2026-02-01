@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel da Associacao - IncentivaBR</title>
+  <meta name="description" content="Painel de impacto da organizacao - metricas agregadas de destinacoes via IncentivaBR">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    body {
+      background: var(--background-light);
+    }
+
+    /* Header */
+    .panel-header {
+      background: var(--primary-color);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .panel-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .panel-header .logo img {
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .panel-header .logo span {
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    .panel-header .badge-powered {
+      background: rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-header .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-export {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s;
+    }
+
+    .btn-export:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Container */
+    .panel-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Hero / Welcome */
+    .welcome-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      color: white;
+      padding: 48px;
+      border-radius: var(--radius-xl);
+      margin-bottom: 32px;
+    }
+
+    .welcome-section h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .welcome-section p {
+      opacity: 0.9;
+      font-size: 16px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.15);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .stat-card .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin: 0 auto 12px;
+    }
+
+    .stat-card .stat-icon.success { background: var(--success-color); }
+    .stat-card .stat-icon.primary { background: rgba(255,255,255,0.25); }
+    .stat-card .stat-icon.info { background: var(--info-color); }
+    .stat-card .stat-icon.secondary { background: var(--secondary-color); }
+
+    .stat-card .value {
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .stat-card .label {
+      font-size: 13px;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--primary-color);
+    }
+
+    .section-title i {
+      color: var(--secondary-color);
+    }
+
+    /* Chart */
+    .chart-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .chart-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 250px;
+      padding: 20px 0;
+      border-bottom: 2px solid var(--border-color);
+      position: relative;
+    }
+
+    .chart-bar-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    .chart-bar {
+      width: 100%;
+      max-width: 48px;
+      background: linear-gradient(180deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      border-radius: 6px 6px 0 0;
+      min-height: 4px;
+      transition: height 0.6s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .chart-bar:hover {
+      opacity: 0.85;
+    }
+
+    .chart-bar .tooltip {
+      display: none;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text-primary);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      margin-bottom: 6px;
+      z-index: 10;
+    }
+
+    .chart-bar:hover .tooltip {
+      display: block;
+    }
+
+    .chart-labels {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .chart-labels span {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-secondary);
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 250px;
+      color: var(--text-secondary);
+    }
+
+    .chart-empty i {
+      font-size: 48px;
+      color: var(--border-color);
+      margin-bottom: 12px;
+    }
+
+    /* Table */
+    .table-container {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .table-header-bar {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .table-header-bar h3 {
+      font-size: 18px;
+      color: var(--primary-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th {
+      text-align: left;
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--background-light);
+    }
+
+    table td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table tr:hover td {
+      background: var(--background-light);
+    }
+
+    /* Progress bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+
+    .progress-bar-fill.low { background: var(--danger-color); }
+    .progress-bar-fill.medium { background: var(--warning-color); }
+    .progress-bar-fill.high { background: var(--success-color); }
+
+    .progress-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .status-badge.active { background: #e8f5e9; color: #2e7d32; }
+    .status-badge.draft { background: #fff3e0; color: #e65100; }
+    .status-badge.funded { background: #e3f2fd; color: #1565c0; }
+    .status-badge.completed { background: #f3e5f5; color: #7b1fa2; }
+    .status-badge.cancelled { background: #fbe9e7; color: #bf360c; }
+
+    /* Ranking */
+    .ranking-row { transition: all 0.3s; }
+    .ranking-row.highlight { background: rgba(30, 58, 95, 0.05); }
+    .ranking-row.highlight td { font-weight: 600; }
+
+    .ranking-position {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .ranking-position.gold { background: #FFF3CD; color: #856404; }
+    .ranking-position.silver { background: #E8E8E8; color: #555; }
+    .ranking-position.bronze { background: #FDDCB5; color: #8B4513; }
+    .ranking-position.normal { background: var(--background-light); color: var(--text-secondary); }
+
+    .ranking-org {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ranking-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: var(--background-light);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, #e8850a 100%);
+      color: white;
+      padding: 48px;
+      border-radius: var(--radius-xl);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .cta-section h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 24px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--primary-color);
+      padding: 14px 32px;
+      border-radius: var(--radius-md);
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Footer */
+    .panel-footer {
+      background: var(--primary-color);
+      color: rgba(255,255,255,0.8);
+      padding: 24px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .panel-footer a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    .panel-footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+
+    .footer-links {
+      margin-bottom: 12px;
+    }
+
+    /* Loading */
+    .loading-spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: var(--text-secondary);
+    }
+
+    .loading-spinner i {
+      font-size: 24px;
+      animation: spin 1s linear infinite;
+      margin-right: 12px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-secondary);
+    }
+
+    .empty-state i {
+      font-size: 48px;
+      color: var(--border-color);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .panel-header {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+
+      .panel-header .header-actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .panel-container {
+        padding: 16px;
+      }
+
+      .welcome-section {
+        padding: 24px;
+      }
+
+      .welcome-section h1 {
+        font-size: 24px;
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .stat-card {
+        padding: 16px;
+      }
+
+      .stat-card .value {
+        font-size: 24px;
+      }
+
+      .chart-card {
+        padding: 16px;
+      }
+
+      .chart-container {
+        height: 180px;
+      }
+
+      table th, table td {
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+
+      .hide-mobile { display: none; }
+
+      .cta-section {
+        padding: 32px 20px;
+      }
+
+      .cta-section h2 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="panel-header">
+    <a href="/" class="logo">
+      <img src="assets/favicon.svg" alt="Logo" class="org-logo">
+      <span class="org-name">Organizacao</span>
+    </a>
+    <div class="header-actions">
+      <span class="badge-powered">
+        <i class="fas fa-bolt"></i> Powered by IncentivaBR
+      </span>
+      <button class="btn-export" onclick="exportPDF()" title="Exportar Relatorio em PDF">
+        <i class="fas fa-file-pdf"></i> Exportar PDF
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="panel-container" id="panel-content">
+
+    <!-- Welcome / Stats -->
+    <section class="welcome-section" id="welcome-section">
+      <h1><i class="fas fa-chart-pie"></i> Painel de Impacto</h1>
+      <p>Acompanhe as metricas de destinacao de IR dos associados da <strong class="org-name">Organizacao</strong></p>
+
+      <div class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon success"><i class="fas fa-hand-holding-usd"></i></div>
+          <div class="value" id="stat-total">R$ 0</div>
+          <div class="label">Total Destinado</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon primary"><i class="fas fa-users"></i></div>
+          <div class="value" id="stat-doadores">0</div>
+          <div class="label">Doadores Ativos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon info"><i class="fas fa-project-diagram"></i></div>
+          <div class="value" id="stat-projetos">0</div>
+          <div class="label">Projetos Apoiados</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon secondary"><i class="fas fa-chart-line"></i></div>
+          <div class="value" id="stat-engajamento">0%</div>
+          <div class="label">Taxa de Engajamento</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Monthly Chart -->
+    <section class="section" id="monthly-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-chart-bar"></i> Evolucao Mensal</h2>
+      </div>
+      <div class="chart-card">
+        <div id="chart-loading" class="loading-spinner">
+          <i class="fas fa-spinner"></i> Carregando dados...
+        </div>
+        <div id="chart-content" style="display:none;">
+          <div class="chart-container" id="chart-bars"></div>
+          <div class="chart-labels" id="chart-labels"></div>
+        </div>
+        <div id="chart-empty" style="display:none;" class="chart-empty">
+          <i class="fas fa-chart-bar"></i>
+          <p>Nenhum dado mensal disponivel</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Table -->
+    <section class="section" id="projects-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projetos Apoiados</h2>
+      </div>
+      <div class="table-container">
+        <div id="projects-loading" class="loading-spinner">
+          <i class="fas fa-spinner"></i> Carregando projetos...
+        </div>
+        <div id="projects-content" style="display:none;">
+          <table>
+            <thead>
+              <tr>
+                <th>Projeto</th>
+                <th class="hide-mobile">Categoria</th>
+                <th>Meta</th>
+                <th>Arrecadado</th>
+                <th>Progresso</th>
+                <th class="hide-mobile">Doadores</th>
+                <th class="hide-mobile">Status</th>
+              </tr>
+            </thead>
+            <tbody id="projects-tbody"></tbody>
+          </table>
+        </div>
+        <div id="projects-empty" style="display:none;" class="empty-state">
+          <i class="fas fa-folder-open"></i>
+          <p>Nenhum projeto encontrado</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ranking -->
+    <section class="section" id="ranking-section">
+      <div class="section-header">
+        <h2 class="section-title"><i class="fas fa-trophy"></i> Ranking de Organizacoes</h2>
+      </div>
+      <div class="table-container">
+        <div id="ranking-loading" class="loading-spinner">
+          <i class="fas fa-spinner"></i> Carregando ranking...
+        </div>
+        <div id="ranking-content" style="display:none;">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:80px">Posicao</th>
+                <th>Organizacao</th>
+                <th>Doadores</th>
+                <th>Total Destinado</th>
+              </tr>
+            </thead>
+            <tbody id="ranking-tbody"></tbody>
+          </table>
+        </div>
+        <div id="ranking-empty" style="display:none;" class="empty-state">
+          <i class="fas fa-trophy"></i>
+          <p>Nenhum dado de ranking disponivel</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="cta-section">
+      <h2>Faca parte!</h2>
+      <p>Destine seu Imposto de Renda atraves da <strong class="org-name">Organizacao</strong> e contribua para projetos de impacto social.</p>
+      <a href="/" class="btn-cta" id="cta-link">
+        <i class="fas fa-heart"></i> Destinar meu IR agora
+      </a>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="panel-footer">
+    <div class="footer-links">
+      <a href="politica-privacidade.html">Politica de Privacidade</a>
+      <a href="termos-uso.html">Termos de Uso</a>
+      <a href="/">Pagina Inicial</a>
+    </div>
+    <p>Plataforma IncentivaBR &mdash; Tecnologia para impacto social</p>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/tenant.js"></script>
+  <script src="js/toast.js"></script>
+  <script>
+    // ========================================
+    // Painel da Organizacao - IncentivaBR
+    // ========================================
+
+    const API_BASE = window.location.origin + '/api';
+    const urlParams = new URLSearchParams(window.location.search);
+    const orgSlug = urlParams.get('org') || 'www';
+
+    // Formatacao monetaria
+    const formatCurrency = (value) => {
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      }).format(value);
+    };
+
+    const formatNumber = (value) => {
+      return new Intl.NumberFormat('pt-BR').format(value);
+    };
+
+    // Helper para fetch com org param
+    async function fetchAPI(endpoint) {
+      const separator = endpoint.includes('?') ? '&' : '?';
+      const url = `${API_BASE}${endpoint}${separator}org=${orgSlug}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      return response.json();
+    }
+
+    // ========================================
+    // Load Stats
+    // ========================================
+    async function loadStats() {
+      try {
+        const data = await fetchAPI(`/org-dashboard/${orgSlug}/stats`);
+        if (data.status !== 'success') throw new Error(data.message);
+
+        const { stats, organization } = data;
+
+        document.getElementById('stat-total').textContent = formatCurrency(stats.total_destinado);
+        document.getElementById('stat-doadores').textContent = formatNumber(stats.total_doadores);
+        document.getElementById('stat-projetos').textContent = formatNumber(stats.projetos_apoiados);
+        document.getElementById('stat-engajamento').textContent = stats.taxa_engajamento + '%';
+
+        // Update org branding
+        if (organization) {
+          document.querySelectorAll('.org-name').forEach(el => el.textContent = organization.name);
+          if (organization.logo_url) {
+            document.querySelectorAll('.org-logo').forEach(el => {
+              if (el.tagName === 'IMG') el.src = organization.logo_url;
+            });
+          }
+          document.title = `Painel de Impacto - ${organization.name} | IncentivaBR`;
+
+          // Update CTA link
+          const ctaLink = document.getElementById('cta-link');
+          if (ctaLink) {
+            ctaLink.href = `index.html?org=${orgSlug}`;
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao carregar stats:', error);
+      }
+    }
+
+    // ========================================
+    // Load Monthly Chart
+    // ========================================
+    async function loadMonthlyChart() {
+      const loading = document.getElementById('chart-loading');
+      const content = document.getElementById('chart-content');
+      const empty = document.getElementById('chart-empty');
+
+      try {
+        const data = await fetchAPI(`/org-dashboard/${orgSlug}/monthly`);
+        if (data.status !== 'success') throw new Error(data.message);
+
+        loading.style.display = 'none';
+
+        if (!data.monthly || data.monthly.length === 0) {
+          empty.style.display = 'flex';
+          return;
+        }
+
+        content.style.display = 'block';
+
+        const months = data.monthly;
+        const maxValor = Math.max(...months.map(m => m.valor), 1);
+        const barsContainer = document.getElementById('chart-bars');
+        const labelsContainer = document.getElementById('chart-labels');
+
+        barsContainer.innerHTML = '';
+        labelsContainer.innerHTML = '';
+
+        months.forEach(month => {
+          const pct = (month.valor / maxValor) * 100;
+
+          // Bar
+          const wrapper = document.createElement('div');
+          wrapper.className = 'chart-bar-wrapper';
+
+          const bar = document.createElement('div');
+          bar.className = 'chart-bar';
+          bar.style.height = Math.max(pct, 2) + '%';
+
+          const tooltip = document.createElement('div');
+          tooltip.className = 'tooltip';
+          tooltip.textContent = `${formatCurrency(month.valor)} (${month.doacoes} doacoes)`;
+          bar.appendChild(tooltip);
+
+          wrapper.appendChild(bar);
+          barsContainer.appendChild(wrapper);
+
+          // Label
+          const label = document.createElement('span');
+          const [year, m] = month.mes.split('-');
+          const monthNames = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+          label.textContent = monthNames[parseInt(m) - 1] + '/' + year.slice(2);
+          labelsContainer.appendChild(label);
+        });
+      } catch (error) {
+        console.error('Erro ao carregar grafico mensal:', error);
+        loading.style.display = 'none';
+        empty.style.display = 'flex';
+      }
+    }
+
+    // ========================================
+    // Load Projects
+    // ========================================
+    async function loadProjects() {
+      const loading = document.getElementById('projects-loading');
+      const content = document.getElementById('projects-content');
+      const empty = document.getElementById('projects-empty');
+
+      try {
+        const data = await fetchAPI(`/org-dashboard/${orgSlug}/projects`);
+        if (data.status !== 'success') throw new Error(data.message);
+
+        loading.style.display = 'none';
+
+        if (!data.projects || data.projects.length === 0) {
+          empty.style.display = 'block';
+          return;
+        }
+
+        content.style.display = 'block';
+
+        const tbody = document.getElementById('projects-tbody');
+        tbody.innerHTML = '';
+
+        data.projects.forEach(project => {
+          const progressClass = project.progress_pct >= 75 ? 'high' :
+                               project.progress_pct >= 40 ? 'medium' : 'low';
+
+          const statusLabel = {
+            active: 'Ativo',
+            draft: 'Rascunho',
+            funded: 'Financiado',
+            completed: 'Concluido',
+            cancelled: 'Cancelado'
+          }[project.status] || project.status;
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong>${escapeHtml(project.title)}</strong></td>
+            <td class="hide-mobile">${escapeHtml(project.category || '-')}</td>
+            <td>${formatCurrency(project.goal_amount)}</td>
+            <td>${formatCurrency(project.current_amount)}</td>
+            <td>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill ${progressClass}" style="width:${project.progress_pct}%"></div>
+              </div>
+              <div class="progress-text">${project.progress_pct}%</div>
+            </td>
+            <td class="hide-mobile">${formatNumber(project.total_donors)}</td>
+            <td class="hide-mobile"><span class="status-badge ${project.status}">${statusLabel}</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        console.error('Erro ao carregar projetos:', error);
+        loading.style.display = 'none';
+        empty.style.display = 'block';
+      }
+    }
+
+    // ========================================
+    // Load Ranking
+    // ========================================
+    async function loadRanking() {
+      const loading = document.getElementById('ranking-loading');
+      const content = document.getElementById('ranking-content');
+      const empty = document.getElementById('ranking-empty');
+
+      try {
+        const data = await fetchAPI(`/org-dashboard/${orgSlug}/ranking`);
+        if (data.status !== 'success') throw new Error(data.message);
+
+        loading.style.display = 'none';
+
+        if (!data.ranking || data.ranking.length === 0) {
+          empty.style.display = 'block';
+          return;
+        }
+
+        content.style.display = 'block';
+
+        const tbody = document.getElementById('ranking-tbody');
+        tbody.innerHTML = '';
+
+        data.ranking.forEach(item => {
+          const posClass = item.posicao === 1 ? 'gold' :
+                          item.posicao === 2 ? 'silver' :
+                          item.posicao === 3 ? 'bronze' : 'normal';
+
+          const trophy = item.posicao <= 3
+            ? `<i class="fas fa-trophy" style="color:${item.posicao === 1 ? '#FFD700' : item.posicao === 2 ? '#C0C0C0' : '#CD7F32'}"></i>`
+            : item.posicao;
+
+          const isHighlight = item.slug === orgSlug;
+
+          const tr = document.createElement('tr');
+          tr.className = `ranking-row ${isHighlight ? 'highlight' : ''}`;
+          tr.innerHTML = `
+            <td>
+              <div class="ranking-position ${posClass}">${trophy}</div>
+            </td>
+            <td>
+              <div class="ranking-org">
+                ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="" class="ranking-logo">` : ''}
+                <span>${escapeHtml(item.name)}${isHighlight ? ' <i class="fas fa-star" style="color:var(--secondary-color);font-size:12px"></i>' : ''}</span>
+              </div>
+            </td>
+            <td>${formatNumber(item.doadores)}</td>
+            <td><strong>${formatCurrency(item.total)}</strong></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        console.error('Erro ao carregar ranking:', error);
+        loading.style.display = 'none';
+        empty.style.display = 'block';
+      }
+    }
+
+    // ========================================
+    // Export PDF
+    // ========================================
+    async function exportPDF() {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        const orgName = document.querySelector('.org-name')?.textContent || 'Organizacao';
+        const dataAtual = new Date().toLocaleDateString('pt-BR');
+
+        // Title
+        doc.setFontSize(20);
+        doc.setTextColor(30, 58, 95);
+        doc.text(`Relatorio de Impacto - ${orgName}`, 14, 22);
+
+        doc.setFontSize(11);
+        doc.setTextColor(100, 100, 100);
+        doc.text(`Gerado em ${dataAtual} via IncentivaBR`, 14, 30);
+
+        // Line separator
+        doc.setDrawColor(30, 58, 95);
+        doc.setLineWidth(0.5);
+        doc.line(14, 34, 196, 34);
+
+        // Stats
+        doc.setFontSize(14);
+        doc.setTextColor(30, 58, 95);
+        doc.text('Metricas de Impacto', 14, 44);
+
+        doc.setFontSize(11);
+        doc.setTextColor(60, 60, 60);
+        const totalEl = document.getElementById('stat-total');
+        const doadoresEl = document.getElementById('stat-doadores');
+        const projetosEl = document.getElementById('stat-projetos');
+        const engajamentoEl = document.getElementById('stat-engajamento');
+
+        doc.text(`Total Destinado: ${totalEl?.textContent || 'R$ 0'}`, 14, 54);
+        doc.text(`Doadores Ativos: ${doadoresEl?.textContent || '0'}`, 14, 62);
+        doc.text(`Projetos Apoiados: ${projetosEl?.textContent || '0'}`, 14, 70);
+        doc.text(`Taxa de Engajamento: ${engajamentoEl?.textContent || '0%'}`, 14, 78);
+
+        // Projects table
+        const projectsRows = document.querySelectorAll('#projects-tbody tr');
+        if (projectsRows.length > 0) {
+          doc.setFontSize(14);
+          doc.setTextColor(30, 58, 95);
+          doc.text('Projetos Apoiados', 14, 92);
+
+          const tableData = [];
+          projectsRows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            tableData.push([
+              cells[0]?.textContent?.trim() || '',
+              cells[2]?.textContent?.trim() || '',
+              cells[3]?.textContent?.trim() || '',
+              cells[4]?.textContent?.trim() || ''
+            ]);
+          });
+
+          doc.autoTable({
+            startY: 96,
+            head: [['Projeto', 'Meta', 'Arrecadado', 'Progresso']],
+            body: tableData,
+            styles: { fontSize: 9, cellPadding: 3 },
+            headStyles: { fillColor: [30, 58, 95], textColor: 255 },
+            alternateRowStyles: { fillColor: [245, 247, 250] }
+          });
+        }
+
+        // Footer
+        const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 20 : 110;
+        doc.setFontSize(9);
+        doc.setTextColor(150, 150, 150);
+        doc.text('Plataforma IncentivaBR - Tecnologia para impacto social', 14, Math.min(finalY, 280));
+
+        // Save
+        const safeOrgName = orgName.replace(/[^a-zA-Z0-9]/g, '_');
+        const dateStr = new Date().toISOString().slice(0, 10);
+        doc.save(`Relatorio_Impacto_${safeOrgName}_${dateStr}.pdf`);
+
+      } catch (error) {
+        console.error('Erro ao gerar PDF:', error);
+        if (typeof toast !== 'undefined') {
+          toast.error('Erro ao gerar PDF. Tente novamente.');
+        } else {
+          alert('Erro ao gerar PDF. Tente novamente.');
+        }
+      }
+    }
+
+    // ========================================
+    // HTML escape utility
+    // ========================================
+    function escapeHtml(text) {
+      if (!text) return '';
+      const div = document.createElement('div');
+      div.appendChild(document.createTextNode(text));
+      return div.innerHTML;
+    }
+
+    // ========================================
+    // Init
+    // ========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!orgSlug || orgSlug === 'www') {
+        document.querySelector('.welcome-section p').innerHTML =
+          'Selecione uma organizacao para visualizar o painel de impacto.';
+      }
+
+      // Load all sections in parallel
+      loadStats();
+      loadMonthlyChart();
+      loadProjects();
+      loadRanking();
+    });
+  </script>
+</body>
+</html>
