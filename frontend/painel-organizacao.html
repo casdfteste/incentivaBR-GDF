@@ -571,9 +571,37 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
+    /* Demo Banner */
+    .demo-banner {
+      background: linear-gradient(135deg, #F7941D 0%, #ff6b35 100%);
+      color: white;
+      text-align: center;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .demo-banner a {
+      color: white;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: 4px;
+    }
+
+    .demo-banner a:hover {
+      opacity: 0.9;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner" id="demo-banner" style="display:none;">
+    <i class="fas fa-info-circle"></i>
+    Este e um exemplo do painel que sua associacao pode ter.
+    <a href="clube-vantagens.html">Saiba mais sobre o Clube de Vantagens Fiscais</a>
+  </div>
 
   <!-- Header padrao IncentivaBR -->
   <header class="header">
@@ -1117,6 +1145,12 @@
             link.href = href + (href.includes('?') ? '&' : '?') + 'org=' + orgSlug;
           }
         });
+      }
+
+      // Show demo banner when accessed with org param
+      const demoBanner = document.getElementById('demo-banner');
+      if (demoBanner && orgSlug && orgSlug !== 'www') {
+        demoBanner.style.display = 'block';
       }
 
       // Load all sections in parallel

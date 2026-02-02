@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clube de Vantagens Fiscais - IncentivaBR</title>
+  <meta name="description" content="Clube de Vantagens Fiscais white label para associacoes, sindicatos e organizacoes. Plataforma personalizada onde associados destinam IR para projetos sociais.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    /* Hero */
+    .hero-clube {
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 60%, #1E3A5F 100%);
+      color: white;
+      padding: 140px 24px 80px;
+      text-align: center;
+    }
+
+    .hero-clube .badge-clube {
+      display: inline-block;
+      background: rgba(247, 148, 29, 0.9);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-clube h1 {
+      font-size: 44px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .hero-clube h1 span {
+      color: #F7941D;
+    }
+
+    .hero-clube .hero-sub {
+      font-size: 20px;
+      opacity: 0.95;
+      max-width: 720px;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+    }
+
+    .hero-clube .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Numbers */
+    .section-numbers {
+      padding: 60px 24px;
+      background: white;
+    }
+
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .number-item .value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #1E3A5F;
+    }
+
+    .number-item .label {
+      font-size: 14px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* What Section */
+    .section-what {
+      padding: 80px 24px;
+      background: #f8f9fa;
+    }
+
+    .what-description {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      text-align: center;
+      font-size: 18px;
+      color: #444;
+      line-height: 1.7;
+    }
+
+    .what-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .what-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+
+    .what-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .what-card .icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 1rem;
+      color: white;
+    }
+
+    .what-card:nth-child(1) .icon { background: linear-gradient(135deg, #00A859, #00c96b); }
+    .what-card:nth-child(2) .icon { background: linear-gradient(135deg, #1E3A5F, #2B5A9E); }
+    .what-card:nth-child(3) .icon { background: linear-gradient(135deg, #F7941D, #ff6b35); }
+
+    .what-card h3 {
+      color: #1E3A5F;
+      margin-bottom: 0.5rem;
+    }
+
+    .what-card p {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Pillars */
+    .section-pillars {
+      padding: 80px 24px;
+      background: white;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .pillar-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background: #f8f9fa;
+      transition: all 0.3s;
+    }
+
+    .pillar-card:hover {
+      background: #eef2f7;
+      transform: translateX(4px);
+    }
+
+    .pillar-card .pillar-number {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1E3A5F, #2B5A9E);
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .pillar-card h4 {
+      color: #1E3A5F;
+      margin: 0 0 0.3rem;
+    }
+
+    .pillar-card p {
+      color: #666;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Customize */
+    .section-customize {
+      padding: 80px 24px;
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 100%);
+      color: white;
+    }
+
+    .customize-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .customize-controls h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .customize-controls label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      opacity: 0.9;
+    }
+
+    .customize-controls input[type="text"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 16px;
+      margin-bottom: 1.5rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .customize-controls input[type="text"]::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .customize-controls input[type="text"]:focus {
+      border-color: #F7941D;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .color-option {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .color-option:hover,
+    .color-option.active {
+      border-color: white;
+      transform: scale(1.15);
+    }
+
+    .preview-mockup {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .preview-header {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+    }
+
+    .preview-header .preview-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    .preview-header .preview-title {
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .preview-body {
+      padding: 24px 20px;
+    }
+
+    .preview-body h4 {
+      color: #333;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .preview-body p {
+      color: #888;
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .preview-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .preview-stat {
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .preview-stat .val {
+      font-weight: 700;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .preview-stat .lbl {
+      font-size: 10px;
+      color: #999;
+    }
+
+    .preview-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 12px;
+      cursor: default;
+      transition: background 0.3s;
+    }
+
+    /* Steps */
+    .section-steps {
+      padding: 80px 24px;
+      background: #f8f9fa;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .step-card {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-card .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F7941D, #ff6b35);
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .step-card h4 {
+      color: #1E3A5F;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Case */
+    .section-case {
+      padding: 80px 24px;
+      background: white;
+    }
+
+    .case-highlight {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #1E3A5F 0%, #2B5A9E 100%);
+      border-radius: 20px;
+      padding: 3rem;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .case-highlight h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-highlight p {
+      opacity: 0.9;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .case-highlight .case-stats {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .case-highlight .case-stat .val {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #F7941D;
+    }
+
+    .case-highlight .case-stat .lbl {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .case-visual-side {
+      text-align: center;
+    }
+
+    .case-visual-side .big-icon {
+      font-size: 5rem;
+      opacity: 0.3;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    /* Audience */
+    .section-audience {
+      padding: 80px 24px;
+      background: #f8f9fa;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .audience-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.3s;
+    }
+
+    .audience-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .audience-card .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1E3A5F, #2B5A9E);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .audience-card h4 {
+      color: #1E3A5F;
+      margin: 0 0 4px;
+      font-size: 15px;
+    }
+
+    .audience-card p {
+      color: #888;
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* FAQ */
+    .section-faq {
+      padding: 80px 24px;
+      background: white;
+    }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .faq-item-clube {
+      margin-bottom: 1rem;
+      padding: 1.25rem;
+      background: #f8f9fa;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .faq-item-clube summary {
+      font-weight: 600;
+      cursor: pointer;
+      color: #1E3A5F;
+      font-size: 15px;
+    }
+
+    .faq-item-clube p {
+      margin-top: 1rem;
+      color: #666;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* CTA Contact */
+    .section-contact {
+      padding: 80px 24px;
+      background: linear-gradient(135deg, #F7941D 0%, #ff6b35 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .section-contact h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-contact p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-contact .contact-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-clube h1 {
+        font-size: 28px;
+      }
+
+      .hero-clube .hero-sub {
+        font-size: 16px;
+      }
+
+      .customize-container {
+        grid-template-columns: 1fr;
+      }
+
+      .case-highlight {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+      }
+
+      .case-visual-side {
+        display: none;
+      }
+
+      .case-highlight .case-stats {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .number-item .value {
+        font-size: 2rem;
+      }
+
+      .pillar-card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .pillar-card .pillar-number {
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img">
+    </a>
+    <nav>
+      <a href="projetos.html">Projetos</a>
+      <a href="calculadora-escolha.html">Calculadora IR</a>
+      <a href="como-funciona.html">Como Funciona</a>
+      <a href="#" id="navAuth" class="btn btn-primary btn-sm">Entrar</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-clube">
+    <div class="badge-clube"><i class="fas fa-award"></i> Exclusivo para Associacoes e Sindicatos</div>
+    <h1>O Clube de Vantagens <span>Fiscais</span> da sua Associacao</h1>
+    <p class="hero-sub">
+      Plataforma white label onde seus associados transformam Imposto de Renda em impacto social
+      — com a marca e identidade da sua organizacao
+    </p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5561999682929?text=Ol%C3%A1!%20Represento%20uma%20associa%C3%A7%C3%A3o%20e%20tenho%20interesse%20no%20Clube%20de%20Vantagens%20Fiscais" target="_blank" class="btn btn-white" style="color: #1E3A5F;">
+        <i class="fab fa-whatsapp"></i> Solicitar Demonstracao
+      </a>
+      <a href="painel-organizacao.html?org=ajufer" class="btn btn-outline-white">
+        <i class="fas fa-eye"></i> Ver Exemplo ao Vivo
+      </a>
+    </div>
+  </section>
+
+  <!-- Numeros / Prova Social -->
+  <section class="section-numbers" id="section-numbers">
+    <div class="numbers-grid">
+      <div class="number-item">
+        <div class="value"><span class="counter-value" data-target="12" data-suffix="+">0</span></div>
+        <div class="label">Associacoes Parceiras</div>
+      </div>
+      <div class="number-item">
+        <div class="value"><span class="counter-value" data-target="8500" data-suffix="+">0</span></div>
+        <div class="label">Membros Alcancados</div>
+      </div>
+      <div class="number-item">
+        <div class="value">R$ <span class="counter-value" data-target="2500000" data-suffix="">0</span></div>
+        <div class="label">Valor Destinado</div>
+      </div>
+      <div class="number-item">
+        <div class="value"><span class="counter-value" data-target="45" data-suffix="+">0</span></div>
+        <div class="label">Projetos Apoiados</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O Que E o Clube -->
+  <section class="section-what" id="section-what">
+    <div class="container">
+      <div class="section-header">
+        <h2>O Que e o Clube de Vantagens Fiscais?</h2>
+        <p>Um beneficio exclusivo para seus associados</p>
+      </div>
+
+      <div class="what-description">
+        Um clube de vantagens fiscais e uma plataforma personalizada com a marca da sua associacao,
+        onde cada membro pode calcular e destinar parte do IR para projetos sociais aprovados pelo
+        governo. Zero custo para o associado, impacto real para a sociedade.
+      </div>
+
+      <div class="what-cards">
+        <div class="what-card">
+          <div class="icon"><i class="fas fa-user-check"></i></div>
+          <h3>Para o Associado</h3>
+          <p>Calcula o IR, escolhe o projeto social, gera o DARF automaticamente. Tudo em poucos cliques e com zero custo.</p>
+        </div>
+        <div class="what-card">
+          <div class="icon"><i class="fas fa-building"></i></div>
+          <h3>Para a Associacao</h3>
+          <p>Painel de impacto com metricas, engajamento dos membros e marketing positivo para a organizacao.</p>
+        </div>
+        <div class="what-card">
+          <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <h3>Para a Sociedade</h3>
+          <p>Recursos direcionados para projetos sociais reais — criancas, idosos, cultura, esporte e mais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Pilares de Valor -->
+  <section class="section-pillars" id="section-pillars">
+    <div class="container">
+      <div class="section-header">
+        <h2>6 Pilares de Valor</h2>
+        <p>Tudo que sua associacao precisa em uma unica plataforma</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-number">1</div>
+          <div>
+            <h4>Plataforma White Label</h4>
+            <p>Sua marca, suas cores, seu dominio. A plataforma e 100% personalizada com a identidade da sua organizacao.</p>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">2</div>
+          <div>
+            <h4>Calculadora de IR Inteligente</h4>
+            <p>Calculo automatico do limite de destinacao. Simples para qualquer associado usar.</p>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">3</div>
+          <div>
+            <h4>Painel de Impacto Exclusivo</h4>
+            <p>Metricas em tempo real das destinacoes dos associados. Ranking, evolucao mensal e projetos apoiados.</p>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">4</div>
+          <div>
+            <h4>Zero Custo para o Associado</h4>
+            <p>E dinheiro que iria para o governo de qualquer forma. O associado apenas redireciona para um projeto social.</p>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">5</div>
+          <div>
+            <h4>Engajamento e Retencao</h4>
+            <p>Diferencial competitivo que fortalece o vinculo com seus membros e atrai novos associados.</p>
+          </div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">6</div>
+          <div>
+            <h4>Suporte Completo</h4>
+            <p>Implantacao assistida, treinamento para a equipe e material de divulgacao pronto para usar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personalize do Seu Jeito -->
+  <section class="section-customize" id="section-customize">
+    <div class="container">
+      <div class="section-header text-light">
+        <h2>Personalize do Seu Jeito</h2>
+        <p>Veja como ficaria a plataforma com a marca da sua organizacao</p>
+      </div>
+
+      <div class="customize-container">
+        <div class="customize-controls">
+          <h3>Monte o seu clube</h3>
+          <label for="clubeName">Nome do seu clube</label>
+          <input type="text" id="clubeName" placeholder="Ex: Clube Fiscal AJUFER" maxlength="40">
+
+          <label>Cor principal</label>
+          <div class="color-options">
+            <div class="color-option active" style="background: #1E3A5F;" data-color="#1E3A5F" title="Azul Marinho"></div>
+            <div class="color-option" style="background: #00A859;" data-color="#00A859" title="Verde"></div>
+            <div class="color-option" style="background: #8B1A4A;" data-color="#8B1A4A" title="Vinho"></div>
+            <div class="color-option" style="background: #D4380D;" data-color="#D4380D" title="Vermelho"></div>
+            <div class="color-option" style="background: #6B21A8;" data-color="#6B21A8" title="Roxo"></div>
+          </div>
+
+          <a href="https://wa.me/5561999682929?text=Ol%C3%A1!%20Quero%20uma%20demonstra%C3%A7%C3%A3o%20personalizada%20do%20Clube%20de%20Vantagens%20Fiscais" target="_blank" class="btn btn-white" style="color: #1E3A5F;">
+            <i class="fab fa-whatsapp"></i> Solicite sua demonstracao personalizada
+          </a>
+        </div>
+
+        <div class="preview-mockup" id="previewMockup">
+          <div class="preview-header" id="previewHeader" style="background: #1E3A5F;">
+            <div class="preview-logo"></div>
+            <span class="preview-title" id="previewTitle">Clube de Vantagens Fiscais</span>
+          </div>
+          <div class="preview-body">
+            <h4 id="previewHeading">Destine seu IR com impacto</h4>
+            <p>Calcule seu limite de destinacao e escolha um projeto social para apoiar com seu Imposto de Renda.</p>
+            <div class="preview-stats">
+              <div class="preview-stat" id="previewStat1" style="background: rgba(30,58,95,0.08);">
+                <div class="val">R$ 1.2M</div>
+                <div class="lbl">Destinados</div>
+              </div>
+              <div class="preview-stat" id="previewStat2" style="background: rgba(30,58,95,0.08);">
+                <div class="val">340</div>
+                <div class="lbl">Membros</div>
+              </div>
+              <div class="preview-stat" id="previewStat3" style="background: rgba(30,58,95,0.08);">
+                <div class="val">12</div>
+                <div class="lbl">Projetos</div>
+              </div>
+            </div>
+            <div class="preview-btn" id="previewBtn" style="background: #1E3A5F;">Calcular meu IR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como Funciona -->
+  <section class="section-steps" id="section-steps">
+    <div class="container">
+      <div class="section-header">
+        <h2>Como Funciona</h2>
+        <p>Da parceria ao impacto em 4 passos</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h4>Fechamos a parceria</h4>
+          <p>Definimos juntos a identidade visual, dominio e projetos sociais vinculados.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h4>Personalizamos a plataforma</h4>
+          <p>Cores, logo, fundo vinculado e pagina exclusiva com a marca da sua associacao.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h4>Lancamos para seus associados</h4>
+          <p>Material de divulgacao incluso: emails, banners, posts e guia de uso.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h4>Voce acompanha o impacto</h4>
+          <p>Painel de metricas em tempo real com total de destinacoes, membros ativos e projetos apoiados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Exemplo -->
+  <section class="section-case" id="section-case">
+    <div class="container">
+      <div class="section-header">
+        <h2>Caso de Sucesso</h2>
+        <p>Veja um exemplo real em funcionamento</p>
+      </div>
+
+      <div class="case-highlight">
+        <div>
+          <h3><i class="fas fa-balance-scale"></i> AJUFER — Associacao dos Juizes Federais</h3>
+          <p>
+            A AJUFER foi uma das primeiras associacoes a adotar o Clube de Vantagens Fiscais.
+            Seus membros utilizam a plataforma personalizada para destinar IR a projetos sociais
+            com total praticidade e transparencia.
+          </p>
+          <div class="case-stats">
+            <div class="case-stat">
+              <div class="val">R$ 850K+</div>
+              <div class="lbl">Destinados</div>
+            </div>
+            <div class="case-stat">
+              <div class="val">280+</div>
+              <div class="lbl">Juizes Ativos</div>
+            </div>
+            <div class="case-stat">
+              <div class="val">8</div>
+              <div class="lbl">Projetos</div>
+            </div>
+          </div>
+          <a href="painel-organizacao.html?org=ajufer" class="btn btn-white" style="color: #1E3A5F;">
+            <i class="fas fa-external-link-alt"></i> Ver Painel ao Vivo
+          </a>
+        </div>
+        <div class="case-visual-side">
+          <span class="big-icon"><i class="fas fa-gavel"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Para Quem -->
+  <section class="section-audience" id="section-audience">
+    <div class="container">
+      <div class="section-header">
+        <h2>Para Quem e o Clube?</h2>
+        <p>Organizacoes que podem oferecer esse beneficio</p>
+      </div>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="icon"><i class="fas fa-fist-raised"></i></div>
+          <div>
+            <h4>Sindicatos</h4>
+            <p>De servidores publicos, professores, policiais e mais</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="icon"><i class="fas fa-balance-scale"></i></div>
+          <div>
+            <h4>Associacoes de Classe</h4>
+            <p>Magistrados, procuradores, auditores, medicos</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="icon"><i class="fas fa-university"></i></div>
+          <div>
+            <h4>Conselhos Profissionais</h4>
+            <p>CRM, OAB, CREA, CRC e outros conselhos regionais</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="icon"><i class="fas fa-sitemap"></i></div>
+          <div>
+            <h4>Federacoes</h4>
+            <p>Federacoes de trabalhadores e associacoes nacionais</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="icon"><i class="fas fa-hands-helping"></i></div>
+          <div>
+            <h4>ONGs</h4>
+            <p>Organizacoes do terceiro setor com base de apoiadores</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="icon"><i class="fas fa-handshake"></i></div>
+          <div>
+            <h4>Cooperativas</h4>
+            <p>Cooperativas de credito, saude e profissionais</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-faq" id="section-faq">
+    <div class="container">
+      <div class="section-header">
+        <h2>Perguntas Frequentes</h2>
+        <p>Tire suas duvidas sobre o Clube de Vantagens Fiscais</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item-clube">
+          <summary>Quanto custa para a associacao?</summary>
+          <p>Oferecemos plano piloto gratuito para ate 100 usuarios. Para organizacoes maiores, o modelo e sob consulta — pode ser mensalidade fixa ou percentual sobre destinacoes. Sempre com ROI positivo.</p>
+        </details>
+        <details class="faq-item-clube">
+          <summary>Quanto tempo leva para implementar?</summary>
+          <p>A personalizacao basica (logo, cores, dominio) fica pronta rapidamente. Curadoria de projetos e materiais de campanha podem levar ate 15 dias uteis.</p>
+        </details>
+        <details class="faq-item-clube">
+          <summary>Precisa de equipe tecnica na associacao?</summary>
+          <p>Nao. Nos cuidamos de toda a implementacao tecnica. Sua equipe so precisa ajudar na divulgacao para os associados.</p>
+        </details>
+        <details class="faq-item-clube">
+          <summary>Como funciona a destinacao do IR?</summary>
+          <p>O associado informa os dados da declaracao, a calculadora mostra o limite de destinacao, ele escolhe o projeto e gera o DARF para pagamento. O valor volta na restituicao ou abate do imposto — custo zero.</p>
+        </details>
+        <details class="faq-item-clube">
+          <summary>Quais fundos estao disponiveis?</summary>
+          <p>Fundo da Crianca e do Adolescente (FDCA), Fundo do Idoso (FDI), Lei de Incentivo ao Esporte, Lei de Incentivo a Cultura, PRONON e PRONAS/PCD. Voce pode vincular os projetos mais alinhados com sua causa.</p>
+        </details>
+        <details class="faq-item-clube">
+          <summary>Os dados dos associados sao protegidos?</summary>
+          <p>Sim. Utilizamos criptografia ponta a ponta, servidores no Brasil e seguimos integralmente a LGPD. Sua associacao recebe apenas relatorios agregados, sem acesso a dados individuais sensiveis.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Final -->
+  <section class="section-contact" id="section-contact">
+    <h2>Transforme sua associacao em referencia de impacto social</h2>
+    <p>Agende uma conversa e descubra como oferecer o Clube de Vantagens Fiscais para seus associados.</p>
+    <div class="contact-btns">
+      <a href="https://wa.me/5561999682929?text=Ol%C3%A1!%20Represento%20uma%20associa%C3%A7%C3%A3o%20e%20tenho%20interesse%20no%20Clube%20de%20Vantagens%20Fiscais" target="_blank" class="btn btn-white" style="color: #F7941D;">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+      <a href="mailto:parcerias@incentivabr.com.br" class="btn btn-outline-white">
+        <i class="fas fa-envelope"></i> parcerias@incentivabr.com.br
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white">
+    </a>
+    <p class="tagline">Incentivos Fiscais Simplificados</p>
+    <div class="footer-nav">
+      <a href="index.html">Inicio</a>
+      <a href="como-funciona.html">Como Funciona</a>
+      <a href="para-organizacoes.html">Para Organizacoes</a>
+      <a href="para-contadores.html">Para Contadores</a>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        <a href="politica-privacidade.html" class="footer-legal-link">Politica de Privacidade</a> |
+        <a href="termos-uso.html" class="footer-legal-link">Termos de Uso</a>
+      </p>
+      <p class="footer-copyright">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
+      <p class="footer-inpi">INPI: BR512025000647-0</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/mobile-menu.js"></script>
+  <script src="js/tina.js"></script>
+  <script>
+    // Auth check
+    const navAuth = document.getElementById('navAuth');
+    if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
+      const user = auth.getUser();
+      navAuth.textContent = user.nome ? user.nome.split(' ')[0] : 'Minha Conta';
+      navAuth.href = 'dashboard.html';
+    } else {
+      navAuth.href = 'login.html';
+    }
+  </script>
+  <script>
+    // ========================================
+    // Animated Counters (same pattern as index.html)
+    // ========================================
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter-value');
+
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const duration = 2000;
+        const start = 0;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = Math.floor(start + (target - start) * easeOut);
+
+          if (target >= 1000000) {
+            counter.textContent = (current / 1000000).toFixed(1) + 'M' + suffix;
+          } else if (target >= 1000) {
+            counter.textContent = current.toLocaleString('pt-BR') + suffix;
+          } else {
+            counter.textContent = current + suffix;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
+    // Intersection Observer for counters
+    const numbersSection = document.getElementById('section-numbers');
+    if (numbersSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      observer.observe(numbersSection);
+    }
+
+    // ========================================
+    // Customizer Interativo
+    // ========================================
+    const clubeNameInput = document.getElementById('clubeName');
+    const colorOptions = document.querySelectorAll('.color-option');
+    const previewHeader = document.getElementById('previewHeader');
+    const previewTitle = document.getElementById('previewTitle');
+    const previewBtn = document.getElementById('previewBtn');
+    const previewStat1 = document.getElementById('previewStat1');
+    const previewStat2 = document.getElementById('previewStat2');
+    const previewStat3 = document.getElementById('previewStat3');
+
+    let selectedColor = '#1E3A5F';
+
+    clubeNameInput.addEventListener('input', function() {
+      const name = this.value.trim();
+      previewTitle.textContent = name || 'Clube de Vantagens Fiscais';
+    });
+
+    colorOptions.forEach(option => {
+      option.addEventListener('click', function() {
+        colorOptions.forEach(o => o.classList.remove('active'));
+        this.classList.add('active');
+        selectedColor = this.getAttribute('data-color');
+
+        previewHeader.style.background = selectedColor;
+        previewBtn.style.background = selectedColor;
+
+        const lightBg = selectedColor + '14';
+        previewStat1.style.background = lightBg;
+        previewStat2.style.background = lightBg;
+        previewStat3.style.background = lightBg;
+      });
+    });
+  </script>
+</body>
+</html>
