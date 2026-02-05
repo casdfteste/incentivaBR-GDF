@@ -42,20 +42,6 @@
       </a>
     </div>
 
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="value">R$ <span class="counter-value" data-target="2500000" data-prefix="" data-suffix="">0</span></div>
-        <div class="label">Destinados em 2024</div>
-      </div>
-      <div class="hero-stat">
-        <div class="value"><span class="counter-value" data-target="1200" data-prefix="" data-suffix="+">0</span></div>
-        <div class="label">Apoiadores</div>
-      </div>
-      <div class="hero-stat">
-        <div class="value"><span class="counter-value" data-target="45" data-prefix="" data-suffix="+">0</span></div>
-        <div class="label">Projetos Apoiados</div>
-      </div>
-    </div>
   </section>
 
   <!-- Como Funciona - Resumo -->
@@ -334,55 +320,5 @@
     }
   </script>
   <script src="js/tenant.js"></script>
-  <script>
-    // Animated counters
-    function animateCounters() {
-      const counters = document.querySelectorAll('.counter-value');
-
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const suffix = counter.getAttribute('data-suffix') || '';
-        const duration = 2000;
-        const start = 0;
-        const startTime = performance.now();
-
-        function updateCounter(currentTime) {
-          const elapsed = currentTime - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const easeOut = 1 - Math.pow(1 - progress, 3);
-          const current = Math.floor(start + (target - start) * easeOut);
-
-          if (target >= 1000000) {
-            counter.textContent = (current / 1000000).toFixed(1) + 'M' + suffix;
-          } else if (target >= 1000) {
-            counter.textContent = current.toLocaleString('pt-BR') + suffix;
-          } else {
-            counter.textContent = current + suffix;
-          }
-
-          if (progress < 1) {
-            requestAnimationFrame(updateCounter);
-          }
-        }
-
-        requestAnimationFrame(updateCounter);
-      });
-    }
-
-    // Intersection Observer for counters
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            animateCounters();
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.5 });
-
-      observer.observe(heroStats);
-    }
-  </script>
 </body>
 </html>
