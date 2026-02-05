@@ -293,11 +293,9 @@
     <!-- Categorias -->
     <div class="faq-categories">
       <button class="faq-category-btn active" onclick="filterCategory('all')">Todas</button>
-      <button class="faq-category-btn" onclick="filterCategory('basico')">Basico</button>
-      <button class="faq-category-btn" onclick="filterCategory('seguranca')">Seguranca</button>
+      <button class="faq-category-btn" onclick="filterCategory('destinacao')">Sobre a Destinacao</button>
       <button class="faq-category-btn" onclick="filterCategory('processo')">Processo</button>
-      <button class="faq-category-btn" onclick="filterCategory('fundos')">Fundos</button>
-      <button class="faq-category-btn" onclick="filterCategory('prazos')">Prazos</button>
+      <button class="faq-category-btn" onclick="filterCategory('fundos')">Fundos e Prazos</button>
     </div>
 
     <!-- Sem resultados -->
@@ -307,62 +305,9 @@
       <p>Tente buscar com outras palavras ou fale com a TINA.</p>
     </div>
 
-    <!-- BASICO -->
-    <div class="faq-section" data-category="basico">
-      <h2 class="faq-section-title"><i class="fas fa-lightbulb"></i> Conceitos Basicos</h2>
-
-      <div class="faq-item" data-keywords="o que e destinacao doar imposto renda">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          O que e destinacao de IR?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p>A <strong>destinacao de IR</strong> permite que voce direcione parte do imposto que ja vai pagar para projetos sociais de sua escolha.</p>
-            <div class="highlight-box">
-              <strong>Importante:</strong> Voce NAO paga nada a mais! O valor destinado e deduzido do seu imposto devido ou aumenta sua restituicao.
-            </div>
-            <p>E como dizer ao governo: "Esse dinheiro que eu ja vou pagar, quero que va para essa causa social."</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-keywords="quem pode destinar declaracao completa simplificada">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          Quem pode fazer a destinacao?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p>Apenas quem faz a <strong>declaracao COMPLETA</strong> do Imposto de Renda pode destinar.</p>
-            <div class="warning-box">
-              <strong>Atencao:</strong> A declaracao simplificada NAO permite destinacao de IR.
-            </div>
-            <p>Se voce usa a simplificada mas quer destinar, pode mudar para a completa - em muitos casos vale a pena!</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-keywords="quanto posso destinar limite percentual maximo">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          Quanto posso destinar do meu IR?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p>Os limites variam conforme o tipo de incentivo:</p>
-            <ul>
-              <li><strong>Fundos da Crianca/Idoso + Cultura + Audiovisual + Reciclagem:</strong> ate 6%</li>
-              <li><strong>Com Esporte:</strong> ate 7%</li>
-              <li><strong>PRONON (Oncologia):</strong> +1%</li>
-              <li><strong>PRONAS/PCD:</strong> +1%</li>
-            </ul>
-            <div class="highlight-box">
-              <strong>Total maximo:</strong> Ate 9% do IR devido se usar todos os incentivos!
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- SOBRE A DESTINACAO -->
+    <div class="faq-section" data-category="destinacao">
+      <h2 class="faq-section-title"><i class="fas fa-lightbulb"></i> Sobre a Destinacao</h2>
 
       <div class="faq-item" data-keywords="perder dinheiro prejuizo custo pagar mais">
         <div class="faq-question" onclick="toggleFAQ(this)">
@@ -371,58 +316,22 @@
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p><strong>NAO!</strong> Voce nao perde nada e nao paga mais imposto.</p>
-            <ul>
-              <li>Se voce tem <strong>restituicao</strong>: ela AUMENTA no valor destinado</li>
-              <li>Se voce tem <strong>imposto a pagar</strong>: ele DIMINUI no valor destinado</li>
-            </ul>
-            <div class="highlight-box">
-              <strong>Resumo:</strong> Voce apenas direciona para onde quer que seu imposto va. E custo ZERO para voce!
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEGURANCA -->
-    <div class="faq-section" data-category="seguranca">
-      <h2 class="faq-section-title"><i class="fas fa-shield-alt"></i> Seguranca e Credibilidade</h2>
-
-      <div class="faq-item" data-keywords="seguro confiavel golpe fake verdade">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          E seguro? Como sei que nao e golpe?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p><strong>100% seguro!</strong> Voce pode verificar tudo:</p>
-            <ul>
-              <li><strong>Dados bancarios oficiais:</strong> Sao os mesmos dos sites oficiais dos conselhos</li>
-              <li><strong>Recibo conforme Art. 6:</strong> Documento legal exigido pela Receita Federal</li>
-              <li><strong>Protocolo rastreavel:</strong> Cada destinacao tem numero unico</li>
-              <li><strong>INPI registrado:</strong> Sistema com registro de propriedade intelectual</li>
-            </ul>
-            <div class="highlight-box">
-              <strong>Dica:</strong> Clique em "Ver site oficial do conselho" para conferir os dados bancarios!
-            </div>
+            <p><strong>NAO!</strong> O valor destinado volta na restituicao ou reduz o imposto a pagar. E custo ZERO para voce.</p>
           </div>
         </div>
       </div>
 
-      <div class="faq-item" data-keywords="verificar conferir dados bancarios conta">
+      <div class="faq-item" data-keywords="seguro confiavel golpe fake verdade verificar conferir dados bancarios">
         <div class="faq-question" onclick="toggleFAQ(this)">
-          Como verifico se os dados bancarios sao reais?
+          E seguro? Como verifico os dados?
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p>Ao lado de cada dado bancario no IncentivaBR, voce encontra um link <strong>"Ver site oficial"</strong>.</p>
-            <p>Clique nele e compare - os dados sao IDENTICOS aos publicados nos sites oficiais dos conselhos!</p>
-            <p><strong>Dados oficiais que usamos:</strong></p>
-            <ul>
-              <li>FDI/DF: BRB (070) | Ag: 0100 | CC: 062024-4</li>
-              <li>FDCA/DF: BRB (070) | Ag: 100 | CC: 044149-8</li>
-            </ul>
+            <p><strong>100% seguro.</strong> Dados bancarios sao os mesmos dos sites oficiais dos conselhos. Cada destinacao tem protocolo rastreavel e recibo conforme Art. 6.</p>
+            <div class="highlight-box">
+              <strong>Dica:</strong> Clique em "Ver site oficial do conselho" ao lado dos dados bancarios para conferir.
+            </div>
           </div>
         </div>
       </div>
@@ -434,16 +343,7 @@
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p><strong>Sim, e recomendado!</strong> Informe seu contador sobre a destinacao.</p>
-            <p>Ele precisara:</p>
-            <ul>
-              <li>Incluir a destinacao na sua declaracao</li>
-              <li>Anexar o comprovante oficial (que enviaremos a voce)</li>
-              <li>Garantir que o limite de 6-9% seja respeitado</li>
-            </ul>
-            <div class="highlight-box">
-              <strong>Dica:</strong> A maioria dos contadores ja conhece o processo. Se tiver duvidas, compartilhe nosso link "Como Funciona" com ele!
-            </div>
+            <p><strong>Sim, recomendado.</strong> Ele precisara incluir a destinacao na declaracao e anexar o comprovante oficial. Compartilhe nosso link <a href="como-funciona.html">Como Funciona</a> com ele.</p>
           </div>
         </div>
       </div>
@@ -451,57 +351,19 @@
 
     <!-- PROCESSO -->
     <div class="faq-section" data-category="processo">
-      <h2 class="faq-section-title"><i class="fas fa-list-ol"></i> Processo de Destinacao</h2>
+      <h2 class="faq-section-title"><i class="fas fa-list-ol"></i> Processo</h2>
 
-      <div class="faq-item" data-keywords="como funciona passo etapas fazer">
+      <div class="faq-item" data-keywords="comprovante upload enviar anexar formato pix transferencia deposito">
         <div class="faq-question" onclick="toggleFAQ(this)">
-          Como funciona o processo de destinacao?
+          Que comprovante preciso enviar? Posso usar PIX?
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p><strong>4 passos simples:</strong></p>
-            <ol>
-              <li><strong>Calcule:</strong> Use nossa calculadora para saber quanto pode destinar</li>
-              <li><strong>Escolha:</strong> Selecione o fundo e projeto de sua preferencia</li>
-              <li><strong>Deposite:</strong> Faca a transferencia para a conta oficial do fundo</li>
-              <li><strong>Envie:</strong> Envie o comprovante pelo sistema e pronto!</li>
-            </ol>
-            <p>Voce recebera um protocolo e, apos confirmacao do fundo, o recibo oficial.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-keywords="comprovante upload enviar anexar formato">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          Que tipo de comprovante preciso enviar?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p><strong>Formatos aceitos:</strong> PDF, JPG ou PNG (ate 5MB)</p>
-            <p>O comprovante deve mostrar:</p>
-            <ul>
-              <li>Data da transferencia</li>
-              <li>Valor depositado</li>
-              <li>Dados do destinatario (conta do fundo)</li>
-            </ul>
+            <p><strong>Sim, PIX, TED ou transferencia.</strong> Envie comprovante em PDF, JPG ou PNG (ate 5MB) mostrando data, valor e destinatario.</p>
             <div class="highlight-box">
               <strong>Dica:</strong> Print do aplicativo do banco funciona perfeitamente!
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-keywords="pix transferencia deposito como pagar">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          Posso fazer por PIX?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p><strong>Sim!</strong> Voce pode usar PIX, TED ou transferencia bancaria.</p>
-            <p>O importante e que o deposito seja feito na conta oficial do fundo e que voce guarde o comprovante.</p>
           </div>
         </div>
       </div>
@@ -513,47 +375,24 @@
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p>Entre em contato em ate <strong>48 horas</strong> pelo email ou WhatsApp.</p>
-            <p>Antes do deposito: basta refazer o processo.</p>
-            <p>Apos o deposito: entraremos em contato com o fundo para ajustar.</p>
-            <div class="warning-box">
-              <strong>Dica:</strong> Confira os dados antes de confirmar a transferencia!
-            </div>
+            <p>Antes do deposito: refaca o processo. Apos o deposito: entre em contato em ate <strong>48 horas</strong> pelo email ou WhatsApp.</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- FUNDOS -->
+    <!-- FUNDOS E PRAZOS -->
     <div class="faq-section" data-category="fundos">
-      <h2 class="faq-section-title"><i class="fas fa-hand-holding-heart"></i> Fundos e Projetos</h2>
+      <h2 class="faq-section-title"><i class="fas fa-hand-holding-heart"></i> Fundos e Prazos</h2>
 
-      <div class="faq-item" data-keywords="fdi fdca idoso crianca diferenca qual escolher">
+      <div class="faq-item" data-keywords="fdi fdca idoso crianca diferenca qual escolher dividir">
         <div class="faq-question" onclick="toggleFAQ(this)">
-          Qual a diferenca entre FDI e FDCA?
+          Qual a diferenca entre FDI e FDCA? Posso dividir?
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <ul>
-              <li><strong>FDI (Fundo do Idoso):</strong> Apoia pessoas com 60 anos ou mais</li>
-              <li><strong>FDCA (Fundo da Crianca e Adolescente):</strong> Apoia criancas e jovens ate 18 anos</li>
-            </ul>
-            <p>Escolha pela causa que mais te identifica! Voce tambem pode dividir entre os dois fundos.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-keywords="dividir dois fundos separar metade">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          Posso dividir minha destinacao entre fundos diferentes?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p><strong>Sim!</strong> Voce pode fazer destinacoes separadas para diferentes fundos.</p>
-            <p>Basta respeitar o limite total de 6-9% do seu IR devido.</p>
-            <p>Exemplo: 3% para FDI + 3% para FDCA = 6% total</p>
+            <p><strong>FDI</strong> apoia idosos (60+), <strong>FDCA</strong> apoia criancas e adolescentes. Sim, voce pode dividir entre fundos diferentes, respeitando o limite total de 6-9%.</p>
           </div>
         </div>
       </div>
@@ -565,75 +404,31 @@
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p>Todos os projetos listados sao <strong>pre-aprovados pelos conselhos</strong> e tem impacto real.</p>
-            <p>Cada projeto mostra:</p>
-            <ul>
-              <li>Descricao e objetivos</li>
-              <li>Publico beneficiado</li>
-              <li>Valor necessario e arrecadado</li>
-            </ul>
-            <div class="highlight-box">
-              <strong>Dica:</strong> A opcao "Destinacao Geral" deixa o conselho decidir a melhor alocacao - ideal se voce nao souber qual escolher!
-            </div>
+            <p>Todos os projetos sao <strong>pre-aprovados pelos conselhos</strong>. Cada um mostra descricao, publico e valores. A opcao "Destinacao Geral" deixa o conselho decidir a melhor alocacao.</p>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- PRAZOS -->
-    <div class="faq-section" data-category="prazos">
-      <h2 class="faq-section-title"><i class="fas fa-clock"></i> Prazos e Datas</h2>
 
       <div class="faq-item" data-keywords="prazo quando ate limite data">
         <div class="faq-question" onclick="toggleFAQ(this)">
-          Ate quando posso fazer a destinacao?
+          Ate quando posso destinar?
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p>Voce pode destinar <strong>a qualquer momento do ano</strong>!</p>
-            <p>Para que a destinacao entre na declaracao de 2026 (ano-base 2025), o deposito deve ser feito ate <strong>31 de dezembro de 2025</strong>.</p>
-            <div class="warning-box">
-              <strong>Dica:</strong> Nao deixe para a ultima hora! Faca com calma ao longo do ano.
-            </div>
+            <p>A qualquer momento do ano. Para entrar na declaracao de 2026 (ano-base 2025), o deposito deve ser feito ate <strong>31 de dezembro de 2025</strong>.</p>
           </div>
         </div>
       </div>
 
-      <div class="faq-item" data-keywords="recibo comprovante oficial demora 60 dias">
+      <div class="faq-item" data-keywords="recibo comprovante oficial demora 60 dias declaracao">
         <div class="faq-question" onclick="toggleFAQ(this)">
-          Quanto tempo demora para receber o recibo oficial?
+          Quando recebo o recibo e como uso na declaracao?
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="faq-answer">
           <div class="faq-answer-content">
-            <p>O prazo legal e de ate <strong>60 dias</strong>, mas na pratica:</p>
-            <ul>
-              <li><strong>Confirmacao do deposito:</strong> 5-10 dias uteis</li>
-              <li><strong>Recibo oficial:</strong> 15-30 dias em media</li>
-            </ul>
-            <p>Voce recebera notificacao por email e WhatsApp quando o recibo estiver pronto.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="faq-item" data-keywords="declaracao aparece proximo ano restituicao">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          Quando a destinacao aparece na minha declaracao?
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          <div class="faq-answer-content">
-            <p>A destinacao feita em 2025 aparecera na <strong>declaracao de 2026</strong> (ano-base 2025).</p>
-            <p>Voce (ou seu contador) devera:</p>
-            <ol>
-              <li>Informar a destinacao na declaracao</li>
-              <li>Anexar o recibo oficial</li>
-              <li>O valor sera deduzido automaticamente</li>
-            </ol>
-            <div class="highlight-box">
-              <strong>Resultado:</strong> Sua restituicao aumenta ou seu imposto a pagar diminui!
-            </div>
+            <p>O recibo oficial sai em <strong>15-30 dias</strong> (prazo legal: ate 60 dias). Voce recebe notificacao por email/WhatsApp. Na declaracao seguinte, informe a destinacao e anexe o recibo - o valor sera deduzido automaticamente.</p>
           </div>
         </div>
       </div>
@@ -711,14 +506,8 @@
       // Update buttons
       document.querySelectorAll('.faq-category-btn').forEach(btn => {
         btn.classList.remove('active');
-        if (btn.textContent.toLowerCase().includes(category) || category === 'all') {
-          if (category === 'all' && btn.textContent === 'Todas') {
-            btn.classList.add('active');
-          } else if (btn.textContent.toLowerCase().includes(category)) {
-            btn.classList.add('active');
-          }
-        }
       });
+      event.target.classList.add('active');
 
       // Show/hide sections
       document.querySelectorAll('.faq-section').forEach(section => {

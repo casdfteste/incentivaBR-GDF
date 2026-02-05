@@ -115,19 +115,6 @@
     </div>
   </div>
 
-  <!-- Modal de Destinacao Antigo (mantido para compatibilidade) -->
-  <div class="modal-overlay" id="donateModal">
-    <div class="modal">
-      <div class="modal-header">
-        <h2><i class="fas fa-hand-holding-heart"></i> Fazer Destinação</h2>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body" id="modalBody">
-        <!-- Conteúdo dinâmico -->
-      </div>
-    </div>
-  </div>
-
   <!-- Modal de Destinação com Dados Bancários -->
   <div id="modal-doacao" class="modal-doacao-overlay" style="display: none;">
     <div class="modal-doacao-content">
@@ -167,10 +154,9 @@
           </div>
         </div>
 
-        <div style="background: #fff8e1; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #ffc107;">
+        <div style="background: #fff8e1; padding: 0.75rem 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #ffc107;">
           <p style="margin: 0; font-size: 0.9rem; color: #f57c00;">
-            <i class="fas fa-exclamation-triangle"></i> <strong>Importante:</strong> Faça o PIX ou transferência para os dados acima.
-            Após realizar o depósito, clique no botão abaixo para confirmar sua destinação.
+            <i class="fas fa-exclamation-triangle"></i> Faça o depósito e clique abaixo para confirmar.
           </p>
         </div>
 
@@ -491,8 +477,8 @@
           <p style="text-align: center; margin-top: 12px; color: rgba(255,255,255,0.8); font-size: 13px;">
             É rápido! Depois você volta para destinar.
           </p>
-          <button class="btn btn-calc-outline" onclick="openDonateModal()" style="margin-top: 8px; font-size: 13px; opacity: 0.8;">
-            <i class="fas fa-hand-holding-heart"></i> Já sei meu IR - Quero destinar
+          <button class="btn btn-calc-outline" onclick="irParaCalculadora()" style="margin-top: 8px; font-size: 13px; opacity: 0.8;">
+            <i class="fas fa-calculator"></i> Já sei meu IR - Usar calculadora rápida
           </button>
         `;
       }
@@ -508,192 +494,7 @@
       window.location.href = 'calculadora-escolha.html';
     }
 
-    // Open donate modal
-    function openDonateModal() {
-      // Verificar se temos o ID do projeto na URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const projectId = urlParams.get('id');
-      if (!projectId) {
-        utils.showToast('Erro: ID do projeto não encontrado', 'error');
-        return;
-      }
-
-      if (!auth.isLoggedIn()) {
-        window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
-        return;
-      }
-
-      irData = auth.getIRData();
-
-      if (!irData || !irData.ir_devido) {
-        document.getElementById('modalBody').innerHTML = `
-          <div class="info-box warning">
-            <p><strong><i class="fas fa-calculator"></i> Calcule seu IR primeiro</strong></p>
-            <p style="margin-top:8px">Para fazer uma destinação, você precisa primeiro calcular seu IR na nossa calculadora.</p>
-          </div>
-          <button onclick="irParaCalculadora()" class="btn btn-primary" style="width:100%">
-            <i class="fas fa-calculator"></i> Ir para Calculadora
-          </button>
-        `;
-      } else {
-        const maxDonation = irData.limites_doacao.total_maximo;
-
-        document.getElementById('modalBody').innerHTML = `
-          <div class="info-box">
-            <p><strong>Seu IR devido:</strong> ${utils.formatCurrency(irData.ir_devido)}</p>
-            <p><strong>Limite máximo (${typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9}%):</strong> ${utils.formatCurrency(maxDonation)}</p>
-          </div>
-
-          <form id="donateForm">
-            <div class="form-group">
-              <label for="donationAmount">Valor da destinação</label>
-              <input type="text" id="donationAmount" placeholder="R$ 0,00" required style="padding:14px 16px;border:2px solid var(--border-color);border-radius:var(--radius-md);width:100%;font-size:16px">
-              <p style="font-size:13px;color:var(--text-muted);margin-top:8px">Máximo: ${utils.formatCurrency(maxDonation)}</p>
-            </div>
-
-            <button type="submit" class="btn btn-success" style="width:100%" id="confirmDonateBtn">
-              <i class="fas fa-check"></i> Confirmar Destinação
-            </button>
-          </form>
-        `;
-
-        // Mask
-        document.getElementById('donationAmount').addEventListener('input', function() {
-          utils.maskCurrency(this);
-        });
-
-        // Form submit
-        document.getElementById('donateForm').addEventListener('submit', handleDonation);
-      }
-
-      document.getElementById('donateModal').classList.add('show');
-    }
-
-    function closeModal() {
-      document.getElementById('donateModal').classList.remove('show');
-    }
-
-    async function handleDonation(e) {
-      if (e) e.preventDefault();
-
-      try {
-        // 1. PEGAR PROJECT_ID DA URL (método garantido)
-        const urlParams = new URLSearchParams(window.location.search);
-        const projectId = urlParams.get('id');
-
-        console.log('=== DOAÇÃO ===');
-        console.log('Project ID:', projectId);
-
-        if (!projectId) {
-          utils.showToast('Erro: ID do projeto não encontrado', 'error');
-          return;
-        }
-
-        // 2. PEGAR VALORES DO FORMULÁRIO
-        const amount = utils.parseCurrency(document.getElementById('donationAmount').value);
-        const irDevido = irData?.ir_devido || 0;
-        const anoFiscal = irData?.fiscal_year || 2026;
-
-        console.log('Valores:', { amount, irDevido, anoFiscal });
-
-        // 3. VALIDAÇÕES
-        if (!irDevido || irDevido <= 0) {
-          utils.showToast('Erro: IR devido não encontrado. Recalcule seu IR.', 'error');
-          return;
-        }
-
-        if (!amount || amount <= 0) {
-          utils.showToast('Informe o valor da destinação', 'warning');
-          return;
-        }
-
-        const maxPercent = typeof tenant !== 'undefined' ? tenant.getMaxPercentage() : 9;
-        const limiteMaximo = irDevido * (maxPercent / 100);
-        if (amount > limiteMaximo) {
-          utils.showToast(`Valor máximo: ${utils.formatCurrency(limiteMaximo)} (${maxPercent}% do IR)`, 'warning');
-          return;
-        }
-
-        // 4. PEGAR TOKEN (usa auth.getToken() que busca de 'incentivabr_token')
-        const token = auth.getToken();
-        if (!token) {
-          utils.showToast('Faça login para continuar', 'warning');
-          window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
-          return;
-        }
-
-        // 5. MOSTRAR LOADING
-        const btn = document.getElementById('confirmDonateBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
-
-        // 6. PREPARAR DADOS
-        const donationData = {
-          project_id: projectId,
-          ir_total: irDevido,
-          donation_amount: amount,
-          fiscal_year: anoFiscal
-        };
-
-        console.log('Enviando para API:', donationData);
-
-        // 7. ENVIAR PARA API (fetch direto para debug)
-        const response = await fetch('/api/donations', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-          },
-          body: JSON.stringify(donationData)
-        });
-
-        const result = await response.json();
-        console.log('Resposta:', response.status, result);
-
-        // 8. PROCESSAR RESPOSTA
-        if (response.ok && result.status === 'success') {
-          const projectTitle = project?.title || 'Projeto';
-
-          document.getElementById('modalBody').innerHTML = `
-            <div class="success-message">
-              <i class="fas fa-check-circle"></i>
-              <h3>Destinação Registrada!</h3>
-              <p style="color:var(--text-secondary);margin-bottom:24px">Sua destinação de ${utils.formatCurrency(amount)} foi registrada com sucesso.</p>
-              <p style="font-size:14px;color:var(--text-secondary)">Projeto: ${projectTitle}</p>
-              <a href="dashboard.html" class="btn btn-primary" style="margin-top:24px">
-                Ver Minhas Destinações
-              </a>
-            </div>
-          `;
-
-          // Reload project to update values
-          setTimeout(() => loadProject(), 2500);
-
-        } else {
-          const errorMsg = result.message || 'Erro ao processar destinação';
-          utils.showToast(errorMsg, 'error');
-          console.error('Erro da API:', result);
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fas fa-check"></i> Confirmar Destinação';
-        }
-
-      } catch (error) {
-        console.error('Erro completo:', error);
-        utils.showToast('Erro ao processar destinação: ' + error.message, 'error');
-        const btn = document.getElementById('confirmDonateBtn');
-        if (btn) {
-          btn.disabled = false;
-          btn.innerHTML = '<i class="fas fa-check"></i> Confirmar Destinação';
-        }
-      }
-    }
-
-    // Close modal on overlay click
-    document.getElementById('donateModal').addEventListener('click', (e) => {
-      if (e.target === document.getElementById('donateModal')) closeModal();
-    });
-
-    // ========== NOVO MODAL DE DOAÇÃO COM DADOS BANCÁRIOS ==========
+    // ========== MODAL DE DOAÇÃO COM DADOS BANCÁRIOS ==========
 
     let dadosDoacaoAtual = {
       projectId: null,
@@ -888,7 +689,7 @@
       }
     });
 
-    // ========== FIM DO NOVO MODAL ==========
+    // ========== FIM DO MODAL ==========
 
     // Init
     loadProject();
