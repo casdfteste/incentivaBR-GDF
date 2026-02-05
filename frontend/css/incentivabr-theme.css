@@ -251,6 +251,11 @@ header img {
   transform: scale(1.1);
 }
 
+/* Hide mobile-only elements on desktop */
+.mobile-close-area {
+  display: none;
+}
+
 /* Mobile Navigation Overlay */
 .mobile-nav-overlay {
   display: none;
