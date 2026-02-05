@@ -216,16 +216,16 @@ header img {
 
 .header nav a,
 .navbar nav a {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
-  font-weight: 500;
-  font-size: var(--font-size-sm);
+  font-weight: 600;
+  font-size: 15px;
   transition: color var(--transition-fast);
 }
 
 .header nav a:hover,
 .navbar nav a:hover {
-  color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 .header nav a.active,
@@ -364,16 +364,6 @@ header img {
   .header nav a[href*="calculadora"]::after,
   .navbar nav a[href*="calculadora"]::after {
     content: '\f1ec';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    margin-left: auto;
-    font-size: 14px;
-    color: var(--text-muted);
-  }
-
-  .header nav a[href*="como-funciona"]::after,
-  .navbar nav a[href*="como-funciona"]::after {
-    content: '\f059';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     margin-left: auto;
