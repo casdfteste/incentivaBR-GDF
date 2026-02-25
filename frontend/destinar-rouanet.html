@@ -12,17 +12,19 @@
   <link rel="stylesheet" href="css/incentivabr-theme.css">
   <style>
     :root {
-      --rouanet: #9C27B0;
-      --rouanet-dark: #6A1B9A;
-      --rouanet-light: #F3E5F5;
-      --success: #2E7D32;
+      --rouanet: #7C3AED;
+      --rouanet-dark: #4C1D95;
+      --rouanet-light: #EDE9FE;
+      --success: #059669;
     }
 
     body { background: var(--background-light); }
 
     /* ── Header ── */
     .page-header {
-      background: linear-gradient(135deg, var(--rouanet-dark) 0%, var(--rouanet) 100%);
+      background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 50%, #DB2777 100%);
+      background-size: 300% 300%;
+      animation: heroGradient 7s ease infinite;
       color: white;
       padding: 20px 24px;
     }
@@ -1117,9 +1119,14 @@
     };
 
     // ── Formatadores ─────────────────────────────────────────
-    const BRL = v => v != null
-      ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v)
-      : '—';
+    const BRL = v => {
+      if (v == null) return '—';
+      const n = parseFloat(v);
+      if (isNaN(n)) return '—';
+      const parts = n.toFixed(2).split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return 'R$ ' + parts[0] + ',' + parts[1];
+    };
 
     const PCT = v => v != null ? `${v.toFixed(0)}%` : '—';
 

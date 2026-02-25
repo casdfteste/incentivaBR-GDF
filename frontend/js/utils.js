@@ -3,10 +3,10 @@
 const utils = {
   // Formatar valor em reais
   formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(value || 0);
+    const n = parseFloat(value) || 0;
+    const parts = n.toFixed(2).split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return 'R$ ' + parts[0] + ',' + parts[1];
   },
 
   // Formatar porcentagem

@@ -15,7 +15,9 @@
 
     /* ── Header da página ── */
     .page-header {
-      background: linear-gradient(135deg, #6A1B9A 0%, #9C27B0 60%, #CE93D8 100%);
+      background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 45%, #DB2777 80%, #F97316 100%);
+      background-size: 300% 300%;
+      animation: heroGradient 7s ease infinite;
       color: white;
       padding: 56px 24px 40px;
       text-align: center;
@@ -492,21 +494,12 @@
   <!-- Hero -->
   <div class="page-header">
     <div class="lei-badge"><i class="fas fa-landmark"></i>&nbsp; Lei 8.313/1991 — Lei Rouanet</div>
-    <h1><i class="fas fa-palette"></i> Projetos Culturais</h1>
-    <p>Destine até <strong>6% do seu Imposto de Renda</strong> a projetos culturais aprovados pelo Ministério da Cultura.</p>
-    <div class="stats-row" id="statsRow">
-      <div class="stat">
-        <strong id="statTotal">—</strong>
-        <span>projetos disponíveis</span>
-      </div>
-      <div class="stat">
-        <strong>6%</strong>
-        <span>do IR pode ser destinado</span>
-      </div>
-      <div class="stat">
-        <strong>100%</strong>
-        <span>de dedução via patrocínio</span>
-      </div>
+    <h1 id="orgNameHeader">Nosso Projeto Cultural</h1>
+    <p>Destine até <strong>6% do seu Imposto de Renda</strong> a este projeto aprovado pelo Ministério da Cultura — sem custo algum para você.</p>
+    <div class="stats-row">
+      <div class="stat"><strong>6%</strong><span>do IR destinado</span></div>
+      <div class="stat"><strong>100%</strong><span>de dedução fiscal</span></div>
+      <div class="stat"><strong>R$ 0</strong><span>custo para você</span></div>
     </div>
   </div>
 
@@ -521,72 +514,13 @@
       </span>
     </div>
 
-    <!-- Filtros -->
-    <div class="filters-bar">
-      <div class="filter-group search-group">
-        <label>Buscar projeto ou proponente</label>
-        <div class="search-wrapper">
-          <i class="fas fa-search"></i>
-          <input type="text" id="inputNome" placeholder="Nome do projeto ou proponente...">
-        </div>
-      </div>
-
-      <div class="filter-group">
-        <label>Estado (UF)</label>
-        <select id="filterUF">
-          <option value="">Todos</option>
-          <option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option>
-          <option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option>
-          <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
-          <option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option>
-          <option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option>
-          <option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option>
-          <option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option>
-          <option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option>
-          <option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <label>Área Cultural</label>
-        <select id="filterArea">
-          <option value="">Todas as áreas</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <label>Situação</label>
-        <select id="filterSituacao">
-          <option value="">Todas</option>
-          <option value="Em andamento">Em andamento</option>
-          <option value="Aprovado">Aprovado</option>
-          <option value="Concluído">Concluído</option>
-          <option value="Em análise">Em análise</option>
-        </select>
-      </div>
-
-      <button class="btn-buscar" id="btnBuscar">
-        <i class="fas fa-search"></i> Buscar
-      </button>
-    </div>
-
-    <!-- Info resultados -->
-    <div class="results-info">
-      <span class="results-count" id="resultsCount">Carregando projetos...</span>
-      <span id="resultsMeta" style="font-size:13px;color:var(--text-muted)"></span>
-    </div>
-
-    <!-- Grid -->
+    <!-- Card único do projeto -->
     <div id="projectsContainer">
       <div class="loading-grid" id="loadingSkeleton">
         <div class="skeleton-card"><div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line xshort"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-        <div class="skeleton-card"><div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line xshort"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-        <div class="skeleton-card"><div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line xshort"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
       </div>
     </div>
 
-    <!-- Paginação -->
-    <div class="pagination" id="pagination" style="display:none"></div>
   </div>
 
   <!-- Modal detalhe -->
@@ -598,7 +532,7 @@
       </div>
       <div class="modal-body" id="modalBody">
         <div style="text-align:center;padding:40px">
-          <i class="fas fa-spinner fa-spin" style="font-size:32px;color:#9C27B0"></i>
+          <i class="fas fa-spinner fa-spin" style="font-size:32px;color:#7C3AED"></i>
         </div>
       </div>
       <div class="modal-footer" id="modalFooter"></div>
@@ -642,19 +576,19 @@
       navAuth.href = 'login.html';
     }
 
-    // ── Estado ──────────────────────────────────────────────
-    const LIMIT = 20;
-    let currentOffset = 0;
-    let totalResults  = 0;
-    let currentParams = {};
+    const BASE     = window.location.origin;
+    const urlParams = new URLSearchParams(window.location.search);
+    const orgParam  = urlParams.get('org') || '';
+    const qs        = orgParam ? `?org=${orgParam}` : '';
 
-    // ── Base URL (usa o mesmo origin do app) ────────────────
-    const BASE = window.location.origin;
-
-    // ── Utilitários ─────────────────────────────────────────
+    // ── Utilitários ──────────────────────────────────────────
     function formatBRL(v) {
       if (v === null || v === undefined) return '—';
-      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(v);
+      const n = parseFloat(v);
+      if (isNaN(n)) return '—';
+      const parts = n.toFixed(0).split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return 'R$ ' + parts[0];
     }
 
     function pct(captado, aprovado) {
@@ -671,210 +605,84 @@
       return 'situacao-outro';
     }
 
-    // ── Carregar áreas culturais para o filtro ───────────────
-    async function carregarAreas() {
+    // ── Carregar projeto da organização ──────────────────────
+    async function carregarProjeto() {
       try {
-        const res  = await fetch(`${BASE}/api/salic/areas`);
-        const data = await res.json();
-        const sel  = document.getElementById('filterArea');
-        (data.areas || []).forEach(a => {
-          const opt = document.createElement('option');
-          opt.value       = a.codigo ?? a.cd_area ?? a.id ?? '';
-          opt.textContent = a.nome   ?? a.ds_area ?? a.name ?? '';
-          sel.appendChild(opt);
-        });
-      } catch (e) {
-        console.warn('[SALIC] Falha ao carregar áreas:', e.message);
-      }
-    }
-
-    // ── Buscar projetos ──────────────────────────────────────
-    async function buscarProjetos(resetOffset = true) {
-      if (resetOffset) currentOffset = 0;
-
-      const nome     = document.getElementById('inputNome').value.trim();
-      const UF       = document.getElementById('filterUF').value;
-      const area     = document.getElementById('filterArea').value;
-      const situacao = document.getElementById('filterSituacao').value;
-
-      currentParams = { nome, UF, area, situacao };
-
-      mostrarSkeleton();
-
-      const params = new URLSearchParams();
-      if (nome)     params.set('nome',     nome);
-      if (UF)       params.set('UF',       UF);
-      if (area)     params.set('area',     area);
-      if (situacao) params.set('situacao', situacao);
-      params.set('limit',  LIMIT);
-      params.set('offset', currentOffset);
-
-      try {
-        const res  = await fetch(`${BASE}/api/salic/projetos?${params}`);
+        const res  = await fetch(`${BASE}/api/salic/org-project${qs}`);
         const data = await res.json();
 
-        if (data.status !== 'success') throw new Error(data.message || 'Erro na API SALIC');
+        if (data.status !== 'success') throw new Error(data.message || 'Projeto não configurado');
 
-        totalResults = data.total || 0;
+        const p   = data.projeto;
+        const org = data.organizacao;
+        const cap = pct(p.valores?.captado, p.valores?.aprovado);
 
-        document.getElementById('statTotal').textContent =
-          totalResults.toLocaleString('pt-BR');
-        document.getElementById('resultsCount').textContent =
-          `${totalResults.toLocaleString('pt-BR')} projeto${totalResults !== 1 ? 's' : ''} encontrado${totalResults !== 1 ? 's' : ''}`;
-        document.getElementById('resultsMeta').textContent =
-          currentOffset > 0 ? `Exibindo ${currentOffset + 1}–${Math.min(currentOffset + LIMIT, totalResults)}` : '';
+        // Atualiza header
+        if (org?.name) {
+          document.getElementById('orgNameHeader').textContent = `Projeto ${org.name}`;
+          document.title = `Lei Rouanet — ${org.name} | IncentivaBR`;
+        }
 
-        renderCards(data.projetos || []);
-        renderPaginacao();
+        const destinarUrl = `destinar-rouanet.html${qs}`;
+
+        document.getElementById('projectsContainer').innerHTML = `
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="card-header">
+                <span class="area-tag"><i class="fas fa-palette"></i> ${escapeHtml(p.area || 'Cultura')}</span>
+                <span class="pronac-tag">PRONAC ${p.pronac}</span>
+                <h3>${escapeHtml(p.nome)}</h3>
+              </div>
+              <div class="card-body">
+                <div class="proponente">
+                  <i class="fas fa-user-tie"></i> ${escapeHtml(p.proponente?.nome || '—')}
+                </div>
+                <div class="meta-row">
+                  ${p.uf ? `<span class="meta-chip"><i class="fas fa-map-marker-alt"></i>${p.uf}${p.municipio ? ' · ' + p.municipio : ''}</span>` : ''}
+                  ${p.segmento ? `<span class="meta-chip"><i class="fas fa-tag"></i>${escapeHtml(p.segmento)}</span>` : ''}
+                  ${p.ano_projeto ? `<span class="meta-chip"><i class="fas fa-calendar"></i>${p.ano_projeto}</span>` : ''}
+                </div>
+                <div class="valores-grid">
+                  <div class="valor-box">
+                    <div class="label">Valor Aprovado</div>
+                    <div class="amount">${formatBRL(p.valores?.aprovado)}</div>
+                  </div>
+                  <div class="valor-box captado">
+                    <div class="label">Captado</div>
+                    <div class="amount">${formatBRL(p.valores?.captado)}</div>
+                  </div>
+                </div>
+                ${p.valores?.aprovado ? `
+                <div class="captacao-bar">
+                  <div class="bar"><div class="fill" style="width:${cap}%"></div></div>
+                  <div class="info"><span>${cap}% captado</span><span>${formatBRL(p.valores?.aprovado)} meta</span></div>
+                </div>` : ''}
+                <span class="situacao-badge ${situacaoClass(p.situacao)}">
+                  <i class="fas fa-circle" style="font-size:8px"></i>
+                  ${escapeHtml(p.situacao || 'Sem situação')}
+                </span>
+              </div>
+              <div class="card-footer">
+                <button class="btn-detalhe" onclick="abrirDetalhe('${p.pronac}', '${escapeHtml(p.nome).replace(/'/g,"\\'")}')">
+                  <i class="fas fa-info-circle"></i> Detalhes
+                </button>
+                <a href="${destinarUrl}" class="btn-detalhe" style="text-decoration:none;background:#4CAF50">
+                  <i class="fas fa-hand-holding-heart"></i> Destinar agora
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
 
       } catch (err) {
         document.getElementById('projectsContainer').innerHTML = `
           <div class="empty-state">
             <i class="fas fa-exclamation-triangle"></i>
-            <h3>Não foi possível consultar o SALIC</h3>
-            <p>${err.message}</p>
-            <p style="margin-top:8px;font-size:13px">
-              A API SALIC pode estar temporariamente indisponível.
-              <a href="https://salic.cultura.gov.br" target="_blank">Acesse o SALIC diretamente</a>.
-            </p>
+            <h3>Projeto não disponível</h3>
+            <p>${escapeHtml(err.message)}</p>
           </div>
         `;
-        document.getElementById('pagination').style.display = 'none';
-        document.getElementById('resultsCount').textContent = 'Erro ao carregar';
       }
-    }
-
-    // ── Renderizar cards ─────────────────────────────────────
-    function renderCards(projetos) {
-      const container = document.getElementById('projectsContainer');
-
-      if (projetos.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <i class="fas fa-search"></i>
-            <h3>Nenhum projeto encontrado</h3>
-            <p>Tente ajustar os filtros ou buscar por outro termo.</p>
-          </div>
-        `;
-        return;
-      }
-
-      const html = projetos.map(p => {
-        const cap = pct(p.valores?.captado, p.valores?.aprovado);
-        return `
-          <div class="project-card">
-            <div class="card-header">
-              <span class="area-tag"><i class="fas fa-music"></i> ${p.area || 'Cultura'}</span>
-              <span class="pronac-tag">PRONAC ${p.pronac}</span>
-              <h3>${escapeHtml(p.nome)}</h3>
-            </div>
-            <div class="card-body">
-              <div class="proponente">
-                <i class="fas fa-user-tie"></i> ${escapeHtml(p.proponente?.nome || '—')}
-              </div>
-
-              <div class="meta-row">
-                ${p.uf ? `<span class="meta-chip"><i class="fas fa-map-marker-alt"></i>${p.uf}${p.municipio ? ' · ' + p.municipio : ''}</span>` : ''}
-                ${p.segmento ? `<span class="meta-chip"><i class="fas fa-tag"></i>${escapeHtml(p.segmento)}</span>` : ''}
-                ${p.ano_projeto ? `<span class="meta-chip"><i class="fas fa-calendar"></i>${p.ano_projeto}</span>` : ''}
-              </div>
-
-              <div class="valores-grid">
-                <div class="valor-box">
-                  <div class="label">Valor Aprovado</div>
-                  <div class="amount">${formatBRL(p.valores?.aprovado)}</div>
-                </div>
-                <div class="valor-box captado">
-                  <div class="label">Captado</div>
-                  <div class="amount">${formatBRL(p.valores?.captado)}</div>
-                </div>
-              </div>
-
-              ${p.valores?.aprovado ? `
-              <div class="captacao-bar">
-                <div class="bar"><div class="fill" style="width:${cap}%"></div></div>
-                <div class="info"><span>${cap}% captado</span><span>${formatBRL(p.valores?.aprovado)} meta</span></div>
-              </div>` : ''}
-
-              <span class="situacao-badge ${situacaoClass(p.situacao)}">
-                <i class="fas fa-circle" style="font-size:8px"></i>
-                ${p.situacao || 'Sem situação'}
-              </span>
-            </div>
-            <div class="card-footer">
-              <button class="btn-detalhe" onclick="abrirDetalhe('${p.pronac}', ${JSON.stringify(escapeHtml(p.nome))})">
-                <i class="fas fa-info-circle"></i> Detalhes
-              </button>
-              <a href="${p.link_salic}" target="_blank" rel="noopener" class="btn-salic">
-                <i class="fas fa-external-link-alt"></i> SALIC
-              </a>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      container.innerHTML = `<div class="projects-grid">${html}</div>`;
-    }
-
-    // ── Skeleton loading ─────────────────────────────────────
-    function mostrarSkeleton() {
-      document.getElementById('projectsContainer').innerHTML = `
-        <div class="loading-grid">
-          ${Array(6).fill(`
-            <div class="skeleton-card">
-              <div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div>
-              <div class="skeleton-body">
-                <div class="skeleton-line short"></div>
-                <div class="skeleton-line"></div>
-                <div class="skeleton-line xshort"></div>
-                <div class="skeleton-line"></div>
-                <div class="skeleton-line short"></div>
-              </div>
-            </div>
-          `).join('')}
-        </div>
-      `;
-      document.getElementById('pagination').style.display = 'none';
-    }
-
-    // ── Paginação ────────────────────────────────────────────
-    function renderPaginacao() {
-      const totalPages = Math.ceil(totalResults / LIMIT);
-      const currentPage = Math.floor(currentOffset / LIMIT);
-      const pag = document.getElementById('pagination');
-
-      if (totalPages <= 1) { pag.style.display = 'none'; return; }
-      pag.style.display = 'flex';
-      pag.innerHTML = '';
-
-      const prev = document.createElement('button');
-      prev.innerHTML = '<i class="fas fa-chevron-left"></i>';
-      prev.disabled  = currentPage === 0;
-      prev.onclick   = () => { currentOffset -= LIMIT; buscarProjetos(false); window.scrollTo(0,0); };
-      pag.appendChild(prev);
-
-      for (let i = 0; i < totalPages; i++) {
-        if (totalPages > 7 && i > 1 && i < totalPages - 2 && Math.abs(i - currentPage) > 1) {
-          if (i === 2 || i === totalPages - 3) {
-            const dots = document.createElement('span');
-            dots.textContent = '...';
-            dots.style.padding = '10px 4px';
-            pag.appendChild(dots);
-          }
-          continue;
-        }
-        const btn = document.createElement('button');
-        btn.textContent = i + 1;
-        btn.className   = i === currentPage ? 'active' : '';
-        btn.onclick     = () => { currentOffset = i * LIMIT; buscarProjetos(false); window.scrollTo(0,0); };
-        pag.appendChild(btn);
-      }
-
-      const next = document.createElement('button');
-      next.innerHTML = '<i class="fas fa-chevron-right"></i>';
-      next.disabled  = currentPage >= totalPages - 1;
-      next.onclick   = () => { currentOffset += LIMIT; buscarProjetos(false); window.scrollTo(0,0); };
-      pag.appendChild(next);
     }
 
     // ── Modal de detalhe ─────────────────────────────────────
@@ -885,7 +693,7 @@
       const footer  = document.getElementById('modalFooter');
 
       title.textContent = nome;
-      body.innerHTML = `<div style="text-align:center;padding:40px"><i class="fas fa-spinner fa-spin" style="font-size:32px;color:#9C27B0"></i><p style="margin-top:12px;color:var(--text-secondary)">Consultando API SALIC...</p></div>`;
+      body.innerHTML = `<div style="text-align:center;padding:40px"><i class="fas fa-spinner fa-spin" style="font-size:32px;color:#7C3AED"></i><p style="margin-top:12px;color:var(--text-secondary)">Consultando API SALIC...</p></div>`;
       footer.innerHTML = '';
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -1008,22 +816,8 @@
         .replace(/"/g, '&quot;');
     }
 
-    // ── Eventos ──────────────────────────────────────────────
-    document.getElementById('btnBuscar').addEventListener('click', () => buscarProjetos(true));
-
-    // Enter no campo de busca
-    document.getElementById('inputNome').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') buscarProjetos(true);
-    });
-
-    // Mudança nos selects dispara busca automática
-    ['filterUF', 'filterArea', 'filterSituacao'].forEach(id => {
-      document.getElementById(id).addEventListener('change', () => buscarProjetos(true));
-    });
-
     // ── Init ─────────────────────────────────────────────────
-    carregarAreas();
-    buscarProjetos();
+    carregarProjeto();
   </script>
   <script src="js/tenant.js"></script>
 </body>
