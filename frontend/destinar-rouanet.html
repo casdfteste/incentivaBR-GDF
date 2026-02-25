@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Destinar ao Projeto - IncentivaBR</title>
+  <meta name="description" content="Destine seu Imposto de Renda ao projeto cultural da sua organização via Lei Rouanet.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    :root {
+      --rouanet: #9C27B0;
+      --rouanet-dark: #6A1B9A;
+      --rouanet-light: #F3E5F5;
+      --success: #2E7D32;
+    }
+
+    body { background: var(--background-light); }
+
+    /* ── Header ── */
+    .page-header {
+      background: linear-gradient(135deg, var(--rouanet-dark) 0%, var(--rouanet) 100%);
+      color: white;
+      padding: 20px 24px;
+    }
+    .page-header .inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .page-header .org-logo-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .page-header h1 { font-size: 18px; margin: 0; }
+    .page-header p  { font-size: 13px; opacity: .85; margin: 2px 0 0; }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      background: white;
+      border-bottom: 1px solid var(--border-light);
+      padding: 0;
+    }
+    .progress-steps {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+    }
+    .step-tab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 14px 8px 10px;
+      position: relative;
+      cursor: default;
+    }
+    .step-tab::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: transparent;
+      border-radius: 2px 2px 0 0;
+    }
+    .step-tab.active::after    { background: var(--rouanet); }
+    .step-tab.completed::after { background: var(--success); }
+    .step-tab .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .step-tab.active .step-num {
+      border-color: var(--rouanet);
+      background: var(--rouanet);
+      color: white;
+    }
+    .step-tab.completed .step-num {
+      border-color: var(--success);
+      background: var(--success);
+      color: white;
+    }
+    .step-tab .step-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-align: center;
+    }
+    .step-tab.active .step-label    { color: var(--rouanet); font-weight: 600; }
+    .step-tab.completed .step-label { color: var(--success); }
+
+    /* ── Main ── */
+    .wizard-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .card-header {
+      background: var(--rouanet-light);
+      border-bottom: 1px solid #E1BEE7;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-header i { color: var(--rouanet); font-size: 18px; }
+    .card-header h2 { font-size: 16px; font-weight: 700; color: var(--rouanet-dark); margin: 0; }
+    .card-body { padding: 24px; }
+
+    /* ── Step 1: Projeto ── */
+    .project-banner {
+      background: linear-gradient(135deg, var(--rouanet-dark), var(--rouanet));
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      color: white;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-banner::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+    }
+    .pronac-chip {
+      display: inline-block;
+      background: rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 12px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .project-banner h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px; line-height: 1.3; }
+    .project-banner .sub { font-size: 13px; opacity: .85; }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .info-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--background-light);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-light);
+    }
+    .info-chip i { color: var(--rouanet); }
+
+    .valores-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .valor-card {
+      background: var(--background-light);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+    }
+    .valor-card .lbl { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+    .valor-card .val { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+    .valor-card.captado .val { color: var(--success); }
+
+    .captacao-bar {
+      margin-bottom: 20px;
+    }
+    .captacao-bar .bar {
+      height: 8px; background: var(--border-color);
+      border-radius: 4px; overflow: hidden;
+    }
+    .captacao-bar .fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rouanet), var(--success));
+      border-radius: 4px;
+    }
+    .captacao-bar .info {
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: var(--text-muted); margin-top: 4px;
+    }
+
+    .salic-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--rouanet);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .salic-link:hover { text-decoration: underline; }
+
+    /* ── Step 2: Calculadora ── */
+    .calc-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-light);
+      margin-bottom: 20px;
+    }
+    .calc-tab {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+    }
+    .calc-tab.active { color: var(--rouanet); border-bottom-color: var(--rouanet); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+    .form-group input[type="number"] {
+      padding: 10px 14px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      transition: border-color .2s;
+    }
+    .form-group input[type="number"]:focus {
+      outline: none;
+      border-color: var(--rouanet);
+    }
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix span {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .input-prefix input { padding-left: 34px; }
+
+    .result-box {
+      background: var(--rouanet-light);
+      border: 1px solid #CE93D8;
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-top: 20px;
+    }
+    .result-box .title { font-size: 13px; color: var(--rouanet-dark); font-weight: 700; margin-bottom: 16px; }
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .result-item .lbl { font-size: 11px; color: #7B1FA2; margin-bottom: 2px; }
+    .result-item .val { font-size: 20px; font-weight: 700; color: var(--rouanet-dark); }
+    .result-item .val.highlight { color: var(--success); font-size: 24px; }
+
+    /* ── Step 3: Valor ── */
+    .valor-explainer {
+      background: #E8F5E9;
+      border: 1px solid #A5D6A7;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--success);
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .valor-explainer i { margin-top: 2px; flex-shrink: 0; }
+
+    .slider-wrap { margin-bottom: 20px; }
+    .slider-wrap input[type="range"] {
+      width: 100%;
+      accent-color: var(--rouanet);
+      margin: 12px 0;
+    }
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .valor-input-big {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--rouanet-light);
+      border: 2px solid #CE93D8;
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .valor-input-big .currency { font-size: 22px; font-weight: 700; color: var(--rouanet); }
+    .valor-input-big input {
+      flex: 1;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--rouanet-dark);
+      border: none;
+      background: transparent;
+      outline: none;
+      min-width: 0;
+    }
+
+    .resumo-box {
+      background: var(--background-light);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .resumo-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .resumo-row:last-child { border-bottom: none; }
+    .resumo-row .lbl { color: var(--text-secondary); }
+    .resumo-row .val { font-weight: 600; }
+    .resumo-row.highlight .val { color: var(--success); font-size: 16px; }
+    .resumo-row.zero .val { color: var(--rouanet); font-weight: 700; }
+
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .terms-check input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: var(--rouanet);
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* ── Step 4: Pagamento ── */
+    .pagamento-intro {
+      background: #FFF8E1;
+      border: 1px solid #FFE082;
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      font-size: 13px;
+      color: #F57F17;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .banco-card {
+      background: white;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .banco-card-header {
+      background: linear-gradient(135deg, var(--rouanet-dark), var(--rouanet));
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+    }
+    .banco-campo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .banco-campo:last-child { border-bottom: none; }
+    .banco-campo .lbl { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+    .banco-campo .val { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+    .btn-copy {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border: 1.5px solid var(--rouanet);
+      color: var(--rouanet);
+      background: white;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+    }
+    .btn-copy:hover { background: var(--rouanet-light); }
+    .btn-copy.copied { border-color: var(--success); color: var(--success); }
+
+    .pix-card {
+      background: linear-gradient(135deg, #E8F5E9, #F1F8E9);
+      border: 2px solid #A5D6A7;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .pix-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--success);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pix-key-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      border: 1px solid #A5D6A7;
+    }
+    .pix-key-box .key {
+      flex: 1;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+
+    .referencia-box {
+      background: var(--rouanet-light);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .referencia-box .lbl { font-size: 12px; color: #7B1FA2; margin-bottom: 4px; }
+    .referencia-box .val { font-size: 14px; font-weight: 700; color: var(--rouanet-dark); }
+
+    .valor-destinar-box {
+      background: linear-gradient(135deg, var(--rouanet-dark), var(--rouanet));
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      color: white;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .valor-destinar-box .lbl { font-size: 13px; opacity: .85; margin-bottom: 4px; }
+    .valor-destinar-box .amount { font-size: 36px; font-weight: 800; }
+
+    /* ── Step 5: Comprovante ── */
+    .upload-area {
+      border: 2px dashed #CE93D8;
+      border-radius: var(--radius-lg);
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      margin-bottom: 20px;
+      background: var(--rouanet-light);
+      position: relative;
+    }
+    .upload-area:hover { border-color: var(--rouanet); background: #EDE7F6; }
+    .upload-area.has-file { border-color: var(--success); background: #E8F5E9; }
+    .upload-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .upload-area i { font-size: 36px; color: var(--rouanet); margin-bottom: 12px; }
+    .upload-area.has-file i { color: var(--success); }
+    .upload-area p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    .upload-area .file-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--success);
+      margin-top: 8px;
+    }
+
+    /* ── Step 6: Sucesso ── */
+    .success-wrap {
+      text-align: center;
+      padding: 32px 20px;
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #E8F5E9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+      color: var(--success);
+    }
+    .success-wrap h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .success-wrap p  { color: var(--text-secondary); font-size: 15px; }
+    .donation-id-box {
+      background: var(--background-light);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin: 20px 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .donation-id-box span { font-weight: 700; color: var(--rouanet-dark); }
+
+    .next-steps {
+      text-align: left;
+      background: var(--rouanet-light);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+    .next-steps h4 { font-size: 14px; font-weight: 700; color: var(--rouanet-dark); margin-bottom: 10px; }
+    .next-steps ol { padding-left: 20px; font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+
+    /* ── Botões ── */
+    .btn-primary-rouanet {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--rouanet);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-primary-rouanet:hover    { background: var(--rouanet-dark); }
+    .btn-primary-rouanet:disabled { background: var(--text-muted); cursor: not-allowed; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 24px;
+      background: white;
+      color: var(--text-secondary);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all .2s;
+    }
+    .btn-secondary:hover { border-color: var(--rouanet); color: var(--rouanet); }
+
+    /* ── Loading overlay ── */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,.85);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .loading-overlay i { font-size: 36px; color: var(--rouanet); }
+    .loading-overlay p { color: var(--text-secondary); font-size: 15px; }
+
+    /* ── Toast ── */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 9000;
+      transition: transform .3s;
+      white-space: nowrap;
+    }
+    .toast-msg.show { transform: translateX(-50%) translateY(0); }
+    .toast-msg.success { background: var(--success); }
+    .toast-msg.error   { background: #C62828; }
+
+    /* ── Offline banner ── */
+    .offline-banner {
+      background: #FFF3E0;
+      border: 1px solid #FFCC02;
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #E65100;
+      margin-bottom: 16px;
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+    .offline-banner.show { display: flex; }
+
+    @media (max-width: 600px) {
+      .step-label { display: none; }
+      .form-grid  { grid-template-columns: 1fr; }
+      .valores-row { grid-template-columns: 1fr 1fr; }
+      .result-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <i class="fas fa-spinner fa-spin"></i>
+    <p id="loadingText">Carregando projeto...</p>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-msg" id="toastMsg"></div>
+
+  <!-- Header nav -->
+  <header class="header" style="background:var(--rouanet-dark)">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white">
+    </a>
+    <nav>
+      <a href="projetos-rouanet.html" style="color:rgba(255,255,255,.85)">Projetos</a>
+      <a href="dashboard.html"        style="color:rgba(255,255,255,.85)">Minha Conta</a>
+    </nav>
+  </header>
+
+  <!-- Page header (org specific) -->
+  <div class="page-header">
+    <div class="inner">
+      <div class="org-logo-wrap" id="orgLogoWrap">
+        <i class="fas fa-landmark"></i>
+      </div>
+      <div>
+        <h1 id="orgNameHeader">Carregando...</h1>
+        <p>Destinação — Lei Rouanet (Lei 8.313/1991)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress steps -->
+  <div class="progress-wrap">
+    <div class="progress-steps">
+      <div class="step-tab active"    id="tab1"><div class="step-num">1</div><div class="step-label">Projeto</div></div>
+      <div class="step-tab"           id="tab2"><div class="step-num">2</div><div class="step-label">Calculadora</div></div>
+      <div class="step-tab"           id="tab3"><div class="step-num">3</div><div class="step-label">Valor</div></div>
+      <div class="step-tab"           id="tab4"><div class="step-num">4</div><div class="step-label">Pagamento</div></div>
+      <div class="step-tab"           id="tab5"><div class="step-num">5</div><div class="step-label">Comprovante</div></div>
+    </div>
+  </div>
+
+  <!-- Wizard body -->
+  <div class="wizard-body">
+    <div class="offline-banner" id="offlineBanner">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>API SALIC indisponível — exibindo dados em cache. Informações podem estar desatualizadas.</span>
+    </div>
+
+    <!-- ─── ETAPA 1: Projeto ─── -->
+    <div id="step1">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-palette"></i>
+          <h2>Projeto da sua organização</h2>
+        </div>
+        <div class="card-body">
+          <div class="project-banner" id="projectBanner">
+            <div class="pronac-chip" id="pronacChip">PRONAC —</div>
+            <h3 id="projectTitle">Carregando...</h3>
+            <div class="sub" id="projectProponente"></div>
+          </div>
+
+          <div class="info-row" id="infoRow"></div>
+
+          <div class="valores-row" id="valoresRow" style="display:none">
+            <div class="valor-card">
+              <div class="lbl">Valor Aprovado</div>
+              <div class="val" id="valAprovado">—</div>
+            </div>
+            <div class="valor-card captado">
+              <div class="lbl">Captado</div>
+              <div class="val" id="valCaptado">—</div>
+            </div>
+            <div class="valor-card">
+              <div class="lbl">A captar</div>
+              <div class="val" id="valRestante">—</div>
+            </div>
+          </div>
+
+          <div class="captacao-bar" id="captacaoBar" style="display:none">
+            <div class="bar"><div class="fill" id="captacaoFill" style="width:0%"></div></div>
+            <div class="info">
+              <span id="captacaoPct">0% captado</span>
+              <span id="captacaoMeta"></span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px">
+            <a href="#" id="salicLink" class="salic-link" target="_blank" rel="noopener">
+              <i class="fas fa-external-link-alt"></i> Ver no SALIC
+            </a>
+            <span id="situacaoBadge" class="situacao-badge" style="display:none"></span>
+          </div>
+
+          <button class="btn-primary-rouanet" onclick="goTo(2)">
+            <i class="fas fa-calculator"></i> Calcular meu Imposto de Renda
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ETAPA 2: Calculadora ─── -->
+    <div id="step2" style="display:none">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-calculator"></i>
+          <h2>Calculadora de IR</h2>
+        </div>
+        <div class="card-body">
+          <div class="calc-tabs">
+            <div class="calc-tab active" onclick="switchCalcTab('rapida')">Rápida</div>
+            <div class="calc-tab" onclick="switchCalcTab('completa')">Detalhada</div>
+          </div>
+
+          <!-- Modo rápido -->
+          <div id="calcRapida">
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">
+              Informe diretamente o valor do IR devido (disponível na sua declaração ou holerite).
+            </p>
+            <div class="form-group">
+              <label>IR Devido (R$)</label>
+              <div class="input-prefix">
+                <span>R$</span>
+                <input type="number" id="rapidaIRDevido" placeholder="0,00" min="0" step="0.01">
+              </div>
+            </div>
+          </div>
+
+          <!-- Modo completo -->
+          <div id="calcCompleta" style="display:none">
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">
+              Preencha os dados da sua declaração para calcular automaticamente.
+            </p>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Rendimentos Tributáveis (R$)</label>
+                <div class="input-prefix"><span>R$</span>
+                  <input type="number" id="rendimentos" placeholder="0,00" min="0" step="0.01">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>13º Salário (R$)</label>
+                <div class="input-prefix"><span>R$</span>
+                  <input type="number" id="decimo3" placeholder="0,00" min="0" step="0.01" value="0">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Dependentes</label>
+                <input type="number" id="dependentes" placeholder="0" min="0" max="20" value="0">
+              </div>
+              <div class="form-group">
+                <label>Dedução Saúde (R$)</label>
+                <div class="input-prefix"><span>R$</span>
+                  <input type="number" id="saude" placeholder="0,00" min="0" step="0.01" value="0">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Dedução Educação (R$)</label>
+                <div class="input-prefix"><span>R$</span>
+                  <input type="number" id="educacao" placeholder="0,00" min="0" step="0.01" value="0">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>INSS (R$)</label>
+                <div class="input-prefix"><span>R$</span>
+                  <input type="number" id="inss" placeholder="0,00" min="0" step="0.01" value="0">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-box" id="calcResultBox" style="display:none">
+            <div class="title"><i class="fas fa-check-circle" style="color:var(--rouanet)"></i> Resultado do Cálculo</div>
+            <div class="result-grid">
+              <div class="result-item">
+                <div class="lbl">IR Devido</div>
+                <div class="val" id="resIRDevido">—</div>
+              </div>
+              <div class="result-item">
+                <div class="lbl">Alíquota Efetiva</div>
+                <div class="val" id="resAliquota">—</div>
+              </div>
+              <div class="result-item">
+                <div class="lbl">Limite Rouanet (6%)</div>
+                <div class="val highlight" id="resLimite">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;display:flex;gap:10px">
+            <button class="btn-secondary" onclick="goTo(1)">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button class="btn-primary-rouanet" id="btnCalcular" onclick="calcular()">
+              <i class="fas fa-calculator"></i> Calcular
+            </button>
+          </div>
+          <button class="btn-secondary" id="btnProStep3" onclick="goTo(3)" style="display:none;margin-top:10px">
+            Definir valor a destinar <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ETAPA 3: Valor ─── -->
+    <div id="step3" style="display:none">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-hand-holding-usd"></i>
+          <h2>Quanto deseja destinar?</h2>
+        </div>
+        <div class="card-body">
+          <div class="valor-explainer">
+            <i class="fas fa-info-circle"></i>
+            <span>
+              Destinações via Lei Rouanet são <strong>100% dedutíveis</strong> do IR (mecanismo de patrocínio).
+              Você não paga nada a mais — apenas redireciona o que iria para o governo.
+            </span>
+          </div>
+
+          <div class="valor-input-big">
+            <span class="currency">R$</span>
+            <input type="number" id="valorDestinar" placeholder="0,00" min="0.01" step="0.01"
+                   oninput="onValorChange()">
+          </div>
+
+          <div class="slider-wrap">
+            <input type="range" id="valorSlider" min="0" max="100" step="0.01" value="0"
+                   oninput="onSliderChange()">
+            <div class="slider-labels">
+              <span>R$ 0</span>
+              <span id="sliderMax">R$ 0</span>
+            </div>
+          </div>
+
+          <div class="resumo-box">
+            <div class="resumo-row">
+              <span class="lbl">IR Devido</span>
+              <span class="val" id="resumoIR">—</span>
+            </div>
+            <div class="resumo-row">
+              <span class="lbl">Limite Lei Rouanet (6%)</span>
+              <span class="val" id="resumoLimite">—</span>
+            </div>
+            <div class="resumo-row highlight">
+              <span class="lbl">Valor a destinar</span>
+              <span class="val" id="resumoValor">R$ 0,00</span>
+            </div>
+            <div class="resumo-row zero">
+              <span class="lbl"><i class="fas fa-star" style="color:var(--rouanet)"></i> Custo real para você</span>
+              <span class="val">R$ 0,00</span>
+            </div>
+          </div>
+
+          <div class="terms-check">
+            <input type="checkbox" id="termsCheck">
+            <label for="termsCheck">
+              Declaro que sou contribuinte do Imposto de Renda (Pessoa Física) e que as informações
+              prestadas são verdadeiras. Autorizo o registro desta intenção de destinação.
+            </label>
+          </div>
+
+          <div style="display:flex;gap:10px">
+            <button class="btn-secondary" onclick="goTo(2)">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button class="btn-primary-rouanet" id="btnRegistrar" onclick="registrarDestinacao()">
+              <i class="fas fa-check"></i> Confirmar e ver dados para pagamento
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ETAPA 4: Pagamento ─── -->
+    <div id="step4" style="display:none">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-university"></i>
+          <h2>Dados para pagamento</h2>
+        </div>
+        <div class="card-body">
+          <div class="pagamento-intro">
+            <i class="fas fa-exclamation-triangle" style="margin-top:2px;flex-shrink:0"></i>
+            <span>
+              Realize a transferência bancária ou PIX <strong>para o beneficiário abaixo</strong>.
+              Use a referência indicada para identificação. Após transferir, envie o comprovante na próxima etapa.
+            </span>
+          </div>
+
+          <!-- Valor destacado -->
+          <div class="valor-destinar-box">
+            <div class="lbl">Valor a transferir</div>
+            <div class="amount" id="pgValor">R$ —</div>
+          </div>
+
+          <!-- Dados bancários -->
+          <div class="banco-card">
+            <div class="banco-card-header">
+              <i class="fas fa-university"></i>
+              <span>Dados Bancários — Transferência</span>
+            </div>
+            <div class="banco-campo">
+              <div><div class="lbl">Beneficiário</div><div class="val" id="pgBeneficiario">—</div></div>
+            </div>
+            <div class="banco-campo">
+              <div><div class="lbl">CNPJ</div><div class="val" id="pgCNPJ">—</div></div>
+              <button class="btn-copy" onclick="copiar('pgCNPJ', this)"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+            <div class="banco-campo">
+              <div><div class="lbl">Banco</div><div class="val" id="pgBanco">—</div></div>
+            </div>
+            <div class="banco-campo">
+              <div><div class="lbl">Agência</div><div class="val" id="pgAgencia">—</div></div>
+              <button class="btn-copy" onclick="copiar('pgAgencia', this)"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+            <div class="banco-campo">
+              <div><div class="lbl">Conta</div><div class="val" id="pgConta">—</div></div>
+              <button class="btn-copy" onclick="copiar('pgConta', this)"><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+          </div>
+
+          <!-- PIX -->
+          <div class="pix-card" id="pixCard" style="display:none">
+            <h4><i class="fas fa-bolt"></i> PIX — Chave</h4>
+            <div class="pix-key-box">
+              <div>
+                <div style="font-size:11px;color:var(--text-muted);margin-bottom:2px" id="pgPixTipo">—</div>
+                <div class="key" id="pgPix">—</div>
+              </div>
+              <button class="btn-copy" onclick="copiar('pgPix', this)" style="background:white">
+                <i class="fas fa-copy"></i> Copiar PIX
+              </button>
+            </div>
+          </div>
+
+          <!-- Referência -->
+          <div class="referencia-box">
+            <div>
+              <div class="lbl">Referência / Identificação</div>
+              <div class="val" id="pgReferencia">—</div>
+            </div>
+            <button class="btn-copy" onclick="copiar('pgReferencia', this)"><i class="fas fa-copy"></i> Copiar</button>
+          </div>
+
+          <button class="btn-primary-rouanet" onclick="goTo(5)">
+            <i class="fas fa-upload"></i> Já fiz a transferência — enviar comprovante
+          </button>
+          <button class="btn-secondary" onclick="goTo(3)">
+            <i class="fas fa-arrow-left"></i> Voltar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ETAPA 5: Comprovante ─── -->
+    <div id="step5" style="display:none">
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-file-upload"></i>
+          <h2>Enviar comprovante de pagamento</h2>
+        </div>
+        <div class="card-body">
+          <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px">
+            Faça o upload do comprovante da transferência (extrato bancário, comprovante PIX ou TED).
+            Formatos aceitos: PDF, JPG, PNG — máx. 5MB.
+          </p>
+
+          <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" onchange="onFileSelect()">
+            <i class="fas fa-cloud-upload-alt" id="uploadIcon"></i>
+            <p id="uploadText">Clique aqui ou arraste o comprovante</p>
+            <div class="file-name" id="fileName" style="display:none"></div>
+          </div>
+
+          <div style="display:flex;gap:10px">
+            <button class="btn-secondary" onclick="goTo(4)">
+              <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+            <button class="btn-primary-rouanet" id="btnEnviar" onclick="enviarComprovante()" disabled>
+              <i class="fas fa-paper-plane"></i> Enviar comprovante e finalizar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ETAPA 6: Sucesso ─── -->
+    <div id="step6" style="display:none">
+      <div class="card">
+        <div class="card-body">
+          <div class="success-wrap">
+            <div class="success-icon"><i class="fas fa-check"></i></div>
+            <h2>Destinação Registrada!</h2>
+            <p>Seu comprovante foi enviado e sua destinação está em análise pela organização.</p>
+
+            <div class="donation-id-box">
+              Protocolo: <span id="successDonationId">—</span>
+            </div>
+
+            <div class="next-steps">
+              <h4><i class="fas fa-list-check" style="color:var(--rouanet)"></i> Próximos passos</h4>
+              <ol>
+                <li>A organização irá analisar e confirmar o recebimento</li>
+                <li>Você receberá um e-mail de confirmação em até 5 dias úteis</li>
+                <li>Na sua declaração de IR, informe o patrocínio no campo "Incentivos Fiscais" (código Lei 8.313/1991)</li>
+                <li>Guarde o comprovante e o protocolo acima</li>
+              </ol>
+            </div>
+
+            <a href="dashboard.html" class="btn-primary-rouanet" style="text-decoration:none;margin-bottom:10px">
+              <i class="fas fa-home"></i> Ir para Minha Conta
+            </a>
+            <a href="projetos-rouanet.html" class="btn-secondary" style="text-decoration:none">
+              <i class="fas fa-search"></i> Ver outros projetos Rouanet
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /wizard-body -->
+
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    // ── Guard: requer login ──────────────────────────────────
+    if (!auth.isLoggedIn()) {
+      window.location.href = 'login.html?redirect=' + encodeURIComponent(window.location.href);
+    }
+
+    const BASE = window.location.origin;
+    const urlParams = new URLSearchParams(window.location.search);
+    const orgParam  = urlParams.get('org') || '';
+
+    // ── Estado global ────────────────────────────────────────
+    const state = {
+      org:        null,
+      projeto:    null,
+      ir_devido:  null,
+      limite:     null,
+      valor:      null,
+      donationId: null,
+      currentStep: 1,
+      calcMode:   'rapida'
+    };
+
+    // ── Formatadores ─────────────────────────────────────────
+    const BRL = v => v != null
+      ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(v)
+      : '—';
+
+    const PCT = v => v != null ? `${v.toFixed(0)}%` : '—';
+
+    function pct(captado, aprovado) {
+      if (!captado || !aprovado) return 0;
+      return Math.min(Math.round((captado / aprovado) * 100), 100);
+    }
+
+    // ── Toast ─────────────────────────────────────────────────
+    function toast(msg, type = '') {
+      const el = document.getElementById('toastMsg');
+      el.textContent = msg;
+      el.className = `toast-msg ${type} show`;
+      setTimeout(() => el.classList.remove('show'), 3500);
+    }
+
+    // ── Loading ───────────────────────────────────────────────
+    function showLoading(text = 'Aguarde...') {
+      document.getElementById('loadingText').textContent = text;
+      document.getElementById('loadingOverlay').style.display = 'flex';
+    }
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+
+    // ── Copiar para área de transferência ────────────────────
+    function copiar(elementId, btn) {
+      const text = document.getElementById(elementId).textContent.trim();
+      navigator.clipboard.writeText(text).then(() => {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fas fa-copy"></i> Copiar';
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(() => toast('Não foi possível copiar', 'error'));
+    }
+
+    // ── Navegação entre etapas ───────────────────────────────
+    function goTo(step) {
+      // Guardar step 3 requer IR calculado
+      if (step === 3 && (!state.ir_devido || !state.limite)) {
+        toast('Calcule o IR primeiro', 'error');
+        return;
+      }
+      if (step === 3) setupStep3();
+
+      // Ocultar todas
+      for (let i = 1; i <= 6; i++) {
+        const el = document.getElementById(`step${i}`);
+        if (el) el.style.display = 'none';
+      }
+
+      // Mostrar etapa atual
+      const target = document.getElementById(`step${step}`);
+      if (target) target.style.display = '';
+
+      // Atualizar tabs (steps 1-5)
+      for (let i = 1; i <= 5; i++) {
+        const tab = document.getElementById(`tab${i}`);
+        if (!tab) continue;
+        tab.className = 'step-tab';
+        if (i < step)  tab.classList.add('completed');
+        if (i === step && step <= 5) tab.classList.add('active');
+      }
+
+      state.currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Modo calculadora ─────────────────────────────────────
+    function switchCalcTab(mode) {
+      state.calcMode = mode;
+      document.querySelectorAll('.calc-tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && mode === 'rapida') || (i === 1 && mode === 'completa'));
+      });
+      document.getElementById('calcRapida').style.display   = mode === 'rapida'   ? '' : 'none';
+      document.getElementById('calcCompleta').style.display = mode === 'completa' ? '' : 'none';
+      // Reset resultado
+      document.getElementById('calcResultBox').style.display = 'none';
+      document.getElementById('btnProStep3').style.display   = 'none';
+    }
+
+    // ── Calcular IR ───────────────────────────────────────────
+    async function calcular() {
+      let body;
+
+      if (state.calcMode === 'rapida') {
+        const irDevido = parseFloat(document.getElementById('rapidaIRDevido').value);
+        if (!irDevido || irDevido <= 0) { toast('Informe o IR Devido', 'error'); return; }
+        body = { ir_devido: irDevido };
+        return calcularRapido(body);
+      }
+
+      const rendimentos = parseFloat(document.getElementById('rendimentos').value);
+      if (!rendimentos || rendimentos <= 0) { toast('Informe os rendimentos tributáveis', 'error'); return; }
+
+      body = {
+        rendimentos_tributaveis: rendimentos,
+        rendimento_13:           parseFloat(document.getElementById('decimo3').value)    || 0,
+        dependentes:             parseInt(document.getElementById('dependentes').value)  || 0,
+        deducao_saude:           parseFloat(document.getElementById('saude').value)      || 0,
+        deducao_educacao:        parseFloat(document.getElementById('educacao').value)   || 0,
+        inss:                    parseFloat(document.getElementById('inss').value)       || 0
+      };
+
+      showLoading('Calculando IR...');
+      try {
+        const qs = orgParam ? `?org=${orgParam}` : '';
+        const res  = await fetch(`${BASE}/api/calculator/ir${qs}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader() },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (data.status !== 'success') throw new Error(data.message);
+
+        // Limite Rouanet: usar rouanet ou total_maximo
+        const limite = data.limites_doacao?.rouanet ?? data.limites_doacao?.total_maximo;
+
+        state.ir_devido = data.ir_devido;
+        state.limite    = limite;
+
+        document.getElementById('resIRDevido').textContent = BRL(data.ir_devido);
+        document.getElementById('resAliquota').textContent = `${data.aliquota_efetiva}%`;
+        document.getElementById('resLimite').textContent   = BRL(limite);
+        document.getElementById('calcResultBox').style.display = '';
+        document.getElementById('btnProStep3').style.display   = '';
+
+      } catch (err) {
+        toast('Erro no cálculo: ' + err.message, 'error');
+      } finally {
+        hideLoading();
+      }
+    }
+
+    async function calcularRapido(body) {
+      showLoading('Calculando...');
+      try {
+        const qs  = orgParam ? `?org=${orgParam}` : '';
+        const res  = await fetch(`${BASE}/api/calculator/limites-rapido${qs}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader() },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (data.status !== 'success') throw new Error(data.message);
+
+        const limite = data.limites_doacao?.rouanet ?? data.limites_doacao?.total_maximo;
+
+        state.ir_devido = data.ir_devido;
+        state.limite    = limite;
+
+        document.getElementById('resIRDevido').textContent = BRL(data.ir_devido);
+        document.getElementById('resAliquota').textContent = '—';
+        document.getElementById('resLimite').textContent   = BRL(limite);
+        document.getElementById('calcResultBox').style.display = '';
+        document.getElementById('btnProStep3').style.display   = '';
+
+      } catch (err) {
+        toast('Erro: ' + err.message, 'error');
+      } finally {
+        hideLoading();
+      }
+    }
+
+    // ── Step 3: Controles de valor ───────────────────────────
+    function setupStep3() {
+      const limite = state.limite || 0;
+
+      document.getElementById('resumoIR').textContent     = BRL(state.ir_devido);
+      document.getElementById('resumoLimite').textContent  = BRL(limite);
+      document.getElementById('sliderMax').textContent     = BRL(limite);
+
+      const slider = document.getElementById('valorSlider');
+      slider.max   = limite;
+      slider.value = limite; // default: valor máximo
+
+      document.getElementById('valorDestinar').value = limite.toFixed(2);
+      document.getElementById('valorDestinar').max   = limite;
+      updateResumoValor(limite);
+    }
+
+    function onSliderChange() {
+      const v = parseFloat(document.getElementById('valorSlider').value) || 0;
+      document.getElementById('valorDestinar').value = v.toFixed(2);
+      updateResumoValor(v);
+    }
+
+    function onValorChange() {
+      const v = parseFloat(document.getElementById('valorDestinar').value) || 0;
+      const max = state.limite || 0;
+      const clamped = Math.min(v, max);
+      document.getElementById('valorSlider').value = clamped;
+      updateResumoValor(clamped);
+    }
+
+    function updateResumoValor(v) {
+      state.valor = v;
+      document.getElementById('resumoValor').textContent = BRL(v);
+    }
+
+    // ── Registrar destinação ─────────────────────────────────
+    async function registrarDestinacao() {
+      if (!state.valor || state.valor <= 0) { toast('Informe um valor válido', 'error'); return; }
+      if (!document.getElementById('termsCheck').checked) {
+        toast('Aceite os termos para continuar', 'error'); return;
+      }
+      if (!state.org?.pronac) { toast('Organização sem PRONAC configurado', 'error'); return; }
+
+      showLoading('Registrando destinação...');
+      try {
+        const qs = orgParam ? `?org=${orgParam}` : '';
+        const res = await fetch(`${BASE}/api/donations/rouanet${qs}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeader() },
+          body: JSON.stringify({
+            pronac:          state.org.pronac,
+            ir_total:        state.ir_devido,
+            donation_amount: state.valor,
+            fiscal_year:     new Date().getFullYear()
+          })
+        });
+        const data = await res.json();
+        if (data.status !== 'success') throw new Error(data.message);
+
+        state.donationId = data.donation.id;
+        preencherPagamento(data.donation);
+        goTo(4);
+
+      } catch (err) {
+        toast('Erro: ' + err.message, 'error');
+      } finally {
+        hideLoading();
+      }
+    }
+
+    // ── Preencher tela de pagamento ───────────────────────────
+    function preencherPagamento(donation) {
+      const banco = donation.banco;
+      const user  = auth.getUser();
+
+      document.getElementById('pgValor').textContent       = BRL(donation.donation_amount);
+      document.getElementById('pgBeneficiario').textContent = banco.beneficiary_name || '—';
+      document.getElementById('pgCNPJ').textContent         = formatCNPJ(banco.beneficiary_cnpj) || '—';
+      document.getElementById('pgBanco').textContent        = banco.bank_name
+        ? `${banco.bank_name}${banco.bank_code ? ' (' + banco.bank_code + ')' : ''}`
+        : '—';
+      document.getElementById('pgAgencia').textContent      = banco.bank_agency || '—';
+      document.getElementById('pgConta').textContent        = banco.bank_account || '—';
+
+      // PIX
+      if (banco.pix_key) {
+        document.getElementById('pgPix').textContent    = banco.pix_key;
+        document.getElementById('pgPixTipo').textContent = banco.pix_key_type
+          ? 'Tipo: ' + banco.pix_key_type
+          : 'Chave PIX';
+        document.getElementById('pixCard').style.display = '';
+      }
+
+      // Referência
+      const pronac = state.org?.pronac || '—';
+      const cpf    = user?.cpf ? formatCPF(user.cpf) : (user?.nome || '');
+      document.getElementById('pgReferencia').textContent =
+        `PRONAC ${pronac} - ${cpf} - Lei Rouanet`;
+    }
+
+    // ── Upload comprovante ────────────────────────────────────
+    function onFileSelect() {
+      const file = document.getElementById('fileInput').files[0];
+      if (!file) return;
+
+      const area = document.getElementById('uploadArea');
+      area.classList.add('has-file');
+      document.getElementById('uploadIcon').className = 'fas fa-file-check';
+      document.getElementById('uploadText').textContent = 'Arquivo selecionado:';
+      const fn = document.getElementById('fileName');
+      fn.textContent = file.name;
+      fn.style.display = '';
+      document.getElementById('btnEnviar').disabled = false;
+    }
+
+    async function enviarComprovante() {
+      const file = document.getElementById('fileInput').files[0];
+      if (!file) { toast('Selecione um arquivo', 'error'); return; }
+      if (!state.donationId) { toast('Destinação não registrada', 'error'); return; }
+
+      showLoading('Enviando comprovante...');
+      try {
+        const formData = new FormData();
+        formData.append('receipt', file);
+
+        const res = await fetch(`${BASE}/api/uploads/receipt/${state.donationId}`, {
+          method: 'POST',
+          headers: authHeader(),
+          body: formData
+        });
+        const data = await res.json();
+        if (data.status !== 'success') throw new Error(data.message);
+
+        document.getElementById('successDonationId').textContent = state.donationId;
+        goTo(6);
+        toast('Comprovante enviado com sucesso!', 'success');
+
+      } catch (err) {
+        toast('Erro ao enviar: ' + err.message, 'error');
+      } finally {
+        hideLoading();
+      }
+    }
+
+    // ── Auth helper ───────────────────────────────────────────
+    function authHeader() {
+      const token = auth.getToken();
+      return token ? { 'Authorization': `Bearer ${token}` } : {};
+    }
+
+    // ── Formatadores ─────────────────────────────────────────
+    function formatCPF(cpf) {
+      if (!cpf) return '';
+      return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    }
+    function formatCNPJ(cnpj) {
+      if (!cnpj) return '';
+      return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+
+    // ── Carregar dados iniciais ──────────────────────────────
+    async function init() {
+      showLoading('Carregando projeto...');
+      try {
+        const qs = orgParam ? `?org=${orgParam}` : '';
+
+        const [orgRes, projRes] = await Promise.all([
+          fetch(`${BASE}/api/config/organization${qs}`),
+          fetch(`${BASE}/api/salic/org-project${qs}`)
+        ]);
+
+        const orgData  = await orgRes.json();
+        const projData = await projRes.json();
+
+        if (orgData.status !== 'success') throw new Error('Organização não encontrada');
+
+        state.org = orgData.organization;
+
+        // Header
+        document.getElementById('orgNameHeader').textContent = state.org.name;
+        document.title = `Destinar — ${state.org.name} | IncentivaBR`;
+
+        // Cores da org
+        if (state.org.primary_color) {
+          document.documentElement.style.setProperty('--rouanet', state.org.primary_color);
+        }
+        if (state.org.secondary_color) {
+          document.documentElement.style.setProperty('--rouanet-dark', state.org.secondary_color);
+        }
+
+        if (projData.status !== 'success') {
+          // Org sem PRONAC
+          document.getElementById('projectTitle').textContent = 'Projeto não configurado';
+          document.getElementById('projectProponente').textContent = 'Entre em contato com a organização.';
+          hideLoading();
+          return;
+        }
+
+        if (projData.source === 'cache_local') {
+          document.getElementById('offlineBanner').classList.add('show');
+        }
+
+        state.org.pronac  = projData.organizacao.pronac;
+        state.projeto      = projData.projeto;
+        const p            = projData.projeto;
+        const org          = projData.organizacao;
+
+        // Merge bank data do projeto na org
+        Object.assign(state.org, {
+          bank_name:        org.bank_name,
+          bank_code:        org.bank_code,
+          bank_agency:      org.bank_agency,
+          bank_account:     org.bank_account,
+          pix_key:          org.pix_key,
+          pix_key_type:     org.pix_key_type,
+          beneficiary_name: org.beneficiary_name,
+          beneficiary_cnpj: org.beneficiary_cnpj,
+          max_percentage:   org.max_percentage
+        });
+
+        // Banner do projeto
+        document.getElementById('pronacChip').textContent    = `PRONAC ${p.pronac}`;
+        document.getElementById('projectTitle').textContent  = p.nome || 'Projeto sem título';
+        document.getElementById('projectProponente').textContent = p.proponente?.nome || '';
+
+        // Info chips
+        const chips = [];
+        if (p.area)      chips.push(`<span class="info-chip"><i class="fas fa-palette"></i>${p.area}</span>`);
+        if (p.segmento)  chips.push(`<span class="info-chip"><i class="fas fa-tag"></i>${p.segmento}</span>`);
+        if (p.uf)        chips.push(`<span class="info-chip"><i class="fas fa-map-marker-alt"></i>${p.uf}${p.municipio ? ' · '+p.municipio : ''}</span>`);
+        if (p.mecanismo) chips.push(`<span class="info-chip"><i class="fas fa-gavel"></i>${p.mecanismo}</span>`);
+        document.getElementById('infoRow').innerHTML = chips.join('');
+
+        // Valores
+        if (p.valores?.aprovado != null) {
+          document.getElementById('valAprovado').textContent = BRL(p.valores.aprovado);
+          document.getElementById('valCaptado').textContent  = BRL(p.valores.captado);
+          const restante = (p.valores.aprovado || 0) - (p.valores.captado || 0);
+          document.getElementById('valRestante').textContent = BRL(restante > 0 ? restante : 0);
+          document.getElementById('valoresRow').style.display = '';
+
+          const pctCap = pct(p.valores.captado, p.valores.aprovado);
+          document.getElementById('captacaoFill').style.width  = `${pctCap}%`;
+          document.getElementById('captacaoPct').textContent   = `${pctCap}% captado`;
+          document.getElementById('captacaoMeta').textContent  = `Meta: ${BRL(p.valores.aprovado)}`;
+          document.getElementById('captacaoBar').style.display = '';
+        }
+
+        // Situação
+        if (p.situacao) {
+          const badge = document.getElementById('situacaoBadge');
+          badge.textContent = p.situacao;
+          badge.style.display = '';
+          badge.className = `situacao-badge ${getSituacaoClass(p.situacao)}`;
+        }
+
+        // Link SALIC
+        document.getElementById('salicLink').href = p.link_salic || '#';
+
+      } catch (err) {
+        console.error('Init error:', err);
+        toast('Erro ao carregar: ' + err.message, 'error');
+      } finally {
+        hideLoading();
+      }
+    }
+
+    function getSituacaoClass(s) {
+      if (!s) return '';
+      const sl = s.toLowerCase();
+      if (sl.includes('andamento')) return 'situacao-andamento';
+      if (sl.includes('aprovado'))  return 'situacao-aprovado';
+      if (sl.includes('conclu'))    return 'situacao-concluido';
+      return 'situacao-outro';
+    }
+
+    // ── Init ─────────────────────────────────────────────────
+    init();
+  </script>
+  <script src="js/tenant.js"></script>
+
+  <!-- Estilos para badges de situação (reaproveitados) -->
+  <style>
+    .situacao-badge { display:inline-flex;align-items:center;gap:5px;border-radius:12px;padding:4px 12px;font-size:12px;font-weight:600; }
+    .situacao-andamento { background:#E8F5E9;color:#2E7D32; }
+    .situacao-aprovado  { background:#E3F2FD;color:#1565C0; }
+    .situacao-concluido { background:#F3E5F5;color:#6A1B9A; }
+    .situacao-outro     { background:#FFF8E1;color:#F57F17; }
+  </style>
+</body>
+</html>

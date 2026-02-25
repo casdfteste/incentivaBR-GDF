@@ -34,7 +34,12 @@ router.get('/organization', async (req, res) => {
           beneficiary_cnpj: req.organization.beneficiary_cnpj,
           // Contato
           contact_email: req.organization.contact_email,
-          contact_phone: req.organization.contact_phone
+          contact_phone: req.organization.contact_phone,
+          // Projeto Rouanet vinculado (se houver)
+          pronac:            req.organization.pronac || null,
+          pronac_titulo:     req.organization.pronac_titulo || null,
+          pronac_area:       req.organization.pronac_area || null,
+          pronac_proponente: req.organization.pronac_proponente || null
         }
       });
     } else {

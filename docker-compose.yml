@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  # ── Banco de dados PostgreSQL ──────────────────────────
+  db:
+    image: postgres:15-alpine
+    container_name: incentivabr_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER:     incentivabr
+      POSTGRES_PASSWORD: incentivabr123
+      POSTGRES_DB:       incentivabr
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U incentivabr"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Backend Node.js ────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: incentivabr_app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV:      development
+      PORT:          3000
+      DB_HOST:       db
+      DB_PORT:       5432
+      DB_USER:       incentivabr
+      DB_PASSWORD:   incentivabr123
+      DB_NAME:       incentivabr
+      JWT_SECRET:    dev_jwt_secret_trocar_em_producao
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend/uploads:/app/uploads   # persiste uploads localmente
+
+volumes:
+  pg_data:

@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projetos Lei Rouanet - IncentivaBR</title>
+  <meta name="description" content="Destine até 6% do seu Imposto de Renda a projetos culturais aprovados pela Lei Rouanet (Lei 8.313/1991).">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/incentivabr-theme.css">
+  <style>
+    body { background: var(--background-light); }
+
+    /* ── Header da página ── */
+    .page-header {
+      background: linear-gradient(135deg, #6A1B9A 0%, #9C27B0 60%, #CE93D8 100%);
+      color: white;
+      padding: 56px 24px 40px;
+      text-align: center;
+    }
+    .page-header .lei-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .page-header h1 { font-size: 36px; margin-bottom: 8px; }
+    .page-header p  { opacity: 0.9; max-width: 560px; margin: 0 auto 20px; }
+    .page-header .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .page-header .stat { text-align: center; }
+    .page-header .stat strong { display: block; font-size: 28px; font-weight: 700; }
+    .page-header .stat span  { font-size: 13px; opacity: 0.85; }
+
+    /* ── Filtros ── */
+    .filters-bar {
+      background: white;
+      padding: 20px 24px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: flex-end;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .filter-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .filter-group select,
+    .filter-group input[type="text"] {
+      padding: 9px 14px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      min-width: 140px;
+      background: white;
+      transition: border-color 0.2s;
+    }
+    .filter-group select:focus,
+    .filter-group input[type="text"]:focus {
+      outline: none;
+      border-color: #9C27B0;
+    }
+    .search-group {
+      flex: 1;
+      min-width: 220px;
+    }
+    .search-group input {
+      width: 100%;
+      padding: 9px 14px 9px 40px;
+    }
+    .search-wrapper {
+      position: relative;
+    }
+    .search-wrapper i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .btn-buscar {
+      padding: 9px 24px;
+      background: #9C27B0;
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-buscar:hover  { background: #7B1FA2; }
+    .btn-buscar:active { background: #6A1B9A; }
+
+    /* ── Aviso API SALIC ── */
+    .salic-notice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #6A1B9A;
+    }
+    .salic-notice a { color: #7B1FA2; font-weight: 600; }
+
+    /* ── Resultados ── */
+    .results-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .results-count { color: var(--text-secondary); font-size: 14px; }
+
+    /* ── Grid de cards ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.25s, box-shadow 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-header {
+      background: linear-gradient(135deg, #6A1B9A 0%, #9C27B0 100%);
+      padding: 20px;
+      color: white;
+      position: relative;
+    }
+    .card-header .area-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .card-header h3 {
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .pronac-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .card-body { padding: 16px 20px; flex: 1; }
+
+    .meta-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--background-light);
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .meta-chip i { color: #9C27B0; font-size: 11px; }
+
+    .proponente {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .proponente i { color: #9C27B0; }
+
+    .valores-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .valor-box {
+      background: var(--background-light);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+    }
+    .valor-box .label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .valor-box .amount {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .valor-box.captado .amount { color: #2E7D32; }
+
+    .captacao-bar {
+      margin-bottom: 14px;
+    }
+    .captacao-bar .bar {
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .captacao-bar .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #9C27B0, #4CAF50);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    .captacao-bar .info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .situacao-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 12px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .situacao-andamento  { background: #E8F5E9; color: #2E7D32; }
+    .situacao-aprovado   { background: #E3F2FD; color: #1565C0; }
+    .situacao-concluido  { background: #F3E5F5; color: #6A1B9A; }
+    .situacao-outro      { background: #FFF8E1; color: #F57F17; }
+
+    .card-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      gap: 8px;
+    }
+    .btn-detalhe {
+      flex: 1;
+      padding: 10px;
+      background: #9C27B0;
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+    .btn-detalhe:hover { background: #7B1FA2; color: white; }
+    .btn-salic {
+      padding: 10px 14px;
+      border: 2px solid #9C27B0;
+      color: #9C27B0;
+      background: white;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-salic:hover { background: #F3E5F5; }
+
+    /* ── Modal de detalhe ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: white;
+      border-radius: var(--radius-xl);
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-header {
+      background: linear-gradient(135deg, #6A1B9A, #9C27B0);
+      color: white;
+      padding: 24px;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      position: relative;
+    }
+    .modal-header h2 { font-size: 20px; margin: 0 32px 0 0; }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-body { padding: 24px; }
+    .modal-section { margin-bottom: 20px; }
+    .modal-section h4 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #9C27B0;
+      margin-bottom: 10px;
+    }
+    .modal-info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .info-item .label { font-size: 12px; color: var(--text-muted); }
+    .info-item .value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      background: var(--background-light);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+    }
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Paginação ── */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .pagination button {
+      padding: 9px 15px;
+      border: 2px solid var(--border-color);
+      background: white;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .pagination button:hover    { border-color: #9C27B0; }
+    .pagination button.active   { background: #9C27B0; color: white; border-color: #9C27B0; }
+    .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── Skeletons ── */
+    .loading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+    .skeleton-card { background: white; border-radius: var(--radius-xl); overflow: hidden; height: 360px; }
+    .skeleton-top  { height: 90px; }
+    .skeleton-body { padding: 16px; }
+    .skeleton-line {
+      height: 14px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .skeleton-line.short { width: 55%; }
+    .skeleton-line.xshort { width: 35%; }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ── Empty / Error ── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-secondary);
+    }
+    .empty-state i  { font-size: 56px; color: #CE93D8; margin-bottom: 16px; }
+    .empty-state h3 { font-size: 20px; margin-bottom: 8px; }
+
+    /* ── Responsivo ── */
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 26px; }
+      .filters-bar    { flex-direction: column; align-items: stretch; }
+      .filter-group, .search-group { width: 100%; }
+      .filter-group select, .filter-group input { width: 100%; }
+      .modal-info-grid { grid-template-columns: 1fr; }
+      .page-header .stats-row { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img">
+    </a>
+    <nav>
+      <a href="projetos.html">Projetos</a>
+      <a href="projetos-rouanet.html" style="color:#9C27B0;font-weight:600">Lei Rouanet</a>
+      <a href="calculadora-escolha.html">Calculadora</a>
+      <a href="#" id="navAuth">Entrar</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <div class="page-header">
+    <div class="lei-badge"><i class="fas fa-landmark"></i>&nbsp; Lei 8.313/1991 — Lei Rouanet</div>
+    <h1><i class="fas fa-palette"></i> Projetos Culturais</h1>
+    <p>Destine até <strong>6% do seu Imposto de Renda</strong> a projetos culturais aprovados pelo Ministério da Cultura.</p>
+    <div class="stats-row" id="statsRow">
+      <div class="stat">
+        <strong id="statTotal">—</strong>
+        <span>projetos disponíveis</span>
+      </div>
+      <div class="stat">
+        <strong>6%</strong>
+        <span>do IR pode ser destinado</span>
+      </div>
+      <div class="stat">
+        <strong>100%</strong>
+        <span>de dedução via patrocínio</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:28px;padding-bottom:60px;">
+
+    <!-- Aviso fonte SALIC -->
+    <div class="salic-notice">
+      <i class="fas fa-database"></i>
+      <span>
+        Dados em tempo real da <strong>API SALIC Web</strong> — Ministério da Cultura.
+        Informações oficiais do sistema <a href="https://salic.cultura.gov.br" target="_blank" rel="noopener">salic.cultura.gov.br</a>.
+      </span>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters-bar">
+      <div class="filter-group search-group">
+        <label>Buscar projeto ou proponente</label>
+        <div class="search-wrapper">
+          <i class="fas fa-search"></i>
+          <input type="text" id="inputNome" placeholder="Nome do projeto ou proponente...">
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>Estado (UF)</label>
+        <select id="filterUF">
+          <option value="">Todos</option>
+          <option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option>
+          <option value="AP">AP</option><option value="BA">BA</option><option value="CE">CE</option>
+          <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+          <option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option>
+          <option value="MT">MT</option><option value="PA">PA</option><option value="PB">PB</option>
+          <option value="PE">PE</option><option value="PI">PI</option><option value="PR">PR</option>
+          <option value="RJ">RJ</option><option value="RN">RN</option><option value="RO">RO</option>
+          <option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option>
+          <option value="SE">SE</option><option value="SP">SP</option><option value="TO">TO</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Área Cultural</label>
+        <select id="filterArea">
+          <option value="">Todas as áreas</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Situação</label>
+        <select id="filterSituacao">
+          <option value="">Todas</option>
+          <option value="Em andamento">Em andamento</option>
+          <option value="Aprovado">Aprovado</option>
+          <option value="Concluído">Concluído</option>
+          <option value="Em análise">Em análise</option>
+        </select>
+      </div>
+
+      <button class="btn-buscar" id="btnBuscar">
+        <i class="fas fa-search"></i> Buscar
+      </button>
+    </div>
+
+    <!-- Info resultados -->
+    <div class="results-info">
+      <span class="results-count" id="resultsCount">Carregando projetos...</span>
+      <span id="resultsMeta" style="font-size:13px;color:var(--text-muted)"></span>
+    </div>
+
+    <!-- Grid -->
+    <div id="projectsContainer">
+      <div class="loading-grid" id="loadingSkeleton">
+        <div class="skeleton-card"><div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line xshort"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line xshort"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line xshort"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+      </div>
+    </div>
+
+    <!-- Paginação -->
+    <div class="pagination" id="pagination" style="display:none"></div>
+  </div>
+
+  <!-- Modal detalhe -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent">
+      <div class="modal-header">
+        <h2 id="modalTitle">Carregando...</h2>
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div style="text-align:center;padding:40px">
+          <i class="fas fa-spinner fa-spin" style="font-size:32px;color:#9C27B0"></i>
+        </div>
+      </div>
+      <div class="modal-footer" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-incentivabr.png" alt="IncentivaBR" class="logo-img logo-white">
+    </a>
+    <p class="tagline">Incentivos Fiscais Simplificados</p>
+    <div style="margin:1.5rem 0">
+      <a href="projetos.html"           style="color:rgba(255,255,255,.9);margin:0 1rem">Outros Projetos</a>
+      <a href="calculadora-escolha.html" style="color:rgba(255,255,255,.9);margin:0 1rem">Calculadora IR</a>
+      <a href="faq.html"                style="color:rgba(255,255,255,.9);margin:0 1rem">FAQ</a>
+    </div>
+    <div class="footer-bottom">
+      <p>
+        <a href="politica-privacidade.html" style="color:rgba(255,255,255,.8)">Politica de Privacidade</a> |
+        <a href="termos-uso.html"           style="color:rgba(255,255,255,.8)">Termos de Uso</a>
+      </p>
+      <p style="margin-top:12px">&copy; 2026 IncentivaBR. Todos os direitos reservados.</p>
+      <p style="margin-top:8px;font-size:12px">INPI: BR512025000647-0</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/mobile-menu.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/toast.js"></script>
+  <script>
+    // ── Nav ──────────────────────────────────────────────────
+    const navAuth = document.getElementById('navAuth');
+    if (auth.isLoggedIn()) {
+      const user = auth.getUser();
+      navAuth.textContent = user.nome ? user.nome.split(' ')[0] : 'Minha Conta';
+      navAuth.href = 'dashboard.html';
+    } else {
+      navAuth.href = 'login.html';
+    }
+
+    // ── Estado ──────────────────────────────────────────────
+    const LIMIT = 20;
+    let currentOffset = 0;
+    let totalResults  = 0;
+    let currentParams = {};
+
+    // ── Base URL (usa o mesmo origin do app) ────────────────
+    const BASE = window.location.origin;
+
+    // ── Utilitários ─────────────────────────────────────────
+    function formatBRL(v) {
+      if (v === null || v === undefined) return '—';
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(v);
+    }
+
+    function pct(captado, aprovado) {
+      if (!captado || !aprovado || aprovado === 0) return 0;
+      return Math.min(Math.round((captado / aprovado) * 100), 100);
+    }
+
+    function situacaoClass(s) {
+      if (!s) return 'situacao-outro';
+      const sl = s.toLowerCase();
+      if (sl.includes('andamento')) return 'situacao-andamento';
+      if (sl.includes('aprovado'))  return 'situacao-aprovado';
+      if (sl.includes('conclu'))    return 'situacao-concluido';
+      return 'situacao-outro';
+    }
+
+    // ── Carregar áreas culturais para o filtro ───────────────
+    async function carregarAreas() {
+      try {
+        const res  = await fetch(`${BASE}/api/salic/areas`);
+        const data = await res.json();
+        const sel  = document.getElementById('filterArea');
+        (data.areas || []).forEach(a => {
+          const opt = document.createElement('option');
+          opt.value       = a.codigo ?? a.cd_area ?? a.id ?? '';
+          opt.textContent = a.nome   ?? a.ds_area ?? a.name ?? '';
+          sel.appendChild(opt);
+        });
+      } catch (e) {
+        console.warn('[SALIC] Falha ao carregar áreas:', e.message);
+      }
+    }
+
+    // ── Buscar projetos ──────────────────────────────────────
+    async function buscarProjetos(resetOffset = true) {
+      if (resetOffset) currentOffset = 0;
+
+      const nome     = document.getElementById('inputNome').value.trim();
+      const UF       = document.getElementById('filterUF').value;
+      const area     = document.getElementById('filterArea').value;
+      const situacao = document.getElementById('filterSituacao').value;
+
+      currentParams = { nome, UF, area, situacao };
+
+      mostrarSkeleton();
+
+      const params = new URLSearchParams();
+      if (nome)     params.set('nome',     nome);
+      if (UF)       params.set('UF',       UF);
+      if (area)     params.set('area',     area);
+      if (situacao) params.set('situacao', situacao);
+      params.set('limit',  LIMIT);
+      params.set('offset', currentOffset);
+
+      try {
+        const res  = await fetch(`${BASE}/api/salic/projetos?${params}`);
+        const data = await res.json();
+
+        if (data.status !== 'success') throw new Error(data.message || 'Erro na API SALIC');
+
+        totalResults = data.total || 0;
+
+        document.getElementById('statTotal').textContent =
+          totalResults.toLocaleString('pt-BR');
+        document.getElementById('resultsCount').textContent =
+          `${totalResults.toLocaleString('pt-BR')} projeto${totalResults !== 1 ? 's' : ''} encontrado${totalResults !== 1 ? 's' : ''}`;
+        document.getElementById('resultsMeta').textContent =
+          currentOffset > 0 ? `Exibindo ${currentOffset + 1}–${Math.min(currentOffset + LIMIT, totalResults)}` : '';
+
+        renderCards(data.projetos || []);
+        renderPaginacao();
+
+      } catch (err) {
+        document.getElementById('projectsContainer').innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Não foi possível consultar o SALIC</h3>
+            <p>${err.message}</p>
+            <p style="margin-top:8px;font-size:13px">
+              A API SALIC pode estar temporariamente indisponível.
+              <a href="https://salic.cultura.gov.br" target="_blank">Acesse o SALIC diretamente</a>.
+            </p>
+          </div>
+        `;
+        document.getElementById('pagination').style.display = 'none';
+        document.getElementById('resultsCount').textContent = 'Erro ao carregar';
+      }
+    }
+
+    // ── Renderizar cards ─────────────────────────────────────
+    function renderCards(projetos) {
+      const container = document.getElementById('projectsContainer');
+
+      if (projetos.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-search"></i>
+            <h3>Nenhum projeto encontrado</h3>
+            <p>Tente ajustar os filtros ou buscar por outro termo.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const html = projetos.map(p => {
+        const cap = pct(p.valores?.captado, p.valores?.aprovado);
+        return `
+          <div class="project-card">
+            <div class="card-header">
+              <span class="area-tag"><i class="fas fa-music"></i> ${p.area || 'Cultura'}</span>
+              <span class="pronac-tag">PRONAC ${p.pronac}</span>
+              <h3>${escapeHtml(p.nome)}</h3>
+            </div>
+            <div class="card-body">
+              <div class="proponente">
+                <i class="fas fa-user-tie"></i> ${escapeHtml(p.proponente?.nome || '—')}
+              </div>
+
+              <div class="meta-row">
+                ${p.uf ? `<span class="meta-chip"><i class="fas fa-map-marker-alt"></i>${p.uf}${p.municipio ? ' · ' + p.municipio : ''}</span>` : ''}
+                ${p.segmento ? `<span class="meta-chip"><i class="fas fa-tag"></i>${escapeHtml(p.segmento)}</span>` : ''}
+                ${p.ano_projeto ? `<span class="meta-chip"><i class="fas fa-calendar"></i>${p.ano_projeto}</span>` : ''}
+              </div>
+
+              <div class="valores-grid">
+                <div class="valor-box">
+                  <div class="label">Valor Aprovado</div>
+                  <div class="amount">${formatBRL(p.valores?.aprovado)}</div>
+                </div>
+                <div class="valor-box captado">
+                  <div class="label">Captado</div>
+                  <div class="amount">${formatBRL(p.valores?.captado)}</div>
+                </div>
+              </div>
+
+              ${p.valores?.aprovado ? `
+              <div class="captacao-bar">
+                <div class="bar"><div class="fill" style="width:${cap}%"></div></div>
+                <div class="info"><span>${cap}% captado</span><span>${formatBRL(p.valores?.aprovado)} meta</span></div>
+              </div>` : ''}
+
+              <span class="situacao-badge ${situacaoClass(p.situacao)}">
+                <i class="fas fa-circle" style="font-size:8px"></i>
+                ${p.situacao || 'Sem situação'}
+              </span>
+            </div>
+            <div class="card-footer">
+              <button class="btn-detalhe" onclick="abrirDetalhe('${p.pronac}', ${JSON.stringify(escapeHtml(p.nome))})">
+                <i class="fas fa-info-circle"></i> Detalhes
+              </button>
+              <a href="${p.link_salic}" target="_blank" rel="noopener" class="btn-salic">
+                <i class="fas fa-external-link-alt"></i> SALIC
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.innerHTML = `<div class="projects-grid">${html}</div>`;
+    }
+
+    // ── Skeleton loading ─────────────────────────────────────
+    function mostrarSkeleton() {
+      document.getElementById('projectsContainer').innerHTML = `
+        <div class="loading-grid">
+          ${Array(6).fill(`
+            <div class="skeleton-card">
+              <div class="skeleton-top" style="background:linear-gradient(135deg,#6A1B9A,#9C27B0)"></div>
+              <div class="skeleton-body">
+                <div class="skeleton-line short"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line xshort"></div>
+                <div class="skeleton-line"></div>
+                <div class="skeleton-line short"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('pagination').style.display = 'none';
+    }
+
+    // ── Paginação ────────────────────────────────────────────
+    function renderPaginacao() {
+      const totalPages = Math.ceil(totalResults / LIMIT);
+      const currentPage = Math.floor(currentOffset / LIMIT);
+      const pag = document.getElementById('pagination');
+
+      if (totalPages <= 1) { pag.style.display = 'none'; return; }
+      pag.style.display = 'flex';
+      pag.innerHTML = '';
+
+      const prev = document.createElement('button');
+      prev.innerHTML = '<i class="fas fa-chevron-left"></i>';
+      prev.disabled  = currentPage === 0;
+      prev.onclick   = () => { currentOffset -= LIMIT; buscarProjetos(false); window.scrollTo(0,0); };
+      pag.appendChild(prev);
+
+      for (let i = 0; i < totalPages; i++) {
+        if (totalPages > 7 && i > 1 && i < totalPages - 2 && Math.abs(i - currentPage) > 1) {
+          if (i === 2 || i === totalPages - 3) {
+            const dots = document.createElement('span');
+            dots.textContent = '...';
+            dots.style.padding = '10px 4px';
+            pag.appendChild(dots);
+          }
+          continue;
+        }
+        const btn = document.createElement('button');
+        btn.textContent = i + 1;
+        btn.className   = i === currentPage ? 'active' : '';
+        btn.onclick     = () => { currentOffset = i * LIMIT; buscarProjetos(false); window.scrollTo(0,0); };
+        pag.appendChild(btn);
+      }
+
+      const next = document.createElement('button');
+      next.innerHTML = '<i class="fas fa-chevron-right"></i>';
+      next.disabled  = currentPage >= totalPages - 1;
+      next.onclick   = () => { currentOffset += LIMIT; buscarProjetos(false); window.scrollTo(0,0); };
+      pag.appendChild(next);
+    }
+
+    // ── Modal de detalhe ─────────────────────────────────────
+    async function abrirDetalhe(pronac, nome) {
+      const overlay = document.getElementById('modalOverlay');
+      const title   = document.getElementById('modalTitle');
+      const body    = document.getElementById('modalBody');
+      const footer  = document.getElementById('modalFooter');
+
+      title.textContent = nome;
+      body.innerHTML = `<div style="text-align:center;padding:40px"><i class="fas fa-spinner fa-spin" style="font-size:32px;color:#9C27B0"></i><p style="margin-top:12px;color:var(--text-secondary)">Consultando API SALIC...</p></div>`;
+      footer.innerHTML = '';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      try {
+        const res  = await fetch(`${BASE}/api/salic/projetos/${pronac}`);
+        const data = await res.json();
+
+        if (data.status !== 'success') throw new Error(data.message);
+
+        const p   = data.projeto;
+        const cap = pct(p.valores?.captado, p.valores?.aprovado);
+
+        title.textContent = p.nome;
+
+        body.innerHTML = `
+          <div class="modal-section">
+            <h4><i class="fas fa-info-circle"></i> Informações Gerais</h4>
+            <div class="modal-info-grid">
+              <div class="info-item"><div class="label">PRONAC</div><div class="value">${p.pronac}</div></div>
+              <div class="info-item"><div class="label">Ano</div><div class="value">${p.ano_projeto || '—'}</div></div>
+              <div class="info-item"><div class="label">Área</div><div class="value">${p.area || '—'}</div></div>
+              <div class="info-item"><div class="label">Segmento</div><div class="value">${p.segmento || '—'}</div></div>
+              <div class="info-item"><div class="label">Local</div><div class="value">${p.municipio ? p.municipio + ' / ' + p.uf : (p.uf || '—')}</div></div>
+              <div class="info-item"><div class="label">Situação</div>
+                <div class="value"><span class="situacao-badge ${situacaoClass(p.situacao)}">${p.situacao || '—'}</span></div>
+              </div>
+              <div class="info-item"><div class="label">Mecanismo</div><div class="value">${p.mecanismo || '—'}</div></div>
+              <div class="info-item"><div class="label">Enquadramento</div><div class="value">${p.enquadramento || '—'}</div></div>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h4><i class="fas fa-user-tie"></i> Proponente</h4>
+            <div class="modal-info-grid">
+              <div class="info-item"><div class="label">Nome</div><div class="value">${p.proponente?.nome || '—'}</div></div>
+              <div class="info-item"><div class="label">CNPJ / CPF</div><div class="value">${p.proponente?.cgccpf || '—'}</div></div>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h4><i class="fas fa-dollar-sign"></i> Valores</h4>
+            <div class="modal-info-grid">
+              <div class="info-item"><div class="label">Solicitado</div><div class="value">${formatBRL(p.valores?.solicitado)}</div></div>
+              <div class="info-item"><div class="label">Aprovado</div><div class="value">${formatBRL(p.valores?.aprovado)}</div></div>
+              <div class="info-item"><div class="label">Captado</div><div class="value" style="color:#2E7D32">${formatBRL(p.valores?.captado)}</div></div>
+              <div class="info-item"><div class="label">Desembolsado</div><div class="value">${formatBRL(p.valores?.desembolsado)}</div></div>
+            </div>
+            ${p.valores?.aprovado ? `
+            <div class="captacao-bar" style="margin-top:12px">
+              <div class="bar"><div class="fill" style="width:${cap}%"></div></div>
+              <div class="info"><span>${cap}% captado</span><span>Meta: ${formatBRL(p.valores?.aprovado)}</span></div>
+            </div>` : ''}
+          </div>
+
+          ${p.objetivos || p.resumo ? `
+          <div class="modal-section">
+            <h4><i class="fas fa-align-left"></i> ${p.resumo ? 'Resumo' : 'Objetivos'}</h4>
+            <div class="modal-desc">${escapeHtml(p.resumo || p.objetivos)}</div>
+          </div>` : ''}
+
+          ${p.data_inicio || p.data_termino ? `
+          <div class="modal-section">
+            <h4><i class="fas fa-calendar-alt"></i> Período</h4>
+            <div class="modal-info-grid">
+              <div class="info-item"><div class="label">Início</div><div class="value">${p.data_inicio || '—'}</div></div>
+              <div class="info-item"><div class="label">Término</div><div class="value">${p.data_termino || '—'}</div></div>
+            </div>
+          </div>` : ''}
+        `;
+
+        footer.innerHTML = `
+          <a href="${p.link_salic}" target="_blank" rel="noopener" class="btn-detalhe" style="text-decoration:none">
+            <i class="fas fa-external-link-alt"></i> Ver no SALIC
+          </a>
+          <button onclick="fecharModal()" style="padding:10px 20px;border:2px solid var(--border-color);background:white;border-radius:var(--radius-md);cursor:pointer;font-weight:600">
+            Fechar
+          </button>
+        `;
+
+      } catch (err) {
+        body.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Não foi possível carregar o detalhe</h3>
+            <p>${err.message}</p>
+          </div>
+        `;
+        footer.innerHTML = `
+          <button onclick="fecharModal()" style="padding:10px 20px;border:2px solid var(--border-color);background:white;border-radius:var(--radius-md);cursor:pointer;font-weight:600">
+            Fechar
+          </button>
+        `;
+      }
+    }
+
+    function fecharModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Fechar clicando fora do modal
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) fecharModal();
+    });
+    document.getElementById('modalClose').addEventListener('click', fecharModal);
+
+    // Escape para fechar
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') fecharModal();
+    });
+
+    // ── Escape de HTML ───────────────────────────────────────
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ── Eventos ──────────────────────────────────────────────
+    document.getElementById('btnBuscar').addEventListener('click', () => buscarProjetos(true));
+
+    // Enter no campo de busca
+    document.getElementById('inputNome').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') buscarProjetos(true);
+    });
+
+    // Mudança nos selects dispara busca automática
+    ['filterUF', 'filterArea', 'filterSituacao'].forEach(id => {
+      document.getElementById(id).addEventListener('change', () => buscarProjetos(true));
+    });
+
+    // ── Init ─────────────────────────────────────────────────
+    carregarAreas();
+    buscarProjetos();
+  </script>
+  <script src="js/tenant.js"></script>
+</body>
+</html>

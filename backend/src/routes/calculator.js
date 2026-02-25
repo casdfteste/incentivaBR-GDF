@@ -77,6 +77,16 @@ function getOrganizationLimits(org) {
         pronas_pcd: maxPercent,
         total_maximo: maxPercent
       };
+    case 'rouanet':
+      // Lei 8.313/1991 — até 6% do IR devido via patrocínio (dedução integral)
+      return {
+        grupo_1_sem_esporte: 0,
+        grupo_1_com_esporte: 0,
+        pronon: 0,
+        pronas_pcd: 0,
+        rouanet: maxPercent,        // 6% via Rouanet
+        total_maximo: maxPercent
+      };
     default:
       return {
         grupo_1_sem_esporte: Math.min(maxPercent, LIMITE_GRUPO_1_SEM_ESPORTE),

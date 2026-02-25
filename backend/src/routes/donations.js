@@ -219,6 +219,149 @@ router.post('/', authenticateToken, async (req, res) => {
   }
 });
 
+// ─────────────────────────────────────────────────────────────
+// POST /api/donations/rouanet
+// Registra uma destinação para projeto da Lei Rouanet (SALIC).
+// Não exige project_id local — usa PRONAC da organização.
+// ─────────────────────────────────────────────────────────────
+router.post('/rouanet', authenticateToken, async (req, res) => {
+  const client = await pool.connect();
+
+  try {
+    const { pronac, ir_total, donation_amount, fiscal_year } = req.body;
+    const userId = req.user.userId;
+    const org    = req.organization;
+
+    // Validar que a organização tem esse PRONAC vinculado
+    if (!org || !org.pronac) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Esta organização não possui projeto Rouanet configurado.'
+      });
+    }
+
+    if (!pronac || pronac !== org.pronac) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'PRONAC não corresponde ao projeto desta organização.'
+      });
+    }
+
+    if (!ir_total || ir_total <= 0) {
+      return res.status(400).json({ status: 'error', message: 'IR total deve ser maior que zero.' });
+    }
+
+    if (!donation_amount || donation_amount <= 0) {
+      return res.status(400).json({ status: 'error', message: 'Valor da destinação deve ser maior que zero.' });
+    }
+
+    if (!fiscal_year || fiscal_year < 2024) {
+      return res.status(400).json({ status: 'error', message: 'Ano fiscal inválido.' });
+    }
+
+    // Limite Rouanet: max_percentage da org (padrão 6%)
+    const maxPct     = parseFloat(org.max_percentage) / 100 || 0.06;
+    const limiteMax  = ir_total * maxPct;
+
+    if (donation_amount > limiteMax) {
+      return res.status(400).json({
+        status: 'error',
+        message: `Valor excede o limite de ${(maxPct * 100).toFixed(0)}% do IR (R$ ${limiteMax.toFixed(2)}).`
+      });
+    }
+
+    // Verificar total já destinado no mesmo ano/org
+    const existingResult = await client.query(`
+      SELECT COALESCE(SUM(donation_amount), 0) AS total
+      FROM donations
+      WHERE user_id = $1 AND fiscal_year = $2 AND pronac = $3 AND status != 'cancelled'
+    `, [userId, fiscal_year, pronac]);
+
+    const totalJa   = parseFloat(existingResult.rows[0].total);
+    const novoTotal = totalJa + donation_amount;
+
+    if (novoTotal > limiteMax) {
+      return res.status(400).json({
+        status: 'error',
+        message: `Total no ano (R$ ${novoTotal.toFixed(2)}) excederia o limite de ${(maxPct * 100).toFixed(0)}% do IR (R$ ${limiteMax.toFixed(2)}). Já destinado: R$ ${totalJa.toFixed(2)}.`
+      });
+    }
+
+    // Buscar fundo FNC (Lei Rouanet)
+    const fncResult = await client.query(
+      `SELECT id FROM official_funds WHERE code = 'FNC' LIMIT 1`
+    );
+    const fncId = fncResult.rows[0]?.id || null;
+
+    await client.query('BEGIN');
+
+    const result = await client.query(`
+      INSERT INTO donations
+        (user_id, pronac, official_fund_id, ir_total, donation_amount, fiscal_year, status)
+      VALUES ($1, $2, $3, $4, $5, $6, 'pending')
+      RETURNING id, created_at
+    `, [userId, pronac, fncId, ir_total, donation_amount, fiscal_year]);
+
+    const donation = result.rows[0];
+
+    // Atualizar total_donated do usuário
+    await client.query(
+      'UPDATE users SET total_donated = total_donated + $1 WHERE id = $2',
+      [donation_amount, userId]
+    );
+
+    await client.query('COMMIT');
+
+    // Notificações (não bloqueia resposta)
+    try {
+      const userRow = await pool.query('SELECT nome, email, phone FROM users WHERE id = $1', [userId]);
+      const user    = userRow.rows[0];
+      if (user) {
+        notifyDestinationRegistered(
+          { name: user.nome, email: user.email, phone: user.phone },
+          { amount: donation_amount },
+          { title: org.pronac_titulo || `Projeto PRONAC ${pronac}` },
+          org
+        ).catch(() => {});
+      }
+    } catch (_) {}
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Destinação registrada com sucesso!',
+      donation: {
+        id:               donation.id,
+        pronac,
+        projeto_titulo:   org.pronac_titulo || `Projeto PRONAC ${pronac}`,
+        ir_total,
+        donation_amount,
+        percentage_of_ir: Math.round((donation_amount / ir_total) * 10000) / 100,
+        fiscal_year,
+        status:           'pending',
+        created_at:       donation.created_at,
+        // Dados bancários para pagamento
+        banco: {
+          beneficiary_name: org.beneficiary_name,
+          beneficiary_cnpj: org.beneficiary_cnpj,
+          bank_name:        org.bank_name,
+          bank_code:        org.bank_code,
+          bank_agency:      org.bank_agency,
+          bank_account:     org.bank_account,
+          pix_key:          org.pix_key,
+          pix_key_type:     org.pix_key_type
+        }
+      }
+    });
+
+  } catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Erro ao registrar destinação Rouanet:', error.message);
+    res.status(500).json({ status: 'error', message: 'Erro interno ao registrar destinação.' });
+  } finally {
+    client.release();
+  }
+});
+
 // GET /api/donations - Listar doações do usuário
 router.get('/', authenticateToken, async (req, res) => {
   try {
